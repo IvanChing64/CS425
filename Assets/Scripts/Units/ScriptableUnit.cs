@@ -1,5 +1,5 @@
 using UnityEngine;
-
+//Unit info
 [CreateAssetMenu(fileName ="New Unit",menuName = "Scriptable Unit")]
 
 public class ScriptableUnit : ScriptableObject

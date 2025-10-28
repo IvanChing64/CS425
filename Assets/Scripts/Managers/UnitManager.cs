@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
 public class UnitManager : MonoBehaviour
 {
     public static UnitManager Instance;
@@ -16,6 +17,7 @@ public class UnitManager : MonoBehaviour
 
         units = Resources.LoadAll<ScriptableUnit>("Units").ToList();
     }
+
     public void SpawnPlayers()
     {
         var playerUnitCount = 1;

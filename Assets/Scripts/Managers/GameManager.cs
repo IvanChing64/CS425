@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
         ChangeState(GameState.GenerateGrid);
     }
 
+    //Game state manager
     public void ChangeState(GameState state)
     {
         gameState = state;

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 public abstract class Tile : MonoBehaviour
@@ -18,6 +17,7 @@ public abstract class Tile : MonoBehaviour
         
     }
 
+    //Hover Highlight code
     void OnMouseEnter()
     {
         highlight.SetActive(true);
@@ -28,6 +28,7 @@ public abstract class Tile : MonoBehaviour
         highlight.SetActive(false);
     }
 
+    //Player movement testing
     private void OnMouseDown()
     {
         if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
@@ -53,7 +54,7 @@ public abstract class Tile : MonoBehaviour
         }
     }
 
-
+    //General Code for Movement
     public void setUnit(BaseUnit unit)
     {
         if (unit.OccupiedTile != null) unit.OccupiedTile.OccupiedUnit = null;

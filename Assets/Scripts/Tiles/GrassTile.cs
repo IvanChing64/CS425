@@ -4,6 +4,7 @@ public class GrassTile : Tile
 {
     [SerializeField] private Color baseColor, offsetColor;
 
+    //Checkerboard Pattern
     public override void Init(int x, int y)
     {
         var isOffset = (x + y) % 2 == 1;

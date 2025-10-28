@@ -17,6 +17,9 @@ public class GridManager : MonoBehaviour
     {
         Instance = this;
     }
+
+    //Generates Grid based on w/h of inspector values
+    //Switchs game state
     public void GenerateGrid()
     {
         tiles = new Dictionary<Vector2, Tile>();
