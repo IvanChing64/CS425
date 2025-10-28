@@ -82,10 +82,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5035e680cb30842b0ee998114e217f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrassTile
-  baseColor: {r: 0.43614274, g: 0.9339623, b: 0.48395726, a: 1}
-  offsetColor: {r: 0.3941727, g: 0.6698113, b: 0.37597898, a: 1}
   _renderer: {fileID: 5261618535256312303}
   highlight: {fileID: 7615237263825248722}
+  isWalkable: 1
+  OccupiedUnit: {fileID: 0}
+  baseColor: {r: 0.43614274, g: 0.9339623, b: 0.48395726, a: 1}
+  offsetColor: {r: 0.3941727, g: 0.6698113, b: 0.37597898, a: 1}
 --- !u!1 &7615237263825248722 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7832129910396769477, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}

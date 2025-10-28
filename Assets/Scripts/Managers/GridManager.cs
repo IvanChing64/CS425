@@ -1,22 +1,23 @@
 using System;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    public static GridManager Instance;
     [SerializeField] private int width, height;
     [SerializeField] private Tile grassTile, mountainTile;
     [SerializeField] private Transform cam;
     private Dictionary<Vector2, Tile> tiles;
 
-    void Start()
+    private void Awake()
     {
-        GenerateGrid();
+        Instance = this;
     }
-
-    void GenerateGrid()
+    public void GenerateGrid()
     {
         tiles = new Dictionary<Vector2, Tile>();
         for (int x = 0; x < width; x++)
@@ -35,6 +36,18 @@ public class GridManager : MonoBehaviour
             }
         }
         cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
+
+        GameManager.Instance.ChangeState(GameState.SpawnPlayers);
+    }
+        
+    public Tile GetPlayerSpawnTile()
+    {
+        return tiles.Where(t => t.Key.x < width / 2 && t.Value.Walkable).OrderBy(t => UnityEngine.Random.value).First().Value;
+    }
+
+    public Tile GetEnemySpawnTile()
+    {
+        return tiles.Where(t => t.Key.x > width / 2 && t.Value.Walkable).OrderBy(t => UnityEngine.Random.value).First().Value;
     }
 
     public Tile GetTileAtPosition(Vector2 pos)
