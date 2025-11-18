@@ -1,6 +1,7 @@
 # CS425
 Senior Projects
-Members 
+
+Members : Ivan Ching, Bailey Escritor, Liam Riel, Andrew Shelton
 
 Project Name: Pandora's
 
