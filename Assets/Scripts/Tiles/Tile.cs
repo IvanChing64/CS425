@@ -31,14 +31,18 @@ public abstract class Tile : MonoBehaviour
     //Player movement testing
     private void OnMouseDown()
     {
-        if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
+        if (GameManager.Instance.gameState != GameState.PlayerTurn) return; //Checks if it is player's turn
 
+        //If there is something on the tile selected
         if(OccupiedUnit != null)
         {
+            //Selecting players
             if (OccupiedUnit.Faction == Faction.Player)
             {
                 UnitManager.Instance.SetSelectedPlayer((BasePlayer)OccupiedUnit);
-            } else if(UnitManager.Instance.SelectedPlayer != null) {
+            
+                
+            } else if(UnitManager.Instance.SelectedPlayer != null) { // If not selecting a player unit then it selects a enemy
                 var enemy = (BaseEnemy)OccupiedUnit;
                 Destroy(enemy.gameObject);
                 UnitManager.Instance.SetSelectedPlayer(null);
@@ -46,6 +50,13 @@ public abstract class Tile : MonoBehaviour
 
         } else if (UnitManager.Instance.SelectedPlayer != null)
         {
+            //checks is terrain is walkable
+            if (!isWalkable)
+            {
+                Debug.Log("Cannot move here.");
+                return;
+            }
+            //places unit there
             setUnit(UnitManager.Instance.SelectedPlayer);
             UnitManager.Instance.SetSelectedPlayer(null);
         }
