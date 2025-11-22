@@ -1,6 +1,43 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class combatUIManager : MonoBehaviour
 {
     //temp usage until card functionality is implemented.
+    public static combatUIManager Instance;
+
+    [SerializeField] private GameObject combatPanel;
+    [SerializeField] private Button combatButton;
+
+    private BasePlayer targetPlayer;
+    private BaseEnemy targetEnemy;
+
+
+    private void Awake()
+    {
+        Instance = this;
+        combatPanel.SetActive(false);
+    }
+
+    public void showCombatOption(BasePlayer player, BaseEnemy enemy)
+    {
+        targetPlayer = player;
+        targetEnemy = enemy;
+
+        combatPanel.SetActive(true);
+    }
+    public void hideCombatOption()
+    {
+        combatPanel.SetActive(false);
+    }
+
+    public void ExecuteCombat()
+    {
+        if (targetEnemy != null)
+        {
+            targetEnemy.takeDamage(targetPlayer.dmg);
+        }
+        hideCombatOption();
+    }
+
 }

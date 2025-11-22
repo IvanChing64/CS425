@@ -399,8 +399,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::healthbar
   slider: {fileID: 6893016189919335109}
-  camera: {fileID: 0}
-  target: {fileID: 6852541251775065487}
 --- !u!1 &6163788838552927680
 GameObject:
   m_ObjectHideFlags: 0

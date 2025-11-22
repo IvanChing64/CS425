@@ -46,9 +46,9 @@ public abstract class Tile : MonoBehaviour
               Debug.Log("Cannot move here. Enemy Space.");
               return;
                 
-                //var enemy = (BaseEnemy)OccupiedUnit;
-              //Destroy(enemy.gameObject);
-              //UnitManager.Instance.SetSelectedPlayer(null);
+             //var enemy = (BaseEnemy)OccupiedUnit;
+             //Destroy(enemy.gameObject);
+             //UnitManager.Instance.SetSelectedPlayer(null);
             }
 
             } else if (UnitManager.Instance.SelectedPlayer != null) {
@@ -58,13 +58,26 @@ public abstract class Tile : MonoBehaviour
                     Debug.Log("Cannot move here.");
                     return;
                 }
+                if (IsNextToEnemy())
+                {
+                        Debug.Log("Player moved next to an enemy!");
+                        var neighbors = GridManager.Instance.GetNeighborsOf(this);
+
+                        foreach (var n in neighbors)
+                        {
+                            if (n.OccupiedUnit != null && n.OccupiedUnit.Faction == Faction.Enemy)
+                            {
+                                BaseEnemy enemy = (BaseEnemy)n.OccupiedUnit;
+                                BasePlayer player = UnitManager.Instance.SelectedPlayer;
+                                combatUIManager.Instance.showCombatOption(player, enemy);
+                                break;
+                            }
+                        }
+
+                }
+
                 //places unit there
                 setUnit(UnitManager.Instance.SelectedPlayer);
-                if (IsNextToEnemy())
-                    {
-                        Debug.Log("Player moved next to an enemy!");
-                        // You can trigger combat, highlight the enemy, etc.
-                    }
                 UnitManager.Instance.SetSelectedPlayer(null);
             }
     }
