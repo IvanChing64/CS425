@@ -157,4 +157,33 @@ public class GridManager : MonoBehaviour
         if (tiles.TryGetValue(pos, out var tile)) return tile;
         return null;
     }
+
+    public List<Tile> GetNeighborsOf(Tile tile)
+    {
+        List<Tile> neighbors = new List<Tile>();
+
+        Vector2 pos = new Vector2(tile.transform.position.x, tile.transform.position.y);
+
+        // List of the 4 adjacent directions
+        Vector2[] dirs = new Vector2[]
+        {
+            new Vector2(1, 0),   // Right
+            new Vector2(-1, 0),  // Left
+            new Vector2(0, 1),   // Up
+            new Vector2(0, -1)   // Down
+        };
+
+        foreach (Vector2 d in dirs)
+        {
+            Vector2 checkPos = pos + d;
+
+            if (tiles.TryGetValue(checkPos, out Tile neighborTile))
+            {
+                neighbors.Add(neighborTile);
+            }
+        }
+
+        return neighbors;
+    }
+
 }

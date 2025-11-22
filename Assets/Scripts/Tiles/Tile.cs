@@ -12,6 +12,7 @@ public abstract class Tile : MonoBehaviour
     public BaseUnit OccupiedUnit;
     public bool Walkable => isWalkable && OccupiedUnit == null;
 
+
     public virtual void Init(int x, int y)
     {
         
@@ -40,29 +41,47 @@ public abstract class Tile : MonoBehaviour
             if (OccupiedUnit.Faction == Faction.Player)
             {
                 UnitManager.Instance.SetSelectedPlayer((BasePlayer)OccupiedUnit);
-            
+            }
+            else if (UnitManager.Instance.SelectedPlayer != null) { // If not selecting a player unit then it selects a enemy
+              Debug.Log("Cannot move here. Enemy Space.");
+              return;
                 
-            } else if(UnitManager.Instance.SelectedPlayer != null) { // If not selecting a player unit then it selects a enemy
-                var enemy = (BaseEnemy)OccupiedUnit;
-                Destroy(enemy.gameObject);
+                //var enemy = (BaseEnemy)OccupiedUnit;
+              //Destroy(enemy.gameObject);
+              //UnitManager.Instance.SetSelectedPlayer(null);
+            }
+
+            } else if (UnitManager.Instance.SelectedPlayer != null) {
+            //checks is terrain is walkable
+                if (!isWalkable)
+                {
+                    Debug.Log("Cannot move here.");
+                    return;
+                }
+                //places unit there
+                setUnit(UnitManager.Instance.SelectedPlayer);
+                if (IsNextToEnemy())
+                    {
+                        Debug.Log("Player moved next to an enemy!");
+                        // You can trigger combat, highlight the enemy, etc.
+                    }
                 UnitManager.Instance.SetSelectedPlayer(null);
             }
+    }
 
-        } else if (UnitManager.Instance.SelectedPlayer != null)
+    public bool IsNextToEnemy()
+    {
+        var neighbors = GridManager.Instance.GetNeighborsOf(this);
+
+        foreach (var n in neighbors)
         {
-            //checks is terrain is walkable
-            if (!isWalkable)
+            if (n.OccupiedUnit != null && n.OccupiedUnit.Faction == Faction.Enemy)
             {
-                Debug.Log("Cannot move here.");
-                return;
+                return true;
             }
-            //places unit there
-            setUnit(UnitManager.Instance.SelectedPlayer);
-            UnitManager.Instance.SetSelectedPlayer(null);
         }
-        {
 
-        }
+        return false;
     }
 
     //General Code for Movement
