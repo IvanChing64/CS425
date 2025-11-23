@@ -8,8 +8,8 @@ public abstract class Tile : MonoBehaviour
     [SerializeField] private GameObject highlight;
     [SerializeField] private bool isWalkable;
 
-
     public BaseUnit OccupiedUnit;
+
     public bool Walkable => isWalkable && OccupiedUnit == null;
 
 
@@ -19,12 +19,12 @@ public abstract class Tile : MonoBehaviour
     }
 
     //Hover Highlight code
-    void OnMouseEnter()
+    private void OnMouseEnter()
     {
         highlight.SetActive(true);
     }
 
-    void OnMouseExit()
+    private void OnMouseExit()
     {
         highlight.SetActive(false);
     }
@@ -68,41 +68,41 @@ public abstract class Tile : MonoBehaviour
                 return;
             }
 
-            } else if (UnitManager.Instance.SelectedPlayer != null) {
+        } else if (UnitManager.Instance.SelectedPlayer != null) {
             //checks is terrain is walkable
-                if (!isWalkable)
-                {
-                    Debug.Log("Cannot move here.");
-                    return;
-                }
-                //when moving to tile, scan for enemy and prompt attack button
-                if (IsNextToEnemy())
-                {
-                        Debug.Log("Player moved next to an enemy!");
-                        var neighbors = GridManager.Instance.GetNeighborsOf(this);
+            if (!isWalkable)
+            {
+                Debug.Log("Cannot move here.");
+                return;
+            }
+            //when moving to tile, scan for enemy and prompt attack button
+            if (IsNextToEnemy())
+            {
+                    Debug.Log("Player moved next to an enemy!");
+                    var neighbors = GridManager.Instance.GetNeighborsOf(this);
 
-                        foreach (var n in neighbors)
+                    foreach (var n in neighbors)
+                    {
+                        if (n.OccupiedUnit != null && n.OccupiedUnit.Faction == Faction.Enemy)
                         {
-                            if (n.OccupiedUnit != null && n.OccupiedUnit.Faction == Faction.Enemy)
-                            {
-                                BaseEnemy enemy = (BaseEnemy)n.OccupiedUnit;
-                                BasePlayer player = UnitManager.Instance.SelectedPlayer;
-                                CombatUIManager.Instance.showCombatOption(player, enemy);
-                                break;
-                            }
+                            BaseEnemy enemy = (BaseEnemy)n.OccupiedUnit;
+                            BasePlayer player = UnitManager.Instance.SelectedPlayer;
+                            CombatUIManager.Instance.showCombatOption(player, enemy);
+                            break;
                         }
+                    }
 
-                }
-                //when moved away from enemy, hide attack prompt
-                if (!IsNextToEnemy())
-                {
+            }
+            //when moved away from enemy, hide attack prompt
+            if (!IsNextToEnemy())
+            {
                 CombatUIManager.Instance.hideCombatOption();
-                }
+            }
 
-                //places unit there
-                setUnit(UnitManager.Instance.SelectedPlayer);
-                UnitManager.Instance.SetSelectedPlayer(null);
-                }
+            //places unit there
+            setUnit(UnitManager.Instance.SelectedPlayer);
+            UnitManager.Instance.SetSelectedPlayer(null);
+        }
     }
 
     //Helper function to scan direction for enemys
