@@ -32,8 +32,11 @@ public abstract class Tile : MonoBehaviour
     //Player movement testing
     private void OnMouseDown()
     {
+        if (combatUIManager.Instance != null && combatUIManager.Instance.IsCombatMenuOpen)
+            return;
         if (GameManager.Instance.gameState != GameState.PlayerTurn) return; //Checks if it is player's turn
 
+        
         //If there is something on the tile selected
         if(OccupiedUnit != null)
         {
@@ -41,14 +44,27 @@ public abstract class Tile : MonoBehaviour
             if (OccupiedUnit.Faction == Faction.Player)
             {
                 UnitManager.Instance.SetSelectedPlayer((BasePlayer)OccupiedUnit);
+                if (IsNextToEnemy())
+                {
+                        Debug.Log("Player is next to an enemy!");
+                        var neighbors = GridManager.Instance.GetNeighborsOf(this);
+
+                        foreach (var n in neighbors)
+                        {
+                            if (n.OccupiedUnit != null && n.OccupiedUnit.Faction == Faction.Enemy)
+                            {
+                                BaseEnemy enemy = (BaseEnemy)n.OccupiedUnit;
+                                BasePlayer player = UnitManager.Instance.SelectedPlayer;
+                                combatUIManager.Instance.showCombatOption(player, enemy);
+                                break;
+                            }
+                        }
+
+                }
             }
             else if (UnitManager.Instance.SelectedPlayer != null) { // If not selecting a player unit then it selects a enemy
-              Debug.Log("Cannot move here. Enemy Space.");
-              return;
-                
-             //var enemy = (BaseEnemy)OccupiedUnit;
-             //Destroy(enemy.gameObject);
-             //UnitManager.Instance.SetSelectedPlayer(null);
+                Debug.Log("Cannot move here. Enemy Space.");
+                return;
             }
 
             } else if (UnitManager.Instance.SelectedPlayer != null) {
@@ -75,11 +91,15 @@ public abstract class Tile : MonoBehaviour
                         }
 
                 }
-
+                if (!IsNextToEnemy())
+                {
+                combatUIManager.Instance.hideCombatOption();
+                }
                 //places unit there
                 setUnit(UnitManager.Instance.SelectedPlayer);
+                
                 UnitManager.Instance.SetSelectedPlayer(null);
-            }
+                }
     }
 
     public bool IsNextToEnemy()

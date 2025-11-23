@@ -142,10 +142,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
   OccupiedTile: {fileID: 0}
   Faction: 1
-  maxHealth: 0
+  maxHealth: 100
   health: 100
   dmg: 40
-  healthbar: {fileID: 0}
+  healthbar: {fileID: 5043209147972648630}
 --- !u!1 &1771412561709253947
 GameObject:
   m_ObjectHideFlags: 0

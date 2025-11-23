@@ -11,6 +11,7 @@ public class combatUIManager : MonoBehaviour
 
     private BasePlayer targetPlayer;
     private BaseEnemy targetEnemy;
+    public bool IsCombatMenuOpen => combatPanel.activeSelf;
 
 
     private void Awake()
@@ -25,6 +26,8 @@ public class combatUIManager : MonoBehaviour
         targetEnemy = enemy;
 
         combatPanel.SetActive(true);
+        combatButton.onClick.RemoveAllListeners();
+        combatButton.onClick.AddListener(() => ExecuteCombat());
     }
     public void hideCombatOption()
     {

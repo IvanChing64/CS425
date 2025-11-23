@@ -11,6 +11,7 @@ public class BaseUnit : MonoBehaviour
 
     public void takeDamage(float damageAmount)
     {
+        healthbar = GetComponentInChildren<healthbar>();
         health -= damageAmount;
         Debug.Log($"{name} took {damageAmount} damage. Health now: {health}");
         healthbar.UpdateHealthBar(health, maxHealth);
