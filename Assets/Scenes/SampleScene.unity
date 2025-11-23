@@ -746,7 +746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbba7d39188a6474db9f052e43d646b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
-  width: 20
+  width: 18
   height: 10
   grassTile: {fileID: -8581200666732430661, guid: 9689771e00856ca40a9f4cc2e7c0b32b, type: 3}
   mountainTile: {fileID: -4349095895413475627, guid: a7b239b3627e03b4e8582a9709e90e3a, type: 3}

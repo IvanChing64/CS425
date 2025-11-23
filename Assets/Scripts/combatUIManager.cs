@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class combatUIManager : MonoBehaviour
+public class CombatUIManager : MonoBehaviour
 {
     //temp usage until card functionality is implemented.
-    public static combatUIManager Instance;
+    public static CombatUIManager Instance;
 
     [SerializeField] private GameObject combatPanel;
     [SerializeField] private Button combatButton;

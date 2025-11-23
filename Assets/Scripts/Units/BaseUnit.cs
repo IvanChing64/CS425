@@ -7,13 +7,14 @@ public class BaseUnit : MonoBehaviour
     public float maxHealth;
     public float health;
     public float dmg;
-    [SerializeField] healthbar healthbar;
+    public int moveRange;
+    [SerializeField] Healthbar healthbar;
 
 
     //damage functions
     public void takeDamage(float damageAmount)
     {
-        healthbar = GetComponentInChildren<healthbar>();
+        healthbar = GetComponentInChildren<Healthbar>();
         health -= damageAmount;
         Debug.Log($"{name} took {damageAmount} damage. Health now: {health}");
         healthbar.UpdateHealthBar(health, maxHealth);
@@ -23,7 +24,7 @@ public class BaseUnit : MonoBehaviour
         }
     }
 
-    void Die()
+    private void Die()
     {
         Debug.Log($"{name} has died.");
         Destroy(gameObject);

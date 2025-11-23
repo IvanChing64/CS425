@@ -207,6 +207,7 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   dmg: 40
+  moveRange: 3
   healthbar: {fileID: 6525803158315793462}
 --- !u!1 &3310885552388918130
 GameObject:

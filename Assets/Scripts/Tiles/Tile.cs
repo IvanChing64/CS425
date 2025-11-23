@@ -33,7 +33,7 @@ public abstract class Tile : MonoBehaviour
     private void OnMouseDown()
     {
         //Checks if the combat menu is open on screen
-        if (combatUIManager.Instance != null && combatUIManager.Instance.IsCombatMenuOpen) return;
+        if (CombatUIManager.Instance != null && CombatUIManager.Instance.IsCombatMenuOpen) return;
         //Checks if it is player's turn
         if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
 
@@ -57,7 +57,7 @@ public abstract class Tile : MonoBehaviour
                             {
                                 BaseEnemy enemy = (BaseEnemy)n.OccupiedUnit;
                                 BasePlayer player = UnitManager.Instance.SelectedPlayer;
-                                combatUIManager.Instance.showCombatOption(player, enemy);
+                                CombatUIManager.Instance.showCombatOption(player, enemy);
                                 break;
                             }
                         }
@@ -87,7 +87,7 @@ public abstract class Tile : MonoBehaviour
                             {
                                 BaseEnemy enemy = (BaseEnemy)n.OccupiedUnit;
                                 BasePlayer player = UnitManager.Instance.SelectedPlayer;
-                                combatUIManager.Instance.showCombatOption(player, enemy);
+                                CombatUIManager.Instance.showCombatOption(player, enemy);
                                 break;
                             }
                         }
@@ -96,7 +96,7 @@ public abstract class Tile : MonoBehaviour
                 //when moved away from enemy, hide attack prompt
                 if (!IsNextToEnemy())
                 {
-                combatUIManager.Instance.hideCombatOption();
+                CombatUIManager.Instance.hideCombatOption();
                 }
 
                 //places unit there
