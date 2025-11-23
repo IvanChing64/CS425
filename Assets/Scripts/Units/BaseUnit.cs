@@ -9,6 +9,8 @@ public class BaseUnit : MonoBehaviour
     public float dmg;
     [SerializeField] healthbar healthbar;
 
+
+    //damage functions
     public void takeDamage(float damageAmount)
     {
         healthbar = GetComponentInChildren<healthbar>();

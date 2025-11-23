@@ -22,11 +22,14 @@ public class GridManager : MonoBehaviour
     //Switchs game state
     public void GenerateGrid()
     {
+        //open dictionary for tiles storage and data usage
         tiles = new Dictionary<Vector2, Tile>();
+        //2 for loops for width and height for grid
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
+
                 Tile tileToSpawn = grassTile;
                 Vector2 currentPos = new Vector2(x, y);
 
@@ -44,69 +47,64 @@ public class GridManager : MonoBehaviour
                     isNeighborMountain = true;
                 }
 
-            //Define base mountain chance (e.g., 1 in 10 for a scattered mountain)
-            int baseMountainChance = 10;
+                //Define base mountain chance (e.g., 1 in 10 for a scattered mountain)
+                int baseMountainChance = 10;
             
-            // Define increased chance multiplier if a neighbor is a mountain
-            int neighborMountainMultiplier = 4; 
+                // Define increased chance multiplier if a neighbor is a mountain
+                int neighborMountainMultiplier = 4; 
 
-            int mountainRoll = UnityEngine.Random.Range(0, baseMountainChance);
+                int mountainRoll = UnityEngine.Random.Range(0, baseMountainChance);
 
-            if (isNeighborMountain)
-            {
-                // Increase the chance of a mountain
-                if (mountainRoll < neighborMountainMultiplier) 
+                if (isNeighborMountain)
                 {
-                    tileToSpawn = mountainTile;
+                    // Increase the chance of a mountain
+                    if (mountainRoll < neighborMountainMultiplier) 
+                    {
+                        tileToSpawn = mountainTile;
+                    }
                 }
-            }
-            else
-            {
-                // Use the base chance for an isolated mountain
-                if (mountainRoll == 0) // Only on a roll of 0 (1 in 10 chance)
+                else
                 {
-                    tileToSpawn = mountainTile;
+                    // Use the base chance for an isolated mountain
+                    if (mountainRoll == 0) // Only on a roll of 0 (1 in 10 chance)
+                    {
+                        tileToSpawn = mountainTile;
+                    }
                 }
-            }
 
-            var spawnedTile = Instantiate(tileToSpawn, new Vector3(x, y), Quaternion.identity);
+                var spawnedTile = Instantiate(tileToSpawn, new Vector3(x, y), Quaternion.identity);
             
 
-            //Creates tiles with mountain or grass name currently
-            if (tileToSpawn == mountainTile)
-            {
-                spawnedTile.name = $"Tile {x} {y} (mountain)";
-            }
-            else
-            {
-                spawnedTile.name = $"Tile {x} {y} (grass)";
-            }
+                //Creates tiles with mountain or grass name currently
+                if (tileToSpawn == mountainTile)
+                {
+                    spawnedTile.name = $"Tile {x} {y} (mountain)";
+                }
+                else
+                {
+                    spawnedTile.name = $"Tile {x} {y} (grass)";
+                }
 
 
-            //Checkerboard coloring
-            var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
+                //Checkerboard coloring
+                var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
 
-            //Shows tiles name in debug console
-            Debug.Log($"Creating {spawnedTile.name} offset={isOffset}");
-            spawnedTile.Init(x,y);
+                //Shows tiles name in debug console
+                Debug.Log($"Creating {spawnedTile.name} offset={isOffset}");
+                spawnedTile.Init(x,y);
 
-            tiles[currentPos] = spawnedTile;
-                //var randomTile = UnityEngine.Random.Range(0, 6) == 3 ? mountainTile : grassTile;
-                //var spawnedTile = Instantiate(randomTile, new Vector3(x, y), Quaternion.identity);
-                //spawnedTile.name = $"Tile {x} {y}";
+                tiles[currentPos] = spawnedTile;
 
-                //var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
-                //Debug.Log($"Creating {spawnedTile.name} offset={isOffset}");
-                //spawnedTile.Init(x,y);
-
-                //tiles[new Vector2(x, y)] = spawnedTile;
             }
         }
-        cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
 
+        //set camera and change states to spawn units
+        cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
         GameManager.Instance.ChangeState(GameState.SpawnPlayers);
     }
 
+
+    //Helper functions: mountiain checks  
     private bool IsSurroundedByMountains(Tile tile)
     {
         // Get the coordinates of the tile
@@ -131,8 +129,6 @@ public class GridManager : MonoBehaviour
             if (tiles.TryGetValue(neighborPos, out Tile neighborTile))
             {
                 // 2. Check if the neighbor tile is a mountain tile
-                // We assume mountain tiles contain "mountain" in their name, 
-                // as set during grid generation.
                 if (neighborTile.gameObject.name.Contains("mountain"))
                 {
                     mountainCount++;
@@ -141,7 +137,8 @@ public class GridManager : MonoBehaviour
         }
         return mountainCount >= 3;
     }
-        
+
+    //Helper functions: Spawn tiles   
     public Tile GetPlayerSpawnTile()
     {
         return tiles.Where(t => t.Key.x < 2 && t.Value.Walkable && !IsSurroundedByMountains(t.Value)).OrderBy(t => UnityEngine.Random.value).First().Value;
@@ -152,6 +149,7 @@ public class GridManager : MonoBehaviour
         return tiles.Where(t => t.Key.x >= width - 2 && t.Value.Walkable && !IsSurroundedByMountains(t.Value)).OrderBy(t => UnityEngine.Random.value).First().Value;
     }
 
+    //Helper functions: Get tiles  
     public Tile GetTileAtPosition(Vector2 pos)
     {
         if (tiles.TryGetValue(pos, out var tile)) return tile;

@@ -32,18 +32,20 @@ public abstract class Tile : MonoBehaviour
     //Player movement testing
     private void OnMouseDown()
     {
-        if (combatUIManager.Instance != null && combatUIManager.Instance.IsCombatMenuOpen)
-            return;
-        if (GameManager.Instance.gameState != GameState.PlayerTurn) return; //Checks if it is player's turn
+        //Checks if the combat menu is open on screen
+        if (combatUIManager.Instance != null && combatUIManager.Instance.IsCombatMenuOpen) return;
+        //Checks if it is player's turn
+        if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
 
-        
         //If there is something on the tile selected
         if(OccupiedUnit != null)
         {
             //Selecting players
             if (OccupiedUnit.Faction == Faction.Player)
             {
+                //Selects players
                 UnitManager.Instance.SetSelectedPlayer((BasePlayer)OccupiedUnit);
+                //code to check if selected player is already next to an enemy
                 if (IsNextToEnemy())
                 {
                         Debug.Log("Player is next to an enemy!");
@@ -59,7 +61,6 @@ public abstract class Tile : MonoBehaviour
                                 break;
                             }
                         }
-
                 }
             }
             else if (UnitManager.Instance.SelectedPlayer != null) { // If not selecting a player unit then it selects a enemy
@@ -74,6 +75,7 @@ public abstract class Tile : MonoBehaviour
                     Debug.Log("Cannot move here.");
                     return;
                 }
+                //when moving to tile, scan for enemy and prompt attack button
                 if (IsNextToEnemy())
                 {
                         Debug.Log("Player moved next to an enemy!");
@@ -91,17 +93,19 @@ public abstract class Tile : MonoBehaviour
                         }
 
                 }
+                //when moved away from enemy, hide attack prompt
                 if (!IsNextToEnemy())
                 {
                 combatUIManager.Instance.hideCombatOption();
                 }
+
                 //places unit there
                 setUnit(UnitManager.Instance.SelectedPlayer);
-                
                 UnitManager.Instance.SetSelectedPlayer(null);
                 }
     }
 
+    //Helper function to scan direction for enemys
     public bool IsNextToEnemy()
     {
         var neighbors = GridManager.Instance.GetNeighborsOf(this);

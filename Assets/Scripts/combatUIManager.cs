@@ -13,13 +13,13 @@ public class combatUIManager : MonoBehaviour
     private BaseEnemy targetEnemy;
     public bool IsCombatMenuOpen => combatPanel.activeSelf;
 
-
     private void Awake()
     {
         Instance = this;
         combatPanel.SetActive(false);
     }
 
+    //gets player and enemy data and prompts attack button
     public void showCombatOption(BasePlayer player, BaseEnemy enemy)
     {
         targetPlayer = player;
@@ -29,11 +29,14 @@ public class combatUIManager : MonoBehaviour
         combatButton.onClick.RemoveAllListeners();
         combatButton.onClick.AddListener(() => ExecuteCombat());
     }
+    
+    //hides button when not in use
     public void hideCombatOption()
     {
         combatPanel.SetActive(false);
     }
 
+    //damage step
     public void ExecuteCombat()
     {
         if (targetEnemy != null)
