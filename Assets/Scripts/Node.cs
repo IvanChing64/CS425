@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Node: MonoBehaviour
 {
-    public Node cameFrom;
-    public List<Node> connections;
-
-    public float gScore;
-    public float hScore;
-
-    public float Fscore()
-    {
-        return gScore + hScore;    
-    }
+    public bool walkable = true;
     
+
+    public float gScore = float.MaxValue;
+    public float hScore;
+    public float fScore => gScore + hScore;
+
+    public Node cameFrom;
+    public List<Node> connections = new List<Node>();
+
+
+
 }
 
