@@ -1,5 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Tile : MonoBehaviour
@@ -11,7 +16,8 @@ public abstract class Tile : MonoBehaviour
     public BaseUnit OccupiedUnit;
 
     public bool Walkable => isWalkable && OccupiedUnit == null;
-
+    public Vector2 Position => new Vector2(this.transform.position.x, this.transform.position.y);
+    public List<Tile> Neighbors => GridManager.Instance.GetNeighborsOf(this);
 
     public virtual void Init(int x, int y)
     {
@@ -129,4 +135,45 @@ public abstract class Tile : MonoBehaviour
         OccupiedUnit = unit;
         unit.OccupiedTile = this;
     }
+
+    /// <summary>
+    /// <p>Gets all tiles and paths to them within a certain range of a unit</p>
+    /// </summary>
+    /// <param name="range">The maximum range to search for tiles away from this tile</param>
+    /// <returns>A dictionary with all found tiles in range and their preceding tile</returns>
+    public Dictionary<Tile, Tile> GetPathsInRange(int range)
+    {
+        var tilesPaths = new Dictionary<Tile, Tile>();
+        var visitedList = new List<Tile>();
+        var visitQueue = new Queue<Tile>();
+
+        visitQueue.Enqueue(this);
+        
+        while (visitQueue.TryDequeue(out Tile tile))
+        {
+            foreach (Tile neighbor in Neighbors.Where(t => !visitedList.Contains(t) && t.Walkable && this.DistanceTo(t) <= range))
+            {
+                tilesPaths.Add(neighbor, tile);
+                visitQueue.Enqueue(neighbor);
+            }
+            
+            visitedList.Add(tile);
+        }
+
+        return tilesPaths;
+    }
+
+    /// <summary>
+    /// <p>Finds the distance to another tile in terms of the number of tile moves it would take to reach it</p>
+    /// </summary>
+    /// <param name="other">The tile to find the distance to</param>
+    /// <returns>The number of tile moves it would take to reach 'other' from this tile</returns>
+    public int DistanceTo(Tile other)
+    {
+        float thisTotal = this.Position.x + this.Position.y;
+        float otherTotal = other.Position.x + other.Position.y;
+
+        return (int)Math.Abs(thisTotal - otherTotal);
+    }
+
 }
