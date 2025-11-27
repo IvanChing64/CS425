@@ -1,85 +1,102 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class AStarManager: MonoBehaviour
+public class AStarManager : MonoBehaviour
 {
-    public static AStarManager instance;
+    public static AStarManager Instance;
 
     private void Awake()
     {
-       instance = this;
+        Instance = this;
     }
 
-    public List<Node> GeneratePath(Node start, Node end)
+    public List<Tile> GeneratePath(Tile start, Tile end)
     {
-        List<Node> openSet = new List<Node>();
+        List<Tile> openSet = new List<Tile>();
+        HashSet<Tile> closedSet = new HashSet<Tile>();
 
-        foreach (Node n in FindObjectsOfType<Node>())
-        {
-            n.gScore = float.MaxValue;
-        }
+        Dictionary<Tile, Tile> cameFrom = new Dictionary<Tile, Tile>();
+        Dictionary<Tile, float> gScore = new Dictionary<Tile, float>();
+        Dictionary<Tile, float> fScore = new Dictionary<Tile, float>();
 
-        start.gScore = 0;
-        start.hScore = Vector2.Distance(start.transform.position, end.transform.position);
+        gScore[start] = 0;
+        fScore[start] = Heuristic(start, end);
         openSet.Add(start);
 
-        while (openSet.Count > 0) 
+        while (openSet.Count > 0)
         {
-            int lowestF = default;
+            Tile current = GetLowestFScore(openSet, fScore);
 
-            for (int i = 1; i < openSet.Count; i++)
+            if (current == end)
             {
-                if (openSet[i].Fscore() < openSet[lowestF].Fscore())
-                {
-                    lowestF = i;
-
-                }
+                return ReconstructPath(cameFrom, current);
             }
+            openSet.Remove(current);
+            closedSet.Add(current);
 
-            Node currentNode = openSet[lowestF];
-            openSet.Remove(currentNode);
-
-            if (currentNode == end) 
+            foreach (Tile neighbor in GridManager.Instance.GetNeighborsOf(current))
             {
-                List<Node> path = new List<Node>();
-
-                path.Insert(0, end);
-
-                while (currentNode != start)
+                if (!neighbor.Walkable || closedSet.Contains(neighbor))
                 {
-                    currentNode = currentNode.cameFrom;
-                    path.Add(currentNode);
+                    continue;
                 }
-                
-                path.Reverse();
-                return path;
-            
-            }
+                float tentativeG = gScore[current] + 1;
 
-            foreach (Node connectedNode in currentNode.connections)
-            {
-                float heldGscore = currentNode.gScore + Vector2.Distance(currentNode.transform.position, connectedNode.transform.position);
-
-                if (heldGscore < connectedNode.gScore)
+                if (!gScore.ContainsKey(neighbor) || tentativeG < gScore[neighbor])
                 {
-                    connectedNode.cameFrom = currentNode;
-                    connectedNode.gScore = heldGscore;
-                    connectedNode.hScore = Vector2.Distance(connectedNode.transform.position, end.transform.position);
+                    cameFrom[neighbor] = current;
+                    gScore[neighbor] = tentativeG;
+                    fScore[neighbor] = tentativeG + Heuristic(neighbor, end);
 
-                    if(!openSet.Contains(connectedNode))
+                    if (!openSet.Contains(neighbor))
                     {
-                        openSet.Add(connectedNode);
+                        openSet.Add(neighbor);
                     }
-                    
                 }
-
             }
-        
+            
         }
-
         return null;
-    
+     }
+
+    private float Heuristic(Tile a, Tile b)
+    {
+
+        return Mathf.Abs(a.transform.position.x - b.transform.position.x) + Mathf.Abs(a.transform.position.y - b.transform.position.y);
     }
+
+    private Tile GetLowestFScore(List<Tile> openSet, Dictionary<Tile, float> fScore)
+    {
+        Tile lowest = openSet[0];
+        float lowestScore = fScore.ContainsKey(lowest) ? fScore[lowest] : Mathf.Infinity;
+
+        foreach (Tile tile in openSet)
+        {
+            float score = fScore.ContainsKey(tile) ? fScore[tile] : Mathf.Infinity;
+            if (score < lowestScore)
+            {
+                lowest = tile;
+                lowestScore = score;
+            }
+        }
+        return lowest;
+    }
+
+    private List<Tile> ReconstructPath(Dictionary<Tile, Tile> cameFrom, Tile current)
+    {
+        List<Tile> path = new List<Tile> { current };
+        while (cameFrom.ContainsKey(current))
+        {
+            current = cameFrom[current];
+            path.Insert(0, current);
+        }
+        return path;
+    }
+    
+    
 }
 
+    

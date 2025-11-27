@@ -31,7 +31,7 @@ public class NPC_Controller: MonoBehaviour
             Node[] nodes = Object.FindObjectsByType<Node>(FindObjectsSortMode.None);
             while (path == null || path.Count == 0)
             {
-                path = AStarManager.instance.GeneratePath(currentNode, nodes[Random.Range(0, nodes.Length)]);
+                //path = AStarManager.instance.GeneratePath(currentNode, nodes[Random.Range(0, nodes.Length)]);
             }
 
         }
