@@ -5,36 +5,57 @@ using UnityEngine;
 
 public class NPC_Controller: MonoBehaviour
 {
-    public Node currentNode;
-    public List<Node> path = new List<Node>();
+    public float moveSpeed = 1f;
+    public int tilesPerMove = 3;
+
+    public List<Tile> path;
+    private int pathIndex;
+    private int tilesMovedThisTurn;
+    private bool isMoving;
+
+ 
 
     private void Update()
     {
-        CreatePath();
+        if (GameManager.Instance.gameState != GameState.EnemyTurn) return;
+
+        if (!isMoving || path == null || pathIndex >= path.Count) return;
+
+        if (tilesMovedThisTurn >= tilesPerMove)
+        {
+            isMoving = false;
+            return;
+        }
+
+        Tile currentTargetTile = path[pathIndex];
+        if (currentTargetTile == null) return;
+
+        Vector2 targetPos = currentTargetTile.transform.position;
+        transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+
+        if (Vector2.Distance(transform.position, targetPos) < 0.05f)
+        {
+            pathIndex++;
+            tilesMovedThisTurn++;
+        }
     }
 
-    public void CreatePath()
+    public void SetTarget(Vector2 targetPos)
     {
-        if (path.Count > 0)
-        {
-            int x = 0;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(path[x].transform.position.x, path[x].transform.position.y, -2), 3 * Time.deltaTime);
+        Tile startTile = GridManager.Instance.GetTileAtPosition(transform.position);
+        Tile endTile = GridManager.Instance.GetTileAtPosition(targetPos);
 
-            if (Vector2.Distance(transform.position, path[x].transform.position) < 0.1f)
-            {
-                currentNode = path[x];
-                path.RemoveAt(x);
-            }
-        }
-        else
-        {
-            Node[] nodes = Object.FindObjectsByType<Node>(FindObjectsSortMode.None);
-            while (path == null || path.Count == 0)
-            {
-                //path = AStarManager.instance.GeneratePath(currentNode, nodes[Random.Range(0, nodes.Length)]);
-            }
-
-        }
+        path = AStarManager.Instance.GeneratePath(startTile, endTile);
+        pathIndex = 0;
+        tilesMovedThisTurn = 0;
+        isMoving = true;
     }
+
+    public void BeginTurn()
+    {
+        tilesMovedThisTurn = 0;
+        isMoving = true;
+    }
+
 
 }
