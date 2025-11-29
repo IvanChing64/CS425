@@ -47,6 +47,8 @@ GameObject:
   - component: {fileID: 6852541251775065487}
   - component: {fileID: 6465602832740549134}
   - component: {fileID: 4549722344671113507}
+  - component: {fileID: 751289258245009956}
+  - component: {fileID: 1133397249698605912}
   m_Layer: 0
   m_Name: enemytest
   m_TagString: Untagged
@@ -63,7 +65,7 @@ Transform:
   m_GameObject: {fileID: 1167321167610509267}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.0322447, y: 2.059397, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -146,6 +148,33 @@ MonoBehaviour:
   health: 100
   dmg: 40
   healthbar: {fileID: 5043209147972648630}
+--- !u!114 &751289258245009956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167321167610509267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf3160600fe073488ae2db54fa528c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AStarManager
+--- !u!114 &1133397249698605912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167321167610509267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecbbd051c48c50848b01c66bf32e150d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPC_Controller
+  moveSpeed: 1
+  tilesPerMove: 3
+  path: []
 --- !u!1 &1771412561709253947
 GameObject:
   m_ObjectHideFlags: 0

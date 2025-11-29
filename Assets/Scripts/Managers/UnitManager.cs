@@ -8,8 +8,12 @@ public class UnitManager : MonoBehaviour
 {
     public static UnitManager Instance;
     private List<ScriptableUnit> units;
+    //Adding reference to player tile.
+    private Tile playerTile;
 
     public BasePlayer SelectedPlayer;
+
+    private List<BaseEnemy> enemiesSpawned = new List<BaseEnemy>();
 
     private void Awake()
     {
@@ -28,6 +32,10 @@ public class UnitManager : MonoBehaviour
             var randomSpawnTile = GridManager.Instance.GetPlayerSpawnTile();
 
             randomSpawnTile.setUnit(spawnedPlayer);
+
+            SelectedPlayer = spawnedPlayer;
+            //Adding reference to player tile.
+            playerTile = randomSpawnTile;
         }
         GameManager.Instance.ChangeState(GameState.SpawnEnemies);
     }
@@ -42,9 +50,19 @@ public class UnitManager : MonoBehaviour
             var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
 
             randomSpawnTile.setUnit(spawnedEnemy);
+
+            enemiesSpawned.Add(spawnedEnemy);
+
+            //New section added to help with NPC_Controller
+            var npcController = spawnedEnemy.GetComponent<NPC_Controller>();
+            if (npcController != null && SelectedPlayer != null)
+            {
+                npcController.SetTarget(playerTile);
+            }
         }
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
+
 
 
     private T GetRandomUnit<T>(Faction faction) where T : BaseUnit
@@ -56,4 +74,17 @@ public class UnitManager : MonoBehaviour
         SelectedPlayer = player;
     }
 
+    public void BeginEnemyTurn()
+    {
+        foreach (var enemy in enemiesSpawned)
+        {
+            var npcController = enemy.GetComponent<NPC_Controller>();
+            if (npcController != null && SelectedPlayer != null)
+            {
+                npcController.BeginTurn();
+                npcController.SetTarget(playerTile);
+            }
+        }
+    }
+   
 }

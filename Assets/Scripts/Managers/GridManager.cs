@@ -152,7 +152,13 @@ public class GridManager : MonoBehaviour
     //Helper functions: Get tiles  
     public Tile GetTileAtPosition(Vector2 pos)
     {
+        //Adding code so that it rounds the positionto grid coordinates.
+
+        Vector2 gridPos = new Vector2(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
+
         if (tiles.TryGetValue(pos, out var tile)) return tile;
+        //Debug Log to help check tile positions
+        Debug.Log("No tile found at position: " + gridPos);
         return null;
     }
 

@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ChangeState(GameState.GenerateGrid);
+
+        GameManager.Instance.ChangeState(GameState.EnemyTurn);
+        //Uncomment to regain control of player
+        //GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
 
     //Game state manager
@@ -41,7 +45,10 @@ public class GameManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);
         }
     }
+
 }
+
+
 
 public enum GameState{
     GenerateGrid = 0,
@@ -50,3 +57,6 @@ public enum GameState{
     PlayerTurn=3,
     EnemyTurn =4
 }
+
+
+

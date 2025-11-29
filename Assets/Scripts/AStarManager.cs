@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class AStarManager : MonoBehaviour
 {
@@ -28,9 +29,14 @@ public class AStarManager : MonoBehaviour
 
         while (openSet.Count > 0)
         {
+            
             Tile current = GetLowestFScore(openSet, fScore);
+            Debug.Log("Visiting: " + current.name);
 
-            if (current == end)
+            Debug.Log("Comparing current " + current.name + " with end " + end.name);
+
+
+            if (current.transform.position == end.transform.position)
             {
                 return ReconstructPath(cameFrom, current);
             }
@@ -57,9 +63,14 @@ public class AStarManager : MonoBehaviour
                     }
                 }
             }
-            
+            Debug.Log("Checking tile: " + current.name);
+
+
         }
+        Debug.Log("Start: " + start.name + " End: " + end.name);
+        if (end == null || !end.Walkable) Debug.Log("End tile invalid!");
         return null;
+
      }
 
     private float Heuristic(Tile a, Tile b)
@@ -93,7 +104,9 @@ public class AStarManager : MonoBehaviour
             current = cameFrom[current];
             path.Insert(0, current);
         }
+        Debug.Log("Path length: " + path.Count);
         return path;
+        
     }
     
     

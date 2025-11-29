@@ -17,6 +17,8 @@ public class NPC_Controller: MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance == null) return;
+
         if (GameManager.Instance.gameState != GameState.EnemyTurn) return;
 
         if (!isMoving || path == null || pathIndex >= path.Count) return;
@@ -28,9 +30,11 @@ public class NPC_Controller: MonoBehaviour
         }
 
         Tile currentTargetTile = path[pathIndex];
+        Vector2 targetPos = currentTargetTile.transform.position;
+        transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
         if (currentTargetTile == null) return;
 
-        Vector2 targetPos = currentTargetTile.transform.position;
+       
         transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
 
         if (Vector2.Distance(transform.position, targetPos) < 0.05f)
@@ -40,15 +44,26 @@ public class NPC_Controller: MonoBehaviour
         }
     }
 
-    public void SetTarget(Vector2 targetPos)
+    public void SetTarget(Tile endTile)
     {
         Tile startTile = GridManager.Instance.GetTileAtPosition(transform.position);
-        Tile endTile = GridManager.Instance.GetTileAtPosition(targetPos);
+       
+        if (startTile == null || endTile == null || !endTile.Walkable)
+        {
+            Debug.Log("Invalid start or end tile!");
+            return;
+        }
 
         path = AStarManager.Instance.GeneratePath(startTile, endTile);
         pathIndex = 0;
         tilesMovedThisTurn = 0;
         isMoving = true;
+
+        Debug.Log("Enemy target set to: " + endTile.name);
+
+        //Adding debug to show path
+        Debug.Log("Start tile: " + startTile?.name);
+        Debug.Log("End tile: " + endTile?.name + " Walkable: " + (endTile?.Walkable));
     }
 
     public void BeginTurn()
