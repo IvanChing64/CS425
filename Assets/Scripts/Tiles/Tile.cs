@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public abstract class Tile : MonoBehaviour
@@ -74,9 +75,14 @@ public abstract class Tile : MonoBehaviour
                 return;
             }
 
-        } else if (UnitManager.Instance.SelectedPlayer != null) {
-            //checks is terrain is walkable
-            if (!isWalkable)
+        }
+        // If a player is selected
+        else if (UnitManager.Instance.SelectedPlayer != null)
+        {
+            List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
+
+            // If this terrain is NOT in a selected unit's range
+            if (!tilesInRange.Contains(this))
             {
                 Debug.Log("Cannot move here.");
                 return;
@@ -100,7 +106,7 @@ public abstract class Tile : MonoBehaviour
 
             }
             //when moved away from enemy, hide attack prompt
-            if (!IsNextToEnemy())
+            else
             {
                 CombatUIManager.Instance.hideCombatOption();
             }
@@ -141,26 +147,23 @@ public abstract class Tile : MonoBehaviour
     /// </summary>
     /// <param name="range">The maximum range to search for tiles away from this tile</param>
     /// <returns>A dictionary with all found tiles in range and their preceding tile</returns>
-    public Dictionary<Tile, Tile> GetPathsInRange(int range)
+    public List<Tile> GetTilesInRange(int range)
     {
-        var tilesPaths = new Dictionary<Tile, Tile>();
-        var visitedList = new List<Tile>();
-        var visitQueue = new Queue<Tile>();
+        List<Tile> tilesInRange = new();
+        Queue<Tile> visitQueue = new();
 
         visitQueue.Enqueue(this);
-        
+
         while (visitQueue.TryDequeue(out Tile tile))
         {
-            foreach (Tile neighbor in Neighbors.Where(t => !visitedList.Contains(t) && t.Walkable && this.DistanceTo(t) <= range))
+            foreach (Tile neighbor in tile.Neighbors.Where(t => !tilesInRange.Contains(t) && t.Walkable && this.DistanceTo(t) <= range))
             {
-                tilesPaths.Add(neighbor, tile);
+                tilesInRange.Add(neighbor);
                 visitQueue.Enqueue(neighbor);
             }
-            
-            visitedList.Add(tile);
         }
 
-        return tilesPaths;
+        return tilesInRange;
     }
 
     /// <summary>
@@ -170,10 +173,14 @@ public abstract class Tile : MonoBehaviour
     /// <returns>The number of tile moves it would take to reach 'other' from this tile</returns>
     public int DistanceTo(Tile other)
     {
-        float thisTotal = this.Position.x + this.Position.y;
-        float otherTotal = other.Position.x + other.Position.y;
+        int thisTotal = (int)this.Position.x + (int)this.Position.y;
+        int otherTotal = (int)other.Position.x + (int)other.Position.y;
 
-        return (int)Math.Abs(thisTotal - otherTotal);
+        return Math.Abs(thisTotal - otherTotal);
     }
 
+    public override string ToString()
+    {
+        return Position.ToString();
+    }
 }

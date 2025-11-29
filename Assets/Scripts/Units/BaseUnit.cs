@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseUnit : MonoBehaviour
@@ -29,4 +30,6 @@ public class BaseUnit : MonoBehaviour
         Debug.Log($"{name} has died.");
         Destroy(gameObject);
     }
+
+    public List<Tile> GetTilesInMoveRange() => OccupiedTile.GetTilesInRange(moveRange);
 }
