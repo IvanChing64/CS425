@@ -10,6 +10,7 @@ public class UnitManager : MonoBehaviour
     private List<ScriptableUnit> units;
     //Adding reference to player tile.
     private Tile playerTile;
+    private List<Tile> enemyTiles = new List<Tile>();
 
     public BasePlayer SelectedPlayer;
 
@@ -52,12 +53,13 @@ public class UnitManager : MonoBehaviour
             randomSpawnTile.setUnit(spawnedEnemy);
 
             enemiesSpawned.Add(spawnedEnemy);
+            enemyTiles.Add(randomSpawnTile);
 
             //New section added to help with NPC_Controller
             var npcController = spawnedEnemy.GetComponent<NPC_Controller>();
             if (npcController != null && SelectedPlayer != null)
             {
-                npcController.SetTarget(playerTile);
+                npcController.SetTarget(randomSpawnTile, playerTile);
             }
         }
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
@@ -74,15 +76,17 @@ public class UnitManager : MonoBehaviour
         SelectedPlayer = player;
     }
 
+    //New.
     public void BeginEnemyTurn()
     {
-        foreach (var enemy in enemiesSpawned)
+        for (int i = 0; i < enemiesSpawned.Count; i++)
         {
+            var enemy = enemiesSpawned[i];
             var npcController = enemy.GetComponent<NPC_Controller>();
             if (npcController != null && SelectedPlayer != null)
             {
                 npcController.BeginTurn();
-                npcController.SetTarget(playerTile);
+                npcController.SetTarget(enemyTiles[i], playerTile);
             }
         }
     }

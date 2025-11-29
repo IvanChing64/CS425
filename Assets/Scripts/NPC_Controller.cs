@@ -44,9 +44,9 @@ public class NPC_Controller: MonoBehaviour
         }
     }
 
-    public void SetTarget(Tile endTile)
+    public void SetTarget(Tile startTile, Tile endTile)
     {
-        Tile startTile = GridManager.Instance.GetTileAtPosition(transform.position);
+    
        
         if (startTile == null || endTile == null || !endTile.Walkable)
         {
