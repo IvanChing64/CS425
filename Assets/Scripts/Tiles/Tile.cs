@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public abstract class Tile : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public abstract class Tile : MonoBehaviour
     public BaseUnit OccupiedUnit;
 
     public bool Walkable => isWalkable && OccupiedUnit == null;
-    public Vector2 Position => new Vector2(this.transform.position.x, this.transform.position.y);
+    public Vector2 Position => new(this.transform.position.x, this.transform.position.y);
     public List<Tile> Neighbors => GridManager.Instance.GetNeighborsOf(this);
 
     public virtual void Init(int x, int y)
@@ -52,6 +53,7 @@ public abstract class Tile : MonoBehaviour
             {
                 //Selects players
                 UnitManager.Instance.SetSelectedPlayer((BasePlayer)OccupiedUnit);
+
                 //code to check if selected player is already next to an enemy
                 if (IsNextToEnemy())
                 {
@@ -173,10 +175,10 @@ public abstract class Tile : MonoBehaviour
     /// <returns>The number of tile moves it would take to reach 'other' from this tile</returns>
     public int DistanceTo(Tile other)
     {
-        int thisTotal = (int)this.Position.x + (int)this.Position.y;
-        int otherTotal = (int)other.Position.x + (int)other.Position.y;
+        int xDiff = Math.Abs((int)this.Position.x - (int)other.Position.x);
+        int yDiff = Math.Abs((int)this.Position.y - (int)other.Position.y);
 
-        return Math.Abs(thisTotal - otherTotal);
+        return xDiff + yDiff;
     }
 
     public override string ToString()
