@@ -16,16 +16,21 @@ public class AStarManager : MonoBehaviour
 
     public List<Tile> GeneratePath(Tile start, Tile end)
     {
-        List<Tile> openSet = new List<Tile>();
+
+        if (start == null || end == null)
+        {
+            Debug.Log("Start or end tile is null!");
+            return null;
+        }
+
+        List<Tile> openSet = new List<Tile> { start };
         HashSet<Tile> closedSet = new HashSet<Tile>();
 
         Dictionary<Tile, Tile> cameFrom = new Dictionary<Tile, Tile>();
-        Dictionary<Tile, float> gScore = new Dictionary<Tile, float>();
-        Dictionary<Tile, float> fScore = new Dictionary<Tile, float>();
+        Dictionary<Tile, float> gScore = new Dictionary<Tile, float> { [start] = 0 };
+        Dictionary<Tile, float> fScore = new Dictionary<Tile, float> { [start] = Heuristic(start, end) };
 
-        gScore[start] = 0;
-        fScore[start] = Heuristic(start, end);
-        openSet.Add(start);
+        
 
         while (openSet.Count > 0)
         {
@@ -36,7 +41,7 @@ public class AStarManager : MonoBehaviour
             Debug.Log("Comparing current " + current.name + " with end " + end.name);
 
 
-            if (current.transform.position == end.transform.position)
+            if (current == end)
             {
                 return ReconstructPath(cameFrom, current);
             }
@@ -45,10 +50,9 @@ public class AStarManager : MonoBehaviour
 
             foreach (Tile neighbor in GridManager.Instance.GetNeighborsOf(current))
             {
-                if (!neighbor.Walkable || closedSet.Contains(neighbor))
-                {
-                    continue;
-                }
+                if (closedSet.Contains(neighbor)) continue;
+                if (!neighbor.Walkable && neighbor != end) continue;
+                
                 float tentativeG = gScore[current] + 1;
 
                 if (!gScore.ContainsKey(neighbor) || tentativeG < gScore[neighbor])

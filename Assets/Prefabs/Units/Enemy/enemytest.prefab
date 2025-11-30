@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 6465602832740549134}
   - component: {fileID: 4549722344671113507}
   - component: {fileID: 751289258245009956}
-  - component: {fileID: 1133397249698605912}
+  - component: {fileID: -5458689388755478831}
   m_Layer: 0
   m_Name: enemytest
   m_TagString: Untagged
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adf3160600fe073488ae2db54fa528c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AStarManager
---- !u!114 &1133397249698605912
+--- !u!114 &-5458689388755478831
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,8 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecbbd051c48c50848b01c66bf32e150d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_Controller
-  moveSpeed: 1
-  tilesPerMove: 3
+  moveSpeed: 0.7
+  tilesPerMove: 10
   path: []
 --- !u!1 &1771412561709253947
 GameObject:
