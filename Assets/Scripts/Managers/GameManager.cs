@@ -56,5 +56,5 @@ public enum GameState{
     SpawnPlayers = 1,
     SpawnEnemies = 2,
     PlayerTurn=3,
-    EnemyTurn =4
+    EnemyTurn =4,
 }

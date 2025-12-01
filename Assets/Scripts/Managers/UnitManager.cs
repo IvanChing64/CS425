@@ -8,8 +8,13 @@ public class UnitManager : MonoBehaviour
 {
     public static UnitManager Instance;
     private List<ScriptableUnit> units;
+    //Adding reference to player tile.
+    private Tile playerTile;
+    private List<Tile> enemyTiles = new List<Tile>();
 
     public BasePlayer SelectedPlayer;
+
+    private List<BaseEnemy> enemiesSpawned = new List<BaseEnemy>();
 
     private void Awake()
     {
@@ -28,6 +33,10 @@ public class UnitManager : MonoBehaviour
             var randomSpawnTile = GridManager.Instance.GetPlayerSpawnTile();
 
             randomSpawnTile.setUnit(spawnedPlayer);
+
+            SelectedPlayer = spawnedPlayer;
+            //Adding reference to player tile.
+            playerTile = randomSpawnTile;
         }
         GameManager.Instance.ChangeState(GameState.SpawnEnemies);
     }
@@ -42,9 +51,20 @@ public class UnitManager : MonoBehaviour
             var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
 
             randomSpawnTile.setUnit(spawnedEnemy);
+
+            enemiesSpawned.Add(spawnedEnemy);
+            enemyTiles.Add(randomSpawnTile);
+
+            //New section added to help with NPC_Controller
+            var npcController = spawnedEnemy.GetComponent<NPC_Controller>();
+            if (npcController != null && SelectedPlayer != null)
+            {
+                npcController.SetTarget(randomSpawnTile, playerTile);
+            }
         }
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
+
 
 
     private T GetRandomUnit<T>(Faction faction) where T : BaseUnit
@@ -56,4 +76,19 @@ public class UnitManager : MonoBehaviour
         SelectedPlayer = player;
     }
 
+    //New.
+    public void BeginEnemyTurn()
+    {
+        for (int i = 0; i < enemiesSpawned.Count; i++)
+        {
+            var enemy = enemiesSpawned[i];
+            var npcController = enemy.GetComponent<NPC_Controller>();
+            if (npcController != null && SelectedPlayer != null)
+            {
+                npcController.BeginTurn();
+                npcController.SetTarget(enemyTiles[i], playerTile);
+            }
+        }
+    }
+   
 }
