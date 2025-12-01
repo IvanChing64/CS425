@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_Controller
   moveSpeed: 0.7
-  tilesPerMove: 10
+  tilesPerMove: 4
   path: []
 --- !u!1 &1771412561709253947
 GameObject:

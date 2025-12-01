@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
                 turnNumber += 1;
                 Debug.Log("Enemy Turn");
                 Debug.Log("Turn Number" + turnNumber);
+                NPC_Controller.Instance.BeginTurn();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);

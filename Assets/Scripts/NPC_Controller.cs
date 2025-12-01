@@ -5,15 +5,19 @@ using UnityEngine;
 
 public class NPC_Controller: MonoBehaviour
 {
+    public static NPC_Controller Instance;
     public float moveSpeed = 0.1f;
-    public int tilesPerMove = 10;
+    public int tilesPerMove = 4;
 
     public List<Tile> path;
     private int pathIndex;
     private int tilesMovedThisTurn;
     private bool isMoving;
 
- 
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Update()
     {
@@ -84,7 +88,7 @@ public class NPC_Controller: MonoBehaviour
     {
         tilesMovedThisTurn = 0;
         isMoving = true;
-        
+        Update();
     }
 
 
