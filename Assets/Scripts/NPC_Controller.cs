@@ -19,18 +19,20 @@ public class NPC_Controller: MonoBehaviour
     {
         if (GameManager.Instance == null) return;
 
-        //if (GameManager.Instance.gameState != GameState.EnemyTurn) return;
+        if (GameManager.Instance.gameState != GameState.EnemyTurn) return;
 
-        //Debug Logs to trace movement state.
-        Debug.Log($"isMoving={isMoving}, pathIndex={pathIndex}, pathCount={path?.Count}, tilesMovedThisTurn={tilesMovedThisTurn}");
+        
 
 
         if (!isMoving || path == null || pathIndex >= path.Count) return;
 
         if (tilesMovedThisTurn >= tilesPerMove)
         {
-            Debug.Log("NPC stopped: reached tilesPerMove limit.");
             isMoving = false;
+            Debug.Log("NPC stopped: reached tilesPerMove limit.");
+            Debug.Log("Before ChangeState: " + GameManager.Instance.gameState);
+            GameManager.Instance.ChangeState(GameState.PlayerTurn);
+            Debug.Log("After ChangeState: " + GameManager.Instance.gameState);
             return;
         }
 
@@ -76,6 +78,7 @@ public class NPC_Controller: MonoBehaviour
         Debug.Log("Start tile: " + startTile?.name);
         Debug.Log("End tile: " + endTile?.name + " Walkable: " + (endTile?.Walkable));
     }
+
 
     public void BeginTurn()
     {

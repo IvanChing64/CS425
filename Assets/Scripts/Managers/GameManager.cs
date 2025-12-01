@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     {
         ChangeState(GameState.GenerateGrid);
 
-        GameManager.Instance.ChangeState(GameState.EnemyTurn);
+        //GameManager.Instance.ChangeState(GameState.EnemyTurn);
         //Uncomment to regain control of player
         //GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
             case GameState.PlayerTurn:
                 break;
             case GameState.EnemyTurn:
+                UnitManager.Instance.BeginEnemyTurn();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);
