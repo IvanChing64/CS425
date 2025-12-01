@@ -79,6 +79,7 @@ public class UnitManager : MonoBehaviour
     //New.
     public void BeginEnemyTurn()
     {
+        Tile currentPlayerTile = GridManager.Instance.GetTileAtPosition(SelectedPlayer.transform.position);
         for (int i = 0; i < enemiesSpawned.Count; i++)
         {
             var enemy = enemiesSpawned[i];
@@ -86,7 +87,8 @@ public class UnitManager : MonoBehaviour
             if (npcController != null && SelectedPlayer != null)
             {
                 npcController.BeginTurn();
-                npcController.SetTarget(enemyTiles[i], playerTile);
+                Tile enemyTile = GridManager.Instance.GetTileAtPosition(enemy.transform.position);
+                npcController.SetTarget(enemyTiles[i], currentPlayerTile);
             }
         }
     }
