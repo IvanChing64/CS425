@@ -84,6 +84,7 @@ public class NPC_Controller: MonoBehaviour
     {
         tilesMovedThisTurn = 0;
         isMoving = true;
+        
     }
 
 
