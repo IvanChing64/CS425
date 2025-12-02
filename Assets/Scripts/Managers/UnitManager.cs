@@ -56,10 +56,12 @@ public class UnitManager : MonoBehaviour
             enemyTiles.Add(randomSpawnTile);
 
             //New section added to help with NPC_Controller
+            Tile currentPlayerTile = GridManager.Instance.GetTileAtPosition(SelectedPlayer.transform.position);
+
             var npcController = spawnedEnemy.GetComponent<NPC_Controller>();
             if (npcController != null && SelectedPlayer != null)
             {
-                npcController.SetTarget(randomSpawnTile, playerTile);
+               npcController.SetTarget(randomSpawnTile, currentPlayerTile);
             }
         }
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
@@ -79,7 +81,10 @@ public class UnitManager : MonoBehaviour
     //New.
     public void BeginEnemyTurn()
     {
+
         Tile currentPlayerTile = GridManager.Instance.GetTileAtPosition(SelectedPlayer.transform.position);
+
+
         for (int i = 0; i < enemiesSpawned.Count; i++)
         {
             var enemy = enemiesSpawned[i];
@@ -87,8 +92,12 @@ public class UnitManager : MonoBehaviour
             if (npcController != null && SelectedPlayer != null)
             {
                 npcController.BeginTurn();
+               
+
                 Tile enemyTile = GridManager.Instance.GetTileAtPosition(enemy.transform.position);
-                npcController.SetTarget(enemyTiles[i], currentPlayerTile);
+                npcController.SetTarget(enemyTile, currentPlayerTile);
+                Debug.Log($"EnemyTurn started. Enemy {enemy.name} moving from {enemyTile.name} to {currentPlayerTile.name}");
+
             }
         }
     }
