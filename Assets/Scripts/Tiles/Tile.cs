@@ -101,7 +101,7 @@ public abstract class Tile : MonoBehaviour
 
                 //places unit there
                 setUnit(UnitManager.Instance.SelectedPlayer);
-                UnitManager.Instance.SetSelectedPlayer(null);
+                //UnitManager.Instance.SetSelectedPlayer(null);
                 GameManager.Instance.ChangeState(GameState.EnemyTurn);
                 //Uncomment to regain control of player
                 //GameManager.Instance.ChangeState(GameState.PlayerTurn);

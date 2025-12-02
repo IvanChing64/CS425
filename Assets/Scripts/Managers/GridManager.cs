@@ -162,6 +162,26 @@ public class GridManager : MonoBehaviour
         return null;
     }
 
+    //Added function to get tile for unit based on its position
+    public Tile GetTileForUnit(GameObject unit)
+    {
+        if (unit == null)
+        {
+            Debug.LogWarning("GetTileForUnit called with null unit.");
+            return null;
+        }
+
+        Vector2 rawPos = unit.transform.position;
+        Vector2 gridPos = new Vector2(Mathf.RoundToInt(rawPos.x), Mathf.RoundToInt(rawPos.y));
+
+        Tile tile = GetTileAtPosition(gridPos);
+        if (tile == null)
+        {
+            Debug.LogWarning($"No tile found for unit {unit.name} at raw {rawPos}, rounded {gridPos}");
+        }
+        return tile;
+    }
+
     public List<Tile> GetNeighborsOf(Tile tile)
     {
         List<Tile> neighbors = new List<Tile>();

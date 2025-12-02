@@ -35,6 +35,8 @@ public class UnitManager : MonoBehaviour
             randomSpawnTile.setUnit(spawnedPlayer);
 
             SelectedPlayer = spawnedPlayer;
+            Debug.Log("Spawned Player: " + SelectedPlayer.name);
+
             //Adding reference to player tile.
             playerTile = randomSpawnTile;
         }
@@ -56,13 +58,13 @@ public class UnitManager : MonoBehaviour
             enemyTiles.Add(randomSpawnTile);
 
             //New section added to help with NPC_Controller
-            Tile currentPlayerTile = GridManager.Instance.GetTileAtPosition(SelectedPlayer.transform.position);
+            /*Tile currentPlayerTile = GridManager.Instance.GetTileAtPosition(SelectedPlayer.transform.position);
 
             var npcController = spawnedEnemy.GetComponent<NPC_Controller>();
             if (npcController != null && SelectedPlayer != null)
             {
                npcController.SetTarget(randomSpawnTile, currentPlayerTile);
-            }
+            }*/
         }
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
@@ -81,9 +83,10 @@ public class UnitManager : MonoBehaviour
     //New.
     public void BeginEnemyTurn()
     {
+        Debug.Log("BeginEnemyTurn: SelectedPlayer = " + SelectedPlayer);
 
-        Tile currentPlayerTile = GridManager.Instance.GetTileAtPosition(SelectedPlayer.transform.position);
-
+        Tile currentPlayerTile = GridManager.Instance.GetTileForUnit(SelectedPlayer.gameObject);
+        Debug.Log("Player is at tile: " + currentPlayerTile?.name);
 
         for (int i = 0; i < enemiesSpawned.Count; i++)
         {
@@ -94,8 +97,9 @@ public class UnitManager : MonoBehaviour
                 npcController.BeginTurn();
                
 
-                Tile enemyTile = GridManager.Instance.GetTileAtPosition(enemy.transform.position);
-                npcController.SetTarget(enemyTile, currentPlayerTile);
+                Tile enemyTile = GridManager.Instance.GetTileForUnit(enemy.gameObject);
+                Debug.Log($"Enemy {enemy.name} at {enemyTile?.name}, chasing {currentPlayerTile?.name}");
+                npcController.SetTarget(enemyTile);
                 Debug.Log($"EnemyTurn started. Enemy {enemy.name} moving from {enemyTile.name} to {currentPlayerTile.name}");
 
             }

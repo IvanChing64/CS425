@@ -59,19 +59,29 @@ public class NPC_Controller: MonoBehaviour
         }
     }
 
-    public void SetTarget(Tile startTile, Tile endTile)
+    public void SetTarget(Tile startTile, Tile endTile = null)
     {
     
        
-        if (startTile == null || endTile == null)
+        if (startTile == null)
         {
             Debug.Log("Invalid start or end tile!");
             return;
         }
 
+        if (endTile == null && UnitManager.Instance.SelectedPlayer != null)
+        {
+            endTile = GridManager.Instance.GetTileAtPosition(UnitManager.Instance.SelectedPlayer.transform.position);
+        }
+
         if (!endTile.isWalkable) Debug.Log("End tile is terrain-blocked");
 
         path = AStarManager.Instance.GeneratePath(startTile, endTile);
+        if (path == null || path.Count == 0)
+        {
+            Debug.Log("No path found from {startTile.name} to {endTile.name}!");
+            return;
+        }
         pathIndex = 0;
         tilesMovedThisTurn = 0;
         isMoving = true;
