@@ -14,9 +14,12 @@ public class NPC_Controller: MonoBehaviour
     private int tilesMovedThisTurn;
     private bool isMoving;
 
+    private BaseUnit npcUnit; 
+
     private void Awake()
     {
         Instance = this;
+        npcUnit = GetComponent<BaseUnit>();
     }
 
     private void Update()
@@ -94,6 +97,17 @@ public class NPC_Controller: MonoBehaviour
                 path.RemoveAt(path.Count - 1);
             }
         }
+
+        if (path[0] == startTile)
+        {
+             path.RemoveAt(0);
+        }
+        
+        if (path.Count > tilesPerMove)
+        {
+            path = path.GetRange(0, tilesPerMove);
+        }
+
         pathIndex = 0;
         tilesMovedThisTurn = 0;
         isMoving = true;
@@ -109,7 +123,9 @@ public class NPC_Controller: MonoBehaviour
     public void BeginTurn()
     {
         tilesMovedThisTurn = 0;
-        isMoving = true;
+        HasFinishedTurn = false;
+        isMoving = false;
+        Tile startTile = npcUnit.OccupiedTile; 
         Update();
         
     }
@@ -120,6 +136,14 @@ public class NPC_Controller: MonoBehaviour
     {
         isMoving = false;
         HasFinishedTurn = true;
+        if (path != null && path.Count > 0)
+        {
+            Tile finalTile = path[path.Count -1];
+            finalTile.setUnit(npcUnit);
+            Debug.Log($"{gameObject.name} committed to tile: {finalTile.name}.");
+            //future implementation of enemy combat here i think.
+        
+        }
         Debug.Log($"{gameObject.name} finished moving.");
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }

@@ -156,7 +156,7 @@ public class GridManager : MonoBehaviour
 
         Vector2 gridPos = new Vector2(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
 
-        if (tiles.TryGetValue(pos, out var tile)) return tile;
+        if (tiles.TryGetValue(gridPos, out var tile)) return tile;
         //Debug Log to help check tile positions
         Debug.Log("No tile found at position: " + gridPos);
         return null;
