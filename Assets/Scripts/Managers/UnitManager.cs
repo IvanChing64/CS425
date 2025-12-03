@@ -85,6 +85,7 @@ public class UnitManager : MonoBehaviour
     {
         Debug.Log("BeginEnemyTurn: SelectedPlayer = " + SelectedPlayer);
 
+
         Tile currentPlayerTile = GridManager.Instance.GetTileForUnit(SelectedPlayer.gameObject);
         Debug.Log("Player is at tile: " + currentPlayerTile?.name);
 
@@ -104,6 +105,29 @@ public class UnitManager : MonoBehaviour
 
             }
         }
+
+        //StartCoroutine(CheckEnemiesFinished());
+        
     }
+
+  /* private IEnumerator CheckEnemiesFinished()
+    {
+        bool allDone = false;
+        while (!allDone)
+        {
+            allDone = true;
+            foreach (var enemy in enemiesSpawned)
+            {
+                var npcController = enemy.GetComponent<NPC_Controller>();
+                if (npcController != null && !npcController.HasFinishedTurn)
+                {
+                    allDone = false;
+                    break;
+                }
+            }
+            yield return null;
+        }
+        GameManager.Instance.ChangeState(GameState.PlayerTurn);
+    }*/
    
 }

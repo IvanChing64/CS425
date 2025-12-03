@@ -28,17 +28,26 @@ public class NPC_Controller: MonoBehaviour
         
 
 
-        if (!isMoving || path == null || pathIndex >= path.Count) return;
+        if (!isMoving || path == null) return;
+
+        if (pathIndex >= path.Count)
+        {
+            FinishedMoves();
+            return;
+
+        }
 
         if (tilesMovedThisTurn >= tilesPerMove)
         {
-            isMoving = false;
+            
+            
             Debug.Log("NPC stopped: reached tilesPerMove limit.");
-            Debug.Log("Before ChangeState: " + GameManager.Instance.gameState);
-            GameManager.Instance.ChangeState(GameState.PlayerTurn);
-            Debug.Log("After ChangeState: " + GameManager.Instance.gameState);
+            FinishedMoves();
             return;
+            
+           
         }
+        
 
         Tile currentTargetTile = path[pathIndex];
         Vector2 targetPos = currentTargetTile.transform.position;
@@ -103,6 +112,16 @@ public class NPC_Controller: MonoBehaviour
         isMoving = true;
         Update();
         
+    }
+
+    public bool HasFinishedTurn { get; private set; }
+
+    private void FinishedMoves()
+    {
+        isMoving = false;
+        HasFinishedTurn = true;
+        Debug.Log($"{gameObject.name} finished moving.");
+        GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
 
 
