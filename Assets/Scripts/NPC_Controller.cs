@@ -77,10 +77,13 @@ public class NPC_Controller: MonoBehaviour
         if (!endTile.isWalkable) Debug.Log("End tile is terrain-blocked");
 
         path = AStarManager.Instance.GeneratePath(startTile, endTile);
-        if (path == null || path.Count == 0)
+        if (path != null && path.Count > 1)
         {
-            Debug.Log("No path found from {startTile.name} to {endTile.name}!");
-            return;
+            Tile lastTile = path[path.Count - 1];
+            if (lastTile == endTile)
+            {
+                path.RemoveAt(path.Count - 1);
+            }
         }
         pathIndex = 0;
         tilesMovedThisTurn = 0;
