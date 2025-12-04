@@ -22,15 +22,15 @@ public abstract class Tile : MonoBehaviour
     }
 
     //Hover Highlight code
-    void OnMouseEnter()
-    {
-        highlight.SetActive(true);
-    }
+    //void OnMouseEnter()
+    //{
+    //    highlight.SetActive(true);
+    //}
 
-    void OnMouseExit()
-    {
-        highlight.SetActive(false);
-    }
+    //void OnMouseExit()
+    //{
+    //    highlight.SetActive(false);
+    //}
 
     //Player movement testing
     private void OnMouseDown()
@@ -65,10 +65,12 @@ public abstract class Tile : MonoBehaviour
                             }
                         }
                 }
-
-                // Highlight player movement range
-                // List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
-                // foreach (Tile t in tilesInRange) t.highlight.SetActive(true);
+                else
+                {
+                    // Highlight player movement range
+                    List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
+                    foreach (Tile t in tilesInRange) t.highlight.SetActive(true);
+                }
             }
             else if (UnitManager.Instance.SelectedPlayer != null) { // If not selecting a player unit then it selects a enemy
                 Debug.Log("Cannot move here. Enemy Space.");
@@ -125,6 +127,8 @@ public abstract class Tile : MonoBehaviour
             GameManager.Instance.ChangeState(GameState.EnemyTurn);
             //Uncomment to regain control of player
             //GameManager.Instance.ChangeState(GameState.PlayerTurn);
+
+            foreach (Tile t in tilesInRange) t.highlight.SetActive(false);
         }
     }
 
