@@ -32,7 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8884779130082483461}
+  - {fileID: 566958332690694122}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9181128117581861695
@@ -151,13 +151,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb8d323d3e81ec43af26ebcac7e49df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseAttackCard
-  highlightEffect: {fileID: 1681347489901813205}
+  highlightEffect: {fileID: 7766025107170967354}
   cardName: 
   cardType: 0
   isPlayed: 0
   drawChance: 0
   attack: 0
---- !u!1001 &7707971074563774785
+--- !u!1001 &1615412141240302510
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -165,6 +165,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5531876439940873255}
     m_Modifications:
+    - target: {fileID: 921751188900183547, guid: beae245131c802a44bb22848702591e3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 921751188900183547, guid: beae245131c802a44bb22848702591e3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1444588199
+      objectReference: {fileID: 0}
     - target: {fileID: 1275967099688371268, guid: beae245131c802a44bb22848702591e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -218,13 +226,13 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beae245131c802a44bb22848702591e3, type: 3}
---- !u!1 &1681347489901813205 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9056015890772624532, guid: beae245131c802a44bb22848702591e3, type: 3}
-  m_PrefabInstance: {fileID: 7707971074563774785}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8884779130082483461 stripped
+--- !u!4 &566958332690694122 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1275967099688371268, guid: beae245131c802a44bb22848702591e3, type: 3}
-  m_PrefabInstance: {fileID: 7707971074563774785}
+  m_PrefabInstance: {fileID: 1615412141240302510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7766025107170967354 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9056015890772624532, guid: beae245131c802a44bb22848702591e3, type: 3}
+  m_PrefabInstance: {fileID: 1615412141240302510}
   m_PrefabAsset: {fileID: 0}

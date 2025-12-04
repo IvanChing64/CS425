@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Player Turn");
                 Debug.Log("Turn Number" + turnNumber);
                 TurnUIManager.Instance.UpdateTurnText(turnNumber);
+                CardManager.instance.NextTurn();
                 break;
             case GameState.EnemyTurn:
                 turnNumber += 1;

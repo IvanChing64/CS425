@@ -7,6 +7,8 @@ public class CardManager : MonoBehaviour
     Make background elements for card area, better than disabling card prefabs
     Move Cards to bottom of screen, change camera output
     Implement Separate Deck Manager to better handle individual player decks
+    Maybe instead of instantiating card prefabs, have a pool of card objects to reuse
+    Known In-Editor Glitch: When using inspector on CardManager, opening the list of testDeckPrefabs can cause Editor errors. testDeckPrefabs should not be modified in inspector during runtime.
     */
 
     public static CardManager instance;
@@ -14,8 +16,8 @@ public class CardManager : MonoBehaviour
     //Temporary hardcoded cards for testing
     public List<GameObject> testDeckPrefabs = new List<GameObject>();
     public BaseCard selectedCard;
-    public List<BaseCard> currentDeck = new List<BaseCard>();//MinMaxSize: 6, MaxMaxSize: 9
-    public List<GameObject> currentHand = new List<GameObject>();//Always Size: 3
+    [HideInInspector] public List<BaseCard> currentDeck = new List<BaseCard>();//MinMaxSize: 6, MaxMaxSize: 9
+    [HideInInspector] public List<GameObject> currentHand = new List<GameObject>();//Always Size: 3
     [SerializeField] private int maxHandSize = 3;
     public int maxDeckSize;
     private int deckIndex = 0; // pointer into currentDeck for drawing
@@ -34,9 +36,19 @@ public class CardManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (currentDeck == null || currentDeck.Count == 0)
+        {
+            FillDeckFromResources();
+        }
+
+        // Optionally shuffle here if you want a random draw order
+        ShuffleDeck();
+        DrawHand();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    /*
     void Start()
     {
         // If deck is empty and autofill is enabled, populate from Resources
@@ -48,7 +60,7 @@ public class CardManager : MonoBehaviour
         // Optionally shuffle here if you want a random draw order
         // ShuffleDeck();
         DrawHand();
-    }
+    }*/
 
 
     public void SelectCard(BaseCard card)
@@ -58,14 +70,14 @@ public class CardManager : MonoBehaviour
             DeselectCard();
         }
         selectedCard = card;
-        selectedCard.transform.position += new Vector3(0, 1.1f, 0);
+        selectedCard.transform.position += new Vector3(0, 0.85f, 0);
         Debug.Log("Card Selected: " + card.cardName);
     }
 
     public void DeselectCard()
     {
         Debug.Log("Card Deselected: " + selectedCard.cardName);
-        selectedCard.transform.position -= new Vector3(0, 1.1f, 0);
+        selectedCard.transform.position -= new Vector3(0, 0.85f, 0);
         selectedCard = null;
     }
 
@@ -191,7 +203,7 @@ public class CardManager : MonoBehaviour
 
         for (int i = 0; i < testDeckPrefabs.Count; i++)
         {
-            GameObject cardGO = Instantiate(testDeckPrefabs[i], new Vector3(-5,-5), Quaternion.identity);
+            GameObject cardGO = Instantiate(testDeckPrefabs[i], new Vector3(-6,-6), Quaternion.identity);
             BaseCard baseCard = cardGO.GetComponent<BaseCard>();
             if (baseCard != null)
             {
@@ -211,6 +223,7 @@ public class CardManager : MonoBehaviour
     public void NextTurn()
     {
         // Any per-turn cleanup/logic can go here
+        ShuffleDeck();
         DrawHand();
     }
 }
