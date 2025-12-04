@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ScriptableCard : ScriptableObject
 {
+    public string cardName;
     public Type type;
     public BaseCard CardPrefab;
     public bool isPlayed;
+    public float drawChance;
 }
 
 public enum Type

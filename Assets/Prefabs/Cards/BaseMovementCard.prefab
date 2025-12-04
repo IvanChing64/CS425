@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1444588199
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -7659120240897022540, guid: 71aa1ed1f0bdcc944ad199b8812ccd09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -152,7 +152,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseMovementCard
   highlightEffect: {fileID: 83659658071739162}
+  cardName: 
+  cardType: 0
   isPlayed: 0
+  drawChance: 0
   movement: 0
 --- !u!1001 &5883356529957130184
 PrefabInstance:

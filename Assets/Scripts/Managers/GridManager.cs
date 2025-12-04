@@ -99,7 +99,7 @@ public class GridManager : MonoBehaviour
         }
 
         //set camera and change states to spawn units
-        cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
+        cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 1.7f, -10);
         GameManager.Instance.ChangeState(GameState.SpawnPlayers);
     }
 
