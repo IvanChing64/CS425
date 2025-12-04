@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
                 turnNumber += 1;
                 Debug.Log("Enemy Turn");
                 Debug.Log("Turn Number" + turnNumber);
+                TurnUIManager.Instance.UpdateTurnText(turnNumber);
                 UnitManager.Instance.BeginEnemyTurn();
                 break;
             default:
