@@ -14,17 +14,6 @@ public abstract class BaseCard : MonoBehaviour
         Debug.Log("Base Card Played");
     }
 
-    public virtual void LoadFromScriptable(ScriptableCard scriptable)
-{
-    // Example: Copy fields from ScriptableCard to this BaseCard
-    /*
-    this.cardName = scriptable.cardName;
-    this.cardType = scriptable.type;
-    this.isPlayed = scriptable.isPlayed;
-    this.drawChance = scriptable.drawChance;
-    /*/
-}
-
     void OnMouseEnter()
     {
         if (highlightEffect != null)
@@ -55,9 +44,9 @@ public abstract class BaseCard : MonoBehaviour
         {
             CardManager.instance.SelectCard(this);
         }
-        else
+        else if (CardManager.instance.selectedCard == this)
         {
-            CardManager.instance.DeselectCard();
+            CardManager.instance.PlaySelectedCard();
         }
     }
 }

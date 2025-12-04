@@ -22,19 +22,21 @@ public abstract class Tile : MonoBehaviour
     }
 
     //Hover Highlight code
-    void OnMouseEnter()
-    {
-        highlight.SetActive(true);
-    }
+    // void OnMouseEnter()
+    // {
+    //     highlight.SetActive(true);
+    // }
 
-    void OnMouseExit()
-    {
-        highlight.SetActive(false);
-    }
+    // void OnMouseExit()
+    // {
+    //     highlight.SetActive(false);
+    // }
 
     //Player movement testing
     private void OnMouseDown()
     {
+        List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
+
         //Checks if the combat menu is open on screen
         if (combatUIManager.Instance != null && combatUIManager.Instance.IsCombatMenuOpen) return;
         //Checks if it is player's turn
@@ -51,6 +53,8 @@ public abstract class Tile : MonoBehaviour
                 //code to check if selected player is already next to an enemy
                 if (IsNextToEnemy())
                 {
+                        foreach (Tile t in tilesInRange) t.highlight.SetActive(false);
+
                         Debug.Log("Player is next to an enemy!");
                         var neighbors = GridManager.Instance.GetNeighborsOf(this);
 
@@ -67,8 +71,7 @@ public abstract class Tile : MonoBehaviour
                 }
 
                 // Highlight player movement range
-                // List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
-                // foreach (Tile t in tilesInRange) t.highlight.SetActive(true);
+                foreach (Tile t in tilesInRange) t.highlight.SetActive(true);
             }
             else if (UnitManager.Instance.SelectedPlayer != null) { // If not selecting a player unit then it selects a enemy
                 Debug.Log("Cannot move here. Enemy Space.");
@@ -80,7 +83,6 @@ public abstract class Tile : MonoBehaviour
         else if (UnitManager.Instance.SelectedPlayer != null)
         {
             // Simple implementation for getting tiles in range of a player
-            List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
 
             /* Complex implementation to allow path reconstruction
             Dictionary<Tile, Tile> tilePathsInRange = MovementManager.Instance.GetPathsInRange(
@@ -98,6 +100,8 @@ public abstract class Tile : MonoBehaviour
             // When moving to tile, if an enemy is found near the player display the attack prompt
             if (IsNextToEnemy())
             {
+                    foreach (Tile t in tilesInRange) t.highlight.SetActive(false);
+
                     Debug.Log("Player moved next to an enemy!");
                     var neighbors = GridManager.Instance.GetNeighborsOf(this);
 
@@ -125,6 +129,7 @@ public abstract class Tile : MonoBehaviour
             GameManager.Instance.ChangeState(GameState.EnemyTurn);
             //Uncomment to regain control of player
             //GameManager.Instance.ChangeState(GameState.PlayerTurn);
+            foreach (Tile t in tilesInRange) t.highlight.SetActive(false);
         }
     }
 
