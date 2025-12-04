@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseUnit : MonoBehaviour
@@ -7,8 +8,10 @@ public class BaseUnit : MonoBehaviour
     public float maxHealth;
     public float health;
     public float dmg;
+    public int moveRange;
     [SerializeField] healthbar healthbar;
 
+    public List<Tile> GetTilesInMoveRange() => MovementManager.Instance.GetTilesInRange(OccupiedTile, moveRange);
 
     //damage functions
     public void takeDamage(float damageAmount)
