@@ -22,6 +22,7 @@ public class combatUIManager : MonoBehaviour
     //gets player and enemy data and prompts attack button
     public void showCombatOption(BasePlayer player, BaseEnemy enemy)
     {
+        Debug.Log("showing combat menu");
         targetPlayer = player;
         targetEnemy = enemy;
 

@@ -14,9 +14,12 @@ public class NPC_Controller: MonoBehaviour
     private int tilesMovedThisTurn;
     private bool isMoving;
 
+    private BaseUnit npcUnit; 
+
     private void Awake()
     {
         Instance = this;
+        npcUnit = GetComponent<BaseUnit>();
     }
 
     private void Update()
@@ -28,17 +31,26 @@ public class NPC_Controller: MonoBehaviour
         
 
 
-        if (!isMoving || path == null || pathIndex >= path.Count) return;
+        if (!isMoving || path == null) return;
+
+        if (pathIndex >= path.Count)
+        {
+            FinishedMoves();
+            return;
+
+        }
 
         if (tilesMovedThisTurn >= tilesPerMove)
         {
-            isMoving = false;
+            
+            
             Debug.Log("NPC stopped: reached tilesPerMove limit.");
-            Debug.Log("Before ChangeState: " + GameManager.Instance.gameState);
-            GameManager.Instance.ChangeState(GameState.PlayerTurn);
-            Debug.Log("After ChangeState: " + GameManager.Instance.gameState);
+            FinishedMoves();
             return;
+            
+           
         }
+        
 
         Tile currentTargetTile = path[pathIndex];
         Vector2 targetPos = currentTargetTile.transform.position;
@@ -59,19 +71,43 @@ public class NPC_Controller: MonoBehaviour
         }
     }
 
-    public void SetTarget(Tile startTile, Tile endTile)
+    public void SetTarget(Tile startTile, Tile endTile = null)
     {
     
        
-        if (startTile == null || endTile == null)
+        if (startTile == null)
         {
             Debug.Log("Invalid start or end tile!");
             return;
         }
 
+        if (endTile == null && UnitManager.Instance.SelectedPlayer != null)
+        {
+            endTile = GridManager.Instance.GetTileAtPosition(UnitManager.Instance.SelectedPlayer.transform.position);
+        }
+
         if (!endTile.isWalkable) Debug.Log("End tile is terrain-blocked");
 
         path = AStarManager.Instance.GeneratePath(startTile, endTile);
+        if (path != null && path.Count > 1)
+        {
+            Tile lastTile = path[path.Count - 1];
+            if (lastTile == endTile)
+            {
+                path.RemoveAt(path.Count - 1);
+            }
+        }
+
+        if (path[0] == startTile)
+        {
+             path.RemoveAt(0);
+        }
+        
+        if (path.Count > tilesPerMove)
+        {
+            path = path.GetRange(0, tilesPerMove);
+        }
+
         pathIndex = 0;
         tilesMovedThisTurn = 0;
         isMoving = true;
@@ -87,8 +123,29 @@ public class NPC_Controller: MonoBehaviour
     public void BeginTurn()
     {
         tilesMovedThisTurn = 0;
-        isMoving = true;
+        HasFinishedTurn = false;
+        isMoving = false;
+        Tile startTile = npcUnit.OccupiedTile; 
         Update();
+        
+    }
+
+    public bool HasFinishedTurn { get; private set; }
+
+    private void FinishedMoves()
+    {
+        isMoving = false;
+        HasFinishedTurn = true;
+        if (path != null && path.Count > 0)
+        {
+            Tile finalTile = path[path.Count -1];
+            finalTile.setUnit(npcUnit);
+            Debug.Log($"{gameObject.name} committed to tile: {finalTile.name}.");
+            //future implementation of enemy combat here i think.
+        
+        }
+        Debug.Log($"{gameObject.name} finished moving.");
+        GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
 
 
