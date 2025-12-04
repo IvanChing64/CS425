@@ -39,11 +39,14 @@ public class GameManager : MonoBehaviour
                 turnNumber += 1;
                 Debug.Log("Player Turn");
                 Debug.Log("Turn Number" + turnNumber);
+                TurnUIManager.Instance.UpdateTurnText(turnNumber);
                 break;
             case GameState.EnemyTurn:
                 turnNumber += 1;
                 Debug.Log("Enemy Turn");
                 Debug.Log("Turn Number" + turnNumber);
+                TurnUIManager.Instance.UpdateTurnText(turnNumber);
+                UnitManager.Instance.BeginEnemyTurn();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);
@@ -56,5 +59,5 @@ public enum GameState{
     SpawnPlayers = 1,
     SpawnEnemies = 2,
     PlayerTurn=3,
-    EnemyTurn =4
+    EnemyTurn =4,
 }

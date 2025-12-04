@@ -152,8 +152,34 @@ public class GridManager : MonoBehaviour
     //Helper functions: Get tiles  
     public Tile GetTileAtPosition(Vector2 pos)
     {
-        if (tiles.TryGetValue(pos, out var tile)) return tile;
+        //Adding code so that it rounds the positionto grid coordinates.
+
+        Vector2 gridPos = new Vector2(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
+
+        if (tiles.TryGetValue(gridPos, out var tile)) return tile;
+        //Debug Log to help check tile positions
+        Debug.Log("No tile found at position: " + gridPos);
         return null;
+    }
+
+    //Added function to get tile for unit based on its position
+    public Tile GetTileForUnit(GameObject unit)
+    {
+        if (unit == null)
+        {
+            Debug.LogWarning("GetTileForUnit called with null unit.");
+            return null;
+        }
+
+        Vector2 rawPos = unit.transform.position;
+        Vector2 gridPos = new Vector2(Mathf.RoundToInt(rawPos.x), Mathf.RoundToInt(rawPos.y));
+
+        Tile tile = GetTileAtPosition(gridPos);
+        if (tile == null)
+        {
+            Debug.LogWarning($"No tile found for unit {unit.name} at raw {rawPos}, rounded {gridPos}");
+        }
+        return tile;
     }
 
     public List<Tile> GetNeighborsOf(Tile tile)
