@@ -69,9 +69,12 @@ public abstract class Tile : MonoBehaviour
                             }
                         }
                 }
-
-                // Highlight player movement range
-                foreach (Tile t in tilesInRange) t.highlight.SetActive(true);
+                else
+                {
+                    // Highlight player movement range
+                    List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
+                    foreach (Tile t in tilesInRange) t.highlight.SetActive(true);
+                }
             }
             else if (UnitManager.Instance.SelectedPlayer != null) { // If not selecting a player unit then it selects a enemy
                 Debug.Log("Cannot move here. Enemy Space.");
