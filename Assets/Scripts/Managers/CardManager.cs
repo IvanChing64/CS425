@@ -21,9 +21,6 @@ public class CardManager : MonoBehaviour
     [SerializeField] private int maxHandSize = 3;
     public int maxDeckSize;
     private int deckIndex = 0; // pointer into currentDeck for drawing
-    //[Header("Auto-Fill Deck")]
-    //[SerializeField] private bool autoFillFromResources = true;
-    //[SerializeField] private string prefabsPath = "CardPrefabs"; // folder under Assets/Prefabs/<prefabsPath>
     //public int currentHandSize;
 
     void Awake()
@@ -42,7 +39,6 @@ public class CardManager : MonoBehaviour
             FillDeckFromResources();
         }
 
-        // Optionally shuffle here if you want a random draw order
         ShuffleDeck();
         DrawHand();
     }
@@ -81,11 +77,13 @@ public class CardManager : MonoBehaviour
         selectedCard = null;
     }
 
-    void PlaySelectedCard()
+    public void PlaySelectedCard()
     {
         if (selectedCard != null)
         {
             selectedCard.PlayCard();
+            //Destroy(selectedCard.gameObject);
+            //currentHand.Remove(selectedCard.gameObject);
             DeselectCard();
         }
         else
@@ -119,6 +117,10 @@ public class CardManager : MonoBehaviour
     public void DrawHand()
     {
         // Remove previously instantiated hand cards from scene
+        if (selectedCard != null) 
+        {
+            DeselectCard();
+        }
         for (int i = 0; i < currentHand.Count; i++)
         {
             if (currentHand[i] != null)
@@ -139,6 +141,7 @@ public class CardManager : MonoBehaviour
         {
             if (currentDeck.Count == 0) break;
 
+            //Some AI was used to help implement this function
             int idx = deckIndex % currentDeck.Count;
             GameObject prefabGO = currentDeck[idx].gameObject;
             Vector3 spawnPos = this.transform.position + new Vector3(i * 3, 0, 0);
@@ -151,63 +154,18 @@ public class CardManager : MonoBehaviour
     }
 
     // Populate `currentDeck` from Player Deck Data
-    //[ContextMenu("Fill Deck From Resources")]
+    //Some AI was used to help implement this function
     public void FillDeckFromResources()
     {
         currentDeck.Clear();
-        /*
-        GameObject[] prefabs = Resources.LoadAll<GameObject>();
-        if (prefabs == null || prefabs.Length == 0)
-        {
-            Debug.LogWarning("No prefabs found in Resources/" + prefabsPath + ". Make sure prefabs are placed there.");
-            return;
-        }
 
-        foreach (var go in prefabs)
-        {
-            if (go == null) continue;
-            BaseCard cardComp = go.GetComponent<BaseCard>();
-            if (cardComp != null)
-            {
-                currentDeck.Add(cardComp);
-            }
-            else
-            {
-                Debug.LogWarning("Prefab '" + go.name + "' does not contain a BaseCard component and will be skipped.");
-            }
-        }
-
-        maxDeckSize = currentDeck.Count;
-        deckIndex = 0;
-        Debug.Log("Filled deck with " + currentDeck.Count + " cards from Resources/" + prefabsPath);
-        */
-
-        //Temporary hardcoded cards for testing
-        /*ScriptableCard[] allCards = Resources.LoadAll<ScriptableCard>("Cards");
-        foreach (var card in allCards)
-        {
-            GameObject cardGO = Instantiate(cardPrefab, new Vector3(-5,-5), Quaternion.identity);
-            BaseCard baseCard = cardGO.GetComponent<BaseCard>();
-            if (baseCard != null)
-            {
-                baseCard.LoadFromScriptable(card); // Method in BaseCard
-                currentDeck.Add(baseCard);
-                Debug.Log("Added card to deck: " + baseCard.cardName);
-            }
-            else
-            {
-                Debug.LogWarning("cardPrefab does not have a BaseCard component.");
-                Destroy(cardGO);
-            }
-        }*/
-
+        //Temporarily hardcoded cards for testing
         for (int i = 0; i < testDeckPrefabs.Count; i++)
         {
             GameObject cardGO = Instantiate(testDeckPrefabs[i], new Vector3(-6,-6), Quaternion.identity);
             BaseCard baseCard = cardGO.GetComponent<BaseCard>();
             if (baseCard != null)
             {
-                //baseCard.LoadFromScriptable(card); // Method in BaseCard
                 currentDeck.Add(baseCard);
                 Debug.Log("Added card to deck: " + baseCard.cardName);
             }
@@ -219,10 +177,9 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    // Call this to advance to the next player turn and draw a fresh hand
+    // Call this draw a fresh hand
     public void NextTurn()
     {
-        // Any per-turn cleanup/logic can go here
         ShuffleDeck();
         DrawHand();
     }

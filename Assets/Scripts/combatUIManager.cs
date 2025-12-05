@@ -40,11 +40,13 @@ public class combatUIManager : MonoBehaviour
     //damage step
     public void ExecuteCombat()
     {
+
         if (targetEnemy != null)
         {
             targetEnemy.takeDamage(targetPlayer.dmg);
         }
         hideCombatOption();
+        
     }
 
 }
