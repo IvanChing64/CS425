@@ -6,6 +6,7 @@ using UnityEngine;
 /// <summary>
 /// <para>Script for handling player movements</para>
 /// </summary>
+/// <remarks>by Liam Riel</remarks>
 public class MovementManager : MonoBehaviour
 {
     public static MovementManager Instance;
