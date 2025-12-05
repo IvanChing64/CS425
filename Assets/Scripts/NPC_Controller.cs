@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//Developer: Andrew Shelton
+//Edits from Ivan Ching
+//Aggregated from multiple tutorials and sources
 
 
 public class NPC_Controller: MonoBehaviour

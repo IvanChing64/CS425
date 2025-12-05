@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//Developer: Andrew Shelton
+//Developed with help from Game Dev Garnet on youtube
 
 public class Node: MonoBehaviour
 {

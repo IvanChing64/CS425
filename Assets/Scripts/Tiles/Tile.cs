@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+//Developer: Ivan Ching
+//Aggregated from multiple tutorials
 public abstract class Tile : MonoBehaviour
 {
     [SerializeField] protected SpriteRenderer _renderer;

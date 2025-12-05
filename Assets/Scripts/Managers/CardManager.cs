@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Developer: Bailey Escritor
+//Aggregated from multiple tutorials
 public class CardManager : MonoBehaviour
 {
     /*

@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+//Developer: Ivan Ching
+//Aggregated from multiple sources
+
 public class combatUIManager : MonoBehaviour
 {
     //temp usage until card functionality is implemented.

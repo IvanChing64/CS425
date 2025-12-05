@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+//Developer: Ivan Ching
+//Edits from Andrew Shelton
+//Aggregated from multiple tutorials
 
 public class UnitManager : MonoBehaviour
 {

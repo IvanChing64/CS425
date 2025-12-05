@@ -1,4 +1,7 @@
 using UnityEngine;
+
+//Developer: Bailey Escritor
+//Aggregated from multiple tutorials
 //Card info
 [CreateAssetMenu(fileName ="New Card",menuName = "Scriptable Card")]
 

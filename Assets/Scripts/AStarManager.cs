@@ -4,7 +4,8 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
-
+//Developer: Andrew Shelton
+//Developed with help from Game Dev Garnet on youtube
 public class AStarManager : MonoBehaviour
 {
     public static AStarManager Instance;
