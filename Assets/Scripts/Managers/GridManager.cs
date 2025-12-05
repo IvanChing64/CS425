@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+//Developer: Ivan Ching
+//Aggregated from multiple tutorials and sources
+
 public class GridManager : MonoBehaviour
 {
     public static GridManager Instance;

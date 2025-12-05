@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 
+//Developer: Ivan Ching
+
 public class TurnUIManager : MonoBehaviour
 {
     public static TurnUIManager Instance;

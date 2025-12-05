@@ -1,5 +1,7 @@
 using UnityEngine;
 
+//Developer: Bailey Escritor
+//Aggregated from multiple tutorials
 public class BaseSupportCard : BaseCard
 {
     public int health;
