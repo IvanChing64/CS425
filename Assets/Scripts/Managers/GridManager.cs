@@ -54,7 +54,7 @@ public class GridManager : MonoBehaviour
                 int baseMountainChance = 10;
             
                 // Define increased chance multiplier if a neighbor is a mountain
-                int neighborMountainMultiplier = 4; 
+                int neighborMountainMultiplier = 3; 
 
                 int mountainRoll = UnityEngine.Random.Range(0, baseMountainChance);
 
