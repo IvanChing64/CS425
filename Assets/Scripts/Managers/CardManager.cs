@@ -45,22 +45,6 @@ public class CardManager : MonoBehaviour
         DrawHand();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    /*
-    void Start()
-    {
-        // If deck is empty and autofill is enabled, populate from Resources
-        if (currentDeck == null || currentDeck.Count == 0)
-        {
-            FillDeckFromResources();
-        }
-
-        // Optionally shuffle here if you want a random draw order
-        // ShuffleDeck();
-        DrawHand();
-    }*/
-
-
     public void SelectCard(BaseCard card)
     {
         if (selectedCard != null)
@@ -104,7 +88,7 @@ public class CardManager : MonoBehaviour
         // Implementation for displaying card information
     }
     
-    void ShuffleDeck() //May have no use
+    void ShuffleDeck()
     {
         for (int i = 0; i < currentDeck.Count; i++)
         {
