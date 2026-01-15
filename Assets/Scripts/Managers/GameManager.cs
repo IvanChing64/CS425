@@ -57,10 +57,12 @@ public class GameManager : MonoBehaviour
     }
 }
 
-public enum GameState{
+public enum GameState
+{
     GenerateGrid = 0,
     SpawnPlayers = 1,
     SpawnEnemies = 2,
-    PlayerTurn=3,
-    EnemyTurn =4,
+    PlayerTurn = 3,
+    EnemyTurn = 4,
+    EndScreen = 5,
 }
