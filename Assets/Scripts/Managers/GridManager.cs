@@ -21,6 +21,34 @@ public class GridManager : MonoBehaviour
         Instance = this;
     }
 
+    private HashSet<Tile> GetReachableTiles(Tile startTile)
+    {
+        HashSet<Tile> reachable = new HashSet<Tile>();
+        Queue<Tile> frontier = new Queue<Tile>();
+
+        if(startTile == null || !startTile.isWalkable)
+        {
+            return reachable;
+        }
+
+        frontier.Enqueue(startTile);
+        reachable.Add(startTile);
+
+        while (frontier.Count > 0)
+        {
+            Tile current = frontier.Dequeue();
+            foreach(Tile neighbor in GetNeighborsOf(current))
+            {
+                if(neighbor.isWalkable && !reachable.Contains(neighbor))
+                {
+                    reachable.Add(neighbor);
+                    frontier.Enqueue(neighbor);
+                }
+            }
+        }
+        return reachable;
+    }
+
     //Generates Grid based on w/h of inspector values
     //Switchs game state
     public void GenerateGrid()
@@ -54,14 +82,14 @@ public class GridManager : MonoBehaviour
                 int baseMountainChance = 10;
             
                 // Define increased chance multiplier if a neighbor is a mountain
-                int neighborMountainMultiplier = 3; 
+                int neighborMountainMultiplier = 4; 
 
                 int mountainRoll = UnityEngine.Random.Range(0, baseMountainChance);
 
                 if (isNeighborMountain)
                 {
                     // Increase the chance of a mountain
-                    if (mountainRoll < neighborMountainMultiplier) 
+                    if (mountainRoll < neighborMountainMultiplier)  
                     {
                         tileToSpawn = mountainTile;
                     }
@@ -100,6 +128,20 @@ public class GridManager : MonoBehaviour
 
             }
         }
+
+        Tile startCheck = tiles.Values.FirstOrDefault(t => t.Position.x == 0 && t.isWalkable);
+        var reachableTiles = GetReachableTiles(startCheck);
+        bool canReachEnemySide = reachableTiles.Any(t => t.Position.x == width - 1);
+
+        if (!canReachEnemySide)
+        {
+            Debug.Log("can reach otherside, clearing way");
+            foreach (var t in tiles.Values) Destroy(t.gameObject);
+            tiles.Clear();
+            GenerateGrid();
+            return;
+        }
+
 
         //set camera and change states to spawn units
         cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 1.7f, -10);
@@ -144,12 +186,18 @@ public class GridManager : MonoBehaviour
     //Helper functions: Spawn tiles   
     public Tile GetPlayerSpawnTile()
     {
-        return tiles.Where(t => t.Key.x < 2 && t.Value.Walkable && !IsSurroundedByMountains(t.Value)).OrderBy(t => UnityEngine.Random.value).First().Value;
+        Tile startPoint = tiles.Values.First(t => t.Position.x == 0 && t.isWalkable);
+        var mainArea = GetReachableTiles(startPoint);
+
+        return mainArea.Where(t => t.Position.x < 2 && !IsSurroundedByMountains(t)).OrderBy(t => UnityEngine.Random.value).First();
     }
 
     public Tile GetEnemySpawnTile()
     {
-        return tiles.Where(t => t.Key.x >= width - 2 && t.Value.Walkable && !IsSurroundedByMountains(t.Value)).OrderBy(t => UnityEngine.Random.value).First().Value;
+        Tile startPoint = tiles.Values.First(t => t.Position.x == 0 && t.isWalkable);
+        var mainArea = GetReachableTiles(startPoint);
+
+        return mainArea.Where(t => t.Position.x >= width -2 && !IsSurroundedByMountains(t)).OrderBy(t => UnityEngine.Random.value).First();
     }
 
     //Helper functions: Get tiles  
