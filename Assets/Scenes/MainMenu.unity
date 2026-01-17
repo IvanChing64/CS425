@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 51065513}
   - component: {fileID: 51065515}
   - component: {fileID: 51065516}
+  - component: {fileID: 51065517}
   m_Layer: 5
   m_Name: Title Text (TMP)
   m_TagString: Untagged
@@ -153,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42.349854, y: 20.88669}
+  m_AnchoredPosition: {x: 37.76242, y: 26.238651}
   m_SizeDelta: {x: 827.3595, y: 302.506}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &51065515
@@ -198,6 +199,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Pandora's ToyBox
+--- !u!114 &51065517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51065512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 25, y: -7}
+  m_UseGraphicAlpha: 1
 --- !u!1 &390165530
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,6 +502,7 @@ GameObject:
   - component: {fileID: 1373791820}
   - component: {fileID: 1373791822}
   - component: {fileID: 1373791823}
+  - component: {fileID: 1373791824}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -554,6 +571,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Quit Game
+--- !u!114 &1373791824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373791819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 15, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1483187842
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +730,7 @@ GameObject:
   - component: {fileID: 1575262973}
   - component: {fileID: 1575262975}
   - component: {fileID: 1575262976}
+  - component: {fileID: 1575262977}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -766,6 +799,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Start Game
+--- !u!114 &1575262977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575262972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 15, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1682712899
 GameObject:
   m_ObjectHideFlags: 0
