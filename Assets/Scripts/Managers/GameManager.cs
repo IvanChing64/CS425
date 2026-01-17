@@ -21,8 +21,25 @@ public class GameManager : MonoBehaviour
     //Game state manager
     public void ChangeState(GameState state)
     {
+        // Set internal game state
         gameState = state;
-        switch (state)
+
+        // If it is the player or enemy turn
+        if (gameState is GameState.PlayerTurn or GameState.EnemyTurn)
+        {
+            if (CheckPlayerVictory())
+            {
+                //Set end screen to show victory
+                gameState = GameState.EndScreen;
+            }
+            else if (CheckEnemyVictory())
+            {
+                //Set end screen to show defeat
+                gameState = GameState.EndScreen;
+            }
+        }
+
+        switch (gameState)
         {
             case GameState.GenerateGrid:
                 turnNumber = 0;
@@ -51,10 +68,18 @@ public class GameManager : MonoBehaviour
                 TurnUIManager.Instance.UpdateTurnText(turnNumber);
                 UnitManager.Instance.BeginEnemyTurn();
                 break;
+            case GameState.EndScreen:
+                Debug.Log("End screen reached");
+                // Activate/show end screen
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);
         }
     }
+
+    public bool CheckPlayerVictory() => UnitManager.Instance.enemyUnitCount <= 0;
+
+    public bool CheckEnemyVictory() => UnitManager.Instance.playerUnitCount <= 0;
 }
 
 public enum GameState
