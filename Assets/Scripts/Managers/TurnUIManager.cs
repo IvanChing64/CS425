@@ -1,5 +1,6 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
+//using TMPro;
 
 //Developer: Ivan Ching
 
@@ -7,7 +8,7 @@ public class TurnUIManager : MonoBehaviour
 {
     public static TurnUIManager Instance;
 
-    [SerializeField] private TMP_Text turnText;
+    [SerializeField] private Text turnText;
 
     public void Awake()
     {
