@@ -119,6 +119,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &36499709
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 701327415266027620, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.9220133
+      objectReference: {fileID: 0}
+    - target: {fileID: 701327415266027620, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22132325
+      objectReference: {fileID: 0}
+    - target: {fileID: 701327415266027620, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701327415266027620, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 701327415266027620, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701327415266027620, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701327415266027620, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701327415266027620, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701327415266027620, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701327415266027620, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032329153850387535, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+      propertyPath: m_text
+      value: Gain 3  Guard on self
+      objectReference: {fileID: 0}
+    - target: {fileID: 6892010155999554347, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+      propertyPath: m_Name
+      value: GuardCard
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
 --- !u!1 &37525801
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,14 +969,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1798e46875860434abe15b0e5fd985a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardManager
-  cardPrefab: {fileID: 5579247056591345560, guid: 7932ecc80a5a8e34795009cb15eb4685, type: 3}
+  cardAreaBackdrop: {fileID: 3507846074317225816, guid: 0336dfe59d3c1f94bb233d668c935266, type: 3}
   testDeckPrefabs:
-  - {fileID: 5579247056591345560, guid: 7932ecc80a5a8e34795009cb15eb4685, type: 3}
-  - {fileID: 3447943860063666467, guid: 6f622566aa79f9b4da56ae0971b73d6d, type: 3}
-  - {fileID: 6270265823830240551, guid: e58279376370cf34488c6be93a3a79ce, type: 3}
-  - {fileID: 5579247056591345560, guid: 7932ecc80a5a8e34795009cb15eb4685, type: 3}
-  - {fileID: 3447943860063666467, guid: 6f622566aa79f9b4da56ae0971b73d6d, type: 3}
-  - {fileID: 6270265823830240551, guid: e58279376370cf34488c6be93a3a79ce, type: 3}
+  - {fileID: 2594674260571448879, guid: f606c3e4e0458f84d9402d14c153badf, type: 3}
+  - {fileID: 5406873259851013199, guid: 7f793aeb81d42934787bd232fa323b6f, type: 3}
+  - {fileID: 6892010155999554347, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+  - {fileID: 2594674260571448879, guid: f606c3e4e0458f84d9402d14c153badf, type: 3}
+  - {fileID: 5406873259851013199, guid: 7f793aeb81d42934787bd232fa323b6f, type: 3}
+  - {fileID: 6892010155999554347, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
   selectedCard: {fileID: 0}
   currentDeck: []
   currentHand: []
@@ -1192,3 +1253,4 @@ SceneRoots:
   - {fileID: 933606873}
   - {fileID: 1060585381}
   - {fileID: 1157679552}
+  - {fileID: 36499709}

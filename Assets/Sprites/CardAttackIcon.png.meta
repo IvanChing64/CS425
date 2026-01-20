@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 71aa1ed1f0bdcc944ad199b8812ccd09
+guid: 895ceec2f50f7f44ca08f5b9cfae671f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7659120240897022540
-    second: BaseMovementCard_0
+      213: -5212242483619365012
+    second: CardAttackIcon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BaseMovementCard_0
+      name: CardAttackIcon_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 250
-        height: 350
+        width: 160
+        height: 170
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4b5245d78b655b590800000000000000
-      internalID: -7659120240897022540
+      spriteID: c6ffaa8a3156aa7b0800000000000000
+      internalID: -5212242483619365012
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BaseMovementCard_0: -7659120240897022540
+      CardAttackIcon_0: -5212242483619365012
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

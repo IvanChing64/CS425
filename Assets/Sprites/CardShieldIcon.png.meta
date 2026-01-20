@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dbe5870516399254ea7e3a927efa77fe
+guid: bb481a5c8f8f6dd49a1c49ec4eca01db
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 595005819661736514
-    second: BaseAttackCard_0
+      213: 1853853189450526911
+    second: CardShieldIcon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BaseAttackCard_0
+      name: CardShieldIcon_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 250
-        height: 350
+        width: 160
+        height: 170
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24a5a38f3a2e14800800000000000000
-      internalID: 595005819661736514
+      spriteID: fb07ce657a53ab910800000000000000
+      internalID: 1853853189450526911
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BaseAttackCard_0: 595005819661736514
+      CardShieldIcon_0: 1853853189450526911
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92d42e8cdeee7a74ea6ffe4eff42e70c, type: 3}
-  m_Name: BaseAttackCard
+  m_Name: Slash
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableCard
-  cardName: Attack
+  cardName: Slash
   type: 0
-  CardPrefab: {fileID: 6039241474866512462, guid: 7932ecc80a5a8e34795009cb15eb4685, type: 3}
+  CardPrefab: {fileID: 9165138058738844404, guid: f606c3e4e0458f84d9402d14c153badf, type: 3}
   isPlayed: 0
-  drawChance: 1
