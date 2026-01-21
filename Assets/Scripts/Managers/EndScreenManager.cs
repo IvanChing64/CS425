@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// <para>Script for handling the end screen</para>
@@ -35,5 +36,14 @@ public class EndScreenManager : MonoBehaviour
     public void SetLosingText()
     {
         EndScreenTitle.text = "Defeat.";
+    }
+
+    /// <summary>
+    /// <para>Currently, restarts the scene. Should go to the stage map when that is implemented</para>
+    /// </summary>
+    public void EndGameButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // SceneManager.LoadScene("Scenes/StageMap") // or whatever we call it
     }
 }
