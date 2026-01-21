@@ -29,12 +29,12 @@ public class GameManager : MonoBehaviour
         {
             if (CheckPlayerVictory())
             {
-                //Set end screen to show victory
+                EndScreenManager.Instance.SetWinningText();
                 gameState = GameState.EndScreen;
             }
             else if (CheckEnemyVictory())
             {
-                //Set end screen to show defeat
+                EndScreenManager.Instance.SetLosingText();
                 gameState = GameState.EndScreen;
             }
         }
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.EndScreen:
                 Debug.Log("End screen reached");
-                // Activate/show end screen
+                EndScreenManager.Instance.ShowEndScreen();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);
