@@ -7,10 +7,10 @@ using UnityEngine;
 
 public class ScriptableCard : ScriptableObject
 {
-    public string cardName {get;}
-    public Type type {get;}
-    public BaseCard CardPrefab {get;}
-    public bool isPlayed{get;}
+    public string cardName;
+    public Type type;
+    public BaseCard CardPrefab;
+    public bool isPlayed;
     //public float drawChance;
 }
 

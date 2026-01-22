@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d42e8cdeee7a74ea6ffe4eff42e70c, type: 3}
   m_Name: Guard
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableCard
-  type: 2
+  cardName: 
+  type: 0
+  CardPrefab: {fileID: 0}
+  isPlayed: 0
