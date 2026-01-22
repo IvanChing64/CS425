@@ -39,11 +39,11 @@ public class EndScreenManager : MonoBehaviour
     }
 
     /// <summary>
-    /// <para>Currently, restarts the scene. Should go to the stage map when that is implemented</para>
+    /// <para>Currently, goes to the main menu. Should go to the stage map when that is implemented</para>
     /// </summary>
     public void EndGameButton()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("Scenes/MainMenu");
         // SceneManager.LoadScene("Scenes/StageMap") // or whatever we call it
     }
 }
