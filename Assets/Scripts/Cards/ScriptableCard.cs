@@ -8,7 +8,7 @@ using UnityEngine;
 public class ScriptableCard : ScriptableObject
 {
     public string cardName {get;}
-    public Type type;
+    public Type type {get;}
     public BaseCard CardPrefab {get;}
     public bool isPlayed{get;}
     //public float drawChance;
