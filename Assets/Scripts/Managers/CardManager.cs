@@ -14,7 +14,7 @@ public class CardManager : MonoBehaviour
     */
 
     public static CardManager instance;
-    public GameObject cardPrefab;
+    public GameObject cardAreaBackdrop;
     //Temporary hardcoded cards for testing
     public List<GameObject> testDeckPrefabs = new List<GameObject>();
     public BaseCard selectedCard;
@@ -41,25 +41,16 @@ public class CardManager : MonoBehaviour
             FillDeckFromResources();
         }
 
+        //Create Backdrop for Card Area
+        for (int i = 0; i < maxHandSize; i++)
+        {
+            Vector3 backdropPos = transform.position + new Vector3(i * 3, 0, 0);
+            Instantiate(cardAreaBackdrop, backdropPos, Quaternion.identity);
+        }
+
         ShuffleDeck();
         DrawHand();
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    /*
-    void Start()
-    {
-        // If deck is empty and autofill is enabled, populate from Resources
-        if (currentDeck == null || currentDeck.Count == 0)
-        {
-            FillDeckFromResources();
-        }
-
-        // Optionally shuffle here if you want a random draw order
-        // ShuffleDeck();
-        DrawHand();
-    }*/
-
 
     public void SelectCard(BaseCard card)
     {
@@ -74,6 +65,7 @@ public class CardManager : MonoBehaviour
 
     public void DeselectCard()
     {
+        if (selectedCard == null) return;
         Debug.Log("Card Deselected: " + selectedCard.cardName);
         selectedCard.transform.position -= new Vector3(0, 0.85f, 0);
         selectedCard = null;
@@ -84,8 +76,8 @@ public class CardManager : MonoBehaviour
         if (selectedCard != null)
         {
             selectedCard.PlayCard();
-            //Destroy(selectedCard.gameObject);
-            //currentHand.Remove(selectedCard.gameObject);
+            currentHand.Remove(selectedCard.gameObject);
+            Destroy(selectedCard.gameObject);
             DeselectCard();
         }
         else
@@ -104,7 +96,7 @@ public class CardManager : MonoBehaviour
         // Implementation for displaying card information
     }
     
-    void ShuffleDeck() //May have no use
+    void ShuffleDeck()
     {
         for (int i = 0; i < currentDeck.Count; i++)
         {
@@ -123,11 +115,13 @@ public class CardManager : MonoBehaviour
         {
             DeselectCard();
         }
+
         for (int i = 0; i < currentHand.Count; i++)
         {
             if (currentHand[i] != null)
             {
                 Destroy(currentHand[i]);
+                Debug.Log("Destroyed card: " + currentHand[i].name);
             }
         }
         currentHand.Clear();
@@ -164,8 +158,8 @@ public class CardManager : MonoBehaviour
         //Temporarily hardcoded cards for testing
         for (int i = 0; i < testDeckPrefabs.Count; i++)
         {
-            GameObject cardGO = Instantiate(testDeckPrefabs[i], new Vector3(-6,-6), Quaternion.identity);
-            BaseCard baseCard = cardGO.GetComponent<BaseCard>();
+            //GameObject cardGO = Instantiate(testDeckPrefabs[i], new Vector3(-6,-6), Quaternion.identity);
+            BaseCard baseCard = testDeckPrefabs[i].GetComponent<BaseCard>();
             if (baseCard != null)
             {
                 currentDeck.Add(baseCard);
@@ -174,7 +168,7 @@ public class CardManager : MonoBehaviour
             else
             {
                 Debug.LogWarning("cardPrefab does not have a BaseCard component.");
-                Destroy(cardGO);
+                //Destroy(cardGO);
             }
         }
     }

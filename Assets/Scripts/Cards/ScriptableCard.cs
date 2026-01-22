@@ -7,11 +7,11 @@ using UnityEngine;
 
 public class ScriptableCard : ScriptableObject
 {
-    public string cardName;
+    public string cardName {get;}
     public Type type;
-    public BaseCard CardPrefab;
-    public bool isPlayed;
-    public float drawChance;
+    public BaseCard CardPrefab {get;}
+    public bool isPlayed{get;}
+    //public float drawChance;
 }
 
 public enum Type

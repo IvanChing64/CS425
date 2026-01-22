@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class MountainTile : Tile
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+   [SerializeField] private Sprite[] mountainSprites;
+
+    public override void Init(int x, int y)
     {
-        
+
+        if (mountainSprites != null && mountainSprites.Length > 0)
+        {
+            _renderer.sprite = mountainSprites[Random.Range(0, mountainSprites.Length)];
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

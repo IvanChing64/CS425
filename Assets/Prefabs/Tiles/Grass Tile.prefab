@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3258029580693546745, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 635.12634
       objectReference: {fileID: 0}
     - target: {fileID: 3258029580693546745, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 122.32609
       objectReference: {fileID: 0}
     - target: {fileID: 3258029580693546745, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_LocalPosition.z
@@ -47,6 +47,26 @@ PrefabInstance:
     - target: {fileID: 3258029580693546745, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3996111386752532341, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483862036735999224, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300058, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
+    - target: {fileID: 5483862036735999224, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483862036735999224, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483862036735999224, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6663077133559630390, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_Name
@@ -90,8 +110,15 @@ MonoBehaviour:
   highlight: {fileID: 7615237263825248722}
   isWalkable: 1
   OccupiedUnit: {fileID: 0}
-  baseColor: {r: 0.43614274, g: 0.9339623, b: 0.48395726, a: 1}
-  offsetColor: {r: 0.3941727, g: 0.6698113, b: 0.37597898, a: 1}
+  baseColor: {r: 1, g: 1, b: 1, a: 1}
+  offsetColor: {r: 1, g: 1, b: 1, a: 1}
+  grassSprites:
+  - {fileID: 21300058, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
+  - {fileID: 21300050, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
+  - {fileID: 21300012, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
+  - {fileID: 21300078, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
+  - {fileID: 21300122, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
+  - {fileID: 21300030, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
 --- !u!1 &7615237263825248722 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7832129910396769477, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
