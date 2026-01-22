@@ -29,6 +29,10 @@ public class BaseUnit : MonoBehaviour
     void Die()
     {
         Debug.Log($"{name} has died.");
+        if (Faction == Faction.Player) // If this is a player unit
+            UnitManager.Instance.playerUnitCount -= 1; // Decrease the player unit count
+        else // Otherwise this is an enemy unit
+            UnitManager.Instance.enemyUnitCount -= 1; // Decrease the enemy unit count
         Destroy(gameObject);
     }
 }
