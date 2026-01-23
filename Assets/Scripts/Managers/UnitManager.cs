@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 //Developer: Ivan Ching
 //Edits from Andrew Shelton
@@ -19,6 +20,9 @@ public class UnitManager : MonoBehaviour
 
     private List<BaseEnemy> enemiesSpawned = new List<BaseEnemy>();
 
+    public int enemyUnitCount;
+    public int playerUnitCount;
+
     private void Awake()
     {
         Instance = this;
@@ -26,9 +30,9 @@ public class UnitManager : MonoBehaviour
         units = Resources.LoadAll<ScriptableUnit>("Units").ToList();
     }
 
-    public void SpawnPlayers()
+    public void SpawnPlayers(int count = 1)
     {
-        var playerUnitCount = 1;
+        playerUnitCount = count;
         for (int i = 0; i < playerUnitCount; i++)
         {
             var randomPrefab = GetRandomUnit<BasePlayer>(Faction.Player);
@@ -46,10 +50,10 @@ public class UnitManager : MonoBehaviour
         GameManager.Instance.ChangeState(GameState.SpawnEnemies);
     }
 
-    public void SpawnEnemies()
+    public void SpawnEnemies(int count = 1)
     {
-        var enemyCount = 1;
-        for (int i = 0; i < enemyCount; i++)
+        enemyUnitCount = count;
+        for (int i = 0; i < enemyUnitCount; i++)
         {
             var randomPrefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
             var spawnedEnemy = Instantiate(randomPrefab);
