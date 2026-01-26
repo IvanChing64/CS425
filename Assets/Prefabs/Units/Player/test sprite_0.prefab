@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 6115810445861885752}
   - component: {fileID: 7650870887470218107}
   - component: {fileID: 1672246827751298856}
+  - component: {fileID: 7232603518593366301}
   m_Layer: 0
   m_Name: test sprite_0
   m_TagString: Untagged
@@ -209,6 +210,35 @@ MonoBehaviour:
   dmg: 40
   moveRange: 3
   healthbar: {fileID: 6525803158315793462}
+  startingDeck:
+  - March
+  - Slash
+  - Guard
+  - March
+  - Slash
+  - Guard
+--- !u!114 &7232603518593366301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3038541109350415365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1798e46875860434abe15b0e5fd985a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandManager
+  supportCardPrefab: {fileID: 6892010155999554347, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
+  attackCardPrefab: {fileID: 2594674260571448879, guid: f606c3e4e0458f84d9402d14c153badf, type: 3}
+  movementCardPrefab: {fileID: 5406873259851013199, guid: 7f793aeb81d42934787bd232fa323b6f, type: 3}
+  currentDeck: []
+  currentHand: []
+  maxHandSize: 3
+  minDeckSize: 0
+  maxDeckSize: 0
+  handDrawn: 0
+  handSelected: 0
 --- !u!1 &3310885552388918130
 GameObject:
   m_ObjectHideFlags: 0

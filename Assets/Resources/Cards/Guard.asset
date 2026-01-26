@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d42e8cdeee7a74ea6ffe4eff42e70c, type: 3}
   m_Name: Guard
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableCard
+  cardName: Guard
+  cardDescription: Gain guard on self
   type: 2
+  value: 3
+  cardBorder: {fileID: 2595631386680669454, guid: f6319ea3690e4ce45a0bc06d07a05cda, type: 3}
+  cardIcon: {fileID: 1853853189450526911, guid: bb481a5c8f8f6dd49a1c49ec4eca01db, type: 3}
