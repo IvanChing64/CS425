@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+//Author:Ivan Ching
+//Aggregated from multiple tutorials
+//Usage: Pause menu to change scenes,freeze time, and change settings
 public class PauseMenu : MonoBehaviour
 {
 
@@ -23,6 +27,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    //Unfreeze time and closes the panal
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
@@ -30,6 +35,7 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
     }
 
+    //Freeze time and opens the pause menu panel
     void Pause()
     {
         pauseMenuUI.SetActive(true);
@@ -37,6 +43,7 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
     }
 
+    //Opens another menu panal on top of the pause menu, and closes it.
     public void SettingsMenu()
     {
         settingUI.SetActive(true);
@@ -44,12 +51,15 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
+
+    //closes settings and opens the settings panal
     public void SettingsBack()
     {
         settingUI.SetActive(false);
         pauseMenuUI.SetActive(true);
     }
 
+    //changes scenes to main menu
     public void LoadMenu()
     {
         Time.timeScale = 1f;
