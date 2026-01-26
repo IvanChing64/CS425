@@ -768,8 +768,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Main Menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 075b69038263f5648bb1c3775354e7d0, type: 2}
-  m_sharedMaterial: {fileID: 6662981436798740678, guid: 075b69038263f5648bb1c3775354e7d0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1649,8 +1649,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Victory!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 075b69038263f5648bb1c3775354e7d0, type: 2}
-  m_sharedMaterial: {fileID: 6662981436798740678, guid: 075b69038263f5648bb1c3775354e7d0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2960,6 +2960,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113870365}
   m_CullTransparentMesh: 1
+--- !u!1 &1118180330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1118180331}
+  - component: {fileID: 1118180332}
+  m_Layer: 0
+  m_Name: DeckManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1118180331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118180330}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.27996, y: 3.1268, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1118180332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118180330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baf124ab91d84d54ea5360120a553e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeckManager
+  allCards: []
 --- !u!1 &1131804411
 GameObject:
   m_ObjectHideFlags: 0
@@ -3093,7 +3138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1157679552}
-  - component: {fileID: 1157679551}
+  - component: {fileID: 1157679553}
   m_Layer: 0
   m_Name: CardManager
   m_TagString: Untagged
@@ -3101,31 +3146,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1157679551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1157679550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1798e46875860434abe15b0e5fd985a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CardManager
-  cardAreaBackdrop: {fileID: 3507846074317225816, guid: 0336dfe59d3c1f94bb233d668c935266, type: 3}
-  testDeckPrefabs:
-  - {fileID: 2594674260571448879, guid: f606c3e4e0458f84d9402d14c153badf, type: 3}
-  - {fileID: 5406873259851013199, guid: 7f793aeb81d42934787bd232fa323b6f, type: 3}
-  - {fileID: 6892010155999554347, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
-  - {fileID: 2594674260571448879, guid: f606c3e4e0458f84d9402d14c153badf, type: 3}
-  - {fileID: 5406873259851013199, guid: 7f793aeb81d42934787bd232fa323b6f, type: 3}
-  - {fileID: 6892010155999554347, guid: d7432ecc7f6685d4586f247bb537b833, type: 3}
-  selectedCard: {fileID: 0}
-  currentDeck: []
-  currentHand: []
-  maxHandSize: 3
-  maxDeckSize: 9
 --- !u!4 &1157679552
 Transform:
   m_ObjectHideFlags: 0
@@ -3141,6 +3161,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1157679553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157679550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626c55c916672d44db7de550de5d984c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardManager
+  cardAreaBackdrop: {fileID: 3507846074317225816, guid: 0336dfe59d3c1f94bb233d668c935266, type: 3}
+  maxHandSize: 3
+  selectedPlayer: {fileID: 0}
+  selectedCard: {fileID: 0}
 --- !u!1 &1163061364
 GameObject:
   m_ObjectHideFlags: 0
@@ -4870,3 +4906,4 @@ SceneRoots:
   - {fileID: 403876146}
   - {fileID: 1816218878}
   - {fileID: 1348979113}
+  - {fileID: 1118180331}

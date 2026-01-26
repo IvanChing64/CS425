@@ -32,12 +32,6 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SelectCard(BaseCard card)
     {
         if (selectedCard != null)

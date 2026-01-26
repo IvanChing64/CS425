@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         gameState = state;
 
         // If it is the player or enemy turn
-        if (gameState is GameState.PlayerTurn or GameState.EnemyTurn)
+        if (gameState == GameState.PlayerTurn || gameState == GameState.PlayerTurn)
         {
             if (CheckPlayerVictory())
             {
