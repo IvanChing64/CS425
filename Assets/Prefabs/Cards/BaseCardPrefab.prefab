@@ -142,8 +142,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 075b69038263f5648bb1c3775354e7d0, type: 2}
-  m_sharedMaterial: {fileID: 6662981436798740678, guid: 075b69038263f5648bb1c3775354e7d0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
+  m_sharedMaterial: {fileID: 5430595500760780554, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -491,8 +491,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 075b69038263f5648bb1c3775354e7d0, type: 2}
-  m_sharedMaterial: {fileID: 6662981436798740678, guid: 075b69038263f5648bb1c3775354e7d0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
+  m_sharedMaterial: {fileID: 5430595500760780554, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -702,8 +702,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 075b69038263f5648bb1c3775354e7d0, type: 2}
-  m_sharedMaterial: {fileID: 6662981436798740678, guid: 075b69038263f5648bb1c3775354e7d0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
+  m_sharedMaterial: {fileID: 5430595500760780554, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1049,12 +1049,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardDisplay
   cardData: {fileID: 11400000, guid: 16c651208c246764db805c0ad659e53a, type: 2}
-  cardBack: {fileID: 6969975763012264878}
   cardBorder: {fileID: 2676983448219518677}
   cardIcon: {fileID: 4004979014424989177}
   cardName: {fileID: 4155251481457532157}
   cardDescription: {fileID: 7917724523151183277}
   cardValue: {fileID: 432612903588471785}
+  overrideValue: 0
 --- !u!1 &8571516245562407848
 GameObject:
   m_ObjectHideFlags: 0

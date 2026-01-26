@@ -76,6 +76,18 @@ PrefabInstance:
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7917724523151183277, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
+    - target: {fileID: 7917724523151183277, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5430595500760780554, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
+    - target: {fileID: 7917724523151183277, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -106,7 +118,6 @@ MonoBehaviour:
   cardType: 0
   value: 0
   isPlayed: 0
-  drawChance: 0
 --- !u!1 &5130583905287561088 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 198793630811829094, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}

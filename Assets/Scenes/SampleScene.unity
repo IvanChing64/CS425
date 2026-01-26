@@ -272,7 +272,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1089811744}
-  - {fileID: 731543487}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &181098065
@@ -522,7 +521,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 224189186}
-  m_Father: {fileID: 731543487}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1269,8 +1268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60f8eacd4889e5e41be403740af62ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndScreenManager
-  EndScreenCanvas: {fileID: 731543490}
-  EndScreenTitle: {fileID: 601266004}
+  EndScreenCanvas: {fileID: 1060585380}
+  EndScreenTitle: {fileID: 0}
 --- !u!1 &1146347545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1579,3 +1578,5 @@ SceneRoots:
   - {fileID: 1060585381}
   - {fileID: 610561938}
   - {fileID: 652253238}
+  - {fileID: 71405751}
+  - {fileID: 455756651}
