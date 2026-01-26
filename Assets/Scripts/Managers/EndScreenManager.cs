@@ -10,7 +10,7 @@ public class EndScreenManager : MonoBehaviour
 {
     public static EndScreenManager Instance;
     [SerializeField] private Canvas EndScreenCanvas;
-    [SerializeField] private TextMeshProUGUI EndScreenTitle;
+    [SerializeField] private Text EndScreenTitle;
 
     void Awake()
     {
