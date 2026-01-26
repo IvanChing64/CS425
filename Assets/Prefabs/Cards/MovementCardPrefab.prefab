@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5039878873150811366
+--- !u!1001 &3096805058036749958
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,21 +8,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 432612903588471785, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2676983448219518677, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 594198319219861320, guid: 7fed6d5290d2b4949851240608eab0d7, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780343836921701420, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+      propertyPath: cardData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3033139a27254ff409d00a2b9f4790a6, type: 2}
     - target: {fileID: 4004979014424989177, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.364934
+      value: -2.27
       objectReference: {fileID: 0}
     - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6992552
+      value: 4.25
       objectReference: {fileID: 0}
     - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -58,15 +66,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4155251481457532157, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_text
-      value: Slash
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7058017338369739465, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_Name
-      value: SlashCard
+      value: MovementCardPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 7917724523151183277, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_text
-      value: Deal 40    Damage to a narby enemy
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8184540989031878164, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.55
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -74,33 +86,33 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7058017338369739465, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9165138058738844404}
+      addedObject: {fileID: 6811461745474328600}
   m_SourcePrefab: {fileID: 100100000, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
---- !u!1 &2594674260571448879 stripped
+--- !u!1 &2898152173304014304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 198793630811829094, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+  m_PrefabInstance: {fileID: 3096805058036749958}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5406873259851013199 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7058017338369739465, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
-  m_PrefabInstance: {fileID: 5039878873150811366}
+  m_PrefabInstance: {fileID: 3096805058036749958}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9165138058738844404
+--- !u!114 &6811461745474328600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2594674260571448879}
+  m_GameObject: {fileID: 5406873259851013199}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fb8d323d3e81ec43af26ebcac7e49df, type: 3}
+  m_Script: {fileID: 11500000, guid: dfbc24e9b0069ff4dae7dcd667229541, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseAttackCard
-  highlightEffect: {fileID: 5130583905287561088}
-  cardName: Slash
-  cardType: 0
+  m_EditorClassIdentifier: Assembly-CSharp::BaseMovementCard
+  highlightEffect: {fileID: 2898152173304014304}
+  cardName: 
+  cardType: 1
+  value: 0
   isPlayed: 0
   drawChance: 0
-  attack: 40
---- !u!1 &5130583905287561088 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 198793630811829094, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
-  m_PrefabInstance: {fileID: 5039878873150811366}
-  m_PrefabAsset: {fileID: 0}

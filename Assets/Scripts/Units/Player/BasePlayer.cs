@@ -1,7 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BasePlayer : BaseUnit
 {
+
+    public List<string> startingDeck = new List<string>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

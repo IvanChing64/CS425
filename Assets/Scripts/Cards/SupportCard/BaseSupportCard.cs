@@ -4,10 +4,11 @@ using UnityEngine;
 //Aggregated from multiple tutorials
 public class BaseSupportCard : BaseCard
 {
-    public int health;
+    public SupportEffect effect;
+    //public int value;
 
     public override void PlayCard()
     {
-        Debug.Log("Support Card Played with health value: " + health);
+        Debug.Log("Support Card Played with " + effect + " of value: " + value);
     }
 }

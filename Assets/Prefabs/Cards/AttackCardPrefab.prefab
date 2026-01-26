@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4491861135480283618
+--- !u!1001 &5039878873150811366
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,21 +8,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 432612903588471785, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2676983448219518677, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2595631386680669454, guid: f6319ea3690e4ce45a0bc06d07a05cda, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780343836921701420, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+      propertyPath: cardData
+      value: 
+      objectReference: {fileID: 11400000, guid: 16c651208c246764db805c0ad659e53a, type: 2}
     - target: {fileID: 4004979014424989177, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1853853189450526911, guid: bb481a5c8f8f6dd49a1c49ec4eca01db, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.12305
+      value: -2.22
       objectReference: {fileID: 0}
     - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.560112
+      value: 0.27
       objectReference: {fileID: 0}
     - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -58,15 +66,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4155251481457532157, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_text
-      value: Guard
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7058017338369739465, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_Name
-      value: GuardCard
+      value: AttackCardPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 7917724523151183277, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_text
-      value: Gain 3  Guard on self
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7917724523151183277, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
+    - target: {fileID: 7917724523151183277, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5430595500760780554, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
+    - target: {fileID: 7917724523151183277, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -74,33 +94,32 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7058017338369739465, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8755825387371886847}
+      addedObject: {fileID: 9165138058738844404}
   m_SourcePrefab: {fileID: 100100000, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
---- !u!1 &4365125098840609412 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 198793630811829094, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
-  m_PrefabInstance: {fileID: 4491861135480283618}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6892010155999554347 stripped
+--- !u!1 &2594674260571448879 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7058017338369739465, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
-  m_PrefabInstance: {fileID: 4491861135480283618}
+  m_PrefabInstance: {fileID: 5039878873150811366}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8755825387371886847
+--- !u!114 &9165138058738844404
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6892010155999554347}
+  m_GameObject: {fileID: 2594674260571448879}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 555fcfbf6cb44c849b4b363bda8e0d56, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fb8d323d3e81ec43af26ebcac7e49df, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseSupportCard
-  highlightEffect: {fileID: 4365125098840609412}
-  cardName: Guard
-  cardType: 2
+  m_EditorClassIdentifier: Assembly-CSharp::BaseAttackCard
+  highlightEffect: {fileID: 5130583905287561088}
+  cardName: 
+  cardType: 0
+  value: 0
   isPlayed: 0
-  drawChance: 0
-  health: 0
+--- !u!1 &5130583905287561088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 198793630811829094, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+  m_PrefabInstance: {fileID: 5039878873150811366}
+  m_PrefabAsset: {fileID: 0}

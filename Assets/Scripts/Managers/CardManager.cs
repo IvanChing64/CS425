@@ -2,29 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Developer: Bailey Escritor
-//Aggregated from multiple tutorials
+//Manages card selection and playing
 public class CardManager : MonoBehaviour
 {
-    /*
-    Make background elements for card area, better than disabling card prefabs
-    Move Cards to bottom of screen, change camera output
-    Implement Separate Deck Manager to better handle individual player decks
-    Maybe instead of instantiating card prefabs, have a pool of card objects to reuse
-    Known In-Editor Glitch: When using inspector on CardManager, opening the list of testDeckPrefabs can cause Editor errors. testDeckPrefabs should not be modified in inspector during runtime.
-    */
-
     public static CardManager instance;
     public GameObject cardAreaBackdrop;
-    //Temporary hardcoded cards for testing
-    public List<GameObject> testDeckPrefabs = new List<GameObject>();
+    [SerializeField]private int maxHandSize = 3;
+    public BasePlayer selectedPlayer;
     public BaseCard selectedCard;
-    [HideInInspector] public List<BaseCard> currentDeck = new List<BaseCard>();//MinMaxSize: 6, MaxMaxSize: 9
-    [HideInInspector] public List<GameObject> currentHand = new List<GameObject>();//Always Size: 3
-    [SerializeField] private int maxHandSize = 3;
-    public int maxDeckSize;
-    private int deckIndex = 0; // pointer into currentDeck for drawing
-    //public int currentHandSize;
 
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         if (instance == null)
@@ -36,20 +24,18 @@ public class CardManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (currentDeck == null || currentDeck.Count == 0)
-        {
-            FillDeckFromResources();
-        }
-
         //Create Backdrop for Card Area
         for (int i = 0; i < maxHandSize; i++)
         {
             Vector3 backdropPos = transform.position + new Vector3(i * 3, 0, 0);
             Instantiate(cardAreaBackdrop, backdropPos, Quaternion.identity);
         }
+    }
 
-        ShuffleDeck();
-        DrawHand();
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 
     public void SelectCard(BaseCard card)
@@ -76,7 +62,7 @@ public class CardManager : MonoBehaviour
         if (selectedCard != null)
         {
             selectedCard.PlayCard();
-            currentHand.Remove(selectedCard.gameObject);
+            selectedPlayer.GetComponent<HandManager>().currentHand.Remove(selectedCard.gameObject);
             Destroy(selectedCard.gameObject);
             DeselectCard();
         }
@@ -86,97 +72,37 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void SetUnitValue(BaseUnit unit, BaseCard card)
+    public void NextTurn()
     {
-        // Implementation for setting unit values based on the played card
-    }
-
-    void ShowInfo(BaseCard card)
-    {
-        // Implementation for displaying card information
-    }
-    
-    void ShuffleDeck()
-    {
-        for (int i = 0; i < currentDeck.Count; i++)
+        HandManager[] handManagers = FindObjectsByType<HandManager>(FindObjectsSortMode.None);
+        foreach (HandManager handManager in handManagers)
         {
-            BaseCard temp = currentDeck[i];
-            int randomIndex = Random.Range(i, currentDeck.Count);
-            currentDeck[i] = currentDeck[randomIndex];
-            currentDeck[randomIndex] = temp;
-        }
-        Debug.Log("Deck Shuffled");
-    }
-
-    public void DrawHand()
-    {
-        // Remove previously instantiated hand cards from scene
-        if (selectedCard != null) 
-        {
-            DeselectCard();
-        }
-
-        for (int i = 0; i < currentHand.Count; i++)
-        {
-            if (currentHand[i] != null)
+            handManager.NextTurn();
+            if (handManager.GetComponentInParent<BasePlayer>() == selectedPlayer)
             {
-                Destroy(currentHand[i]);
-                Debug.Log("Destroyed card: " + currentHand[i].name);
-            }
-        }
-        currentHand.Clear();
-
-        if (currentDeck == null || currentDeck.Count == 0)
-        {
-            Debug.LogWarning("Current deck is empty - cannot draw cards.");
-            return;
-        }
-
-        // Draw up to maxHandSize cards from the deck starting at deckIndex
-        for (int i = 0; i < maxHandSize; i++)
-        {
-            if (currentDeck.Count == 0) break;
-
-            //Some AI was used to help implement this function
-            int idx = deckIndex % currentDeck.Count;
-            GameObject prefabGO = currentDeck[idx].gameObject;
-            Vector3 spawnPos = this.transform.position + new Vector3(i * 3, 0, 0);
-            GameObject newCard = Instantiate(prefabGO, spawnPos, Quaternion.identity);
-            currentHand.Add(newCard);
-            deckIndex = (deckIndex + 1) % Mathf.Max(1, currentDeck.Count);
-        }
-
-        Debug.Log("Hand Drawn with " + currentHand.Count + " cards. (deckIndex=" + deckIndex + ")");
-    }
-
-    // Populate `currentDeck` from Player Deck Data
-    //Some AI was used to help implement this function
-    public void FillDeckFromResources()
-    {
-        currentDeck.Clear();
-
-        //Temporarily hardcoded cards for testing
-        for (int i = 0; i < testDeckPrefabs.Count; i++)
-        {
-            //GameObject cardGO = Instantiate(testDeckPrefabs[i], new Vector3(-6,-6), Quaternion.identity);
-            BaseCard baseCard = testDeckPrefabs[i].GetComponent<BaseCard>();
-            if (baseCard != null)
-            {
-                currentDeck.Add(baseCard);
-                Debug.Log("Added card to deck: " + baseCard.cardName);
+                handManager.ToggleHandVisibility(true);
             }
             else
             {
-                Debug.LogWarning("cardPrefab does not have a BaseCard component.");
-                //Destroy(cardGO);
+                handManager.ToggleHandVisibility(false);
             }
         }
     }
 
-    // Call this draw a fresh hand
-    public void NextTurn()
+    public void SetSelectedPlayer(BasePlayer player)
     {
-        ShuffleDeck();
-        DrawHand();
+        BasePlayer previousPlayer = selectedPlayer;
+        selectedPlayer = player;
+        if (selectedPlayer.GetComponent<HandManager>().currentDeck.Count == 0) 
+        {
+            selectedPlayer.GetComponent<HandManager>().FillDeckFromResources();
+            selectedPlayer.GetComponent<HandManager>().NextTurn();
+        }
+
+        selectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(true);
+        if (previousPlayer != null && previousPlayer != selectedPlayer)
+        {
+            previousPlayer.GetComponent<HandManager>().ToggleHandVisibility(false);
+        }
     }
 }

@@ -50,6 +50,7 @@ public abstract class Tile : MonoBehaviour
             {
                 //Selects players
                 UnitManager.Instance.SetSelectedPlayer((BasePlayer)OccupiedUnit);
+                CardManager.instance.SetSelectedPlayer((BasePlayer)OccupiedUnit);
                 //code to check if selected player is already next to an enemy
                 if (IsNextToEnemy())
                 {
