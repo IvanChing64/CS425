@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 4549722344671113507}
   - component: {fileID: 751289258245009956}
   - component: {fileID: -5458689388755478831}
+  - component: {fileID: 738936172720448078}
   m_Layer: 0
   m_Name: enemytest
   m_TagString: Untagged
@@ -176,6 +177,28 @@ MonoBehaviour:
   moveSpeed: 0.7
   tilesPerMove: 4
   path: []
+--- !u!95 &738936172720448078
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167321167610509267}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 451d5f1d5330e42218c98e0f70cea694, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1771412561709253947
 GameObject:
   m_ObjectHideFlags: 0

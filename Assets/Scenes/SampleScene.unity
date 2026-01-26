@@ -2741,6 +2741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e47c8d6e8ea3ba24783f39d70feb1650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::combatUIManager
+  damageSoundClips: []
   combatPanel: {fileID: 1302840161}
   combatButton: {fileID: 2025336905}
 --- !u!1 &1089811743
