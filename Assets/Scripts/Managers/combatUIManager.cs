@@ -9,6 +9,7 @@ public class combatUIManager : MonoBehaviour
     //temp usage until card functionality is implemented.
     public static combatUIManager Instance;
 
+    [SerializeField] private AudioClip[] damageSoundClips;
     [SerializeField] private GameObject combatPanel;
     [SerializeField] private Button combatButton;
 
@@ -43,7 +44,7 @@ public class combatUIManager : MonoBehaviour
     //damage step
     public void ExecuteCombat()
     {
-
+        SoundFXManager.instance.PlaySoundFXClip(damageSoundClips, transform, 1f);
         if (targetEnemy != null)
         {
             targetEnemy.takeDamage(targetPlayer.dmg);
