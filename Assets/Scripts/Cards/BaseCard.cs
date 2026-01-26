@@ -8,12 +8,21 @@ public abstract class BaseCard : MonoBehaviour
     [SerializeField] private GameObject highlightEffect;
     public string cardName;
     public Type cardType;
+    public int value;
     public bool isPlayed;
-    public float drawChance;
+    //public float drawChance;
 
     public virtual void PlayCard()
     {
         Debug.Log("Base Card Played");
+    }
+
+    public virtual void CopyScriptableCard(ScriptableCard card)
+    {
+        cardName = card.cardName;
+        cardType = card.type;
+        value = card.value;
+        Debug.Log("Card Copied: " + cardName);
     }
 
     void OnMouseEnter()

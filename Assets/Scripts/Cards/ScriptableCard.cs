@@ -7,11 +7,10 @@ using UnityEngine;
 
 public class ScriptableCard : ScriptableObject
 {
-    public string cardName;
+    public string cardName, cardDescription;
     public Type type;
-    public BaseCard CardPrefab;
-    public bool isPlayed;
-    //public float drawChance;
+    public int value;
+    public Sprite cardBorder, cardIcon;
 }
 
 public enum Type
@@ -19,4 +18,10 @@ public enum Type
     Attack = 0,
     Movement = 1,
     Support = 2
+}
+
+public enum SupportEffect
+{
+    Heal = 0,
+    Guard = 1,
 }

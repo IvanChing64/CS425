@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d42e8cdeee7a74ea6ffe4eff42e70c, type: 3}
   m_Name: Slash
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableCard
-  cardName: 
+  cardName: Slash
+  cardDescription: Deal Damage to a nearby enemy
   type: 0
-  CardPrefab: {fileID: 0}
-  isPlayed: 0
+  value: 40
+  cardBorder: {fileID: 594198319219861320, guid: 7fed6d5290d2b4949851240608eab0d7, type: 3}
+  cardIcon: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
