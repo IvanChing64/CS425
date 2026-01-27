@@ -3,18 +3,14 @@ using UnityEngine;
 
 public class BasePlayer : BaseUnit
 {
-
     public List<string> startingDeck = new List<string>();
+    public bool canAttack = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    //Resets a units card values at the end of their turn
+    public void ResetCardValues()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        moveRange = 0;
+        dmg = 0;
+        canAttack = false;
     }
 }

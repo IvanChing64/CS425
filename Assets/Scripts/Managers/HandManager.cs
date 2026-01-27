@@ -148,6 +148,7 @@ public class HandManager : MonoBehaviour
     public void NextTurn()
     {
         handDrawn = false;
+        this.GetComponentInParent<BasePlayer>().ResetCardValues();
         ShuffleDeck();
         DrawHand();
     }

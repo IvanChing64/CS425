@@ -128,8 +128,9 @@ public abstract class Tile : MonoBehaviour
 
             //places unit there
             setUnit(UnitManager.Instance.SelectedPlayer);
+
             //UnitManager.Instance.SetSelectedPlayer(null);
-            GameManager.Instance.ChangeState(GameState.EnemyTurn);
+            //GameManager.Instance.ChangeState(GameState.EnemyTurn);
             //Uncomment to regain control of player
             //GameManager.Instance.ChangeState(GameState.PlayerTurn);
             foreach (Tile t in tilesInRange) t.highlight.SetActive(false);
@@ -159,5 +160,15 @@ public abstract class Tile : MonoBehaviour
         unit.transform.position = transform.position;
         OccupiedUnit = unit;
         unit.OccupiedTile = this;
+        unit.moveRange = 0; //Reset move range after moving
     }
+
+    // Highlight player movement range
+    /*
+    public void HighlightMovementRange()
+    {
+        List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
+        foreach (Tile t in tilesInRange) t.highlight.SetActive(true);
+    }
+    */
 }
