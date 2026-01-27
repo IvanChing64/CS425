@@ -12,11 +12,13 @@ public abstract class BaseCard : MonoBehaviour
     public bool isPlayed;
     //public float drawChance;
 
+    //Play the card's effect, overridden in derived classes
     public virtual void PlayCard()
     {
         Debug.Log("Base Card Played");
     }
 
+    //Copies properties from ScriptableCard
     public virtual void CopyScriptableCard(ScriptableCard card)
     {
         cardName = card.cardName;
@@ -25,8 +27,10 @@ public abstract class BaseCard : MonoBehaviour
         Debug.Log("Card Copied: " + cardName);
     }
 
+    //Highlight card on mouse hover during player's turn
     void OnMouseEnter()
     {
+        if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
         if (highlightEffect != null)
         {
             highlightEffect.SetActive(true);
@@ -34,8 +38,10 @@ public abstract class BaseCard : MonoBehaviour
         }
     }
 
+    //Remove highlight when mouse exits card area during player's turn
     void OnMouseExit()
     {
+        if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
         if (highlightEffect != null)
         {
             highlightEffect.SetActive(false);
@@ -43,11 +49,13 @@ public abstract class BaseCard : MonoBehaviour
         }
     }
 
+    //Selects or plays the card on mouse click during player's turn
     private void OnMouseDown()
     {
+        if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
         if (CardManager.instance == null)
         {
-            Debug.LogWarning("CardManager.instance is null. Make sure a CardManager exists in the scene.");
+            Debug.LogWarning("CardManager.instance is null.");
             return;
         }
 

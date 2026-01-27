@@ -207,8 +207,8 @@ MonoBehaviour:
   Faction: 0
   maxHealth: 100
   health: 100
-  dmg: 40
-  moveRange: 3
+  dmg: 0
+  moveRange: 0
   healthbar: {fileID: 6525803158315793462}
   startingDeck:
   - March
@@ -217,6 +217,7 @@ MonoBehaviour:
   - March
   - Slash
   - Guard
+  canAttack: 0
 --- !u!114 &7232603518593366301
 MonoBehaviour:
   m_ObjectHideFlags: 0

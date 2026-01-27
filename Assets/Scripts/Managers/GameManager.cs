@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
                 turnNumber += 1;
                 Debug.Log("Player Turn");
                 Debug.Log("Turn Number" + turnNumber);
+                combatUIManager.Instance.ShowEndTurnOption();
                 TurnUIManager.Instance.UpdateTurnText(turnNumber);
                 CardManager.instance.NextTurn();
                 break;
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Enemy Turn");
                 Debug.Log("Turn Number" + turnNumber);
                 TurnUIManager.Instance.UpdateTurnText(turnNumber);
+                combatUIManager.Instance.hideEndTurnOption();
                 UnitManager.Instance.BeginEnemyTurn();
                 break;
             case GameState.EndScreen:
