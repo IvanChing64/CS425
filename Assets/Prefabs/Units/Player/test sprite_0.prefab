@@ -210,6 +210,11 @@ MonoBehaviour:
   dmg: 40
   moveRange: 3
   healthbar: {fileID: 6525803158315793462}
+  hurtSFX:
+  - {fileID: 8300000, guid: 8aac66cdf036f89479bdb992d5a73ffd, type: 3}
+  - {fileID: 8300000, guid: 91c9ddbccc0cd9f42a0d5e9e6d94f0ef, type: 3}
+  - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
+  - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   startingDeck:
   - March
   - Slash

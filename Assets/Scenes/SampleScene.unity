@@ -920,6 +920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7534e8fc634074240bef86de77b99994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
+  buttonSFX:
+  - {fileID: 8300000, guid: aeb2b1f1d428a9549a37a5c62d92b531, type: 3}
   pauseMenuUI: {fileID: 456937844}
   settingUI: {fileID: 43878402}
 --- !u!1 &392119321
