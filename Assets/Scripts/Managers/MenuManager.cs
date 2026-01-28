@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 /// <remarks>by Liam Riel</remarks>
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField] private UnityEngine.UI.Button continueButton;
     [SerializeField] private AudioClip[] mainMenuSFX;
     public static MenuManager Instance;
 
@@ -16,15 +17,30 @@ public class MenuManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        if(GameProgress.ClearedStages.Count == 0)
+        {
+            continueButton.gameObject.SetActive(false);
+        }
+    }
+
     public void StartGame()
     {
-        SoundFXManager.instance.PlaySoundFXClip(mainMenuSFX, transform, 1f);  
-        SceneManager.LoadScene("Scenes/SampleScene");
+        SoundFXManager.instance.PlaySoundFXClip(mainMenuSFX, transform, 1f);
+        GameProgress.ClearedStages.Clear();
+        CurrentSession.ActiveStageID = "";
+        SceneManager.LoadScene("Scenes/StageSelection");
     }
 
     public void QuitGame()
     {
         SoundFXManager.instance.PlaySoundFXClip(mainMenuSFX, transform, 1f);
         Application.Quit();
+    }
+
+    public void ContinueGame()
+    {
+        SceneManager.LoadScene("Scenes/StageSelection");
     }
 }
