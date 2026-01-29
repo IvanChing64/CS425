@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 //Author: Ivan Ching
 //Developed from mulitple sources
@@ -9,13 +10,16 @@ public class levelSelect : MonoBehaviour
 {
     //Variables
     public string stageID;
+
     [Header("Grid Settings")]
     public int stageWidth;
     public int stageHeight;
     public bool isRandomSize;
-    [Header("Branching")]
-    public string requiredStageID;
 
+    [Header("Branching")]
+    public List<string> requiredStageIDs;
+
+    public bool isStart;
     private Button myNodes;
 
     //When entering the scene, checks nodes to see what is available to the player
@@ -30,7 +34,25 @@ public class levelSelect : MonoBehaviour
     //Colors the node according to if the stage is unlocked to be played or not
     public void RefreshNodes()
     {
-        bool isUnlocked = string.IsNullOrEmpty(requiredStageID) || GameProgress.ClearedStages.Contains(requiredStageID);
+        bool isUnlocked = false;
+
+        if (isStart)
+        {
+            isUnlocked = true;
+        }
+
+        if(requiredStageIDs != null && requiredStageIDs.Count > 0)
+        {
+            foreach(string id in requiredStageIDs)
+            {
+                if (GameProgress.ClearedStages.Contains(id))
+                {
+                    isUnlocked = true;
+                    break;
+                }
+            }
+        }
+
         myNodes.interactable = isUnlocked;
         Image nodeColor = GetComponent<Image>();
         if (isUnlocked)
