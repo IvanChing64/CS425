@@ -52,6 +52,9 @@ public class AStarManager : MonoBehaviour
             foreach (Tile neighbor in GridManager.Instance.GetNeighborsOf(current))
             {
                 if (closedSet.Contains(neighbor)) continue;
+
+                if (neighbor.OccupiedUnit != null && neighbor != end) continue;
+
                 if (!neighbor.Walkable && neighbor != end) continue;
                 
                 float tentativeG = gScore[current] + 1;
