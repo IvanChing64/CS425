@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 //Author: Ivan Ching
 //Developed from mulitple sources
+//Purpose: this script allows the user to select their stage. It holds the code for the node completion logic and also changes the scene to the stage scene. 
+//It contains code that when swapping to the other scene gives the grid manager a range of width and height to create the board.
+
 
 public class levelSelect : MonoBehaviour
 {

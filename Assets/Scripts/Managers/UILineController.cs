@@ -1,7 +1,11 @@
 using UnityEngine;
 
+//Author: Ivan Ching
+//Developed from different tutorials
+//Purpose: This script controls the line between two different nodes. it takes a game object and a line renderer to generate a line from 2 offseted points of the node
 public class UILineController : MonoBehaviour
 {
+
     [SerializeField] private RectTransform[] points;
     private LineRenderer lr;
 
@@ -15,6 +19,8 @@ public class UILineController : MonoBehaviour
         SetUpLine(points);
     }
 
+
+    //Sets the start and end points of the line to bridge 2 different nodes.
     private void SetUpLine(RectTransform[] points)
     {
         lr.positionCount = points.Length;
@@ -35,6 +41,8 @@ public class UILineController : MonoBehaviour
         }
     }
 
+
+    //Calculates the offset of the line from the center of the node, moving it left or right depending on the where it starts and ends.
     private Vector3 GetOffsetPosition(RectTransform origin, RectTransform target)
     {
         Vector3 position = (target.position - origin.position).normalized;
