@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 //Usage: Pause menu to change scenes,freeze time, and change settings
 public class PauseMenu : MonoBehaviour
 {
-
+    [SerializeField] private AudioClip[] buttonSFX;
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject settingUI;
@@ -30,6 +30,7 @@ public class PauseMenu : MonoBehaviour
     //Unfreeze time and closes the panal
     public void Resume()
     {
+        SoundFXManager.instance.PlaySoundFXClip(buttonSFX, transform, 1f);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -38,6 +39,7 @@ public class PauseMenu : MonoBehaviour
     //Freeze time and opens the pause menu panel
     void Pause()
     {
+        SoundFXManager.instance.PlaySoundFXClip(buttonSFX, transform, 1f);
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
@@ -46,6 +48,7 @@ public class PauseMenu : MonoBehaviour
     //Opens another menu panal on top of the pause menu, and closes it.
     public void SettingsMenu()
     {
+        SoundFXManager.instance.PlaySoundFXClip(buttonSFX, transform, 1f);
         settingUI.SetActive(true);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 0f;
@@ -55,6 +58,7 @@ public class PauseMenu : MonoBehaviour
     //closes settings and opens the settings panal
     public void SettingsBack()
     {
+        SoundFXManager.instance.PlaySoundFXClip(buttonSFX, transform, 1f);
         settingUI.SetActive(false);
         pauseMenuUI.SetActive(true);
     }
@@ -62,6 +66,7 @@ public class PauseMenu : MonoBehaviour
     //changes scenes to main menu
     public void LoadMenu()
     {
+        SoundFXManager.instance.PlaySoundFXClip(buttonSFX, transform, 1f);
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
         Debug.Log("Loading Menu");
