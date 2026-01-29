@@ -44,7 +44,11 @@ public class EndScreenManager : MonoBehaviour
     /// </summary>
     public void EndGameButton()
     {
-        //SceneManager.LoadScene("Scenes/MainMenu");
-        SceneManager.LoadScene("Scenes/StageSelection"); // or whatever we call it
+        SceneManager.LoadScene("Scenes/MainMenu");
+        //SceneManager.LoadScene("Scenes/StageSelection"); // or whatever we call it
+    }
+    public void ContinueButton()
+    {
+        SceneManager.LoadScene("Scenes/StageSelection");
     }
 }

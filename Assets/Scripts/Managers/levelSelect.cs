@@ -12,8 +12,10 @@ public class levelSelect : MonoBehaviour
     public string stageID;
 
     [Header("Grid Settings")]
-    public int stageWidth;
-    public int stageHeight;
+    public int stageWidthMin;
+    public int stageWidthMax;
+    public int stageHeightMin;
+    public int stageHeightMax;
     public bool isRandomSize;
 
     [Header("Branching")]
@@ -73,8 +75,12 @@ public class levelSelect : MonoBehaviour
     {
         if (isRandomSize)
         {
-            GridManager.width = Random.Range(10, 30);
-            GridManager.height = Random.Range(10, 20);
+            GridManager.width = Random.Range(stageWidthMin, stageWidthMax);
+            GridManager.height = Random.Range(stageHeightMin, stageWidthMax);
+        } else
+        {
+            GridManager.width = 30;
+            GridManager.height = 20;
         }
         CurrentSession.ActiveStageID = stageID;
         
