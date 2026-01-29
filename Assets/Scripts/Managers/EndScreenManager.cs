@@ -30,6 +30,7 @@ public class EndScreenManager : MonoBehaviour
 
     public void SetWinningText()
     {
+        GameProgress.ClearedStages.Add(CurrentSession.ActiveStageID);
         EndScreenTitle.text = "Victory!";
     }
 
@@ -44,6 +45,10 @@ public class EndScreenManager : MonoBehaviour
     public void EndGameButton()
     {
         SceneManager.LoadScene("Scenes/MainMenu");
-        // SceneManager.LoadScene("Scenes/StageMap") // or whatever we call it
+        //SceneManager.LoadScene("Scenes/StageSelection"); // or whatever we call it
+    }
+    public void ContinueButton()
+    {
+        SceneManager.LoadScene("Scenes/StageSelection");
     }
 }

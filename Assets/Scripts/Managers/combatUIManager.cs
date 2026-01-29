@@ -47,7 +47,7 @@ public class combatUIManager : MonoBehaviour
     //damage step
     public void ExecuteCombat()
     {
-        SoundFXManager.instance.PlaySoundFXClip(damageSoundClips, transform, 1f);
+        //SoundFXManager.instance.PlaySoundFXClip(damageSoundClips, transform, 1f);
         if (targetEnemy != null)
         {
             targetEnemy.takeDamage(targetPlayer.dmg);
