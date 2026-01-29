@@ -2,37 +2,56 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+//Author: Ivan Ching
+//Developed from mulitple sources
+
 public class levelSelect : MonoBehaviour
 {
+    //Variables
     public string stageID;
     [Header("Grid Settings")]
     public int stageWidth;
     public int stageHeight;
     public bool isRandomSize;
-
     [Header("Branching")]
-    public Button[] nextSelectableNode;
     public string requiredStageID;
 
     private Button myNodes;
 
+    //When entering the scene, checks nodes to see what is available to the player
     private void Start()
     {
         myNodes = GetComponent<Button>();
         RefreshNodes();
     }
 
+    //Function to 'refresh' the nodes.
+    //Checks the availability if the stage is selectable with stage completion requirements.
+    //Colors the node according to if the stage is unlocked to be played or not
     public void RefreshNodes()
     {
         bool isUnlocked = string.IsNullOrEmpty(requiredStageID) || GameProgress.ClearedStages.Contains(requiredStageID);
         myNodes.interactable = isUnlocked;
-        GetComponent<Image>().color = isUnlocked ? Color.white : Color.gray;
+        Image nodeColor = GetComponent<Image>();
+        if (isUnlocked)
+        {
+            nodeColor.color = Color.white;
+        } else
+        {
+            nodeColor.color = Color.gray;
+        }
+         
     }
+
+    //Function to give GenerateGrid a random range of numbers to be able to generate a grid
+    //Using the inspector, specific nodes and have a set width and height,  i.e. boss stage
+    //Sets the active stage ID for tracking progress when leaving the game
+    //Loads the next scene, in this case, the grid screen
     public void selectStage()
     {
         if (isRandomSize)
         {
-            GridManager.width = Random.Range(10, 20);
+            GridManager.width = Random.Range(10, 30);
             GridManager.height = Random.Range(10, 20);
         }
         CurrentSession.ActiveStageID = stageID;

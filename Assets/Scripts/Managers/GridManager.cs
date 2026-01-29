@@ -150,11 +150,13 @@ public class GridManager : MonoBehaviour
 
 
         //set camera and change states to spawn units
-
+        //Changed camera settings
+        //Centers camera to the middle of board
         float centerX = (float)width / 2f - 0.5f;
         float centerY = (float)height / 2f - 0.5f;
         cam.transform.position = new Vector3(centerX, centerY, -10);
 
+        //change the camera's perspective
         Camera cameraComponent = cam.GetComponent<Camera>();
         if (cameraComponent.orthographic)
         {
@@ -164,6 +166,7 @@ public class GridManager : MonoBehaviour
 
             float baseZoom = Mathf.Max(heightZoom, widthZoom);
 
+            //change '+x.0f' for zoom of the camera
             cameraComponent.orthographicSize = baseZoom + 3.0f;
         }
         GameManager.Instance.ChangeState(GameState.SpawnPlayers);
