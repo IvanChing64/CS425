@@ -5,11 +5,18 @@ using UnityEngine.UI;
 
 public class healthbar : MonoBehaviour
 {
-    [SerializeField] private Slider slider;
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private Slider guardSlider;
 
     //change healthbar of both player and enemy. (percentage based)
     public void UpdateHealthBar(float currentValue, float maxValue)
     {
-        slider.value = currentValue / maxValue;
+        healthSlider.value = currentValue / maxValue;
+    }
+
+    public void UpdateGuardBar(float currentValue, float maxValue)
+    {
+        guardSlider.value = currentValue / maxValue;
+        guardSlider.gameObject.SetActive(guardSlider.value > 0);
     }
 }

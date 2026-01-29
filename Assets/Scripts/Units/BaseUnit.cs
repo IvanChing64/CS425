@@ -58,7 +58,7 @@ public class BaseUnit : MonoBehaviour
     public void UpdateHealth()
     {
         healthbar.UpdateHealthBar(health, maxHealth);
-        //UpdateGuardBar(guard, maxHealth);
+        healthbar.UpdateGuardBar(guard, maxHealth);
     }
 
     void Die()
