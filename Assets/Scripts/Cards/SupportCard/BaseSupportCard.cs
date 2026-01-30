@@ -30,19 +30,11 @@ public class BaseSupportCard : BaseCard
         switch (effect)
         {
             case SupportEffect.Heal:
-                player.takeDamage(-value); // Negative damage to heal
-                Debug.Log("Healed for " + value + ". Current Health: " + player.health);
+                player.Heal(value);
                 break;
 
             case SupportEffect.Guard:
-                /* Guard is currently not implemented
-                player.guard += value;
-                if (player.guard > player.maxHealth)
-                {
-                    player.guard = player.maxHealth; // Cap guard at maxHealth
-                }
-                Debug.Log("Guard increased by " + value + ". Current Guard: " + player.guard);
-                */
+                player.Guard(value);
                 break;
 
             default:

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 //Developer: Ivan Ching
 
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
     {
         ChangeState(GameState.GenerateGrid);
     }
-
+    
     //Game state manager
     public void ChangeState(GameState state)
     {
@@ -92,4 +93,9 @@ public enum GameState
     PlayerTurn = 3,
     EnemyTurn = 4,
     EndScreen = 5,
+}
+
+public static class GameProgress
+{
+    public static HashSet<string> ClearedStages = new HashSet<string>();
 }

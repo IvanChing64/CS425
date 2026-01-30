@@ -11,10 +11,16 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     public static GridManager Instance;
-    [SerializeField] private int width, height;
+    //[SerializeField] private int width, height;
     [SerializeField] private Tile grassTile, mountainTile;
     [SerializeField] private Transform cam;
     private Dictionary<Vector2, Tile> tiles;
+    //min 10, max 38
+    //default 18
+    public static int width = 18;
+    //min 5, max 18
+    //default 10
+    public static int height = 10;
 
     private void Awake()
     {
@@ -144,7 +150,25 @@ public class GridManager : MonoBehaviour
 
 
         //set camera and change states to spawn units
-        cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 1.7f, -10);
+        //Changed camera settings
+        //Centers camera to the middle of board
+        float centerX = (float)width / 2f - 0.5f;
+        float centerY = (float)height / 2f - 0.5f;
+        cam.transform.position = new Vector3(centerX, centerY, -10);
+
+        //change the camera's perspective
+        Camera cameraComponent = cam.GetComponent<Camera>();
+        if (cameraComponent.orthographic)
+        {
+
+            float heightZoom = (float)height / 2f;
+            float widthZoom = ((float)width / cameraComponent.aspect) / 2f;
+
+            float baseZoom = Mathf.Max(heightZoom, widthZoom);
+
+            //change '+x.0f' for zoom of the camera
+            cameraComponent.orthographicSize = baseZoom + 3.0f;
+        }
         GameManager.Instance.ChangeState(GameState.SpawnPlayers);
     }
 
