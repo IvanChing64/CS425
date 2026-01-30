@@ -10,14 +10,16 @@ public class CardManager : MonoBehaviour
     [SerializeField]private int maxHandSize = 3;
     public BasePlayer selectedPlayer;
     public BaseCard selectedCard;
+    public Vector3 cardLocation;
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Initializes instance and calls backdrop creation
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            cardLocation = transform.position;
         }
         else
         {
@@ -25,13 +27,10 @@ public class CardManager : MonoBehaviour
         }
 
         //Create Backdrop for Card Area
-        for (int i = 0; i < maxHandSize; i++)
-        {
-            Vector3 backdropPos = transform.position + new Vector3(i * 3, 0, 0);
-            Instantiate(cardAreaBackdrop, backdropPos, Quaternion.identity);
-        }
+        CreateCardAreaBackdrops(maxHandSize);
     }
 
+    //Selects a card and raises its position
     public void SelectCard(BaseCard card)
     {
         if (selectedCard != null)
@@ -43,6 +42,7 @@ public class CardManager : MonoBehaviour
         Debug.Log("Card Selected: " + card.cardName);
     }
 
+    //Deselects the currently selected card and lowers its position
     public void DeselectCard()
     {
         if (selectedCard == null) return;
@@ -51,6 +51,7 @@ public class CardManager : MonoBehaviour
         selectedCard = null;
     }
 
+    //Plays the selected card and removes it from the player's hand
     public void PlaySelectedCard()
     {
         if (selectedCard != null)
@@ -66,6 +67,7 @@ public class CardManager : MonoBehaviour
         }
     }
 
+    //Hide unselected players' hands and show selected player's hand at start of turn
     public void NextTurn()
     {
         HandManager[] handManagers = FindObjectsByType<HandManager>(FindObjectsSortMode.None);
@@ -83,6 +85,7 @@ public class CardManager : MonoBehaviour
         }
     }
 
+    //Shows hand of selected player and hides previous player's hand
     public void SetSelectedPlayer(BasePlayer player)
     {
         BasePlayer previousPlayer = selectedPlayer;
@@ -97,6 +100,16 @@ public class CardManager : MonoBehaviour
         if (previousPlayer != null && previousPlayer != selectedPlayer)
         {
             previousPlayer.GetComponent<HandManager>().ToggleHandVisibility(false);
+        }
+    }
+
+    //Creates backdrops for card area (May be irrelevant with later changes)
+    private void CreateCardAreaBackdrops(int handSize)
+    {
+        for (int i = 0; i < handSize; i++)
+        {
+            Vector3 backdropPos = cardLocation + new Vector3(i * 3, 0, 0);
+            Instantiate(cardAreaBackdrop, backdropPos, Quaternion.identity);
         }
     }
 }

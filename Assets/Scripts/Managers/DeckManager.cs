@@ -9,7 +9,7 @@ public class DeckManager : MonoBehaviour
     public List<ScriptableCard> allCards = new List<ScriptableCard>();
     private bool initialized = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //Initializes singleton instance and loads all cards from Resources
     void Awake()
     {
         if (instance == null)
@@ -28,6 +28,7 @@ public class DeckManager : MonoBehaviour
         }
     }
 
+    //Enforces single initialization
     void Start()
     {
         if (!initialized)
@@ -43,6 +44,7 @@ public class DeckManager : MonoBehaviour
         }
     }
 
+    //Returns a unit's deck based on their startingDeck list
     public void GetDeck(HandManager handManager)
     {
         BasePlayer unit = handManager.GetComponent<BasePlayer>();
@@ -65,6 +67,7 @@ public class DeckManager : MonoBehaviour
         }
     }
 
+    //Gets card by name from allCards list
     public ScriptableCard GetCardByName(string newCardName)
     {
         return allCards.Find(card => card.cardName == newCardName);

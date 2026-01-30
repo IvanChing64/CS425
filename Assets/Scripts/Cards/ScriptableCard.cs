@@ -1,7 +1,8 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 //Developer: Bailey Escritor
-//Aggregated from multiple tutorials
+//Aggregated from multiple tutorials, Mainly Sinuous Deckbuilding Card Game Tutorial
 //Holds card data to be copied to BaseCard instances
 [CreateAssetMenu(fileName ="New Card",menuName = "Scriptable Card")]
 
@@ -12,6 +13,7 @@ public class ScriptableCard : ScriptableObject
     public int value;
     public Sprite cardBorder, cardIcon;
     public SupportEffect supportEffect;
+    public HashSet<Tile> validTiles;
 }
 
 //Card types

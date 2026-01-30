@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 //Developer: Bailey Escritor
 //Aggregated from multiple tutorials
@@ -10,6 +11,7 @@ public abstract class BaseCard : MonoBehaviour
     public Type cardType;
     public int value;
     public bool isPlayed;
+    public HashSet<Tile> validTiles;
     //public float drawChance;
 
     //Play the card's effect, overridden in derived classes
@@ -33,6 +35,7 @@ public abstract class BaseCard : MonoBehaviour
         if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
         if (highlightEffect != null)
         {
+            //this.transform.position += new Vector3(0, 0.85f, 0);
             highlightEffect.SetActive(true);
             Debug.Log("Mouse Entered Card Area" + highlightEffect.activeSelf);
         }
@@ -44,8 +47,9 @@ public abstract class BaseCard : MonoBehaviour
         if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
         if (highlightEffect != null)
         {
+            //this.transform.position -= new Vector3(0, 0.85f, 0);
             highlightEffect.SetActive(false);
-            Debug.Log("Mouse Entered Card Area" + highlightEffect.activeSelf);
+            Debug.Log("Mouse Exited Card Area" + highlightEffect.activeSelf);
         }
     }
 

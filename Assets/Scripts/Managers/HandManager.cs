@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
+//using System.Numerics;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -15,10 +15,9 @@ public class HandManager : MonoBehaviour
     */
 
     public static HandManager instance;
-    public GameObject supportCardPrefab, attackCardPrefab, movementCardPrefab;
-    //public BaseCard selectedCard;
-    [HideInInspector] public List<ScriptableCard> currentDeck = new List<ScriptableCard>();//MinMaxSize: 6, MaxMaxSize: 9
-    [HideInInspector] public List<GameObject> currentHand = new List<GameObject>();//Always Size: 3
+    [SerializeField] private GameObject supportCardPrefab, attackCardPrefab, movementCardPrefab;
+    public List<ScriptableCard> currentDeck = new List<ScriptableCard>();//MinMaxSize: 6, MaxMaxSize: 9
+    public List<GameObject> currentHand = new List<GameObject>();//Always Size: 3
     [SerializeField] private int maxHandSize = 3;
     public int minDeckSize, maxDeckSize;
     private int deckIndex = 0; // pointer into currentDeck for drawing
@@ -26,6 +25,7 @@ public class HandManager : MonoBehaviour
     public bool handSelected = false;
     //public int currentHandSize;
 
+    //Initalizes instance and fills deck
     void Awake()
     {
         if (instance == null)
@@ -46,42 +46,43 @@ public class HandManager : MonoBehaviour
         //DrawHand();
     }
 
-    public void SetUnitValue(BaseUnit unit, BaseCard card)
-    {
-        // Implementation for setting unit values based on the played card
-    }
-
+    //Shows card info in UI
     void ShowInfo(BaseCard card)
     {
         // Implementation for displaying card information
     }
     
+    //Shuffle cards based on Fisher-Yates Shuffle
     void ShuffleDeck()
     {
-        for (int i = 0; i < currentDeck.Count; i++)
+        for (int i = currentDeck.Count - 1; i > 0; i--)
         {
+            int randomIndex = Random.Range(0, i + 1);
             ScriptableCard temp = currentDeck[i];
-            int randomIndex = Random.Range(i, currentDeck.Count);
             currentDeck[i] = currentDeck[randomIndex];
             currentDeck[randomIndex] = temp;
         }
         Debug.Log("Deck Shuffled");
     }
 
+    //Draw cards up to maxHandSize from currentDeck
     public void DrawHand()
     {
-        if (handDrawn)
+        //If hand already drawn or hand is full, do not draw again
+        if (handDrawn || currentHand.Count == maxHandSize)
         {
-            Debug.LogWarning("Hand already drawn for this turn.");
+            Debug.Log("Hand already drawn for this turn.");
             return;
         }
 
-        // Remove previously instantiated hand cards from scene
+        //Deselect any selected card
         if (CardManager.instance.selectedCard != null) 
         {
             CardManager.instance.DeselectCard();
         }
 
+        //Clear current hand (Subject to change based on game design)
+        /*
         for (int i = 0; i < currentHand.Count; i++)
         {
             if (currentHand[i] != null)
@@ -91,25 +92,35 @@ public class HandManager : MonoBehaviour
             }
         }
         currentHand.Clear();
+        */
 
-        if (currentDeck == null || currentDeck.Count == 0)
+        //If deck is not filled, fill deck from resources
+        if (currentDeck == null)
         {
-            Debug.LogWarning("Current deck is empty - cannot draw cards.");
-            return;
+            FillDeckFromResources();
+            Debug.Log("Current deck is empty - Filling deck from resources.");
         }
 
         // Draw up to maxHandSize cards from the deck starting at deckIndex
-        for (int i = 0; i < maxHandSize; i++)
+        int cardsToDraw = maxHandSize - currentHand.Count;
+        for (int i = 0; i < cardsToDraw; i++)
         {
+            Debug.Log("Drawing card " + (i + 1) + " of " + cardsToDraw);
             if (currentDeck.Count == 0) break;
 
-            //Some AI was used to help implement this function
-            int index = deckIndex % currentDeck.Count;
-            ScriptableCard card = currentDeck[index];
-            GameObject newCard = null;
-            Vector3 spawnPos = CardManager.instance.transform.position + new Vector3(i * 3, 0, 0);
+            // Reset deckIndex, if it exceeds deck size, to the top of the deck and reshuffle
+            if (deckIndex >= currentDeck.Count)
+            {
+                deckIndex = 0;
+                ShuffleDeck();
+            }
 
-            switch (card.type)
+            ScriptableCard drawnCard = currentDeck[deckIndex];
+            GameObject newCard = null;
+            Vector3 spawnPos = CardManager.instance.transform.position + new Vector3((currentHand.Count) * 3, 0, 0);
+
+            //Instantiate card based on its type
+            switch (drawnCard.type)
             {
                 case Type.Support:
                     newCard = Instantiate(supportCardPrefab, spawnPos, Quaternion.identity);
@@ -121,16 +132,17 @@ public class HandManager : MonoBehaviour
                     newCard = Instantiate(movementCardPrefab, spawnPos, Quaternion.identity);
                     break;
                 default:
-                    Debug.LogWarning("Unknown card type: " + card.type);
+                    Debug.LogWarning("Unknown card type: " + drawnCard.type);
                     continue;
             }
+
+            //Add new card to current hand and copy properties from scriptable card
             currentHand.Add(newCard);
-            newCard.GetComponent<BaseCard>().CopyScriptableCard(card);
-            deckIndex = (deckIndex + 1) % Mathf.Max(1, currentDeck.Count);
+            newCard.GetComponent<BaseCard>().CopyScriptableCard(drawnCard);
+            deckIndex++;
         }
 
         handDrawn = true;
-
         Debug.Log("Hand Drawn with " + currentHand.Count + " cards.");
     }
 
@@ -138,21 +150,21 @@ public class HandManager : MonoBehaviour
     public void FillDeckFromResources()
     {
         currentDeck.Clear();
-
-        //FindAnyObjectByType<DeckManager>().GetDeck(this);
         DeckManager.instance.GetDeck(this);
         Debug.Log("Deck filled from resources with " + currentDeck.Count + " cards.");
     }
 
-    // Call this to draw a fresh hand
+    // Call this to reset for next turn
     public void NextTurn()
     {
         handDrawn = false;
         this.GetComponentInParent<BasePlayer>().ResetCardValues();
-        ShuffleDeck();
+        UpdateHandPositions();
+        //ShuffleDeck();
         DrawHand();
     }
 
+    //Toggles hand visibility based on input
     public void ToggleHandVisibility(bool show)
     {
         if (currentHand.Count == 0)
@@ -177,6 +189,19 @@ public class HandManager : MonoBehaviour
             }
             handSelected = false;
             Debug.Log("Hand is now hidden.");
+        }
+    }
+
+    //Move cards to the right in hand
+    private void UpdateHandPositions()
+    {
+        for (int i = 0; i < currentHand.Count; i++)
+        {
+            if (currentHand[i] != null)
+            {
+                Vector3 targetPos = CardManager.instance.cardLocation + new Vector3(i * 3, 0, 0);
+                currentHand[i].transform.position = targetPos;
+            }
         }
     }
 }
