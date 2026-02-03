@@ -18,7 +18,7 @@ public class HandManager : MonoBehaviour
     [SerializeField] private GameObject supportCardPrefab, attackCardPrefab, movementCardPrefab;
     public List<ScriptableCard> currentDeck = new List<ScriptableCard>();//MinMaxSize: 6, MaxMaxSize: 9
     public List<GameObject> currentHand = new List<GameObject>();//Always Size: 3
-    [SerializeField] private int maxHandSize = 3;
+    public static int maxHandSize = 3;
     public int minDeckSize, maxDeckSize;
     private int deckIndex = 0; // pointer into currentDeck for drawing
     public bool handDrawn = false;
@@ -117,7 +117,7 @@ public class HandManager : MonoBehaviour
 
             ScriptableCard drawnCard = currentDeck[deckIndex];
             GameObject newCard = null;
-            Vector3 spawnPos = CardManager.instance.transform.position + new Vector3((currentHand.Count) * 3, 0, 0);
+            Vector3 spawnPos = CardManager.instance.cardLocation + new Vector3((currentHand.Count) * 3, 0, 0);
 
             //Instantiate card based on its type
             switch (drawnCard.type)

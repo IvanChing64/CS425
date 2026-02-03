@@ -26,6 +26,9 @@ public class CardManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        //Upddates card location based on grid size
+        CenterCardArea();
+
         //Create Backdrop for Card Area
         CreateCardAreaBackdrops(maxHandSize);
     }
@@ -111,5 +114,15 @@ public class CardManager : MonoBehaviour
             Vector3 backdropPos = cardLocation + new Vector3(i * 3, 0, 0);
             Instantiate(cardAreaBackdrop, backdropPos, Quaternion.identity);
         }
+    }
+
+    //Ensures cards are in the middle of the card area
+    public void CenterCardArea()
+    {
+        float centerX = (float)GridManager.width / 2f - 3.5f;
+        float centerY = (float)GridManager.height / 2f - 7.75f;
+
+
+        cardLocation = new Vector3(centerX, centerY, 0);
     }
 }
