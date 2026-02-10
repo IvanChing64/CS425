@@ -127,7 +127,13 @@ public abstract class Tile : MonoBehaviour
             }
 
             //places unit there
-            setUnit(UnitManager.Instance.SelectedPlayer);
+            //setUnit(UnitManager.Instance.SelectedPlayer);
+            BasePlayer playerPath = UnitManager.Instance.SelectedPlayer;
+            List<Tile> path = AStarManager.Instance.GeneratePath(playerPath.OccupiedTile, this);
+            if(path != null && path.Count > 0)
+            {
+                StartCoroutine(MoveUnitPath(playerPath, path));
+            }
 
             //UnitManager.Instance.SetSelectedPlayer(null);
             //GameManager.Instance.ChangeState(GameState.EnemyTurn);
@@ -161,6 +167,32 @@ public abstract class Tile : MonoBehaviour
         OccupiedUnit = unit;
         unit.OccupiedTile = this;
         unit.moveRange = 0; //Reset move range after moving
+    }
+
+    private IEnumerator MoveUnitPath(BaseUnit unit, List<Tile> path)
+    {
+        if (unit.OccupiedTile != null) unit.OccupiedTile = null;
+
+        foreach(Tile tile in path)
+        {
+            Vector3 startPos = unit.transform.position;
+            Vector3 endPos = tile.transform.position;
+            float travelTime = 0.2f;
+            float elapsedTime = 0;
+
+            while(elapsedTime < travelTime)
+            {
+                unit.transform.position = Vector3.Lerp(startPos, endPos, elapsedTime / travelTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            unit.transform.position = endPos;
+        }
+
+        OccupiedUnit = unit;
+        unit.OccupiedTile = this;
+        unit.moveRange = 0;
     }
 
     // Highlight player movement range
