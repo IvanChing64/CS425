@@ -4282,7 +4282,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1060585382}
         m_TargetAssemblyTypeName: combatUIManager, Assembly-CSharp
-        m_MethodName: ExecuteCombat
+        m_MethodName: ExecuteEndTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
