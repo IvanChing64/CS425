@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 //Developer: Bailey Escritor
 //Aggregated from multiple tutorials
@@ -9,11 +10,23 @@ public class BaseMovementCard : BaseCard
     //Sets unit's moveRange value
     public override void PlayCard()
     {
-        CardManager.instance.selectedPlayer.moveRange = value;
+        BasePlayer player = CardManager.instance.selectedPlayer;
         /* Show new movement range on grid after card is played
         //GridManager.Instance.GetTileAtPosition(CardManager.instance.selectedPlayer.OccupiedTile.Position).HighlightMovementRange();
         */
-        isPlayed = true;
-        Debug.Log("Movement Card Played with movement value: " + value);
+
+        if(player != null)
+        {
+            player.moveRange = value;
+
+            List<Tile> tilesInRange = player.GetTilesInMoveRange();
+            foreach(Tile t in tilesInRange)
+            {
+                t.ShowHighlight(true);
+            }
+            isPlayed = true;
+            Debug.Log("Movement Card Played with movement value: " + value);
+        }
+        
     }
 }

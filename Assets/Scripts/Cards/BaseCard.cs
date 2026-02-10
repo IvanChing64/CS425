@@ -62,14 +62,29 @@ public abstract class BaseCard : MonoBehaviour
             Debug.LogWarning("CardManager.instance is null.");
             return;
         }
-
-        if (CardManager.instance.selectedCard != this)
+        if(CardManager.instance.selectedCard == this)
+        {
+            if(UnitManager.Instance.SelectedPlayer != null)
+            {
+                CardManager.instance.PlaySelectedCard();
+            }
+            else
+            {
+                Debug.Log("Select a unit.");
+            }
+        }
+        else
         {
             CardManager.instance.SelectCard(this);
         }
-        else if (CardManager.instance.selectedCard == this)
-        {
-            CardManager.instance.PlaySelectedCard();
-        }
+
+        //if (CardManager.instance.selectedCard != this)
+        //{
+        //    CardManager.instance.SelectCard(this);
+        //}
+        //else if (CardManager.instance.selectedCard == this)
+        //{
+        //    CardManager.instance.PlaySelectedCard();
+        //}
     }
 }
