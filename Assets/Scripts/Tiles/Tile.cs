@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 //Developer: Ivan Ching
 //Aggregated from multiple tutorials
@@ -42,6 +43,8 @@ public abstract class Tile : MonoBehaviour
         //Checks if it is player's turn
         if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
 
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
         //If there is something on the tile selected
         if(OccupiedUnit != null)
         {
@@ -52,28 +55,6 @@ public abstract class Tile : MonoBehaviour
                 UnitManager.Instance.SetSelectedPlayer((BasePlayer)OccupiedUnit);
                 CardManager.instance.SetSelectedPlayer((BasePlayer)OccupiedUnit);
                 //code to check if selected player is already next to an enemy
-                if (IsNextToEnemy())
-                {
-                        Debug.Log("Player is next to an enemy!");
-                        var neighbors = GridManager.Instance.GetNeighborsOf(this);
-
-                        foreach (var n in neighbors)
-                        {
-                            if (n.OccupiedUnit != null && n.OccupiedUnit.Faction == Faction.Enemy)
-                            {
-                                BaseEnemy enemy = (BaseEnemy)n.OccupiedUnit;
-                                BasePlayer player = UnitManager.Instance.SelectedPlayer;
-                                combatUIManager.Instance.showCombatOption(player, enemy);
-                                break;
-                            }
-                        }
-                }
-                else
-                {
-                    // Highlight player movement range
-                    List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
-                    foreach (Tile t in tilesInRange) t.highlight.SetActive(true);
-                }
             }
             else if (UnitManager.Instance.SelectedPlayer != null) { // If not selecting a player unit then it selects a enemy
                 Debug.Log("Cannot move here. Enemy Space.");
@@ -171,7 +152,12 @@ public abstract class Tile : MonoBehaviour
 
     private IEnumerator MoveUnitPath(BaseUnit unit, List<Tile> path)
     {
-        if (unit.OccupiedTile != null) unit.OccupiedTile = null;
+        if (unit.OccupiedTile != null)
+        {
+            unit.OccupiedTile.OccupiedUnit = null;
+            unit.OccupiedTile = null;
+        }
+            
 
         foreach(Tile tile in path)
         {
@@ -193,6 +179,14 @@ public abstract class Tile : MonoBehaviour
         OccupiedUnit = unit;
         unit.OccupiedTile = this;
         unit.moveRange = 0;
+    }
+
+    public void ShowHighlight(bool state)
+    {
+        if(highlight != null)
+        {
+            highlight.SetActive(state);
+        }
     }
 
     // Highlight player movement range

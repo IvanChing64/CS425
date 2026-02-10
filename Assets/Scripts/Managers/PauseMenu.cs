@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject settingUI;
+    public GameObject blocker;
     // Update is called once per frame
     void Update()
     {
@@ -32,6 +33,7 @@ public class PauseMenu : MonoBehaviour
     {
         SoundFXManager.instance.PlaySoundFXClip(buttonSFX, transform, 1f);
         pauseMenuUI.SetActive(false);
+        blocker.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -41,6 +43,7 @@ public class PauseMenu : MonoBehaviour
     {
         SoundFXManager.instance.PlaySoundFXClip(buttonSFX, transform, 1f);
         pauseMenuUI.SetActive(true);
+        blocker.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
@@ -51,6 +54,7 @@ public class PauseMenu : MonoBehaviour
         SoundFXManager.instance.PlaySoundFXClip(buttonSFX, transform, 1f);
         settingUI.SetActive(true);
         pauseMenuUI.SetActive(false);
+        
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
