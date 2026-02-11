@@ -99,10 +99,15 @@ public class CardManager : MonoBehaviour
             selectedPlayer.GetComponent<HandManager>().NextTurn();
         }
 
-        selectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(true);
+        //selectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(true);
         if (previousPlayer != null && previousPlayer != selectedPlayer)
         {
             previousPlayer.GetComponent<HandManager>().ToggleHandVisibility(false);
+        }
+
+        if (selectedPlayer != previousPlayer)
+        {
+            selectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(true);
         }
     }
 

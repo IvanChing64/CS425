@@ -127,7 +127,7 @@ public class GridManager : MonoBehaviour
                 var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
 
                 //Shows tiles name in debug console
-                Debug.Log($"Creating {spawnedTile.name} offset={isOffset}");
+                //Debug.Log($"Creating {spawnedTile.name} offset={isOffset}");
                 spawnedTile.Init(x,y);
 
                 tiles[currentPos] = spawnedTile;

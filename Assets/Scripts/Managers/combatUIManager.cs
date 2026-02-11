@@ -74,6 +74,9 @@ public class combatUIManager : MonoBehaviour
     {
         GameManager.Instance.ChangeState(GameState.EnemyTurn);
         hideEndTurnOption();
+        hideCombatOption();
+        CardManager.instance.DeselectCard();
+        CardManager.instance.selectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false));
     }
 
 }

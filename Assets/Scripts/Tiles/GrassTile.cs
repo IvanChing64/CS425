@@ -14,7 +14,7 @@ public class GrassTile : Tile
             _renderer.sprite = grassSprites[Random.Range(0, grassSprites.Length)];
         }
         var isOffset = (x + y) % 2 == 1;
-        Debug.Log($"{name} Init() called. Renderer is {_renderer}");
+        //Debug.Log($"{name} Init() called. Renderer is {_renderer}");
         _renderer.color = isOffset ? offsetColor : baseColor;
     }
 }

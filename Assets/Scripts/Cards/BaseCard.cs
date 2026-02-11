@@ -37,7 +37,6 @@ public abstract class BaseCard : MonoBehaviour
         {
             //this.transform.position += new Vector3(0, 0.85f, 0);
             highlightEffect.SetActive(true);
-            Debug.Log("Mouse Entered Card Area" + highlightEffect.activeSelf);
         }
     }
 
@@ -49,7 +48,6 @@ public abstract class BaseCard : MonoBehaviour
         {
             //this.transform.position -= new Vector3(0, 0.85f, 0);
             highlightEffect.SetActive(false);
-            Debug.Log("Mouse Exited Card Area" + highlightEffect.activeSelf);
         }
     }
 

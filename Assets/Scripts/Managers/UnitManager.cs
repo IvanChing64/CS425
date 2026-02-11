@@ -84,6 +84,11 @@ public class UnitManager : MonoBehaviour
     }
     public void SetSelectedPlayer(BasePlayer player)
     {
+        if (SelectedPlayer != null && SelectedPlayer != player)
+        {
+            // Deselect current player and hide move range highlights
+            SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false));
+        }
         SelectedPlayer = player;
     }
 
