@@ -15,11 +15,11 @@ PrefabInstance:
     - target: {fileID: 2676983448219518677, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -7846018682984386076, guid: ce671d0d82e242b4bb3da3acf99e763f, type: 3}
     - target: {fileID: 3780343836921701420, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: cardData
       value: 
-      objectReference: {fileID: 11400000, guid: 04892931b60d68b44b7e416e38a7d8e3, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 4004979014424989177, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -111,5 +111,4 @@ MonoBehaviour:
   cardType: 2
   value: 0
   isPlayed: 0
-  drawChance: 0
   effect: 1

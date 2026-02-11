@@ -9,6 +9,7 @@ public class CardDisplay : MonoBehaviour
 
     public ScriptableCard cardData;
     public Image cardBorder, cardIcon;
+    public Color cardBorderColor;
     public TMP_Text cardName, cardDescription, cardValue;
     public int overrideValue;
 
@@ -21,11 +22,13 @@ public class CardDisplay : MonoBehaviour
     // Updates the card display with the current card data
     public void updateCardDisplay()
     {
+        //cardData = GetComponent<ScriptableCard>();
         cardName.text = cardData.cardName;
         cardDescription.text = cardData.cardDescription;
         cardValue.text = cardData.value.ToString();
 
-        cardBorder.sprite = cardData.cardBorder;
+        //cardBorder.sprite = cardData.cardBorder;
+        cardBorder.color = cardData.cardBorderColor;
         cardIcon.sprite = cardData.cardIcon;
     }    
 

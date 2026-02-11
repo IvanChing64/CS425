@@ -125,7 +125,8 @@ public class CardManager : MonoBehaviour
     public void CenterCardArea()
     {
         float centerX = (float)GridManager.width / 2f - 3.5f;
-        float centerY = (float)GridManager.height / 2f - 7.75f;
+        float centerY = (float)GridManager.height / 2f - 5.25f - (0.25f * GridManager.height);
+        //float i = 7.75f;
 
 
         cardLocation = new Vector3(centerX, centerY, 0);

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92d42e8cdeee7a74ea6ffe4eff42e70c, type: 3}
-  m_Name: Slash
+  m_Name: Paralyze
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableCard
-  cardName: Slash
-  cardDescription: Deal Damage to a nearby enemy
-  type: 0
-  value: 40
-  cardBorder: {fileID: 594198319219861320, guid: 7fed6d5290d2b4949851240608eab0d7, type: 3}
-  cardIcon: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
-  cardBorderColor: {r: 1, g: 0, b: 0, a: 1}
+  cardName: Paralyze
+  cardDescription: Stun a single enemy
+  type: 3
+  value: 2
+  cardBorder: {fileID: 3415117509552882256, guid: 61e5eaad35a0d724da8e0ef45bfe8a09, type: 3}
+  cardIcon: {fileID: 0}
+  cardBorderColor: {r: 0.45882353, g: 0, b: 1, a: 1}
   supportEffect: -1
-  controlEffect: -1
+  controlEffect: 0

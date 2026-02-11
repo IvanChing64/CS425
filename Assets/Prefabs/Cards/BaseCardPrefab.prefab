@@ -190,7 +190,7 @@ MonoBehaviour:
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
   m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
+  m_enableExtraPadding: 1
   checkPaddingRequired: 0
   m_isRichText: 1
   m_EmojiFallbackSupport: 1
@@ -330,7 +330,7 @@ MonoBehaviour:
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1048
+  m_DynamicPixelsPerUnit: 2096
   m_PresetInfoIsWorld: 1
 --- !u!114 &4684944071172896731
 MonoBehaviour:
@@ -459,7 +459,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 1.15}
-  m_SizeDelta: {x: 1.75, y: 0.5}
+  m_SizeDelta: {x: 3.25, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &456693295830885315
 CanvasRenderer:
@@ -516,8 +516,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.6
-  m_fontSizeBase: 0.6
+  m_fontSize: 0.57
+  m_fontSizeBase: 0.57
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -539,7 +539,7 @@ MonoBehaviour:
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
   m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
+  m_enableExtraPadding: 1
   checkPaddingRequired: 0
   m_isRichText: 1
   m_EmojiFallbackSupport: 1
@@ -750,7 +750,7 @@ MonoBehaviour:
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
   m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
+  m_enableExtraPadding: 1
   checkPaddingRequired: 0
   m_isRichText: 1
   m_EmojiFallbackSupport: 1
@@ -836,7 +836,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -7846018682984386076, guid: ce671d0d82e242b4bb3da3acf99e763f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1048,9 +1048,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0794ba106cd20b549b24ca1f437dd024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardDisplay
-  cardData: {fileID: 11400000, guid: 16c651208c246764db805c0ad659e53a, type: 2}
+  cardData: {fileID: 0}
   cardBorder: {fileID: 2676983448219518677}
   cardIcon: {fileID: 4004979014424989177}
+  cardBorderColor: {r: 1, g: 1, b: 1, a: 0}
   cardName: {fileID: 4155251481457532157}
   cardDescription: {fileID: 7917724523151183277}
   cardValue: {fileID: 432612903588471785}

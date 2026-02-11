@@ -15,12 +15,12 @@ public class HandManager : MonoBehaviour
     */
 
     public static HandManager instance;
-    [SerializeField] private GameObject supportCardPrefab, attackCardPrefab, movementCardPrefab;
+    [SerializeField] private GameObject attackCardPrefab, movementCardPrefab, supportCardPrefab, controlCardPrefab;
     public List<ScriptableCard> currentDeck = new List<ScriptableCard>();//MinMaxSize: 6, MaxMaxSize: 9
     public List<GameObject> currentHand = new List<GameObject>();//Always Size: 3
     public static int maxHandSize = 3;
-    public int minDeckSize, maxDeckSize;
-    private int deckIndex = 0; // pointer into currentDeck for drawing
+    public static int drawNum = 3; //At least 3
+    [SerializeField] private int deckIndex = 0; // pointer into currentDeck for drawing
     public bool handDrawn = false;
     public bool handSelected = false;
     //public int currentHandSize;
@@ -42,7 +42,7 @@ public class HandManager : MonoBehaviour
             FillDeckFromResources();
         }
 
-        //ShuffleDeck();
+        ShuffleDeck();
         //DrawHand();
     }
 
@@ -131,6 +131,11 @@ public class HandManager : MonoBehaviour
                 case Type.Movement:
                     newCard = Instantiate(movementCardPrefab, spawnPos, Quaternion.identity);
                     break;
+
+                case Type.Control:
+                    newCard = Instantiate(controlCardPrefab, spawnPos, Quaternion.identity);
+                    break;
+
                 default:
                     Debug.LogWarning("Unknown card type: " + drawnCard.type);
                     continue;
@@ -138,6 +143,7 @@ public class HandManager : MonoBehaviour
 
             //Add new card to current hand and copy properties from scriptable card
             currentHand.Add(newCard);
+            newCard.GetComponent<CardDisplay>().cardData = drawnCard;
             newCard.GetComponent<BaseCard>().CopyScriptableCard(drawnCard);
             deckIndex++;
         }

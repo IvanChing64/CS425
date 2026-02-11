@@ -18,4 +18,6 @@ MonoBehaviour:
   value: 3
   cardBorder: {fileID: 8645917116579943695, guid: c99fd13670cbb414fb000abd68155dd1, type: 3}
   cardIcon: {fileID: -1950848172343218298, guid: 4a21f531e8fe56f48ae9ab6df04e55aa, type: 3}
+  cardBorderColor: {r: 0, g: 0.06666667, b: 1, a: 1}
   supportEffect: -1
+  controlEffect: -1
