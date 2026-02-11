@@ -1,7 +1,7 @@
 using UnityEngine;
 
 //Developer: Bailey Escritor
-//Aggregated from multiple tutorials
+//Derived class for support cards
 public class BaseSupportCard : BaseCard
 {
     public SupportEffect effect;

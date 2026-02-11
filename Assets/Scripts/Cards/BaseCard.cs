@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 
 //Developer: Bailey Escritor
-//Aggregated from multiple tutorials
+//Aggregated from multiple tutorials, Mainly Sinuous Deckbuilding Card Game Tutorials
+//Base class for all card types
 public abstract class BaseCard : MonoBehaviour
 {
     //public BaseCard instance;

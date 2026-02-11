@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 //Developer: Bailey Escritor
-//Aggregated from multiple tutorials
+//Derived class for movement cards
 public class BaseMovementCard : BaseCard
 {
     //public int movement;

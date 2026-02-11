@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 //Developer: Bailey Escritor
-//Aggregated from multiple tutorials
+//Derived class for attack cards
 public class BaseAttackCard : BaseCard
 {
     //public int attack;
