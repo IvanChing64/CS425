@@ -259,6 +259,7 @@ MonoBehaviour:
   guard: 0
   dmg: 0
   moveRange: 0
+  attackRange: 1
   healthbar: {fileID: 6525803158315793462}
   hurtSFX:
   - {fileID: 8300000, guid: 8aac66cdf036f89479bdb992d5a73ffd, type: 3}
@@ -293,6 +294,8 @@ MonoBehaviour:
   currentDeck: []
   currentHand: []
   deckIndex: 0
+  minDeckSize: 0
+  maxDeckSize: 0
   handDrawn: 0
   handSelected: 0
 --- !u!1 &5483545698060636878

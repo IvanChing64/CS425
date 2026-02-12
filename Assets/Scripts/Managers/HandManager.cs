@@ -82,7 +82,7 @@ public class HandManager : MonoBehaviour
         }
 
         //Clear current hand (Subject to change based on game design)
-        /*
+        
         for (int i = 0; i < currentHand.Count; i++)
         {
             if (currentHand[i] != null)
@@ -92,7 +92,7 @@ public class HandManager : MonoBehaviour
             }
         }
         currentHand.Clear();
-        */
+        
 
         //If deck is not filled, fill deck from resources
         if (currentDeck == null)
