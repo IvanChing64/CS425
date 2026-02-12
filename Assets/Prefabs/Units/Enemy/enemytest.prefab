@@ -202,6 +202,7 @@ MonoBehaviour:
   guard: 0
   dmg: 40
   moveRange: 4
+  attackRange: 1
   healthbar: {fileID: 1811933326703943321}
   hurtSFX:
   - {fileID: 8300000, guid: 8aac66cdf036f89479bdb992d5a73ffd, type: 3}

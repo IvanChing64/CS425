@@ -11,6 +11,7 @@ public class BaseUnit : MonoBehaviour
     public float guard;
     public float dmg;
     public int moveRange;
+    public int attackRange;
     [SerializeField] healthbar healthbar;
     [SerializeField] private AudioClip[] hurtSFX;
 

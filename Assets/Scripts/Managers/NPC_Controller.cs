@@ -47,7 +47,7 @@ public class NPC_Controller: MonoBehaviour
         {
             
             
-            Debug.Log("NPC stopped: reached tilesPerMove limit.");
+            //Debug.Log("NPC stopped: reached tilesPerMove limit.");
             FinishedMoves();
             return;
             
@@ -68,7 +68,7 @@ public class NPC_Controller: MonoBehaviour
 
         if (Vector2.Distance(transform.position, targetPos) < 0.1f)
         {
-            Debug.Log("NPC reached tile: " + currentTargetTile.name);
+            //Debug.Log("NPC reached tile: " + currentTargetTile.name);
             pathIndex++;
             tilesMovedThisTurn++;
         }
@@ -122,34 +122,109 @@ public class NPC_Controller: MonoBehaviour
         Debug.Log("End tile: " + endTile?.name + " Walkable: " + (endTile?.Walkable));
     }
 
+    private List<Tile> GetTilesInAttackRange(Tile startTile,int range)
+    {
+        List<Tile> inRangeTiles = new List<Tile>();
+        HashSet<Tile> visited = new HashSet<Tile>();
+        Queue<(Tile tile, int distance)> queue = new Queue<(Tile, int)>();
+
+        queue.Enqueue((startTile, 0));
+        visited.Add(startTile);
+
+        while(queue.Count > 0)
+        {
+            var current = queue.Dequeue();
+            if(current.distance > 0)
+            {
+                inRangeTiles.Add(current.tile);
+            }
+
+            if(current.distance < range)
+            {
+                foreach(Tile neighbor in GridManager.Instance.GetNeighborsOf(current.tile))
+                {
+                    if (!visited.Contains(neighbor))
+                    {
+                        visited.Add(neighbor);
+                        queue.Enqueue((neighbor, current.distance + 1));
+                    }
+                }
+            }
+        }
+        return inRangeTiles;
+    }
+
+    private void CheckAndAttack()
+    {
+        List<Tile> attackableTiles = GetTilesInAttackRange(npcUnit.OccupiedTile, npcUnit.attackRange);
+        Debug.Log($"NPC checking attack. Range: {npcUnit.attackRange}. Tiles found in range: {attackableTiles.Count}");
+        BaseUnit target = null;
+        
+
+        foreach (Tile tile in attackableTiles)
+        {
+            if (tile.OccupiedUnit != null && tile.OccupiedUnit.Faction == Faction.Player)
+            {
+                Debug.Log($"Found {tile.OccupiedUnit.name} on tile {tile.name}. Faction: {tile.OccupiedUnit.Faction}");
+                target = tile.OccupiedUnit;
+                Debug.Log($"{target}");
+                break;
+            } 
+        }
+
+        if(target != null)
+        {
+            Debug.Log($"{npcUnit.name} attacks {target.name}");
+            target.takeDamage(npcUnit.dmg);
+        } else {
+             Debug.Log("nothing happened!");
+        }
+    }
+
+    private void ExecuteAttacks()
+    {
+        CheckAndAttack();
+        HasFinishedTurn = true;
+        StartCoroutine(EndTurnDelay());
+    }
 
     public void BeginTurn()
     {
         tilesMovedThisTurn = 0;
         HasFinishedTurn = false;
         isMoving = false;
-        Tile startTile = npcUnit.OccupiedTile; 
-        Update();
+        Tile startTile = npcUnit.OccupiedTile;
+        SetTarget(startTile);
+        //Update();
         
     }
+
 
     public bool HasFinishedTurn { get; private set; }
 
     private void FinishedMoves()
     {
         isMoving = false;
-        HasFinishedTurn = true;
+        
         if (path != null && path.Count > 0)
         {
             Tile finalTile = path[path.Count -1];
+            npcUnit.OccupiedTile = finalTile;
             finalTile.setUnit(npcUnit);
             Debug.Log($"{gameObject.name} committed to tile: {finalTile.name}.");
+            
             //future implementation of enemy combat here i think.
         
         }
         Debug.Log($"{gameObject.name} finished moving.");
-        GameManager.Instance.ChangeState(GameState.PlayerTurn);
+        ExecuteAttacks();
+        HasFinishedTurn = true;
+        StartCoroutine(EndTurnDelay());
     }
 
-
+    private IEnumerator EndTurnDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.ChangeState(GameState.PlayerTurn);
+    }
 }
