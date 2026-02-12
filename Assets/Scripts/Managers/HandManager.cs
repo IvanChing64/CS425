@@ -18,8 +18,7 @@ public class HandManager : MonoBehaviour
     [SerializeField] private GameObject attackCardPrefab, movementCardPrefab, supportCardPrefab, controlCardPrefab;
     public List<ScriptableCard> currentDeck = new List<ScriptableCard>();//MinMaxSize: 6, MaxMaxSize: 9
     public List<GameObject> currentHand = new List<GameObject>();//Always Size: 3
-    public static int maxHandSize = 3;
-    public static int drawNum = 3; //At least 3
+    public int drawNum = 3; //At least 3
     [SerializeField] private int deckIndex = 0; // pointer into currentDeck for drawing
     public bool handDrawn = false;
     public bool handSelected = false;
@@ -69,7 +68,7 @@ public class HandManager : MonoBehaviour
     public void DrawHand()
     {
         //If hand already drawn or hand is full, do not draw again
-        if (handDrawn || currentHand.Count == maxHandSize)
+        if (handDrawn)
         {
             Debug.Log("Hand already drawn for this turn.");
             return;
@@ -101,8 +100,8 @@ public class HandManager : MonoBehaviour
             Debug.Log("Current deck is empty - Filling deck from resources.");
         }
 
-        // Draw up to maxHandSize cards from the deck starting at deckIndex
-        int cardsToDraw = maxHandSize - currentHand.Count;
+        // Draw up to DrawNum cards from the deck starting at deckIndex
+        int cardsToDraw = drawNum - currentHand.Count;
         for (int i = 0; i < cardsToDraw; i++)
         {
             Debug.Log("Drawing card " + (i + 1) + " of " + cardsToDraw);
