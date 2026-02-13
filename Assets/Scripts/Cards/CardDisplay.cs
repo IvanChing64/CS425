@@ -8,8 +8,8 @@ public class CardDisplay : MonoBehaviour
 {
 
     public ScriptableCard cardData;
-    public Image cardBorder, cardIcon;
-    public Color cardBorderColor;
+    public Image cardBorder;
+    public Image cardIcon, cardCorner;
     public TMP_Text cardName, cardDescription, cardValue;
     public int overrideValue;
 
@@ -30,6 +30,7 @@ public class CardDisplay : MonoBehaviour
         //cardBorder.sprite = cardData.cardBorder;
         cardBorder.color = cardData.cardBorderColor;
         cardIcon.sprite = cardData.cardIcon;
+        cardCorner.sprite = cardData.cardCorner;
     }    
 
 

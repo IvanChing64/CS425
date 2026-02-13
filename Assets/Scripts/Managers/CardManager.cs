@@ -7,7 +7,6 @@ public class CardManager : MonoBehaviour
 {
     public static CardManager instance;
     public GameObject cardAreaBackdrop;
-    [SerializeField]private int maxHandSize = 3;
     public BasePlayer selectedPlayer;
     public BaseCard selectedCard;
     public Vector3 cardLocation;
@@ -30,7 +29,7 @@ public class CardManager : MonoBehaviour
         CenterCardArea();
 
         //Create Backdrop for Card Area
-        CreateCardAreaBackdrops(maxHandSize);
+        //CreateCardAreaBackdrops(maxHandSize);
     }
 
     //Selects a card and raises its position
@@ -59,8 +58,10 @@ public class CardManager : MonoBehaviour
     {
         if (selectedCard != null)
         {
+            HandManager selectedHand = selectedPlayer.GetComponent<HandManager>();
             selectedCard.PlayCard();
-            selectedPlayer.GetComponent<HandManager>().currentHand.Remove(selectedCard.gameObject);
+            //selectedHand.handCardIDs.Remove(selectedHand.handCardIDs[selectedHand.currentHand.IndexOf(selectedCard)]);
+            selectedHand.currentHand.Remove(selectedCard);
             Destroy(selectedCard.gameObject);
             DeselectCard();
         }
@@ -86,7 +87,10 @@ public class CardManager : MonoBehaviour
                 handManager.ToggleHandVisibility(false);
             }
         }
+
+        //ToggleCardArea(true);
     }
+    
 
     //Shows hand of selected player and hides previous player's hand
     public void SetSelectedPlayer(BasePlayer player)
@@ -130,5 +134,21 @@ public class CardManager : MonoBehaviour
 
 
         cardLocation = new Vector3(centerX, centerY, 0);
+    }
+
+    //Toggles card area visibility
+    public void ToggleCardArea(bool show)
+    {
+        cardLocation = transform.position;
+        if (show)
+        {
+            transform.position = cardLocation + new Vector3(0, 100, 0);
+            Debug.Log("Card area shown.");
+        }
+        else
+        {
+            transform.position = cardLocation + new Vector3(0, -100, 0);
+            Debug.Log("Card area hidden.");
+        }
     }
 }

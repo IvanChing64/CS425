@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
+
 //using System.Numerics;
 using UnityEngine;
 using UnityEngine.XR;
@@ -17,7 +19,9 @@ public class HandManager : MonoBehaviour
     public static HandManager instance;
     [SerializeField] private GameObject attackCardPrefab, movementCardPrefab, supportCardPrefab, controlCardPrefab;
     public List<ScriptableCard> currentDeck = new List<ScriptableCard>();//MinMaxSize: 6, MaxMaxSize: 9
-    public List<GameObject> currentHand = new List<GameObject>();//Always Size: 3
+    public List<BaseCard> currentHand = new List<BaseCard>();//Always Size: 3
+    //[SerializeField] public List<int> deckCardIDs = new List<int>();
+    //[SerializeField] public List<int> handCardIDs = new List<int>();
     public int drawNum = 3; //At least 3
     [SerializeField] private int deckIndex = 0; // pointer into currentDeck for drawing
     public bool handDrawn = false;
@@ -60,6 +64,12 @@ public class HandManager : MonoBehaviour
             ScriptableCard temp = currentDeck[i];
             currentDeck[i] = currentDeck[randomIndex];
             currentDeck[randomIndex] = temp;
+
+            /*
+            int tempID = deckCardIDs[i];
+            deckCardIDs[i] = deckCardIDs[randomIndex];
+            deckCardIDs[randomIndex] = tempID;
+            */
         }
         Debug.Log("Deck Shuffled");
     }
@@ -118,6 +128,31 @@ public class HandManager : MonoBehaviour
             GameObject newCard = null;
             Vector3 spawnPos = CardManager.instance.cardLocation + new Vector3((currentHand.Count) * 3, 0, 0);
 
+            //Check if drawn card is already in hand, if so, skip and draw next card
+            /*
+            bool notInHand = false;
+            while (!notInHand)
+            {
+                notInHand = true;
+                for (int j = 0; j < currentHand.Count; j++)
+                {
+                    if (handCardIDs.Count > j && handCardIDs[j] == deckCardIDs[deckIndex])
+                    {
+                        Debug.Log("Card already in hand: " + drawnCard.cardName);
+                        deckIndex++;
+                        if (deckIndex >= currentDeck.Count)
+                        {
+                            deckIndex = 0;
+                            ShuffleDeck();
+                        }
+                        drawnCard = currentDeck[deckIndex];
+                        notInHand = false;
+                        break;
+                    }
+                }
+            }
+            */
+
             //Instantiate card based on its type
             switch (drawnCard.type)
             {
@@ -141,7 +176,8 @@ public class HandManager : MonoBehaviour
             }
 
             //Add new card to current hand and copy properties from scriptable card
-            currentHand.Add(newCard);
+            currentHand.Add(newCard.GetComponent<BaseCard>());
+            //handCardIDs.Add(deckCardIDs[deckIndex]);
             newCard.GetComponent<CardDisplay>().cardData = drawnCard;
             newCard.GetComponent<BaseCard>().CopyScriptableCard(drawnCard);
             deckIndex++;
@@ -156,6 +192,14 @@ public class HandManager : MonoBehaviour
     {
         currentDeck.Clear();
         DeckManager.instance.GetDeck(this);
+        /*
+        int index = 0;
+        foreach (ScriptableCard card in currentDeck)
+        {
+            deckCardIDs.Add(index);
+            index++;
+        }
+        */
         Debug.Log("Deck filled from resources with " + currentDeck.Count + " cards.");
     }
 
@@ -180,17 +224,17 @@ public class HandManager : MonoBehaviour
 
         if (show)
         {
-            foreach (GameObject card in currentHand)
+            foreach (BaseCard card in currentHand)
             {
-                card.SetActive(true);
+                card.GameObject().SetActive(true);
             }
             handSelected = true;
             Debug.Log("Hand is now shown.");
         } else
         {
-            foreach (GameObject card in currentHand)
+            foreach (BaseCard card in currentHand)
             {
-                card.SetActive(false);
+                card.GameObject().SetActive(false);
             }
             handSelected = false;
             Debug.Log("Hand is now hidden.");

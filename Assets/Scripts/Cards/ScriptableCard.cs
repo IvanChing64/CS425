@@ -11,7 +11,7 @@ public class ScriptableCard : ScriptableObject
     public string cardName, cardDescription;
     public Type type;
     public int value;
-    public Sprite cardBorder, cardIcon;
+    public Sprite cardIcon, cardCorner;
     public Color cardBorderColor;
     public SupportEffect supportEffect;
     public ControlEffect controlEffect;

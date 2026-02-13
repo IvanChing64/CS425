@@ -273,7 +273,6 @@ MonoBehaviour:
   - March
   - Slash
   - Guard
-  - Paralyze
   canAttack: 0
 --- !u!114 &7232603518593366301
 MonoBehaviour:
