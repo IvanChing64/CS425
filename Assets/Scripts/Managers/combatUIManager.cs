@@ -76,7 +76,10 @@ public class combatUIManager : MonoBehaviour
         hideCombatOption();
         
         CardManager.instance.DeselectCard();
-        CardManager.instance.selectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false));
+        if (CardManager.instance.selectedPlayer != null)
+        {
+            CardManager.instance.selectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false));
+        }
         GameManager.Instance.ChangeState(GameState.EnemyTurn);
     }
 

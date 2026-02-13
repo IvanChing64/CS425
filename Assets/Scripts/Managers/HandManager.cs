@@ -96,7 +96,7 @@ public class HandManager : MonoBehaviour
         {
             if (currentHand[i] != null)
             {
-                Destroy(currentHand[i]);
+                Destroy(currentHand[i].gameObject);
                 Debug.Log("Destroyed card: " + currentHand[i].name);
             }
         }

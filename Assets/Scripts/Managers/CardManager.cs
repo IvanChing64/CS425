@@ -60,8 +60,8 @@ public class CardManager : MonoBehaviour
         {
             HandManager selectedHand = selectedPlayer.GetComponent<HandManager>();
             selectedCard.PlayCard();
-            //selectedHand.handCardIDs.Remove(selectedHand.handCardIDs[selectedHand.currentHand.IndexOf(selectedCard)]);
-            selectedHand.currentHand.Remove(selectedCard);
+            //selectedPlayer.GetComponent<HandManager>().handCardIDs.Remove(selectedHand.handCardIDs[selectedHand.currentHand.IndexOf(selectedCard)]);
+            selectedPlayer.GetComponent<HandManager>().currentHand.Remove(selectedCard);
             Destroy(selectedCard.gameObject);
             DeselectCard();
         }
