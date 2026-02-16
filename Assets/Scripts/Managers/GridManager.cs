@@ -154,7 +154,11 @@ public class GridManager : MonoBehaviour
         //Centers camera to the middle of board
         float centerX = (float)width / 2f - 0.5f;
         float centerY = (float)height / 2f - 0.5f;
-        cam.transform.position = new Vector3(centerX, centerY, -10);
+        Vector3 targetCenter = new Vector3(centerX, centerY, -10);
+
+        cam.transform.position = targetCenter;
+
+        
 
         //change the camera's perspective
         Camera cameraComponent = cam.GetComponent<Camera>();
@@ -167,8 +171,16 @@ public class GridManager : MonoBehaviour
             float baseZoom = Mathf.Max(heightZoom, widthZoom);
 
             //change '+x.0f' for zoom of the camera
-            cameraComponent.orthographicSize = baseZoom + 3.0f;
+            float finalZoom = baseZoom + 3.0f;
+            cameraComponent.orthographicSize = finalZoom;
+
+            if (InputManager.Instance != null)
+            {
+               InputManager.Instance.InitializeCamera(targetCenter, finalZoom);
+            }
         }
+
+
         GameManager.Instance.ChangeState(GameState.SpawnPlayers);
     }
 
