@@ -1852,7 +1852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853bcfd786f29a84db2904792acedc99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  gameState: 0
+  gameState: -1
   turnNumber: 0
 --- !u!1 &621405769
 GameObject:
@@ -3269,7 +3269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardManager
   cardAreaBackdrop: {fileID: 3507846074317225816, guid: 0336dfe59d3c1f94bb233d668c935266, type: 3}
-  maxHandSize: 3
   selectedPlayer: {fileID: 0}
   selectedCard: {fileID: 0}
   cardLocation: {x: 0, y: 0, z: 0}

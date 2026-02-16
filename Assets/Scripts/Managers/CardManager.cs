@@ -97,6 +97,13 @@ public class CardManager : MonoBehaviour
     {
         BasePlayer previousPlayer = selectedPlayer;
         selectedPlayer = player;
+
+        if (selectedPlayer == null)
+        {
+            Debug.Log("No player selected.");
+            return;
+        }
+
         if (selectedPlayer.GetComponent<HandManager>().currentDeck.Count == 0) 
         {
             selectedPlayer.GetComponent<HandManager>().FillDeckFromResources();
