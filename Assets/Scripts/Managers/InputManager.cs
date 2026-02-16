@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class InputManager : MonoBehaviour
 {
@@ -74,6 +75,8 @@ public class InputManager : MonoBehaviour
 
             ClearMovementHighlights();
 
+            CardManager.instance.DeselectCard();
+            UnitManager.Instance.SelectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(false);
             UnitManager.Instance.SetSelectedPlayer(null);
 
             if(CardManager.instance != null){

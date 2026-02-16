@@ -90,6 +90,13 @@ public class UnitManager : MonoBehaviour
             SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false));
         }
         SelectedPlayer = player;
+
+        if (SelectedPlayer != null)
+        {
+            Debug.Log("Selected Player: " + SelectedPlayer.name);
+            // Show move range highlights for the newly selected player
+            SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(true));
+        }
     }
 
     //New.
