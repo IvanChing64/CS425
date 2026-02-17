@@ -10,6 +10,12 @@ using UnityEngine.Serialization;
 
 public class UnitManager : MonoBehaviour
 {
+    //Lists to track number of Players and Enemies on field.
+
+    public List<BasePlayer> PlayerUnits = new List<BasePlayer>();
+    public List<BaseEnemy> EnemyUnits = new List<BaseEnemy>();
+
+
     public static UnitManager Instance;
     private List<ScriptableUnit> units;
     //Adding reference to player tile.
@@ -37,6 +43,7 @@ public class UnitManager : MonoBehaviour
         {
             var randomPrefab = GetRandomUnit<BasePlayer>(Faction.Player);
             var spawnedPlayer = Instantiate(randomPrefab);
+            PlayerUnits.Add(spawnedPlayer);
             var randomSpawnTile = GridManager.Instance.GetPlayerSpawnTile();
 
             randomSpawnTile.setUnit(spawnedPlayer);
@@ -57,6 +64,7 @@ public class UnitManager : MonoBehaviour
         {
             var randomPrefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
             var spawnedEnemy = Instantiate(randomPrefab);
+            EnemyUnits.Add(spawnedEnemy);
             var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
 
             randomSpawnTile.setUnit(spawnedEnemy);
