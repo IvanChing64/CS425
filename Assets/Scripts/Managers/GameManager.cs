@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameState == state)
         {
-            Debug.LogWarning($"Attempted to change to the same game state: {state} - {gameState}");
+            Debug.Log($"Attempted to change to the same game state: {state} - {gameState}");
             return;
         }
         // Set internal game state

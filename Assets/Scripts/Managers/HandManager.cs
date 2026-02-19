@@ -20,8 +20,8 @@ public class HandManager : MonoBehaviour
     [SerializeField] private GameObject attackCardPrefab, movementCardPrefab, supportCardPrefab, controlCardPrefab;
     public List<ScriptableCard> currentDeck = new List<ScriptableCard>();//MinMaxSize: 6, MaxMaxSize: 9
     public List<BaseCard> currentHand = new List<BaseCard>();//Always Size: 3
-    //[SerializeField] public List<int> deckCardIDs = new List<int>();
-    //[SerializeField] public List<int> handCardIDs = new List<int>();
+    // [SerializeField] public List<int> deckCardIDs = new List<int>();
+    // [SerializeField] public List<int> handCardIDs = new List<int>();
     public int drawNum = 3; //At least 3
     [SerializeField] private int deckIndex = 0; // pointer into currentDeck for drawing
     public bool handDrawn = false;
@@ -65,11 +65,10 @@ public class HandManager : MonoBehaviour
             currentDeck[i] = currentDeck[randomIndex];
             currentDeck[randomIndex] = temp;
 
-            /*
-            int tempID = deckCardIDs[i];
-            deckCardIDs[i] = deckCardIDs[randomIndex];
-            deckCardIDs[randomIndex] = tempID;
-            */
+            // int tempID = deckCardIDs[i];
+            // deckCardIDs[i] = deckCardIDs[randomIndex];
+            // deckCardIDs[randomIndex] = tempID;
+            
         }
         Debug.Log("Deck Shuffled");
     }
@@ -111,7 +110,14 @@ public class HandManager : MonoBehaviour
         }
 
         // Draw up to DrawNum cards from the deck starting at deckIndex
-        int cardsToDraw = drawNum - currentHand.Count;
+        int cardsToDraw = drawNum;
+
+        if (currentHand.Count == currentDeck.Count)
+        {
+            Debug.Log("Hand is full, cannot draw more cards.");
+            return;
+        }
+
         for (int i = 0; i < cardsToDraw; i++)
         {
             Debug.Log("Drawing card " + (i + 1) + " of " + cardsToDraw);
@@ -126,7 +132,7 @@ public class HandManager : MonoBehaviour
 
             ScriptableCard drawnCard = currentDeck[deckIndex];
             GameObject newCard = null;
-            Vector3 spawnPos = CardManager.instance.cardLocation + new Vector3((currentHand.Count) * 3, 0, 0);
+            Vector3 spawnPos = new Vector3(currentHand.Count * 250 - 250, -500, 0);
 
             //Check if drawn card is already in hand, if so, skip and draw next card
             /*
@@ -177,6 +183,7 @@ public class HandManager : MonoBehaviour
 
             //Add new card to current hand and copy properties from scriptable card
             currentHand.Add(newCard.GetComponent<BaseCard>());
+            newCard.GetComponent<BaseCard>().cardHolder.transform.localPosition = spawnPos;
             //handCardIDs.Add(deckCardIDs[deckIndex]);
             newCard.GetComponent<CardDisplay>().cardData = drawnCard;
             newCard.GetComponent<BaseCard>().CopyScriptableCard(drawnCard);
@@ -192,14 +199,14 @@ public class HandManager : MonoBehaviour
     {
         currentDeck.Clear();
         DeckManager.instance.GetDeck(this);
-        /*
-        int index = 0;
-        foreach (ScriptableCard card in currentDeck)
-        {
-            deckCardIDs.Add(index);
-            index++;
-        }
-        */
+        
+        // int index = 0;
+        // foreach (ScriptableCard card in currentDeck)
+        // {
+        //     deckCardIDs.Add(index);
+        //     index++;
+        // }
+        
         Debug.Log("Deck filled from resources with " + currentDeck.Count + " cards.");
     }
 
@@ -242,15 +249,55 @@ public class HandManager : MonoBehaviour
     }
 
     //Move cards to the right in hand
-    private void UpdateHandPositions()
+    //Move cards dynamically based on hand size and card index to keep them centered
+    public void UpdateHandPositions()
     {
-        for (int i = 0; i < currentHand.Count; i++)
+        // for (int i = 0; i < currentHand.Count; i++)
+        // {
+        //     if (currentHand[i] != null)
+        //     {
+        //         Vector3 targetPos = CardManager.instance.cardLocation + new Vector3(i * 3, 0, 0);
+        //         currentHand[i].transform.position = targetPos;
+        //     }
+        // }
+
+        if (currentHand.Count == 0)
         {
-            if (currentHand[i] != null)
+            //Debug.Log("No cards in hand to position.");
+            return;
+        }
+
+        if (currentHand.Count % 2 == 0)
+        {
+            for (int i = 0; i < currentHand.Count; i++)
             {
-                Vector3 targetPos = CardManager.instance.cardLocation + new Vector3(i * 3, 0, 0);
-                currentHand[i].transform.position = targetPos;
+                if (currentHand[i] != null)
+                {
+                    Vector3 targetPos = new Vector3((i - (currentHand.Count / 2 - 0.5f)) * 250, -500, 0);
+                    currentHand[i].cardHolder.transform.localPosition = targetPos;
+                    if (currentHand[i] == CardManager.instance.selectedCard)
+                    {
+                        currentHand[i].cardHolder.transform.localPosition += new Vector3(0, 85, 0);
+                    }
+                }
             }
+            //Debug.Log("Current hand size is even, centering cards between two middle cards.");
+        } else if (currentHand.Count % 2 == 1) 
+        {
+                for (int i = 0; i < currentHand.Count; i++)
+                {
+                    if (currentHand[i] != null)
+                    {   
+                        Vector3 targetPos = new Vector3((i - (currentHand.Count / 2)) * 250, -500, 0);
+                        currentHand[i].cardHolder.transform.localPosition = targetPos;
+                        if (currentHand[i] == CardManager.instance.selectedCard)
+                        {
+                            currentHand[i].cardHolder.transform.localPosition += new Vector3(0, 85, 0);
+                        }
+                    }
+                }
+
+            //Debug.Log("Current hand size is odd, centering cards.");
         }
     }
 }
