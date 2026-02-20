@@ -12,6 +12,7 @@ public class combatUIManager : MonoBehaviour
     [SerializeField] private AudioClip[] damageSoundClips;
     [SerializeField] private GameObject combatPanel, endTurnPanel;
     [SerializeField] private Button combatButton, endTurnButton;
+    [SerializeField] private GameObject blocker;
 
     private BasePlayer targetPlayer;
     private BaseEnemy targetEnemy;
@@ -53,6 +54,10 @@ public class combatUIManager : MonoBehaviour
             targetEnemy.takeDamage(targetPlayer.dmg);
             targetPlayer.canAttack = false;
             targetPlayer.dmg = 0;
+            foreach (Tile t in GridManager.Instance.GetNeighborsOf(targetPlayer.OccupiedTile))
+            {
+                if (t.isWalkable)t.ShowHighlight(false, Tile.nonWalkableColor);
+            }
         }
         hideCombatOption();
         
@@ -78,9 +83,16 @@ public class combatUIManager : MonoBehaviour
         CardManager.instance.DeselectCard();
         if (CardManager.instance.selectedPlayer != null)
         {
-            CardManager.instance.selectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false));
+            CardManager.instance.selectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonWalkableColor));
+            GridManager.Instance.GetNeighborsOf(CardManager.instance.selectedPlayer.OccupiedTile).ForEach(t => t.ShowHighlight(false, Tile.nonWalkableColor));
+            CardManager.instance.selectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonWalkableColor);
         }
         GameManager.Instance.ChangeState(GameState.EnemyTurn);
+    }
+
+    public void ToggleBlocker(bool isActive)
+    {
+        blocker.SetActive(isActive);
     }
 
 }

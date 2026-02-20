@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Multiplayer.Center.Common;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,6 +18,10 @@ public abstract class Tile : MonoBehaviour
     public bool Walkable => isWalkable && OccupiedUnit == null;
     public Vector2 Position => this.transform.position;
     public List<Tile> Neighbors => GridManager.Instance.GetNeighborsOf(this);
+
+    public static Color walkableColor = new Color(44f/255f, 252f/255f, 1, 65f / 255f);
+    public static Color nonWalkableColor = new Color(0, 0, 0, 90f / 255f);
+    public static Color attackableColor = new Color(1, 18f/255f, 0, 159f / 255f);
 
 
     public virtual void Init(int x, int y)
@@ -111,6 +116,9 @@ public abstract class Tile : MonoBehaviour
             //setUnit(UnitManager.Instance.SelectedPlayer);
             BasePlayer playerPath = UnitManager.Instance.SelectedPlayer;
             List<Tile> path = AStarManager.Instance.GeneratePath(playerPath.OccupiedTile, this);
+            UnitManager.Instance.SelectedPlayer.OccupiedTile.highlight.SetActive(false);
+            combatUIManager.Instance.ToggleBlocker(true);
+            CardManager.instance.ToggleCardArea(false);
             if(path != null && path.Count > 0)
             {
                 StartCoroutine(MoveUnitPath(playerPath, path));
@@ -158,7 +166,6 @@ public abstract class Tile : MonoBehaviour
             unit.OccupiedTile = null;
         }
             
-
         foreach(Tile tile in path)
         {
             Vector3 startPos = unit.transform.position;
@@ -176,16 +183,20 @@ public abstract class Tile : MonoBehaviour
             unit.transform.position = endPos;
         }
 
+        combatUIManager.Instance.ToggleBlocker(false);
+        CardManager.instance.ToggleCardArea(true);
+
         OccupiedUnit = unit;
         unit.OccupiedTile = this;
         unit.moveRange = 0;
     }
 
-    public void ShowHighlight(bool state)
+    public void ShowHighlight(bool state, Color color)
     {
         if(highlight != null)
         {
             highlight.SetActive(state);
+            highlight.GetComponent<SpriteRenderer>().color = color;
         }
     }
 

@@ -10,15 +10,55 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2618663787158803041, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_Name
-      value: NewControlCardPrefab Variant
+      value: ControlCardPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.5254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.7491652
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.34528297
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.7062641
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 947177837412992787}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BaseControlCard, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -642.16736
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5325317
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -65,11 +105,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2270671723634781939, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
   m_PrefabInstance: {fileID: 1612752381382279539}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1957549096643408904 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 957922254755591547, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
-  m_PrefabInstance: {fileID: 1612752381382279539}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3618353575999263506 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2618663787158803041, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
@@ -87,7 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158fea6e246029f499c9931fbe839222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseControlCard
-  highlightEffect: {fileID: 1957549096643408904}
   cardName: 
   cardType: 3
   value: 0

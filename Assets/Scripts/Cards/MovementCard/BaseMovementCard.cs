@@ -22,8 +22,9 @@ public class BaseMovementCard : BaseCard
             List<Tile> tilesInRange = player.GetTilesInMoveRange();
             foreach(Tile t in tilesInRange)
             {
-                t.ShowHighlight(true);
+                t.ShowHighlight(true, Tile.walkableColor);
             }
+            player.OccupiedTile.ShowHighlight(true, Tile.walkableColor);
             isPlayed = true;
             Debug.Log("Movement Card Played with movement value: " + value);
         }

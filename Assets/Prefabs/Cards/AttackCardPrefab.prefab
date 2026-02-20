@@ -10,7 +10,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2618663787158803041, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_Name
-      value: NewAttackCardPrefab
+      value: AttackCardPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.74433446
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.5254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.61131835
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.42075467
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -80,11 +104,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4386690818074591292}
   m_SourcePrefab: {fileID: 100100000, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
---- !u!1 &4983766287411344524 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 957922254755591547, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
-  m_PrefabInstance: {fileID: 5215973484300960247}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6332579879432482564 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2270671723634781939, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
@@ -107,7 +126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb8d323d3e81ec43af26ebcac7e49df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseAttackCard
-  highlightEffect: {fileID: 4983766287411344524}
   cardName: 
   cardType: 0
   value: 0

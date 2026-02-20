@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Developer: Bailey Escritor
 //Manages card selection and playing
@@ -8,7 +9,8 @@ public class CardManager : MonoBehaviour
     public static CardManager instance;
     public BasePlayer selectedPlayer;
     public BaseCard selectedCard;
-    public Vector3 cardLocation;
+    public GameObject cardArea;
+    [SerializeField] public static int cardSelectOffsetY = 35;
 
     // Initializes instance and calls backdrop creation
     void Awake()
@@ -31,7 +33,7 @@ public class CardManager : MonoBehaviour
             DeselectCard();
         }
         selectedCard = card;
-        selectedCard.cardHolder.transform.localPosition += new Vector3(0, 85, 0);
+        selectedCard.cardHolder.transform.localPosition += new Vector3(0, cardSelectOffsetY, 0);
         Debug.Log("Card Selected: " + card.cardName);
     }
 
@@ -40,7 +42,7 @@ public class CardManager : MonoBehaviour
     {
         if (selectedCard == null) return;
         Debug.Log("Card Deselected: " + selectedCard.cardName);
-        selectedCard.cardHolder.transform.localPosition -= new Vector3(0, 85, 0);
+        selectedCard.cardHolder.transform.localPosition -= new Vector3(0, cardSelectOffsetY, 0);
         selectedCard = null;
     }
 
@@ -72,6 +74,7 @@ public class CardManager : MonoBehaviour
     //Hide unselected players' hands and show selected player's hand at start of turn
     public void NextTurn()
     {
+        ToggleCardArea(true);
         HandManager[] handManagers = FindObjectsByType<HandManager>(FindObjectsSortMode.None);
         foreach (HandManager handManager in handManagers)
         {
@@ -123,16 +126,19 @@ public class CardManager : MonoBehaviour
     //Toggles card area visibility
     public void ToggleCardArea(bool show)
     {
-        cardLocation = transform.position;
-        if (show)
-        {
-            transform.position = cardLocation + new Vector3(0, 100, 0);
-            Debug.Log("Card area shown.");
+        if (show) { 
+            cardArea.SetActive(true);
+            if (selectedPlayer != null)
+            {
+                selectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(true);
+            }
         }
-        else
-        {
-            transform.position = cardLocation + new Vector3(0, -100, 0);
-            Debug.Log("Card area hidden.");
+        else {
+            cardArea.SetActive(false);
+            if (selectedPlayer != null)
+            {
+                selectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(false);
+            }
         }
     }
 }

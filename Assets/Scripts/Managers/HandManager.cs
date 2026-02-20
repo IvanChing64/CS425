@@ -26,6 +26,7 @@ public class HandManager : MonoBehaviour
     [SerializeField] private int deckIndex = 0; // pointer into currentDeck for drawing
     public bool handDrawn = false;
     public bool handSelected = false;
+    public static int cardPositionOffsetX = 220, cardPositionOffsetY = -385;
     //public int currentHandSize;
 
     //Initalizes instance and fills deck
@@ -132,7 +133,7 @@ public class HandManager : MonoBehaviour
 
             ScriptableCard drawnCard = currentDeck[deckIndex];
             GameObject newCard = null;
-            Vector3 spawnPos = new Vector3(currentHand.Count * 250 - 250, -500, 0);
+            Vector3 spawnPos = new Vector3(currentHand.Count * cardPositionOffsetX - cardPositionOffsetX, cardPositionOffsetY, 0);
 
             //Check if drawn card is already in hand, if so, skip and draw next card
             /*
@@ -273,11 +274,11 @@ public class HandManager : MonoBehaviour
             {
                 if (currentHand[i] != null)
                 {
-                    Vector3 targetPos = new Vector3((i - (currentHand.Count / 2 - 0.5f)) * 250, -500, 0);
+                    Vector3 targetPos = new Vector3((i - (currentHand.Count / 2 - 0.5f)) * cardPositionOffsetX, cardPositionOffsetY, 0);
                     currentHand[i].cardHolder.transform.localPosition = targetPos;
                     if (currentHand[i] == CardManager.instance.selectedCard)
                     {
-                        currentHand[i].cardHolder.transform.localPosition += new Vector3(0, 85, 0);
+                        currentHand[i].cardHolder.transform.localPosition += new Vector3(0, CardManager.cardSelectOffsetY, 0);
                     }
                 }
             }
@@ -288,11 +289,11 @@ public class HandManager : MonoBehaviour
                 {
                     if (currentHand[i] != null)
                     {   
-                        Vector3 targetPos = new Vector3((i - (currentHand.Count / 2)) * 250, -500, 0);
+                        Vector3 targetPos = new Vector3((i - (currentHand.Count / 2)) * cardPositionOffsetX, cardPositionOffsetY, 0);
                         currentHand[i].cardHolder.transform.localPosition = targetPos;
                         if (currentHand[i] == CardManager.instance.selectedCard)
                         {
-                            currentHand[i].cardHolder.transform.localPosition += new Vector3(0, 85, 0);
+                            currentHand[i].cardHolder.transform.localPosition += new Vector3(0, CardManager.cardSelectOffsetY, 0);
                         }
                     }
                 }

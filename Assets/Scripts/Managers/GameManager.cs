@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
                 TurnUIManager.Instance.UpdateTurnText(turnNumber);
                 combatUIManager.Instance.hideEndTurnOption();
                 UnitManager.Instance.BeginEnemyTurn();
+                CardManager.instance.ToggleCardArea(false);
                 break;
             case GameState.EndScreen:
                 Debug.Log("End screen reached");

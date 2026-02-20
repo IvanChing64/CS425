@@ -24,7 +24,7 @@ public class BaseUnit : MonoBehaviour
 
         healthbar = GetComponentInChildren<healthbar>();
 
-        guard -= damageAmount;
+        guard -= damageAmount * 0.75f;
         if (guard < 0)
         {
             health += guard;

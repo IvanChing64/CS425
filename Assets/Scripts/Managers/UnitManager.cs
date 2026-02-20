@@ -87,7 +87,8 @@ public class UnitManager : MonoBehaviour
         if (SelectedPlayer != null && SelectedPlayer != player)
         {
             // Deselect current player and hide move range highlights
-            SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false));
+            SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonWalkableColor));
+            //SelectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonWalkableColor);
         }
         SelectedPlayer = player;
 
@@ -95,7 +96,14 @@ public class UnitManager : MonoBehaviour
         {
             Debug.Log("Selected Player: " + SelectedPlayer.name);
             // Show move range highlights for the newly selected player
-            SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(true));
+            SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(true, Tile.walkableColor));
+            if (SelectedPlayer.moveRange > 0) SelectedPlayer.OccupiedTile.ShowHighlight(true, Tile.walkableColor);
+
+            if (SelectedPlayer.canAttack)
+            {
+                GridManager.Instance.GetNeighborsOf(SelectedPlayer.OccupiedTile).ForEach(t => t.ShowHighlight(true, Tile.attackableColor));
+                if (SelectedPlayer.OccupiedTile.IsNextToEnemy()) combatUIManager.Instance.showCombatOption(SelectedPlayer, null);
+            }
         }
     }
 

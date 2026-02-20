@@ -16,6 +16,10 @@ public class BaseAttackCard : BaseCard
             player.canAttack = true;
             player.dmg = value;
             Tile currentTile = player.OccupiedTile;
+            foreach (Tile t in GridManager.Instance.GetNeighborsOf(currentTile))
+            {
+                if (t.isWalkable)t.ShowHighlight(true, Tile.attackableColor);
+            }
             if(currentTile != null && currentTile.IsNextToEnemy())
             {
                 Debug.Log("Player is next to an enemy!");
