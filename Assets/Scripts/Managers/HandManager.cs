@@ -31,14 +31,14 @@ public class HandManager : MonoBehaviour
     //Initalizes instance and fills deck
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        //if (instance == null)
+        //{
+        //    instance = this;
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
     
         if (currentDeck == null || currentDeck.Count == 0)
         {

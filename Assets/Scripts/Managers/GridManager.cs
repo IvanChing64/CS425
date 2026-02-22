@@ -222,10 +222,22 @@ public class GridManager : MonoBehaviour
     //Helper functions: Spawn tiles   
     public Tile GetPlayerSpawnTile()
     {
-        Tile startPoint = tiles.Values.First(t => t.Position.x == 0 && t.isWalkable);
+        Tile startPoint = tiles.Values.FirstOrDefault(t => t.Position.x == 0 && t.isWalkable);
+        if(startPoint == null)
+        {
+            return null;
+        }
         var mainArea = GetReachableTiles(startPoint);
 
-        return mainArea.Where(t => t.Position.x < 2 && !IsSurroundedByMountains(t)).OrderBy(t => UnityEngine.Random.value).First();
+        var availableTiles = mainArea.Where(t => t.Position.x < 4 && !IsSurroundedByMountains(t) && t.OccupiedUnit == null).ToList();
+        if(availableTiles.Count == 0)
+        {
+            Debug.LogError("No available spawns");
+            return null;
+        }
+
+        return availableTiles.OrderBy(t => UnityEngine.Random.value).First();
+        //return mainArea.Where(t => t.Position.x < 2 && !IsSurroundedByMountains(t) && t.OccupiedUnit==null).OrderBy(t => UnityEngine.Random.value).First();
     }
 
     public Tile GetEnemySpawnTile()
@@ -233,7 +245,7 @@ public class GridManager : MonoBehaviour
         Tile startPoint = tiles.Values.First(t => t.Position.x == 0 && t.isWalkable);
         var mainArea = GetReachableTiles(startPoint);
 
-        return mainArea.Where(t => t.Position.x >= width -2 && !IsSurroundedByMountains(t)).OrderBy(t => UnityEngine.Random.value).First();
+        return mainArea.Where(t => t.Position.x >= width -2 && !IsSurroundedByMountains(t) && t.OccupiedUnit == null).OrderBy(t => UnityEngine.Random.value).First();
     }
 
     //Helper functions: Get tiles  
