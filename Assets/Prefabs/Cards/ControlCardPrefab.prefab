@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3103765871352064598
+--- !u!1001 &1612752381382279539
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,83 +8,89 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+    - target: {fileID: 2618663787158803041, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Name
+      value: NewControlCardPrefab Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.547597
+      value: -642.16736
       objectReference: {fileID: 0}
-    - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+    - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.41843903
+      value: -2.5325317
       objectReference: {fileID: 0}
-    - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+    - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+    - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+    - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+    - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+    - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+    - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+    - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4030113047661234566, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+    - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7058017338369739465, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
-      propertyPath: m_Name
-      value: ControlCardPrefab Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7058017338369739465, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 2618663787158803041, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 842561576999547235}
-  m_SourcePrefab: {fileID: 100100000, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
---- !u!1 &3013061380510947632 stripped
+      addedObject: {fileID: 947177837412992787}
+  m_SourcePrefab: {fileID: 100100000, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+--- !u!1 &712323392416690048 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 198793630811829094, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
-  m_PrefabInstance: {fileID: 3103765871352064598}
+  m_CorrespondingSourceObject: {fileID: 2270671723634781939, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+  m_PrefabInstance: {fileID: 1612752381382279539}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5395831057930526879 stripped
+--- !u!1 &1957549096643408904 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7058017338369739465, guid: 7c73c63881ababe45ac610dea9ae5bc2, type: 3}
-  m_PrefabInstance: {fileID: 3103765871352064598}
+  m_CorrespondingSourceObject: {fileID: 957922254755591547, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+  m_PrefabInstance: {fileID: 1612752381382279539}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &842561576999547235
+--- !u!1 &3618353575999263506 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2618663787158803041, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+  m_PrefabInstance: {fileID: 1612752381382279539}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &947177837412992787
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5395831057930526879}
+  m_GameObject: {fileID: 3618353575999263506}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 158fea6e246029f499c9931fbe839222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseControlCard
-  highlightEffect: {fileID: 3013061380510947632}
+  highlightEffect: {fileID: 1957549096643408904}
   cardName: 
   cardType: 3
   value: 0
   isPlayed: 0
-  effect: 0
+  cardHolder: {fileID: 712323392416690048}
+  effect: -1

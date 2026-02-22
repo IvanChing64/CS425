@@ -10,12 +10,6 @@ using UnityEngine.Serialization;
 
 public class UnitManager : MonoBehaviour
 {
-    //Lists to track number of Players and Enemies on field.
-
-    public List<BasePlayer> PlayerUnits = new List<BasePlayer>();
-    public List<BaseEnemy> EnemyUnits = new List<BaseEnemy>();
-
-
     public static UnitManager Instance;
     private List<ScriptableUnit> units;
     //Adding reference to player tile.
@@ -24,7 +18,8 @@ public class UnitManager : MonoBehaviour
 
     public BasePlayer SelectedPlayer;
 
-    private List<BaseEnemy> enemiesSpawned = new List<BaseEnemy>();
+    public List<BasePlayer> playersSpawned = new List<BasePlayer>();
+    public List<BaseEnemy> enemiesSpawned = new List<BaseEnemy>();
 
     public int enemyUnitCount;
     public int playerUnitCount;
@@ -36,50 +31,61 @@ public class UnitManager : MonoBehaviour
         units = Resources.LoadAll<ScriptableUnit>("Units").ToList();
     }
 
-    public void SpawnPlayers(int count = 1)
+    public void SpawnPlayers(int count = 3)
     {
+        playersSpawned.Clear();
         playerUnitCount = count;
         for (int i = 0; i < playerUnitCount; i++)
         {
-            var randomPrefab = GetRandomUnit<BasePlayer>(Faction.Player);
-            var spawnedPlayer = Instantiate(randomPrefab);
-            PlayerUnits.Add(spawnedPlayer);
             var randomSpawnTile = GridManager.Instance.GetPlayerSpawnTile();
 
-            randomSpawnTile.setUnit(spawnedPlayer);
-
-            SelectedPlayer = spawnedPlayer;
+            if (randomSpawnTile != null)
+            {
+                var randomPrefab = GetRandomUnit<BasePlayer>(Faction.Player);
+                BasePlayer spawnedPlayer = Instantiate(randomPrefab, randomSpawnTile.transform.position, Quaternion.identity);
+                spawnedPlayer.name = $"DEBUG_Player_{i}_{randomSpawnTile.Position.x}_{randomSpawnTile.Position.y}";
+                Debug.Log($"Found Tile for player{i}");
+                randomSpawnTile.setUnit(spawnedPlayer);
+                playersSpawned.Add(spawnedPlayer);
+                //Debug.Log($"added to list:{i}");  
+                if (i == 0) SelectedPlayer = spawnedPlayer;
+                if (randomSpawnTile.OccupiedUnit == null)
+                {
+                    Debug.Log("Tiles failed to hold unit" + randomSpawnTile.Position);
+                }
+                Debug.Log($"Spawned Player {i}: {spawnedPlayer.name}s at {randomSpawnTile.Position}");
+            }
+            
             Debug.Log("Spawned Player: " + SelectedPlayer.name);
 
             //Adding reference to player tile.
-            playerTile = randomSpawnTile;
+            //playerTile = randomSpawnTile;
+            var foundInScene = GameObject.FindObjectsByType<BasePlayer>(FindObjectsSortMode.None);
+            Debug.Log($"[FINAL CHECK] Hierarchy physically contains {foundInScene.Length} player objects.");
+
+            foreach (var p in foundInScene)
+            {
+                Debug.Log($"Found {p.name} - Active: {p.gameObject.activeInHierarchy} - Parent: {(p.transform.parent != null ? p.transform.parent.name : "None")}");
+            }
+
         }
+        Debug.Log($"Spawned {playersSpawned.Count} players total.");
         GameManager.Instance.ChangeState(GameState.SpawnEnemies);
     }
 
-    public void SpawnEnemies(int count = 1)
+    public void SpawnEnemies(int count = 3)
     {
         enemyUnitCount = count;
         for (int i = 0; i < enemyUnitCount; i++)
         {
             var randomPrefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
             var spawnedEnemy = Instantiate(randomPrefab);
-            EnemyUnits.Add(spawnedEnemy);
             var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
 
             randomSpawnTile.setUnit(spawnedEnemy);
 
             enemiesSpawned.Add(spawnedEnemy);
             enemyTiles.Add(randomSpawnTile);
-
-            //New section added to help with NPC_Controller
-            /*Tile currentPlayerTile = GridManager.Instance.GetTileAtPosition(SelectedPlayer.transform.position);
-
-            var npcController = spawnedEnemy.GetComponent<NPC_Controller>();
-            if (npcController != null && SelectedPlayer != null)
-            {
-               npcController.SetTarget(randomSpawnTile, currentPlayerTile);
-            }*/
         }
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
@@ -88,7 +94,7 @@ public class UnitManager : MonoBehaviour
 
     private T GetRandomUnit<T>(Faction faction) where T : BaseUnit
     {
-        return (T)units.Where(u=>u.Faction == faction).OrderBy(o=>Random.value).First().UnitPrefab;
+        return (T)units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
     }
     public void SetSelectedPlayer(BasePlayer player)
     {
@@ -98,9 +104,15 @@ public class UnitManager : MonoBehaviour
             SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false));
         }
         SelectedPlayer = player;
+
+        if (SelectedPlayer != null)
+        {
+            Debug.Log("Selected Player: " + SelectedPlayer.name);
+            // Show move range highlights for the newly selected player
+            SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(true));
+        }
     }
 
-    //New.
     public void BeginEnemyTurn()
     {
         Debug.Log("BeginEnemyTurn: SelectedPlayer = " + SelectedPlayer);
@@ -116,7 +128,7 @@ public class UnitManager : MonoBehaviour
             if (npcController != null && SelectedPlayer != null)
             {
                 npcController.BeginTurn();
-               
+
 
                 Tile enemyTile = GridManager.Instance.GetTileForUnit(enemy.gameObject);
                 Debug.Log($"Enemy {enemy.name} at {enemyTile?.name}, chasing {currentPlayerTile?.name}");
@@ -126,28 +138,5 @@ public class UnitManager : MonoBehaviour
             }
         }
 
-        //StartCoroutine(CheckEnemiesFinished());
-        
     }
-
-  /* private IEnumerator CheckEnemiesFinished()
-    {
-        bool allDone = false;
-        while (!allDone)
-        {
-            allDone = true;
-            foreach (var enemy in enemiesSpawned)
-            {
-                var npcController = enemy.GetComponent<NPC_Controller>();
-                if (npcController != null && !npcController.HasFinishedTurn)
-                {
-                    allDone = false;
-                    break;
-                }
-            }
-            yield return null;
-        }
-        GameManager.Instance.ChangeState(GameState.PlayerTurn);
-    }*/
-   
 }

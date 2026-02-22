@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 //Developer: Ivan Ching
 
@@ -22,6 +23,11 @@ public class GameManager : MonoBehaviour
     //Game state manager
     public void ChangeState(GameState state)
     {
+        if (gameState == state)
+        {
+            Debug.Log($"Attempted to change to the same game state: {state} - {gameState}");
+            return;
+        }
         // Set internal game state
         gameState = state;
 
@@ -87,6 +93,7 @@ public class GameManager : MonoBehaviour
 
 public enum GameState
 {
+    Null = -1,
     GenerateGrid = 0,
     SpawnPlayers = 1,
     SpawnEnemies = 2,

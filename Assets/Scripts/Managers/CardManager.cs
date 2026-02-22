@@ -6,11 +6,9 @@ using UnityEngine;
 public class CardManager : MonoBehaviour
 {
     public static CardManager instance;
-    public GameObject cardAreaBackdrop;
     public BasePlayer selectedPlayer;
     public BaseCard selectedCard;
     public Vector3 cardLocation;
-
 
     // Initializes instance and calls backdrop creation
     void Awake()
@@ -18,18 +16,11 @@ public class CardManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            cardLocation = transform.position;
         }
         else
         {
             Destroy(gameObject);
         }
-
-        //Upddates card location based on grid size
-        CenterCardArea();
-
-        //Create Backdrop for Card Area
-        //CreateCardAreaBackdrops(maxHandSize);
     }
 
     //Selects a card and raises its position
@@ -40,7 +31,7 @@ public class CardManager : MonoBehaviour
             DeselectCard();
         }
         selectedCard = card;
-        selectedCard.transform.position += new Vector3(0, 0.85f, 0);
+        selectedCard.cardHolder.transform.localPosition += new Vector3(0, 85, 0);
         Debug.Log("Card Selected: " + card.cardName);
     }
 
@@ -49,25 +40,32 @@ public class CardManager : MonoBehaviour
     {
         if (selectedCard == null) return;
         Debug.Log("Card Deselected: " + selectedCard.cardName);
-        selectedCard.transform.position -= new Vector3(0, 0.85f, 0);
+        selectedCard.cardHolder.transform.localPosition -= new Vector3(0, 85, 0);
         selectedCard = null;
     }
 
     //Plays the selected card and removes it from the player's hand
-    public void PlaySelectedCard()
+    public void PlaySelectedCard(BaseCard card)
     {
         if (selectedCard != null)
         {
+            if (selectedCard != card)
+            {
+                DeselectCard();
+                SelectCard(card);
+                return;
+            }
             HandManager selectedHand = selectedPlayer.GetComponent<HandManager>();
             selectedCard.PlayCard();
             //selectedPlayer.GetComponent<HandManager>().handCardIDs.Remove(selectedHand.handCardIDs[selectedHand.currentHand.IndexOf(selectedCard)]);
             selectedPlayer.GetComponent<HandManager>().currentHand.Remove(selectedCard);
             Destroy(selectedCard.gameObject);
             DeselectCard();
+            selectedPlayer.GetComponent<HandManager>().UpdateHandPositions();
         }
         else
         {
-            Debug.Log("No card selected to play.");
+            SelectCard(card);
         }
     }
 
@@ -97,6 +95,13 @@ public class CardManager : MonoBehaviour
     {
         BasePlayer previousPlayer = selectedPlayer;
         selectedPlayer = player;
+
+        if (selectedPlayer == null)
+        {
+            Debug.Log("No player selected.");
+            return;
+        }
+
         if (selectedPlayer.GetComponent<HandManager>().currentDeck.Count == 0) 
         {
             selectedPlayer.GetComponent<HandManager>().FillDeckFromResources();
@@ -113,27 +118,6 @@ public class CardManager : MonoBehaviour
         {
             selectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(true);
         }
-    }
-
-    //Creates backdrops for card area (May be irrelevant with later changes)
-    private void CreateCardAreaBackdrops(int handSize)
-    {
-        for (int i = 0; i < handSize; i++)
-        {
-            Vector3 backdropPos = cardLocation + new Vector3(i * 3, 0, 0);
-            Instantiate(cardAreaBackdrop, backdropPos, Quaternion.identity);
-        }
-    }
-
-    //Ensures cards are in the middle of the card area
-    public void CenterCardArea()
-    {
-        float centerX = (float)GridManager.width / 2f - 3.5f;
-        float centerY = (float)GridManager.height / 2f - 5.25f - (0.25f * GridManager.height);
-        //float i = 7.75f;
-
-
-        cardLocation = new Vector3(centerX, centerY, 0);
     }
 
     //Toggles card area visibility
