@@ -205,10 +205,16 @@ public class NPC_Controller: MonoBehaviour
     private void FinishedMoves()
     {
         isMoving = false;
-        
+        Tile old = npcUnit.OccupiedTile;
+
         if (path != null && path.Count > 0)
         {
+            
             Tile finalTile = path[path.Count -1];
+            if (old != null)
+            {
+                old.setUnit(null);
+            }
             npcUnit.OccupiedTile = finalTile;
             finalTile.setUnit(npcUnit);
             Debug.Log($"{gameObject.name} committed to tile: {finalTile.name}.");

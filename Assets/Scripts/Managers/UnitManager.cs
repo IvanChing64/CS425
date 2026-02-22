@@ -59,7 +59,7 @@ public class UnitManager : MonoBehaviour
             Debug.Log("Spawned Player: " + SelectedPlayer.name);
 
             //Adding reference to player tile.
-            //playerTile = randomSpawnTile;
+            playerTile = randomSpawnTile;
             var foundInScene = GameObject.FindObjectsByType<BasePlayer>(FindObjectsSortMode.None);
             Debug.Log($"[FINAL CHECK] Hierarchy physically contains {foundInScene.Length} player objects.");
 
