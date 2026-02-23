@@ -151,6 +151,12 @@ public abstract class Tile : MonoBehaviour
     //General Code for Movement
     public void setUnit(BaseUnit unit)
     {
+        if(unit == null)
+        {
+            OccupiedUnit = null;
+            return;
+        }
+
         if (unit.OccupiedTile != null) unit.OccupiedTile.OccupiedUnit = null;
         unit.transform.position = transform.position;
         OccupiedUnit = unit;

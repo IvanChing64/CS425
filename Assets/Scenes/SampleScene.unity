@@ -1431,7 +1431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.57254905}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3423,6 +3423,7 @@ MonoBehaviour:
   selectedPlayer: {fileID: 0}
   selectedCard: {fileID: 0}
   cardArea: {fileID: 732287339}
+  cardLocation: {x: 0, y: 0, z: 0}
 --- !u!1 &1163061364
 GameObject:
   m_ObjectHideFlags: 0
@@ -5301,6 +5302,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitManager
   SelectedPlayer: {fileID: 0}
+  playersSpawned: []
+  enemiesSpawned: []
   enemyUnitCount: 0
   playerUnitCount: 0
 --- !u!4 &2041420433

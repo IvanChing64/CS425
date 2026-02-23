@@ -16,7 +16,6 @@ public class HandManager : MonoBehaviour
     - Shuffles the deck when needed
     */
 
-    public static HandManager instance;
     [SerializeField] private GameObject attackCardPrefab, movementCardPrefab, supportCardPrefab, controlCardPrefab;
     public List<ScriptableCard> currentDeck = new List<ScriptableCard>();//MinMaxSize: 6, MaxMaxSize: 9
     public List<BaseCard> currentHand = new List<BaseCard>();//Always Size: 3
@@ -32,14 +31,14 @@ public class HandManager : MonoBehaviour
     //Initalizes instance and fills deck
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        //if (instance == null)
+        //{
+        //    instance = this;
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
     
         if (currentDeck == null || currentDeck.Count == 0)
         {

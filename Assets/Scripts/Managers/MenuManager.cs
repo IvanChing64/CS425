@@ -43,4 +43,23 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("Scenes/StageSelection");
     }
+
+    public void ToStory()
+    {
+        SceneManager.LoadScene("Scenes/StoryScenes");
+    }
+
+    public void ToControls()
+    {
+        SceneManager.LoadScene("Scenes/Controls");
+    }
+
+    public void PreviousScene()
+    {
+        int previousIndex = SceneManager.GetActiveScene().buildIndex - 1;
+        if(previousIndex >= 0)
+        {
+            SceneManager.LoadScene(previousIndex);
+        }
+    }
 }
