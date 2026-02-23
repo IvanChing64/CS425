@@ -16,7 +16,6 @@ public class HandManager : MonoBehaviour
     - Shuffles the deck when needed
     */
 
-    public static HandManager instance;
     [SerializeField] private GameObject attackCardPrefab, movementCardPrefab, supportCardPrefab, controlCardPrefab;
     public List<ScriptableCard> currentDeck = new List<ScriptableCard>();//MinMaxSize: 6, MaxMaxSize: 9
     public List<BaseCard> currentHand = new List<BaseCard>();//Always Size: 3

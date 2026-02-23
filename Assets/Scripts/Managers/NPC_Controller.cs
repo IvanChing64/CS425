@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 //Developer: Andrew Shelton
 //Edits from Ivan Ching
@@ -99,11 +100,14 @@ public class NPC_Controller: MonoBehaviour
             {
                 path.RemoveAt(path.Count - 1);
             }
+        } else
+        {
+            path = new List<Tile> {npcUnit.OccupiedTile};
         }
 
         if (path[0] == startTile)
         {
-             path.RemoveAt(0);
+            path.RemoveAt(0);
         }
         
         if (path.Count > tilesPerMove)
