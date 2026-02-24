@@ -101,8 +101,9 @@ public class UnitManager : MonoBehaviour
         if (SelectedPlayer != null && SelectedPlayer != player)
         {
             // Deselect current player and hide move range highlights
-            SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonWalkableColor));
-            //SelectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonWalkableColor);
+            SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
+            SelectedPlayer.GetTilesInAttackRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
+            SelectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
         }
         SelectedPlayer = player;
 

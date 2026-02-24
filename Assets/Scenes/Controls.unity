@@ -3229,6 +3229,7 @@ MonoBehaviour:
   continueButton: {fileID: 0}
   mainMenuSFX:
   - {fileID: 8300000, guid: aeb2b1f1d428a9549a37a5c62d92b531, type: 3}
+  currentScreen: 2
 --- !u!4 &1682712901
 Transform:
   m_ObjectHideFlags: 0

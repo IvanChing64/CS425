@@ -15,7 +15,9 @@ public class BaseUnit : MonoBehaviour
     [SerializeField] healthbar healthbar;
     [SerializeField] private AudioClip[] hurtSFX;
 
-    public List<Tile> GetTilesInMoveRange() => MovementManager.Instance.GetTilesInRange(OccupiedTile, moveRange);
+    public List<Tile> GetTilesInMoveRange() => MovementManager.Instance.GetTilesInRange(OccupiedTile, moveRange, false);
+    public List<Tile> GetTilesInAttackRange() => MovementManager.Instance.GetTilesInRange(OccupiedTile, attackRange, true);
+
 
     //damage functions
     public void takeDamage(float damageAmount)
@@ -23,12 +25,22 @@ public class BaseUnit : MonoBehaviour
         SoundFXManager.instance.PlaySoundFXClip(hurtSFX, transform, 1f);
 
         healthbar = GetComponentInChildren<healthbar>();
+        float damage = damageAmount;
 
-        guard -= damageAmount * 0.75f;
-        if (guard < 0)
+        if (guard > 0)
         {
-            health += guard;
-            guard = 0;
+            if (guard >= damage * 0.75f)
+            {
+                guard -= damage * 0.75f;
+            } else
+            {
+                damage = damage * 0.75f - guard;
+                guard = 0;
+                health -= damage;
+            }
+        } else
+        {
+            health -= damage;
         }
 
         Debug.Log($"{name} took {damageAmount} damage. Health now: {health}");

@@ -35,8 +35,8 @@ public class combatUIManager : MonoBehaviour
         targetEnemy = enemy;
 
         combatPanel.SetActive(true);
-        combatButton.onClick.RemoveAllListeners();
-        combatButton.onClick.AddListener(() => ExecuteCombat());
+        //combatButton.onClick.RemoveAllListeners();
+        //combatButton.onClick.AddListener(() => ExecuteCombat());
     }
     
     //hides button when not in use
@@ -56,18 +56,35 @@ public class combatUIManager : MonoBehaviour
             targetPlayer.dmg = 0;
             foreach (Tile t in GridManager.Instance.GetNeighborsOf(targetPlayer.OccupiedTile))
             {
-                if (t.isWalkable)t.ShowHighlight(false, Tile.nonWalkableColor);
+                if (t.isWalkable)t.ShowHighlight(false, Tile.nonwalkableColor);
             }
         }
         hideCombatOption();
+        CardManager.instance.PlaySelectedCard();
         
+    }
+
+    //ADDED FOR CLICK ON TILE COMBAT
+    public void Attack(BasePlayer attacker, BaseUnit defender)
+    {
+        if (defender != null && attacker != null)
+        {
+            defender.takeDamage(attacker.dmg);
+            attacker.canAttack = false;
+            attacker.dmg = 0;
+            foreach (Tile t in GridManager.Instance.GetNeighborsOf(attacker.OccupiedTile))
+            {
+                if (t.isWalkable)t.ShowHighlight(false, Tile.nonwalkableColor);
+            }
+        }
+        CardManager.instance.PlaySelectedCard();
     }
 
     public void ShowEndTurnOption()
     {
         endTurnPanel.SetActive(true);
-        endTurnButton.onClick.RemoveAllListeners();
-        endTurnButton.onClick.AddListener(() => ExecuteEndTurn());
+        //endTurnButton.onClick.RemoveAllListeners();
+        //endTurnButton.onClick.AddListener(() => ExecuteEndTurn());
     }
 
     public void hideEndTurnOption()
@@ -83,9 +100,9 @@ public class combatUIManager : MonoBehaviour
         CardManager.instance.DeselectCard();
         if (CardManager.instance.selectedPlayer != null)
         {
-            CardManager.instance.selectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonWalkableColor));
-            GridManager.Instance.GetNeighborsOf(CardManager.instance.selectedPlayer.OccupiedTile).ForEach(t => t.ShowHighlight(false, Tile.nonWalkableColor));
-            CardManager.instance.selectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonWalkableColor);
+            CardManager.instance.selectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
+            GridManager.Instance.GetNeighborsOf(CardManager.instance.selectedPlayer.OccupiedTile).ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
+            CardManager.instance.selectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
         }
         GameManager.Instance.ChangeState(GameState.EnemyTurn);
     }

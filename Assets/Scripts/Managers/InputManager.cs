@@ -77,7 +77,7 @@ public class InputManager : MonoBehaviour
 
             foreach (Tile t in GridManager.Instance.GetNeighborsOf(UnitManager.Instance.SelectedPlayer.OccupiedTile))
             {
-                if (t.isWalkable) t.ShowHighlight(false, Tile.nonWalkableColor);
+                if (t.isWalkable) t.ShowHighlight(false, Tile.nonwalkableColor);
             }
 
             CardManager.instance.DeselectCard();
@@ -102,9 +102,9 @@ public class InputManager : MonoBehaviour
             List<Tile> tilesInRange = selectedPlayer.GetTilesInMoveRange();
             foreach (Tile t in tilesInRange)
             {
-                t.ShowHighlight(false, Tile.nonWalkableColor);
+                t.ShowHighlight(false, Tile.nonwalkableColor);
             }
-            selectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonWalkableColor);
+            selectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
         }
     }
 

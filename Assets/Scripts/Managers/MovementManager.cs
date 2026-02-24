@@ -22,7 +22,7 @@ public class MovementManager : MonoBehaviour
     /// <param name="startTile">The tile to search from</param>>
     /// <param name="range">The maximum range to search for tiles away from startTile</param>
     /// <returns>A list with all found tiles in range of the starting tile</returns>
-    public List<Tile> GetTilesInRange(Tile startTile, int range)
+    public List<Tile> GetTilesInRange(Tile startTile, int range, bool targetting)
     {
         List<Tile> tilesInRange = new();
         Queue<Tile> visitQueue = new();
@@ -31,10 +31,19 @@ public class MovementManager : MonoBehaviour
 
         while (visitQueue.TryDequeue(out Tile visitedTile))
         {
-            foreach (Tile neighbor in visitedTile.Neighbors.Where(t => !tilesInRange.Contains(t) && t.Walkable && DistanceBetween(startTile, t) <= range))
+            if (!targetting) {
+                foreach (Tile neighbor in visitedTile.Neighbors.Where(t => !tilesInRange.Contains(t) && t.Walkable && DistanceBetween(startTile, t) <= range))
+                {
+                    tilesInRange.Add(neighbor);
+                    visitQueue.Enqueue(neighbor);
+                }
+            } else
             {
-                tilesInRange.Add(neighbor);
-                visitQueue.Enqueue(neighbor);
+                foreach (Tile neighbor in visitedTile.Neighbors.Where(t => !tilesInRange.Contains(t) && t.isWalkable && DistanceBetween(startTile, t) <= range))
+                {
+                    tilesInRange.Add(neighbor);
+                    visitQueue.Enqueue(neighbor);
+                }
             }
         }
 

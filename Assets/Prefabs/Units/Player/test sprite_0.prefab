@@ -274,6 +274,7 @@ MonoBehaviour:
   - Slash
   - Guard
   canAttack: 0
+  canSupport: 0
 --- !u!114 &7232603518593366301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +297,7 @@ MonoBehaviour:
   deckIndex: 0
   handDrawn: 0
   handSelected: 0
+  selectedCard: {fileID: 0}
 --- !u!1 &5483545698060636878
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +523,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &4421357749340508274
 MonoBehaviour:

@@ -4,7 +4,7 @@ using UnityEngine;
 public class BasePlayer : BaseUnit
 {
     public List<string> startingDeck = new List<string>();
-    public bool canAttack = false;
+    public bool canAttack = false, canSupport = false;
 
     //Resets a units card values at the end of their turn
     public void ResetCardValues()

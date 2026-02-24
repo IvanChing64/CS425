@@ -37,9 +37,9 @@ public class AStarManager : MonoBehaviour
         {
             
             Tile current = GetLowestFScore(openSet, fScore);
-            Debug.Log("Visiting: " + current.name);
+            //Debug.Log("Visiting: " + current.name);
 
-            Debug.Log("Comparing current " + current.name + " with end " + end.name);
+            //Debug.Log("Comparing current " + current.name + " with end " + end.name);
 
 
             if (current == end)
@@ -71,7 +71,7 @@ public class AStarManager : MonoBehaviour
                     }
                 }
             }
-            Debug.Log("Checking tile: " + current.name);
+            //Debug.Log("Checking tile: " + current.name);
 
 
         }

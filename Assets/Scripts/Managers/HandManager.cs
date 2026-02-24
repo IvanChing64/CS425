@@ -25,6 +25,7 @@ public class HandManager : MonoBehaviour
     [SerializeField] private int deckIndex = 0; // pointer into currentDeck for drawing
     public bool handDrawn = false;
     public bool handSelected = false;
+    public BaseCard selectedCard;
     public static int cardPositionOffsetX = 220, cardPositionOffsetY = -385;
     //public int currentHandSize;
 

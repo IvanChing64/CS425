@@ -104,6 +104,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4386690818074591292}
   m_SourcePrefab: {fileID: 100100000, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+--- !u!114 &2223355217622611267 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+  m_PrefabInstance: {fileID: 5215973484300960247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &6332579879432482564 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2270671723634781939, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
@@ -131,3 +142,4 @@ MonoBehaviour:
   value: 0
   isPlayed: 0
   cardHolder: {fileID: 6332579879432482564}
+  card: {fileID: 2223355217622611267}
