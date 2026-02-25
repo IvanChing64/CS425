@@ -14,32 +14,47 @@ public class BaseSupportCard : BaseCard
         effect = card.supportEffect;
     }
 
-    //Applies support effect when the card is played
-    public override void PlayCard()
+    public override void SelectCard()
     {
-        ApplySupportEffect();
-        isPlayed = true;
-        Debug.Log("Support Card Played with " + effect + " of value: " + value);
+        //Highlight Selectable Tiles and Targets
+        BasePlayer player = CardManager.instance.selectedPlayer;
+
+        if (player != null)
+        {
+            player.canSupport = true;
+            player.OccupiedTile.ShowHighlight(true, Tile.supportableColor);
+        }
+    }
+
+    public override void DeselectCard()
+    {
+        //Unhighlight Selectable Tiles and Targets
+        BasePlayer player = CardManager.instance.selectedPlayer;
+
+        if (player != null)
+        {
+            player.canSupport = false;
+            player.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
+        }
     }
 
     //Applies the support effect to the selected player
-    public void ApplySupportEffect()
+    public void ApplySupportEffect(BaseUnit targetPlayer)
     {
-        BasePlayer player = CardManager.instance.selectedPlayer;
-
         switch (effect)
         {
             case SupportEffect.Heal:
-                player.Heal(value);
+                targetPlayer.Heal(value);
                 break;
 
             case SupportEffect.Guard:
-                player.Guard(value);
+                targetPlayer.Guard(value);
                 break;
 
             default:
                 Debug.LogWarning("Unknown support effect: " + effect);
                 break;
         }
+        Debug.Log("Support Card Played with " + effect + " of value: " + value);
     }
 }

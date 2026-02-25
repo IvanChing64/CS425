@@ -13,6 +13,7 @@ public class CardDisplay : MonoBehaviour
     public TMP_Text cardName, cardDescription, cardValue;
     public int overrideValue;
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

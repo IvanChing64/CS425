@@ -10,7 +10,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2618663787158803041, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_Name
-      value: NewSupportCardPrefab
+      value: SupportCardPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.5254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.73404425
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.2999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.65275633
       objectReference: {fileID: 0}
     - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -34,11 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 636.4385
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 842.16034
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -97,18 +121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555fcfbf6cb44c849b4b363bda8e0d56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseSupportCard
-  highlightEffect: {fileID: 3251895448273832076}
   cardName: 
   cardType: 2
   value: 0
   isPlayed: 0
   cardHolder: {fileID: 4605281910886880004}
   effect: -1
---- !u!1 &3251895448273832076 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 957922254755591547, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
-  m_PrefabInstance: {fileID: 2335737190429474295}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4605281910886880004 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2270671723634781939, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}

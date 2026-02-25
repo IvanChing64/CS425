@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Multiplayer.Center.Common;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -18,6 +19,10 @@ public abstract class Tile : MonoBehaviour
     public Vector2 Position => this.transform.position;
     public List<Tile> Neighbors => GridManager.Instance.GetNeighborsOf(this);
 
+    public static Color walkableColor = new Color(44f/255f, 153f/255f, 1, 120f / 255f);
+    public static Color nonwalkableColor = new Color(0, 0, 0, 0);
+    public static Color attackableColor = new Color(1, 18f/255f, 0, 159f / 255f);
+    public static Color supportableColor = new Color(3f/255f, 1, 0, 100f/255f);
 
     public virtual void Init(int x, int y)
     {
@@ -39,7 +44,7 @@ public abstract class Tile : MonoBehaviour
     private void OnMouseDown()
     {
         //Checks if the combat menu is open on screen
-        if (combatUIManager.Instance != null && combatUIManager.Instance.IsCombatMenuOpen) return;
+        //if (combatUIManager.Instance != null && combatUIManager.Instance.IsCombatMenuOpen) return;
         //Checks if it is player's turn
         if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
 
@@ -48,9 +53,23 @@ public abstract class Tile : MonoBehaviour
         //If there is something on the tile selected
         if(OccupiedUnit != null)
         {
-            //Selecting players
+            //Selecting players or Supports PLayer
             if (OccupiedUnit.Faction == Faction.Player)
             {
+                // Supports PLayer
+                if (UnitManager.Instance.SelectedPlayer != null && UnitManager.Instance.SelectedPlayer.canSupport)
+                {
+                    if (OccupiedUnit != null && OccupiedUnit.Faction == Faction.Player)
+                    {
+                        if (highlight.activeInHierarchy)
+                        {
+                            BaseSupportCard tempSupport = (BaseSupportCard)CardManager.instance.selectedCard;
+                            tempSupport.ApplySupportEffect(OccupiedUnit);
+                            CardManager.instance.PlaySelectedCard();
+                        }
+                    }
+                }
+
                 //Selects players
                 UnitManager.Instance.SetSelectedPlayer((BasePlayer)OccupiedUnit);
                 CardManager.instance.SetSelectedPlayer((BasePlayer)OccupiedUnit);
@@ -58,7 +77,19 @@ public abstract class Tile : MonoBehaviour
             }
             else if (UnitManager.Instance.SelectedPlayer != null) { // If not selecting a player unit then it selects a enemy
                 Debug.Log("Cannot move here. Enemy Space.");
-                return;
+                //return;
+            }
+
+            // Attacks enemy
+            if (UnitManager.Instance.SelectedPlayer.canAttack)
+            {
+                if (OccupiedUnit != null && OccupiedUnit.Faction == Faction.Enemy)
+                {
+                    if (highlight.activeInHierarchy)
+                    {
+                        combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, OccupiedUnit);
+                    }
+                }
             }
 
         }
@@ -69,9 +100,9 @@ public abstract class Tile : MonoBehaviour
             List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
 
             /* Complex implementation to allow path reconstruction
-            Dictionary<Tile, Tile> tilePathsInRange = MovementManager.Instance.GetPathsInRange(
-                UnitManager.Instance.SelectedPlayer.OccupiedTile, UnitManager.Instance.SelectedPlayer.moveRange);
-            List<Tile> movementPath = MovementManager.Instance.ReconstructPath(this, tilePathsInRange);
+            Dictionary<Tile, Tile> tilePathsInRange = RangeManager.GetPathsInRange(
+                UnitManager.Instance.SelectedPlayer.OccupiedTile, UnitManager.Instance.SelectedPlayer.moveRange, RangeType.FloodMovement);
+            List<Tile> movementPath = RangeManager.ReconstructPath(this, tilePathsInRange);
             */
 
             // If this tile is NOT in the selected unit's movement range, deny movement
@@ -84,21 +115,21 @@ public abstract class Tile : MonoBehaviour
             // When moving to tile, if an enemy is found near the player display the attack prompt
             if (IsNextToEnemy())
             {
-                    foreach (Tile t in tilesInRange) t.highlight.SetActive(false);
+                foreach (Tile t in tilesInRange) t.highlight.SetActive(false);
 
-                    Debug.Log("Player moved next to an enemy!");
-                    var neighbors = GridManager.Instance.GetNeighborsOf(this);
+                Debug.Log("Player moved next to an enemy!");
+                var neighbors = GridManager.Instance.GetNeighborsOf(this);
 
-                    foreach (var n in neighbors)
+                foreach (var n in neighbors)
+                {
+                    if (n.OccupiedUnit != null && n.OccupiedUnit.Faction == Faction.Enemy)
                     {
-                        if (n.OccupiedUnit != null && n.OccupiedUnit.Faction == Faction.Enemy)
-                        {
-                            BaseEnemy enemy = (BaseEnemy)n.OccupiedUnit;
-                            BasePlayer player = UnitManager.Instance.SelectedPlayer;
-                            combatUIManager.Instance.showCombatOption(player, enemy);
-                            break;
-                        }
+                        BaseEnemy enemy = (BaseEnemy)n.OccupiedUnit;
+                        BasePlayer player = UnitManager.Instance.SelectedPlayer;
+                        combatUIManager.Instance.showCombatOption(player, enemy);
+                        break;
                     }
+                }
 
             }
             // If no enemy is found near the player, hide attack prompt
@@ -111,6 +142,10 @@ public abstract class Tile : MonoBehaviour
             //setUnit(UnitManager.Instance.SelectedPlayer);
             BasePlayer playerPath = UnitManager.Instance.SelectedPlayer;
             List<Tile> path = AStarManager.Instance.GeneratePath(playerPath.OccupiedTile, this);
+            UnitManager.Instance.SelectedPlayer.OccupiedTile.highlight.SetActive(false);
+            combatUIManager.Instance.ToggleBlocker(true);
+            CardManager.instance.PlaySelectedCard();
+            CardManager.instance.ToggleCardArea(false);
             if(path != null && path.Count > 0)
             {
                 StartCoroutine(MoveUnitPath(playerPath, path));
@@ -143,6 +178,12 @@ public abstract class Tile : MonoBehaviour
     //General Code for Movement
     public void setUnit(BaseUnit unit)
     {
+        if(unit == null)
+        {
+            OccupiedUnit = null;
+            return;
+        }
+
         if (unit.OccupiedTile != null) unit.OccupiedTile.OccupiedUnit = null;
         unit.transform.position = transform.position;
         OccupiedUnit = unit;
@@ -158,7 +199,6 @@ public abstract class Tile : MonoBehaviour
             unit.OccupiedTile = null;
         }
             
-
         foreach(Tile tile in path)
         {
             Vector3 startPos = unit.transform.position;
@@ -176,16 +216,20 @@ public abstract class Tile : MonoBehaviour
             unit.transform.position = endPos;
         }
 
+        combatUIManager.Instance.ToggleBlocker(false);
+        CardManager.instance.ToggleCardArea(true);
+
         OccupiedUnit = unit;
         unit.OccupiedTile = this;
         unit.moveRange = 0;
     }
 
-    public void ShowHighlight(bool state)
+    public void ShowHighlight(bool state, Color color)
     {
         if(highlight != null)
         {
             highlight.SetActive(state);
+            highlight.GetComponent<SpriteRenderer>().color = color;
         }
     }
 

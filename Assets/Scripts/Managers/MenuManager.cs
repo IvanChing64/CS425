@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private UnityEngine.UI.Button continueButton;
     [SerializeField] private AudioClip[] mainMenuSFX;
+    [SerializeField] private GameScreen currentScreen;
     public static MenuManager Instance;
 
     private void Awake()
@@ -19,9 +20,12 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        if(GameProgress.ClearedStages.Count == 0)
+        if (currentScreen == GameScreen.Start)
         {
-            continueButton.gameObject.SetActive(false);
+            if(GameProgress.ClearedStages.Count == 0)
+            {
+                continueButton.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -42,5 +46,33 @@ public class MenuManager : MonoBehaviour
     public void ContinueGame()
     {
         SceneManager.LoadScene("Scenes/StageSelection");
+    }
+
+    public void ToStory()
+    {
+        SceneManager.LoadScene("Scenes/StoryScenes");
+    }
+
+    public void ToControls()
+    {
+        SceneManager.LoadScene("Scenes/Controls");
+    }
+
+    public void PreviousScene()
+    {
+        int previousIndex = SceneManager.GetActiveScene().buildIndex - 1;
+        if(previousIndex >= 0)
+        {
+            SceneManager.LoadScene(previousIndex);
+        }
+    }
+
+    public enum GameScreen
+    {
+        Start = 0,
+        Story = 1,
+        Controls = 2,
+        StageSelect = 3,
+        Combat = 4
     }
 }

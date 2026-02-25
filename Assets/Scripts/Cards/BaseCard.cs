@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 //Developer: Bailey Escritor
 //Aggregated from multiple tutorials, Mainly Sinuous Deckbuilding Card Game Tutorials
@@ -20,7 +22,17 @@ public abstract class BaseCard : MonoBehaviour
     //Play the card's effect, overridden in derived classes
     public virtual void PlayCard()
     {
-        Debug.Log("Base Card Played");
+        isPlayed = true;
+    }
+
+    public virtual void SelectCard()
+    {
+        Debug.Log("Base Card Selected");
+    }
+
+    public virtual void DeselectCard()
+    {
+        Debug.Log("Base Card Deselected");
     }
 
     //Copies properties from ScriptableCard
@@ -30,6 +42,33 @@ public abstract class BaseCard : MonoBehaviour
         cardType = card.type;
         value = card.value;
         Debug.Log("Card Copied: " + cardName);
+    }
+
+    public virtual void ButtonPressed()
+    {
+        if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
+        if (CardManager.instance == null)
+        {
+            Debug.LogWarning("CardManager.instance is null.");
+            return;
+        }
+        if(CardManager.instance.selectedCard == this)
+        {
+            if(UnitManager.Instance.SelectedPlayer != null)
+            {
+                CardManager.instance.DeselectCard();
+                //CardManager.instance.PlaySelectedCard();
+            }
+            else
+            {
+                Debug.Log("Select a unit.");
+            }
+        }
+        else
+        {
+            CardManager.instance.SelectCard(this);
+            SelectCard();
+        }
     }
 
     // //Highlight card on mouse hover during player's turn
@@ -88,29 +127,4 @@ public abstract class BaseCard : MonoBehaviour
     //     //    CardManager.instance.PlaySelectedCard();
     //     //}
     // }
-
-    public virtual void ButtonPressed()
-    {
-        if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
-        if (CardManager.instance == null)
-        {
-            Debug.LogWarning("CardManager.instance is null.");
-            return;
-        }
-        if(CardManager.instance.selectedCard == this)
-        {
-            if(UnitManager.Instance.SelectedPlayer != null)
-            {
-                CardManager.instance.PlaySelectedCard(this);
-            }
-            else
-            {
-                Debug.Log("Select a unit.");
-            }
-        }
-        else
-        {
-            CardManager.instance.SelectCard(this);
-        }
-    }
 }

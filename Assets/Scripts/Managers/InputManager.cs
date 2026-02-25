@@ -75,6 +75,11 @@ public class InputManager : MonoBehaviour
 
             ClearMovementHighlights();
 
+            foreach (Tile t in GridManager.Instance.GetNeighborsOf(UnitManager.Instance.SelectedPlayer.OccupiedTile))
+            {
+                if (t.isWalkable) t.ShowHighlight(false, Tile.nonwalkableColor);
+            }
+
             CardManager.instance.DeselectCard();
             UnitManager.Instance.SelectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(false);
             UnitManager.Instance.SetSelectedPlayer(null);
@@ -97,8 +102,9 @@ public class InputManager : MonoBehaviour
             List<Tile> tilesInRange = selectedPlayer.GetTilesInMoveRange();
             foreach (Tile t in tilesInRange)
             {
-                t.ShowHighlight(false);
+                t.ShowHighlight(false, Tile.nonwalkableColor);
             }
+            selectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
         }
     }
 
