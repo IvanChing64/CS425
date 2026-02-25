@@ -85,9 +85,22 @@ public class NPC_Controller: MonoBehaviour
             return;
         }
 
-        if (endTile == null && UnitManager.Instance.SelectedPlayer != null)
+        if (endTile == null)
         {
-            endTile = GridManager.Instance.GetTileAtPosition(UnitManager.Instance.SelectedPlayer.transform.position);
+            var target = GetComponent<EnemyTargetingManager>();
+            if (target != null)
+            {
+                if(target.CurrentTarget == null || target.CurrentTarget.gameObject == null)
+                {
+                    target.SelectTarget();
+                }
+               
+                if (target.CurrentTarget != null)
+                {
+                    endTile = GridManager.Instance.GetTileForUnit(target.CurrentTarget.gameObject);
+                }
+            }
+                
         }
 
         if (!endTile.isWalkable) Debug.Log("End tile is terrain-blocked");
@@ -197,7 +210,14 @@ public class NPC_Controller: MonoBehaviour
         tilesMovedThisTurn = 0;
         HasFinishedTurn = false;
         isMoving = false;
+        //New: Ensure targeting happens first
+        var targeting = GetComponent<EnemyTargetingManager>();
+        if (targeting != null || targeting.CurrentTarget.gameObject == null)
+        {
+            targeting.SelectTarget();
+        }
         Tile startTile = npcUnit.OccupiedTile;
+        //GetComponent<EnemyTargetingManager>().SelectTarget();
         SetTarget(startTile);
         //Update();
         
