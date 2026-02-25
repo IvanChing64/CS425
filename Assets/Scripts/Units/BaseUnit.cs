@@ -15,8 +15,8 @@ public class BaseUnit : MonoBehaviour
     [SerializeField] healthbar healthbar;
     [SerializeField] private AudioClip[] hurtSFX;
 
-    public List<Tile> GetTilesInMoveRange() => MovementManager.Instance.GetTilesInRange(OccupiedTile, moveRange, false);
-    public List<Tile> GetTilesInAttackRange() => MovementManager.Instance.GetTilesInRange(OccupiedTile, attackRange, true);
+    public List<Tile> GetTilesInMoveRange() => RangeManager.GetTilesInRange(OccupiedTile, moveRange, RangeType.FloodMovement);
+    public List<Tile> GetTilesInAttackRange() => RangeManager.GetTilesInRange(OccupiedTile, attackRange, RangeType.FloodTargeting);
 
 
     //damage functions
