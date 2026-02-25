@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// <para>Script for handling player movements</para>
+/// <para>(USE RangeManager INSTEAD NOW) Script for handling player movements.</para>
 /// </summary>
 /// <remarks>by Liam Riel</remarks>
 public class MovementManager : MonoBehaviour
@@ -19,36 +19,11 @@ public class MovementManager : MonoBehaviour
     /// <summary>
     /// <para>Gets all tiles within a certain range of another tile</para>
     /// </summary>
-    /// <param name="startTile">The tile to search from</param>>
+    /// <param name="startTile">The tile to search from</param>
     /// <param name="range">The maximum range to search for tiles away from startTile</param>
     /// <returns>A list with all found tiles in range of the starting tile</returns>
-    public List<Tile> GetTilesInRange(Tile startTile, int range, bool targetting)
-    {
-        List<Tile> tilesInRange = new();
-        Queue<Tile> visitQueue = new();
-
-        visitQueue.Enqueue(startTile);
-
-        while (visitQueue.TryDequeue(out Tile visitedTile))
-        {
-            if (!targetting) {
-                foreach (Tile neighbor in visitedTile.Neighbors.Where(t => !tilesInRange.Contains(t) && t.Walkable && DistanceBetween(startTile, t) <= range))
-                {
-                    tilesInRange.Add(neighbor);
-                    visitQueue.Enqueue(neighbor);
-                }
-            } else
-            {
-                foreach (Tile neighbor in visitedTile.Neighbors.Where(t => !tilesInRange.Contains(t) && t.isWalkable && DistanceBetween(startTile, t) <= range))
-                {
-                    tilesInRange.Add(neighbor);
-                    visitQueue.Enqueue(neighbor);
-                }
-            }
-        }
-
-        return tilesInRange;
-    }
+    public List<Tile> GetTilesInRange(Tile startTile, int range, bool targetting) =>
+        RangeManager.GetTilesInRange(startTile, range, targetting ? RangeType.FloodTargeting : RangeType.FloodMovement);
 
     /// <summary>
     /// <para>Gets all tiles within a certain range of another tile with the ability to reconstruct a path to that tile</para>
@@ -56,28 +31,8 @@ public class MovementManager : MonoBehaviour
     /// <param name="startTile">The tile to search from</param>>
     /// <param name="range">The maximum range to search for tiles away from startTile</param>
     /// <returns>A dictionary of all found tiles (key) paired with the tile that precedes them (value) in range of the starting tile</returns>
-    public Dictionary<Tile, Tile> GetPathsInRange(Tile startTile, int range)
-    {
-        Dictionary<Tile, Tile> tilePathsInRange = new();
-        Queue<Tile> visitQueue = new();
-
-        tilePathsInRange.Add(startTile, null);
-        visitQueue.Enqueue(startTile);
-
-        while (visitQueue.TryDequeue(out Tile visitedTile))
-        {
-            foreach (Tile neighbor in visitedTile.Neighbors.Where(t => !tilePathsInRange.Keys.Contains(t) && t.Walkable && DistanceBetween(startTile, t) <= range))
-            {
-                tilePathsInRange.Add(neighbor, visitedTile);
-                visitQueue.Enqueue(neighbor);
-            }
-        }
-
-        // The start tile should not be 'reachable' from itself, b/c that could cause problems with path reconstruction later
-        tilePathsInRange.Remove(startTile);
-        
-        return tilePathsInRange;
-    }
+    public Dictionary<Tile, Tile> GetPathsInRange(Tile startTile, int range) =>
+        RangeManager.GetPathsInRange(startTile, range);
 
     /// <summary>
     /// <para>Finds the distance between two tiles in terms of the number of orthogonal single-tile moves it would take to reach one from the other</para>
