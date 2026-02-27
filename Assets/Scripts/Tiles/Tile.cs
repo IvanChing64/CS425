@@ -100,9 +100,9 @@ public abstract class Tile : MonoBehaviour
             List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
 
             /* Complex implementation to allow path reconstruction
-            Dictionary<Tile, Tile> tilePathsInRange = MovementManager.Instance.GetPathsInRange(
-                UnitManager.Instance.SelectedPlayer.OccupiedTile, UnitManager.Instance.SelectedPlayer.moveRange);
-            List<Tile> movementPath = MovementManager.Instance.ReconstructPath(this, tilePathsInRange);
+            Dictionary<Tile, Tile> tilePathsInRange = RangeManager.GetPathsInRange(
+                UnitManager.Instance.SelectedPlayer.OccupiedTile, UnitManager.Instance.SelectedPlayer.moveRange, RangeType.FloodMovement);
+            List<Tile> movementPath = RangeManager.ReconstructPath(this, tilePathsInRange);
             */
 
             // If this tile is NOT in the selected unit's movement range, deny movement

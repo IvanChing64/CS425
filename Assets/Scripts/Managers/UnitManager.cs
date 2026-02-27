@@ -124,6 +124,8 @@ public class UnitManager : MonoBehaviour
 
     public void BeginEnemyTurn()
     {
+        EnemyTargetingManager.TargetCounts.Clear();
+
         Debug.Log("BeginEnemyTurn: SelectedPlayer = " + SelectedPlayer);
 
 
@@ -132,7 +134,13 @@ public class UnitManager : MonoBehaviour
 
         for (int i = 0; i < enemiesSpawned.Count; i++)
         {
+            //NEW: Check if enemy is null or destroyed before trying to access it
             var enemy = enemiesSpawned[i];
+            if (enemy == null || enemy.gameObject == null)
+            {
+                enemiesSpawned.RemoveAt(i);
+                continue;
+            }
             var npcController = enemy.GetComponent<NPC_Controller>();
             if (npcController != null && SelectedPlayer != null)
             {
