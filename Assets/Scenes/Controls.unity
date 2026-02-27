@@ -2935,7 +2935,9 @@ MonoBehaviour:
     WASD/ARROWs - Camera Pan
 
     Scroll
-    Wheel - Camera Zoom'
+    Wheel - Camera Zoom
+
+    Space Bar - Camera Center'
 --- !u!222 &1566991096
 CanvasRenderer:
   m_ObjectHideFlags: 0

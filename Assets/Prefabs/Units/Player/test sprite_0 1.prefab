@@ -293,10 +293,14 @@ MonoBehaviour:
   controlCardPrefab: {fileID: 3618353575999263506, guid: a0bcc9f3209f6bd4d9d005be278b88a3, type: 3}
   currentDeck: []
   currentHand: []
+  deckCardIDs: 
+  handCardIDs: 
   drawNum: 3
+  actionPoints: 3
   deckIndex: 0
   handDrawn: 0
   handSelected: 0
+  selectedCard: {fileID: 0}
 --- !u!1 &5483545698060636878
 GameObject:
   m_ObjectHideFlags: 0

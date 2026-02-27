@@ -13,7 +13,8 @@ public class CardManager : MonoBehaviour
     public BasePlayer selectedPlayer;
     public BaseCard selectedCard;
     public GameObject cardArea;
-    [SerializeField] public static int cardSelectOffsetY = 35;
+    public Vector3 cardLocation;
+    [SerializeField] public static int cardSelectOffsetY = 22;
 
     // Initializes instance and calls backdrop creation
     void Awake()
@@ -64,7 +65,7 @@ public class CardManager : MonoBehaviour
         if (selectedCard != null)
         {
             HandManager selectedHand = selectedPlayer.GetComponent<HandManager>();
-            //selectedPlayer.GetComponent<HandManager>().handCardIDs.Remove(selectedHand.handCardIDs[selectedHand.currentHand.IndexOf(selectedCard)]);
+            selectedPlayer.GetComponent<HandManager>().handCardIDs.Remove(selectedHand.handCardIDs[selectedHand.currentHand.IndexOf(selectedCard)]);
             selectedPlayer.GetComponent<HandManager>().currentHand.Remove(selectedCard);
             Destroy(selectedCard.gameObject);
             DeselectCard();
