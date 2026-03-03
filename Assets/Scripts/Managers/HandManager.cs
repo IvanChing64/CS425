@@ -234,7 +234,7 @@ public class HandManager : MonoBehaviour
         {
             foreach (BaseCard card in currentHand)
             {
-                card.GameObject().SetActive(true);
+                card.gameObject.SetActive(true);
             }
             handSelected = true;
             Debug.Log("Hand is now shown.");
@@ -242,7 +242,7 @@ public class HandManager : MonoBehaviour
         {
             foreach (BaseCard card in currentHand)
             {
-                card.GameObject().SetActive(false);
+                card.gameObject.SetActive(false);
             }
             handSelected = false;
             Debug.Log("Hand is now hidden.");
