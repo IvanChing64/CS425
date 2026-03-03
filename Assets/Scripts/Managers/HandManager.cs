@@ -104,104 +104,179 @@ public class HandManager : MonoBehaviour
         // Draw up to DrawNum cards from the deck starting at deckIndex
         int cardsToDraw = drawNum;
 
-        if (currentHand.Count == currentDeck.Count || currentHand.Count == maxHandSize)
+        if (currentHand.Count >= currentDeck.Count || currentHand.Count == maxHandSize)
         {
             Debug.Log("Hand is full, cannot draw more cards.");
             return;
         }
 
-        // if (currentHand.Count == 0)
-        // {
-        //     ShuffleDeck();
-        // }
-
         for (int i = 0; i < cardsToDraw; i++)
         {
             Debug.Log("Drawing card " + (i + 1) + " of " + cardsToDraw);
-            if (currentDeck.Count == 0) break;
-            if (currentHand.Count == maxHandSize) return;
+            DrawCard();
 
-            // Reset deckIndex, if it exceeds deck size, to the top of the deck and reshuffle
-            if (deckIndex >= currentDeck.Count)
-            {
-                deckIndex = 0;
-                ShuffleDeck();
-                if (currentHand.Count != 0)
-                {
-                    return;
-                }
-            }
+            // // Reset deckIndex, if it exceeds deck size, to the top of the deck and reshuffle
+            // if (deckIndex >= currentDeck.Count)
+            // {
+            //     deckIndex = 0;
+            //     ShuffleDeck();
+            //     if (currentHand.Count != 0)
+            //     {
+            //         return;
+            //     }
+            // }
 
-            ScriptableCard drawnCard = currentDeck[deckIndex];
-            GameObject newCard = null;
-            Vector3 spawnPos = new Vector3(currentHand.Count * cardPositionOffsetX - cardPositionOffsetX, cardPositionOffsetY, 0);
+            // ScriptableCard drawnCard = currentDeck[deckIndex];
+            // GameObject newCard = null;
+            // Vector3 spawnPos = new Vector3(currentHand.Count * cardPositionOffsetX - cardPositionOffsetX, cardPositionOffsetY, 0);
 
-            //Check if drawn card is already in hand, if so, skip and draw next card
+            // //Check if drawn card is already in hand, if so, skip and draw next card
             
-            bool notInHand = false;
+            // bool notInHand = false;
 
-            if (currentHand.Count >= currentDeck.Count)
-            {
-                Debug.Log("No More Cards to draw");
-                return;
-            }
+            // if (currentHand.Count >= currentDeck.Count)
+            // {
+            //     Debug.Log("No More Cards to draw");
+            //     return;
+            // }
 
-            while (!notInHand)
-            {
-                notInHand = true;
-                for (int j = 0; j < currentHand.Count; j++)
-                {
-                    if (handCardIDs.Count > j && handCardIDs[j] == deckCardIDs[deckIndex])
-                    {
-                        Debug.Log("Card already in hand: " + drawnCard.cardName);
-                        deckIndex++;
-                        if (deckIndex >= currentDeck.Count)
-                        {
-                            deckIndex = 0;
-                            ShuffleDeck();
-                        }
-                        drawnCard = currentDeck[deckIndex];
-                        notInHand = false;
-                        break;
-                    }
-                }
-            }
+            // while (!notInHand)
+            // {
+            //     notInHand = true;
+            //     for (int j = 0; j < currentHand.Count; j++)
+            //     {
+            //         if (handCardIDs.Count > j && handCardIDs[j] == deckCardIDs[deckIndex])
+            //         {
+            //             Debug.Log("Card already in hand: " + drawnCard.cardName);
+            //             deckIndex++;
+            //             if (deckIndex >= currentDeck.Count)
+            //             {
+            //                 deckIndex = 0;
+            //                 ShuffleDeck();
+            //             }
+            //             drawnCard = currentDeck[deckIndex];
+            //             notInHand = false;
+            //             break;
+            //         }
+            //     }
+            // }
             
 
-            //Instantiate card based on its type
-            switch (drawnCard.type)
-            {
-                case Type.Support:
-                    newCard = Instantiate(supportCardPrefab, spawnPos, Quaternion.identity);
-                    break;
-                case Type.Attack:
-                    newCard = Instantiate(attackCardPrefab, spawnPos, Quaternion.identity);
-                    break;
-                case Type.Movement:
-                    newCard = Instantiate(movementCardPrefab, spawnPos, Quaternion.identity);
-                    break;
+            // //Instantiate card based on its type
+            // switch (drawnCard.type)
+            // {
+            //     case Type.Support:
+            //         newCard = Instantiate(supportCardPrefab, spawnPos, Quaternion.identity);
+            //         break;
+            //     case Type.Attack:
+            //         newCard = Instantiate(attackCardPrefab, spawnPos, Quaternion.identity);
+            //         break;
+            //     case Type.Movement:
+            //         newCard = Instantiate(movementCardPrefab, spawnPos, Quaternion.identity);
+            //         break;
 
-                case Type.Control:
-                    newCard = Instantiate(controlCardPrefab, spawnPos, Quaternion.identity);
-                    break;
+            //     case Type.Control:
+            //         newCard = Instantiate(controlCardPrefab, spawnPos, Quaternion.identity);
+            //         break;
 
-                default:
-                    Debug.LogWarning("Unknown card type: " + drawnCard.type);
-                    continue;
-            }
+            //     default:
+            //         Debug.LogWarning("Unknown card type: " + drawnCard.type);
+            //         continue;
+            // }
 
-            //Add new card to current hand and copy properties from scriptable card
-            currentHand.Add(newCard.GetComponent<BaseCard>());
-            newCard.GetComponent<BaseCard>().cardHolder.transform.localPosition = spawnPos;
-            handCardIDs.Add(deckCardIDs[deckIndex]);
-            newCard.GetComponent<CardDisplay>().cardData = drawnCard;
-            newCard.GetComponent<BaseCard>().CopyScriptableCard(drawnCard);
-            deckIndex++;
+            // //Add new card to current hand and copy properties from scriptable card
+            // currentHand.Add(newCard.GetComponent<BaseCard>());
+            // newCard.GetComponent<BaseCard>().cardHolder.transform.localPosition = spawnPos;
+            // handCardIDs.Add(deckCardIDs[deckIndex]);
+            // newCard.GetComponent<CardDisplay>().cardData = drawnCard;
+            // newCard.GetComponent<BaseCard>().CopyScriptableCard(drawnCard);
+            // deckIndex++;
         }
 
         handDrawn = true;
         UpdateHandPositions();
         Debug.Log("Hand Drawn with " + currentHand.Count + " cards.");
+    }
+
+    public void DrawCard()
+    {
+        bool notInHand = false;
+
+        if (currentDeck.Count == 0) return;
+        if (currentHand.Count == maxHandSize) return;
+
+        // Reset deckIndex, if it exceeds deck size, to the top of the deck and reshuffle
+        if (deckIndex >= currentDeck.Count)
+        {
+            deckIndex = 0;
+            ShuffleDeck();
+            if (currentHand.Count != 0)
+            {
+                return;
+            }
+        }
+
+        ScriptableCard drawnCard = currentDeck[deckIndex];
+        GameObject newCard = null;
+        Vector3 spawnPos = new Vector3(currentHand.Count * cardPositionOffsetX - cardPositionOffsetX, cardPositionOffsetY, 0);
+
+        //Check if drawn card is already in hand, if so, skip and draw next card
+        if (currentHand.Count >= currentDeck.Count)
+        {
+            Debug.Log("No More Cards to draw");
+            return;
+        }
+
+        while (!notInHand)
+        {
+            notInHand = true;
+            for (int j = 0; j < currentHand.Count; j++)
+            {
+                if (handCardIDs.Count > j && handCardIDs[j] == deckCardIDs[deckIndex])
+                {
+                    Debug.Log("Card already in hand: " + drawnCard.cardName);
+                    deckIndex++;
+                    if (deckIndex >= currentDeck.Count)
+                    {
+                        deckIndex = 0;
+                        ShuffleDeck();
+                    }
+                    drawnCard = currentDeck[deckIndex];
+                    notInHand = false;
+                    break;
+                }
+            }
+        }
+
+        //Instantiate card based on its type
+        switch (drawnCard.type)
+        {
+            case Type.Support:
+                newCard = Instantiate(supportCardPrefab, spawnPos, Quaternion.identity);
+                break;
+            case Type.Attack:
+                newCard = Instantiate(attackCardPrefab, spawnPos, Quaternion.identity);
+                break;
+            case Type.Movement:
+                newCard = Instantiate(movementCardPrefab, spawnPos, Quaternion.identity);
+                break;
+
+            case Type.Control:
+                newCard = Instantiate(controlCardPrefab, spawnPos, Quaternion.identity);
+                break;
+
+            default:
+                Debug.LogWarning("Unknown card type: " + drawnCard.type);
+                break;
+        }
+
+        //Add new card to current hand and copy properties from scriptable card
+        currentHand.Add(newCard.GetComponent<BaseCard>());
+        newCard.GetComponent<BaseCard>().cardHolder.transform.localPosition = spawnPos;
+        handCardIDs.Add(deckCardIDs[deckIndex]);
+        newCard.GetComponent<CardDisplay>().cardData = drawnCard;
+        newCard.GetComponent<BaseCard>().CopyScriptableCard(drawnCard);
+        deckIndex++;
     }
 
     // Populate `currentDeck` from Player Deck Data
