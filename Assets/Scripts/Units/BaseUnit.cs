@@ -83,4 +83,9 @@ public class BaseUnit : MonoBehaviour
             UnitManager.Instance.enemyUnitCount -= 1; // Decrease the enemy unit count
         Destroy(gameObject);
     }
+
+    public virtual void SelectUnit()
+    {
+        
+    }
 }

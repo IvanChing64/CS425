@@ -13,4 +13,9 @@ public class BasePlayer : BaseUnit
         dmg = 0;
         canAttack = false;
     }
+
+    public override void SelectUnit()
+    {
+
+    }
 }
