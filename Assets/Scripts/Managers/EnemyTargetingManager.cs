@@ -22,7 +22,7 @@ public class EnemyTargetingManager : MonoBehaviour
             CurrentTarget = null;
             return;
         }
-
+        
 
         BasePlayer bestPlayer = null;
         float bestDistance = Mathf.Infinity;
