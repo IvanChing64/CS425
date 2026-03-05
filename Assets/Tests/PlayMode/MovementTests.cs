@@ -46,15 +46,6 @@ public class MovementTests
         player.OccupiedTile.OccupiedUnit = player;
     }
 
-    // A Test behaves as an ordinary method
-    //[Test]
-    //public void Test_MovementLogic()
-    //{
-    //    // Use the Assert class to test conditions
-    //}
-
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
     [UnityTest]
     public IEnumerator Test_PlayerMovement()
     {
@@ -82,6 +73,20 @@ public class MovementTests
     [TearDown]
     public void TearDown()
     {
-        
+        if (player != null)
+        {
+            Object.DestroyImmediate(player.gameObject);
+        }
+
+        if (GridManager.Instance != null)
+        {
+            var dictField = typeof(GridManager).GetField("tiles", BindingFlags.NonPublic | BindingFlags.Instance);
+            Dictionary<Vector2, Tile> tiles = (Dictionary<Vector2, Tile>)dictField.GetValue(GridManager.Instance);
+            foreach (Tile tile in tiles.Values)
+            {
+                Object.DestroyImmediate(tile.gameObject);
+            }
+            Object.DestroyImmediate(GridManager.Instance.gameObject);
+        }
     }
 }
