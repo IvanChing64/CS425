@@ -71,28 +71,6 @@ public abstract class BaseCard : MonoBehaviour
         }
     }
 
-    // //Highlight card on mouse hover during player's turn
-    // void OnMouseEnter()
-    // {
-    //     if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
-    //     if (highlightEffect != null)
-    //     {
-    //         //this.transform.position += new Vector3(0, 0.85f, 0);
-    //         highlightEffect.SetActive(true);
-    //     }
-    // }
-
-    // //Remove highlight when mouse exits card area during player's turn
-    // void OnMouseExit()
-    // {
-    //     if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
-    //     if (highlightEffect != null)
-    //     {
-    //         //this.transform.position -= new Vector3(0, 0.85f, 0);
-    //         highlightEffect.SetActive(false);
-    //     }
-    // }
-
     // //Selects or plays the card on mouse click during player's turn
     // private void OnMouseDown()
     // {
