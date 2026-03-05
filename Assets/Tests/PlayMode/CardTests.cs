@@ -47,6 +47,9 @@ public class CardTests
 
         Assert.AreEqual(3, testPlayer.GetComponent<HandManager>().currentHand.Count, "Player should have a hand of 3");
         Assert.IsTrue(testPlayer.GetComponent<HandManager>().handDrawn, "Player should lose the ability to draw their hand");
+        Assert.IsTrue(testPlayer.GetComponent<HandManager>().currentHand[0].cardName == testPlayer.startingDeck[0], "First Card should be March");
+        Assert.IsTrue(testPlayer.GetComponent<HandManager>().currentHand[1].cardName == testPlayer.startingDeck[1], "First Card should be Guard");
+        Assert.IsTrue(testPlayer.GetComponent<HandManager>().currentHand[2].cardName == testPlayer.startingDeck[2], "First Card should be Slash");
         yield return null;
     }
 
