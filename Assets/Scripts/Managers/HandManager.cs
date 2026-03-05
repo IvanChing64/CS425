@@ -16,7 +16,7 @@ public class HandManager : MonoBehaviour
     - Shuffles the deck when needed
     */
 
-    [SerializeField] private GameObject attackCardPrefab, movementCardPrefab, supportCardPrefab, controlCardPrefab;
+    // [SerializeField] private GameObject attackCardPrefab, movementCardPrefab, supportCardPrefab, controlCardPrefab;
     public List<ScriptableCard> currentDeck = new List<ScriptableCard>(); // MinMaxSize: 6, MaxMaxSize: 9
     public List<BaseCard> currentHand = new List<BaseCard>(); // MinInitialSize: 3, MaxInitialSize: 5
     [SerializeField] public List<int> deckCardIDs = new List<int>();
@@ -223,7 +223,7 @@ public class HandManager : MonoBehaviour
         //Check if drawn card is already in hand, if so, skip and draw next card
         if (currentHand.Count >= currentDeck.Count)
         {
-            Debug.Log("No More Cards to draw");
+            Debug.Log("No More Cards to draw " + currentHand.Count);
             return;
         }
 
@@ -252,22 +252,22 @@ public class HandManager : MonoBehaviour
         switch (drawnCard.type)
         {
             case Type.Support:
-                newCard = Instantiate(supportCardPrefab, spawnPos, Quaternion.identity);
+                newCard = Instantiate(DeckManager.instance.supportCardPrefab, spawnPos, Quaternion.identity);
                 break;
             case Type.Attack:
-                newCard = Instantiate(attackCardPrefab, spawnPos, Quaternion.identity);
+                newCard = Instantiate(DeckManager.instance.attackCardPrefab, spawnPos, Quaternion.identity);
                 break;
             case Type.Movement:
-                newCard = Instantiate(movementCardPrefab, spawnPos, Quaternion.identity);
+                newCard = Instantiate(DeckManager.instance.movementCardPrefab, spawnPos, Quaternion.identity);
                 break;
 
             case Type.Control:
-                newCard = Instantiate(controlCardPrefab, spawnPos, Quaternion.identity);
+                newCard = Instantiate(DeckManager.instance.controlCardPrefab, spawnPos, Quaternion.identity);
                 break;
 
             default:
                 Debug.LogWarning("Unknown card type: " + drawnCard.type);
-                break;
+                return;
         }
 
         //Add new card to current hand and copy properties from scriptable card

@@ -3133,6 +3133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf124ab91d84d54ea5360120a553e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeckManager
+  attackCardPrefab: {fileID: 0}
+  movementCardPrefab: {fileID: 0}
+  supportCardPrefab: {fileID: 0}
+  controlCardPrefab: {fileID: 0}
   allCards: []
 --- !u!1 &1131804411
 GameObject:
