@@ -11,13 +11,16 @@ using UnityEngine.Serialization;
 public class UnitManager : MonoBehaviour
 {
     public static UnitManager Instance;
+
+    [SerializeField] private List<ScriptableUnit> playersToSpawn = new List<ScriptableUnit>();
+    [SerializeField] private List<ScriptableUnit> enemiesToSpawn = new List<ScriptableUnit>();
+
     private List<ScriptableUnit> units;
     //Adding reference to player tile.
     private Tile playerTile;
     private List<Tile> enemyTiles = new List<Tile>();
 
     public BasePlayer SelectedPlayer;
-
     public List<BasePlayer> playersSpawned = new List<BasePlayer>();
     public List<BaseEnemy> enemiesSpawned = new List<BaseEnemy>();
 
@@ -27,22 +30,20 @@ public class UnitManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        units = Resources.LoadAll<ScriptableUnit>("Units").ToList();
     }
 
-    public void SpawnPlayers(int count = 3)
+    public void SpawnPlayers()
     {
         playersSpawned.Clear();
-        playerUnitCount = count;
-        for (int i = 0; i < playerUnitCount; i++)
+
+        for (int i = 0; i < playersToSpawn.Count; i++)
         {
+            var unitData = playersToSpawn[i];
             var randomSpawnTile = GridManager.Instance.GetPlayerSpawnTile();
 
             if (randomSpawnTile != null)
             {
-                var randomPrefab = GetRandomUnit<BasePlayer>(Faction.Player);
-                BasePlayer spawnedPlayer = Instantiate(randomPrefab, randomSpawnTile.transform.position, Quaternion.identity);
+                BasePlayer spawnedPlayer = Instantiate((BasePlayer)unitData.UnitPrefab, randomSpawnTile.transform.position, Quaternion.identity);
                 spawnedPlayer.name = $"DEBUG_Player_{i}_{randomSpawnTile.Position.x}_{randomSpawnTile.Position.y}";
                 Debug.Log($"Found Tile for player{i}");
                 randomSpawnTile.setUnit(spawnedPlayer);
@@ -69,33 +70,41 @@ public class UnitManager : MonoBehaviour
             }
 
         }
+        playerUnitCount = playersSpawned.Count();
         Debug.Log($"Spawned {playersSpawned.Count} players total.");
         GameManager.Instance.ChangeState(GameState.SpawnEnemies);
     }
 
-    public void SpawnEnemies(int count = 3)
+    public void SpawnEnemies()
     {
-        enemyUnitCount = count;
-        for (int i = 0; i < enemyUnitCount; i++)
+        enemiesSpawned.Clear();
+        enemyTiles.Clear();
+        for (int i = 0; i < enemiesToSpawn.Count; i++)
         {
-            var randomPrefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
-            var spawnedEnemy = Instantiate(randomPrefab);
+            var unitData = enemiesToSpawn[i];
             var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
+            if(randomSpawnTile != null)
+            {
+                BaseEnemy spawnedEnemy = Instantiate((BaseEnemy)unitData.UnitPrefab, randomSpawnTile.transform.position, Quaternion.identity);
+                spawnedEnemy.name = $"Enemy_{i}";
+                randomSpawnTile.setUnit(spawnedEnemy);
+                enemiesSpawned.Add(spawnedEnemy);
+                enemyTiles.Add(randomSpawnTile);
+            }
 
-            randomSpawnTile.setUnit(spawnedEnemy);
-
-            enemiesSpawned.Add(spawnedEnemy);
-            enemyTiles.Add(randomSpawnTile);
+            
         }
+        enemyUnitCount = enemiesSpawned.Count();
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
 
 
 
-    private T GetRandomUnit<T>(Faction faction) where T : BaseUnit
-    {
-        return (T)units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
-    }
+    //private T GetRandomUnit<T>(Faction faction) where T : BaseUnit
+    //{
+    //    return (T)units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
+    //}
+
     public void SetSelectedPlayer(BasePlayer player)
     {
         if (SelectedPlayer != null && SelectedPlayer != player)

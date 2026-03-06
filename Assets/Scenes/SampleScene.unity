@@ -5185,6 +5185,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57992a209eeeeb84da058583231e104d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitManager
+  playersToSpawn:
+  - {fileID: 11400000, guid: f2d5425ab28ecbb4ebb8bc1550f29a69, type: 2}
+  - {fileID: 11400000, guid: f2d5425ab28ecbb4ebb8bc1550f29a69, type: 2}
+  - {fileID: 11400000, guid: d502f600d9ca1be40a72b0264cc05c2f, type: 2}
+  - {fileID: 11400000, guid: bd85134c64687194690aa1e0e21a8b7e, type: 2}
+  enemiesToSpawn:
+  - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
+  - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
   SelectedPlayer: {fileID: 0}
   playersSpawned: []
   enemiesSpawned: []
