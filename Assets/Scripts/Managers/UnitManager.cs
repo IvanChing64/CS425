@@ -32,6 +32,20 @@ public class UnitManager : MonoBehaviour
         Instance = this;
     }
 
+    public void AddUnitToParty(ScriptableUnit unit)
+    {
+        playersToSpawn.Add(unit);
+    }
+    public void RemoveUnitFromParty(ScriptableUnit unit)
+    {
+        playersToSpawn.Remove(unit);
+    }
+    public void SetNumberEnemies(List<ScriptableUnit> wave)
+    {
+        enemiesToSpawn = wave;
+    }
+
+
     public void SpawnPlayers()
     {
         playersSpawned.Clear();
