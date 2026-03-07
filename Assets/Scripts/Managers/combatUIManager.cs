@@ -16,6 +16,7 @@ public class combatUIManager : MonoBehaviour
 
     private BasePlayer targetPlayer;
     private BaseEnemy targetEnemy;
+    Animator playerAnim;
     public bool IsCombatMenuOpen => combatPanel.activeSelf;
     public bool IsEndTurnMenuOpen => endTurnPanel.activeSelf;
 
@@ -51,6 +52,11 @@ public class combatUIManager : MonoBehaviour
         //SoundFXManager.instance.PlaySoundFXClip(damageSoundClips, transform, 1f);
         if (targetEnemy != null)
         {
+            targetPlayer.GetComponent<Animator>();
+            if(playerAnim != null)
+            {
+                playerAnim.SetTrigger("attack");
+            }
             targetEnemy.takeDamage(targetPlayer.dmg);
             targetPlayer.canAttack = false;
             targetPlayer.dmg = 0;
@@ -69,6 +75,11 @@ public class combatUIManager : MonoBehaviour
     {
         if (defender != null && attacker != null)
         {
+            attacker.GetComponent<Animator>();
+            if (playerAnim != null)
+            {
+                playerAnim.SetTrigger("attack");
+            }
             defender.takeDamage(attacker.dmg);
             attacker.canAttack = false;
             attacker.dmg = 0;
@@ -111,5 +122,4 @@ public class combatUIManager : MonoBehaviour
     {
         blocker.SetActive(isActive);
     }
-
 }

@@ -193,6 +193,11 @@ public abstract class Tile : MonoBehaviour
 
     private IEnumerator MoveUnitPath(BaseUnit unit, List<Tile> path)
     {
+        Animator UnitAnimator = unit.GetComponent<Animator>();
+        if(UnitAnimator != null)
+        {
+            UnitAnimator.SetBool("isMoving", true);
+        }
         if (unit.OccupiedTile != null)
         {
             unit.OccupiedTile.OccupiedUnit = null;
@@ -214,6 +219,10 @@ public abstract class Tile : MonoBehaviour
             }
 
             unit.transform.position = endPos;
+        }
+        if (UnitAnimator != null)
+        {
+            UnitAnimator.SetBool("isMoving", false);
         }
 
         combatUIManager.Instance.ToggleBlocker(false);

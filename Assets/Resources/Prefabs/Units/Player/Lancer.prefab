@@ -261,6 +261,7 @@ MonoBehaviour:
   dmg: 0
   moveRange: 0
   attackRange: 1
+  UnitAnimator: {fileID: 7650870887470218107}
   healthbar: {fileID: 6525803158315793462}
   hurtSFX:
   - {fileID: 8300000, guid: 8aac66cdf036f89479bdb992d5a73ffd, type: 3}

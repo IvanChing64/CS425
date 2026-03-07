@@ -162,6 +162,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6115810445861885752
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -207,6 +208,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 7384290322352760091, guid: 728135fe2ac4b434ab56e445d647d2a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -216,7 +218,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &7650870887470218107
 Animator:
@@ -260,6 +261,7 @@ MonoBehaviour:
   dmg: 0
   moveRange: 0
   attackRange: 1
+  UnitAnimator: {fileID: 7650870887470218107}
   healthbar: {fileID: 6525803158315793462}
   hurtSFX:
   - {fileID: 8300000, guid: 8aac66cdf036f89479bdb992d5a73ffd, type: 3}
@@ -287,10 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1798e46875860434abe15b0e5fd985a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandManager
-  attackCardPrefab: {fileID: 7797280066774897558, guid: f0a19f5a0b9fe894ca5d97bce7b794cb, type: 3}
-  movementCardPrefab: {fileID: 5971034943928112141, guid: f43d89dcd6fe997419e218c469d846e4, type: 3}
-  supportCardPrefab: {fileID: 305515035691593622, guid: dc1810b3baa63014d8a2de2d6168d67a, type: 3}
-  controlCardPrefab: {fileID: 3618353575999263506, guid: a0bcc9f3209f6bd4d9d005be278b88a3, type: 3}
   currentDeck: []
   currentHand: []
   deckCardIDs: 
