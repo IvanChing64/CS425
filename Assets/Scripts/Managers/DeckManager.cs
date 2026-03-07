@@ -6,6 +6,7 @@ using UnityEngine;
 public class DeckManager : MonoBehaviour
 {
     public static DeckManager instance {get; private set;}
+    public GameObject attackCardPrefab, movementCardPrefab, supportCardPrefab, controlCardPrefab;
     public List<ScriptableCard> allCards = new List<ScriptableCard>();
     private bool initialized = false;
 
@@ -19,6 +20,10 @@ public class DeckManager : MonoBehaviour
             initialized = true;
             ScriptableCard[] cards = Resources.LoadAll<ScriptableCard>("Cards");
             allCards.AddRange(cards);
+            attackCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/AttackCardPrefab");
+            movementCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/MovementCardPrefab");
+            supportCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/SupportCardPrefab");
+            controlCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/ControlCardPrefab");
 
             Debug.Log("DeckManager Instance Created & Initialized");
         } else
@@ -36,6 +41,10 @@ public class DeckManager : MonoBehaviour
             initialized = true;
             ScriptableCard[] cards = Resources.LoadAll<ScriptableCard>("Cards");
             allCards.AddRange(cards);
+            attackCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/AttackCardPrefab");
+            movementCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/MovementCardPrefab");
+            supportCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/SupportCardPrefab");
+            controlCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/ControlCardPrefab");
 
             Debug.Log("DeckManager Initialized");
         } else

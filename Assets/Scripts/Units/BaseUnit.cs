@@ -22,7 +22,11 @@ public class BaseUnit : MonoBehaviour
     //damage functions
     public void takeDamage(float damageAmount)
     {
-        SoundFXManager.instance.PlaySoundFXClip(hurtSFX, transform, 1f);
+        if(SoundFXManager.instance != null)
+        {
+            SoundFXManager.instance.PlaySoundFXClip(hurtSFX, transform, 1f);
+        }
+        
 
         healthbar = GetComponentInChildren<healthbar>();
         float damage = damageAmount;

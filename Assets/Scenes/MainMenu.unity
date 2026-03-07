@@ -198,7 +198,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pandora's ToyBox
+  m_Text: Wonderkin ToyBox
 --- !u!114 &51065517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1120,6 +1120,7 @@ MonoBehaviour:
   continueButton: {fileID: 1101062563}
   mainMenuSFX:
   - {fileID: 8300000, guid: aeb2b1f1d428a9549a37a5c62d92b531, type: 3}
+  currentScreen: 0
 --- !u!4 &1682712901
 Transform:
   m_ObjectHideFlags: 0
