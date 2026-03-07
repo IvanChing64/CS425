@@ -1281,16 +1281,16 @@ MonoBehaviour:
 
 
 
-    Mouse 2 - Delect
+    Mouse 2 - Deselect
 
 
 
-    WASD/ARROWs - Camera Pan
+    WASD/ARROWs - Camera
+    Pan
 
 
 
-    Scroll
-    Wheel - Camera Zoom
+    Scroll Wheel - Camera Zoom
 
 
 
