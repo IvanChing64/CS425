@@ -7,11 +7,28 @@ using UnityEngine.SceneManagement;
 //Usage: Pause menu to change scenes,freeze time, and change settings
 public class PauseMenu : MonoBehaviour
 {
+    public static PauseMenu instance;
+
     [SerializeField] private AudioClip[] buttonSFX;
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject settingUI;
     public GameObject blocker;
+
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        } else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -77,6 +94,7 @@ public class PauseMenu : MonoBehaviour
     {
         SoundFXManager.instance.PlaySoundFXClip(buttonSFX, transform, 1f);
         Time.timeScale = 1f;
+        GameIsPaused = false;
         SceneManager.LoadScene("MainMenu");
         Debug.Log("Loading Menu");
     }

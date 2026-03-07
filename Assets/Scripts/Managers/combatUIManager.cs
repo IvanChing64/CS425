@@ -121,6 +121,6 @@ public class combatUIManager : MonoBehaviour
 
     public void ToggleBlocker(bool isActive)
     {
-        blocker.SetActive(isActive);
+        //blocker.SetActive(isActive);
     }
 }
