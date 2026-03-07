@@ -27,7 +27,7 @@ public class HandManager : MonoBehaviour
     public bool handDrawn = false;
     public bool handSelected = false;
     public BaseCard selectedCard;
-    public static int cardPositionOffsetX = 200, cardPositionOffsetY = -385; // X: How far cards are from each other, Y: How close cards are to the bottom
+    public static int cardPositionOffsetX = 198, cardPositionOffsetY = -402; // X: How far cards are from each other, Y: How close cards are to the bottom
     public static int maxHandSize = 6;
 
     //Initalizes instance and fills deck
@@ -63,7 +63,7 @@ public class HandManager : MonoBehaviour
             deckCardIDs[randomIndex] = tempID;
             
         }
-        Debug.Log("Deck Shuffled");
+        //Debug.Log("Deck Shuffled");
     }
 
     //Draw cards up to maxHandSize from currentDeck
@@ -112,8 +112,8 @@ public class HandManager : MonoBehaviour
 
         for (int i = 0; i < cardsToDraw; i++)
         {
-            Debug.Log("Drawing card " + (i + 1) + " of " + cardsToDraw);
-            DrawCard();
+            //Debug.Log("Drawing card " + (i + 1) + " of " + cardsToDraw);
+            DrawCard(false);
 
             // // Reset deckIndex, if it exceeds deck size, to the top of the deck and reshuffle
             // if (deckIndex >= currentDeck.Count)
@@ -195,10 +195,10 @@ public class HandManager : MonoBehaviour
 
         handDrawn = true;
         UpdateHandPositions();
-        Debug.Log("Hand Drawn with " + currentHand.Count + " cards.");
+        //Debug.Log("Hand Drawn with " + currentHand.Count + " cards.");
     }
 
-    public void DrawCard()
+    public void DrawCard(bool extraDraw)
     {
         bool notInHand = false;
 
@@ -215,6 +215,18 @@ public class HandManager : MonoBehaviour
                 return;
             }
         }
+
+        if (extraDraw)
+        {
+            if (actionPoints > 0)
+            {
+                actionPoints--;
+            } else
+            {
+                Debug.Log("No More Action Points to use");
+                return;
+            }
+        } Debug.Log("Action Points: " + actionPoints);
 
         ScriptableCard drawnCard = currentDeck[deckIndex];
         GameObject newCard = null;
@@ -252,17 +264,17 @@ public class HandManager : MonoBehaviour
         switch (drawnCard.type)
         {
             case Type.Support:
-                newCard = Instantiate(DeckManager.instance.supportCardPrefab, spawnPos, Quaternion.identity);
+                newCard = Instantiate(DeckManager.supportCardPrefab, spawnPos, Quaternion.identity);
                 break;
             case Type.Attack:
-                newCard = Instantiate(DeckManager.instance.attackCardPrefab, spawnPos, Quaternion.identity);
+                newCard = Instantiate(DeckManager.attackCardPrefab, spawnPos, Quaternion.identity);
                 break;
             case Type.Movement:
-                newCard = Instantiate(DeckManager.instance.movementCardPrefab, spawnPos, Quaternion.identity);
+                newCard = Instantiate(DeckManager.movementCardPrefab, spawnPos, Quaternion.identity);
                 break;
 
             case Type.Control:
-                newCard = Instantiate(DeckManager.instance.controlCardPrefab, spawnPos, Quaternion.identity);
+                newCard = Instantiate(DeckManager.controlCardPrefab, spawnPos, Quaternion.identity);
                 break;
 
             default:
@@ -292,7 +304,7 @@ public class HandManager : MonoBehaviour
             index++;
         }
         
-        Debug.Log("Deck filled from resources with " + currentDeck.Count + " cards.");
+        //Debug.Log("Deck filled from resources with " + currentDeck.Count + " cards.");
     }
 
     // Call this to reset for next turn
@@ -302,6 +314,7 @@ public class HandManager : MonoBehaviour
         this.GetComponentInParent<BasePlayer>().ResetCardValues();
         //ShuffleDeck();
         DrawHand();
+        actionPoints = 3;
         UpdateHandPositions();
     }
 
@@ -310,7 +323,7 @@ public class HandManager : MonoBehaviour
     {
         if (currentHand.Count == 0)
         {
-            Debug.Log("No cards in hand to show.");
+            //Debug.Log("No cards in hand to show.");
             return;
         }
 
@@ -321,7 +334,7 @@ public class HandManager : MonoBehaviour
                 card.gameObject.SetActive(true);
             }
             handSelected = true;
-            Debug.Log("Hand is now shown.");
+            //Debug.Log("Hand is now shown.");
         } else
         {
             foreach (BaseCard card in currentHand)
@@ -329,7 +342,7 @@ public class HandManager : MonoBehaviour
                 card.gameObject.SetActive(false);
             }
             handSelected = false;
-            Debug.Log("Hand is now hidden.");
+            //Debug.Log("Hand is now hidden.");
         }
     }
 
@@ -366,7 +379,7 @@ public class HandManager : MonoBehaviour
                     }
                 }
             }
-            Debug.Log("Current hand size is even, centering cards between two middle cards.");
+            //Debug.Log("Current hand size is even, centering cards between two middle cards.");
         } else if (currentHand.Count % 2 == 1) 
         {
                 for (int i = 0; i < currentHand.Count; i++)
@@ -381,8 +394,7 @@ public class HandManager : MonoBehaviour
                         }
                     }
                 }
-
-            Debug.Log("Current hand size is odd, centering cards.");
+            //Debug.Log("Current hand size is odd, centering cards.");
         }
     }
 }

@@ -41,7 +41,7 @@ public abstract class BaseCard : MonoBehaviour
         cardName = card.cardName;
         cardType = card.type;
         value = card.value;
-        Debug.Log("Card Copied: " + cardName);
+        //Debug.Log("Card Copied: " + cardName);
     }
 
     public virtual void ButtonPressed()
