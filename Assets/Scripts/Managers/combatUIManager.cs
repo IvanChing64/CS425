@@ -52,7 +52,7 @@ public class combatUIManager : MonoBehaviour
         //SoundFXManager.instance.PlaySoundFXClip(damageSoundClips, transform, 1f);
         if (targetEnemy != null)
         {
-            targetPlayer.GetComponent<Animator>();
+            Animator playerAnim = targetPlayer.GetComponent<Animator>();
             if(playerAnim != null)
             {
                 playerAnim.SetTrigger("attack");
@@ -73,6 +73,7 @@ public class combatUIManager : MonoBehaviour
     //ADDED FOR CLICK ON TILE COMBAT
     public void Attack(BasePlayer attacker, BaseUnit defender)
     {
+        Animator playerAnim = attacker.GetComponent<Animator>();
         if (defender != null && attacker != null)
         {
             attacker.GetComponent<Animator>();
