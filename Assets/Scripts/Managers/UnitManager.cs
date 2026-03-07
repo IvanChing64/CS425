@@ -32,6 +32,8 @@ public class UnitManager : MonoBehaviour
         Instance = this;
     }
 
+
+    //Party Function for future purposes
     public void AddUnitToParty(ScriptableUnit unit)
     {
         playersToSpawn.Add(unit);
@@ -46,6 +48,7 @@ public class UnitManager : MonoBehaviour
     }
 
 
+    //Spawns players on random spaces
     public void SpawnPlayers()
     {
         playersSpawned.Clear();
@@ -89,6 +92,8 @@ public class UnitManager : MonoBehaviour
         GameManager.Instance.ChangeState(GameState.SpawnEnemies);
     }
 
+
+    //spawns enemies on random spaces
     public void SpawnEnemies()
     {
         enemiesSpawned.Clear();
