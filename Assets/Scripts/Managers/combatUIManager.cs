@@ -16,6 +16,7 @@ public class combatUIManager : MonoBehaviour
 
     private BasePlayer targetPlayer;
     private BaseEnemy targetEnemy;
+    Animator playerAnim;
     public bool IsCombatMenuOpen => combatPanel.activeSelf;
     public bool IsEndTurnMenuOpen => endTurnPanel.activeSelf;
 
@@ -51,6 +52,11 @@ public class combatUIManager : MonoBehaviour
         //SoundFXManager.instance.PlaySoundFXClip(damageSoundClips, transform, 1f);
         if (targetEnemy != null)
         {
+            Animator playerAnim = targetPlayer.GetComponent<Animator>();
+            if(playerAnim != null)
+            {
+                playerAnim.SetTrigger("attack");
+            }
             targetEnemy.takeDamage(targetPlayer.dmg);
             targetPlayer.canAttack = false;
             targetPlayer.dmg = 0;
@@ -67,8 +73,14 @@ public class combatUIManager : MonoBehaviour
     //ADDED FOR CLICK ON TILE COMBAT
     public void Attack(BasePlayer attacker, BaseUnit defender)
     {
+        Animator playerAnim = attacker.GetComponent<Animator>();
         if (defender != null && attacker != null)
         {
+            attacker.GetComponent<Animator>();
+            if (playerAnim != null)
+            {
+                playerAnim.SetTrigger("attack");
+            }
             defender.takeDamage(attacker.dmg);
             attacker.canAttack = false;
             attacker.dmg = 0;
@@ -109,7 +121,6 @@ public class combatUIManager : MonoBehaviour
 
     public void ToggleBlocker(bool isActive)
     {
-        blocker.SetActive(isActive);
+        //blocker.SetActive(isActive);
     }
-
 }

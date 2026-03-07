@@ -70,10 +70,8 @@ public class GameManager : MonoBehaviour
                 CardManager.instance.NextTurn();
                 break;
             case GameState.EnemyTurn:
-                turnNumber += 1;
-                // Debug.Log("Enemy Turn");
-                // Debug.Log("Turn Number" + turnNumber);
-                TurnUIManager.Instance.UpdateTurnText(turnNumber);
+                Debug.Log("Enemy Turn");
+                Debug.Log("Turn Number" + turnNumber);
                 combatUIManager.Instance.hideEndTurnOption();
                 UnitManager.Instance.BeginEnemyTurn();
                 CardManager.instance.ToggleCardArea(false);
