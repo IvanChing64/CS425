@@ -24,6 +24,9 @@ public abstract class Tile : MonoBehaviour
     public static Color attackableColor = new Color(1, 18f/255f, 0, 159f / 255f);
     public static Color supportableColor = new Color(3f/255f, 1, 0, 100f/255f);
 
+    // For enemy highlighting
+    public static Color walkAttackOverlapColor = new Color(0.8f, 0.2f, 0.85f, 0.55f);
+
     public virtual void Init(int x, int y)
     {
         

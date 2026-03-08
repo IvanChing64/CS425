@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using PlasticGui.WorkspaceWindow.BrowseRepository;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 //Developer: Ivan Ching
 //Edits from Andrew Shelton
@@ -16,13 +19,25 @@ public class UnitManager : MonoBehaviour
     private Tile playerTile;
     private List<Tile> enemyTiles = new List<Tile>();
 
-    public BasePlayer SelectedPlayer;
+    public BaseUnit SelectedUnit;
 
     public List<BasePlayer> playersSpawned = new List<BasePlayer>();
     public List<BaseEnemy> enemiesSpawned = new List<BaseEnemy>();
 
     public int enemyUnitCount;
     public int playerUnitCount;
+
+    public BasePlayer SelectedPlayer
+    {
+        get => SelectedUnit as BasePlayer;
+        set => SelectedUnit = value;
+    }
+
+    public BaseEnemy SelectedEnemy
+    {
+        get => SelectedUnit as BaseEnemy;
+        set => SelectedUnit = value;
+    }
 
     private void Awake()
     {
@@ -96,29 +111,73 @@ public class UnitManager : MonoBehaviour
     {
         return (T)units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
     }
+
+    public void SetSelectedUnit(BaseUnit unit)
+    {
+        if (SelectedUnit != null && SelectedUnit != unit)
+        {
+            // Deselect current unit and hide move range highlights
+            SelectedUnit.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
+            SelectedUnit.GetTilesInAttackRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
+            SelectedUnit.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
+
+            //set selection indicator onto unit
+        }
+
+        SelectedUnit = unit;
+
+        if (SelectedUnit == null)
+        {
+            //disable selection indicator or move it out of view
+        }
+    }
+
     public void SetSelectedPlayer(BasePlayer player)
     {
-        if (SelectedPlayer != null && SelectedPlayer != player)
+        SetSelectedUnit(player);
+
+        if (SelectedPlayer == null) return;
+        
+        Debug.Log("Selected Player: " + SelectedPlayer.name);
+
+        // Show move range highlights for the newly selected player
+        SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(true, Tile.walkableColor));
+        if (SelectedPlayer.moveRange > 0) SelectedPlayer.OccupiedTile.ShowHighlight(true, Tile.walkableColor);
+
+        if (SelectedPlayer.canAttack)
         {
-            // Deselect current player and hide move range highlights
-            SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
-            SelectedPlayer.GetTilesInAttackRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
-            SelectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
+            GridManager.Instance.GetNeighborsOf(SelectedPlayer.OccupiedTile).ForEach(t => t.ShowHighlight(true, Tile.attackableColor));
+            if (SelectedPlayer.OccupiedTile.IsNextToEnemy()) combatUIManager.Instance.showCombatOption(SelectedPlayer, null);
         }
-        SelectedPlayer = player;
+    }
 
-        if (SelectedPlayer != null)
+    public void SetSelectedEnemy(BaseEnemy enemy)
+    {
+        SetSelectedUnit(enemy);
+
+        if (SelectedEnemy == null) return;
+
+        Debug.Log("Selected Enemy: " + SelectedEnemy.name);
+
+        // Show move and attack range highlights for enemy unit
+        int overlapRange = Math.Min(SelectedEnemy.attackRange, SelectedEnemy.moveRange);
+
+        if (overlapRange == SelectedEnemy.attackRange)
         {
-            Debug.Log("Selected Player: " + SelectedPlayer.name);
-            // Show move range highlights for the newly selected player
-            SelectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(true, Tile.walkableColor));
-            if (SelectedPlayer.moveRange > 0) SelectedPlayer.OccupiedTile.ShowHighlight(true, Tile.walkableColor);
+            RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, SelectedEnemy.moveRange).ForEach(t => t.ShowHighlight(true, Tile.walkableColor));
+            SelectedEnemy.OccupiedTile.ShowHighlight(true, Tile.walkableColor);
+        }
+        else
+        {
+            RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, SelectedEnemy.attackRange).ForEach(t => t.ShowHighlight(true, Tile.attackableColor));
+            SelectedEnemy.OccupiedTile.ShowHighlight(true, Tile.attackableColor);
+        }
 
-            if (SelectedPlayer.canAttack)
-            {
-                GridManager.Instance.GetNeighborsOf(SelectedPlayer.OccupiedTile).ForEach(t => t.ShowHighlight(true, Tile.attackableColor));
-                if (SelectedPlayer.OccupiedTile.IsNextToEnemy()) combatUIManager.Instance.showCombatOption(SelectedPlayer, null);
-            }
+        if (overlapRange > 0)
+        {
+            RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, overlapRange).ForEach(t => t.ShowHighlight(true, Tile.walkAttackOverlapColor));
+            SelectedEnemy.OccupiedTile.ShowHighlight(true, Tile.walkAttackOverlapColor);
+
         }
     }
 
