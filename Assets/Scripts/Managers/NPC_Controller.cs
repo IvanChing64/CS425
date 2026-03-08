@@ -257,4 +257,19 @@ public class NPC_Controller: MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
+
+    public static IEnumerator RunEnemyTurn(List<NPC_Controller> enemies)
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            NPC_Controller npc = enemies[i];
+
+            npc.HasFinishedTurn = false;
+            npc.BeginTurn();
+
+            yield return new WaitUntil(() => npc.HasFinishedTurn);
+        }
+
+        GameManager.Instance.ChangeState(GameState.PlayerTurn);
+    }
 }

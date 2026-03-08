@@ -152,6 +152,21 @@ public class UnitManager : MonoBehaviour
 
     public void BeginEnemyTurn()
     {
+        if (SelectedPlayer == null || SelectedPlayer.gameObject == null)
+        {
+            playersSpawned.RemoveAll(p => p == null || p.gameObject == null);
+
+            if (playersSpawned.Count == 0)
+            {
+                GameManager.Instance.ChangeState(GameState.EndScreen);
+                return;
+            }
+
+            SelectedPlayer = playersSpawned[0];
+        }
+
+
+
         EnemyTargetingManager.TargetCounts.Clear();
 
         Debug.Log("BeginEnemyTurn: SelectedPlayer = " + SelectedPlayer);

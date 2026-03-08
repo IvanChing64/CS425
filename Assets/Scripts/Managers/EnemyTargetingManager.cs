@@ -16,12 +16,31 @@ public class EnemyTargetingManager : MonoBehaviour
 
     public void SelectTarget(){
 
-        var players = UnitManager.Instance.playersSpawned;
 
-        if (players == null || players.Count == 0) {
+
+        var deadKeys = new List<BasePlayer>();
+        foreach (var kvp in TargetCounts)
+        {
+            if (kvp.Key == null || kvp.Key.gameObject == null)
+            {
+                deadKeys.Add(kvp.Key);
+            }
+            foreach (var dead in deadKeys)
+            {
+                TargetCounts.Remove(kvp.Key);
+            }
+        }
+
+        var players = UnitManager.Instance.playersSpawned;
+        players.RemoveAll(p => p == null || p.gameObject == null);
+
+        if (players == null || players.Count == 0) 
+        {
             CurrentTarget = null;
             return;
         }
+
+        
         
 
         BasePlayer bestPlayer = null;
@@ -47,15 +66,20 @@ public class EnemyTargetingManager : MonoBehaviour
                 bestPlayer = p;
             }
         }
+        if (bestPlayer == null)
+        {
+            CurrentTarget = null;
+            return;
+        }
 
         CurrentTarget = bestPlayer;
 
         if (!EnemyTargetingManager.TargetCounts.ContainsKey(bestPlayer))
         {
             EnemyTargetingManager.TargetCounts[bestPlayer] = 0;
-
-            EnemyTargetingManager.TargetCounts[bestPlayer]++;
         }
+     EnemyTargetingManager.TargetCounts[bestPlayer]++;
+        
 
     }
     
