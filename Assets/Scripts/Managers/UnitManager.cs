@@ -152,6 +152,8 @@ public class UnitManager : MonoBehaviour
 
     public void BeginEnemyTurn()
     {
+        //Added to help with the enemy targeting null after player object is destroyed
+
         if (SelectedPlayer == null || SelectedPlayer.gameObject == null)
         {
             playersSpawned.RemoveAll(p => p == null || p.gameObject == null);
@@ -175,7 +177,23 @@ public class UnitManager : MonoBehaviour
         Tile currentPlayerTile = GridManager.Instance.GetTileForUnit(SelectedPlayer.gameObject);
         Debug.Log("Player is at tile: " + currentPlayerTile?.name);
 
-        for (int i = 0; i < enemiesSpawned.Count; i++)
+        //Just adding this for testing purposes
+
+        List<NPC_Controller> enemyControllers = new List<NPC_Controller>();
+
+        foreach (var enemy in enemiesSpawned)
+        {
+            if (enemy == null || enemy.gameObject == null) continue;
+
+            var npc = enemy.GetComponent<NPC_Controller>();
+            if (npc != null)
+                enemyControllers.Add(npc);
+
+        }
+
+        StartCoroutine(NPC_Controller.RunEnemyTurn(enemyControllers));
+
+        /*for (int i = 0; i < enemiesSpawned.Count; i++)
         {
             //NEW: Check if enemy is null or destroyed before trying to access it
             var enemy = enemiesSpawned[i];
@@ -196,7 +214,7 @@ public class UnitManager : MonoBehaviour
                 Debug.Log($"EnemyTurn started. Enemy {enemy.name} moving from {enemyTile.name} to {currentPlayerTile.name}");
 
             }
-        }
+        }*/
 
     }
 }

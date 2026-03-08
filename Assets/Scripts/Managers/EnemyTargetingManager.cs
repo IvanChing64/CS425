@@ -18,23 +18,29 @@ public class EnemyTargetingManager : MonoBehaviour
 
 
 
-        var deadKeys = new List<BasePlayer>();
+        List<BasePlayer> deadKeys = new List<BasePlayer>();
         foreach (var kvp in TargetCounts)
         {
             if (kvp.Key == null || kvp.Key.gameObject == null)
             {
                 deadKeys.Add(kvp.Key);
             }
-            foreach (var dead in deadKeys)
+            foreach (var key in deadKeys)
             {
-                TargetCounts.Remove(kvp.Key);
+                TargetCounts.Remove(key);
             }
         }
 
         var players = UnitManager.Instance.playersSpawned;
+        if (players == null || players.Count == 0) 
+        {
+            CurrentTarget = null;
+            return;
+        }
+        
         players.RemoveAll(p => p == null || p.gameObject == null);
 
-        if (players == null || players.Count == 0) 
+        if (players.Count == 0)
         {
             CurrentTarget = null;
             return;
@@ -56,9 +62,9 @@ public class EnemyTargetingManager : MonoBehaviour
 
             //Section to ask how many npc's are targetting one unit.
 
-            int load = EnemyTargetingManager.TargetCounts.ContainsKey(p)
+            /*int load = EnemyTargetingManager.TargetCounts.ContainsKey(p)
                 ? EnemyTargetingManager.TargetCounts[p]
-                : 0;
+                : 0;*/
 
             if (dist < bestDistance)
             {
@@ -74,11 +80,11 @@ public class EnemyTargetingManager : MonoBehaviour
 
         CurrentTarget = bestPlayer;
 
-        if (!EnemyTargetingManager.TargetCounts.ContainsKey(bestPlayer))
+        if (!TargetCounts.ContainsKey(bestPlayer))
         {
-            EnemyTargetingManager.TargetCounts[bestPlayer] = 0;
+            TargetCounts[bestPlayer] = 0;
         }
-     EnemyTargetingManager.TargetCounts[bestPlayer]++;
+     TargetCounts[bestPlayer]++;
         
 
     }
