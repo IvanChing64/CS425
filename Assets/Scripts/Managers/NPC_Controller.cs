@@ -10,7 +10,7 @@ using UnityEngine;
 public class NPC_Controller: MonoBehaviour
 {
     public static NPC_Controller Instance;
-    public float moveSpeed = 0.1f;
+    public float moveSpeed = 0.5f;
     public int tilesPerMove = 4;
 
     public List<Tile> path;
@@ -202,7 +202,7 @@ public class NPC_Controller: MonoBehaviour
     {
         CheckAndAttack();
         HasFinishedTurn = true;
-        StartCoroutine(EndTurnDelay());
+        //StartCoroutine(EndTurnDelay());
     }
 
     public void BeginTurn()
@@ -315,6 +315,7 @@ public class NPC_Controller: MonoBehaviour
 
             yield return npc.StartCoroutine(npc.TakeTurn());
         }
+        yield return new WaitForSeconds(0.5f);
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
 }
