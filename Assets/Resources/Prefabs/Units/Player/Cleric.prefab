@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 1672246827751298856}
   - component: {fileID: 7232603518593366301}
   m_Layer: 0
-  m_Name: Pawn
+  m_Name: Cleric
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,8 +255,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player1
   OccupiedTile: {fileID: 0}
   Faction: 0
-  maxHealth: 100
-  health: 100
+  maxHealth: 60
+  health: 60
   guard: 0
   dmg: 0
   moveRange: 0
@@ -269,14 +269,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   startingDeck:
-  - March
-  - Slash
-  - Guard
-  - March
-  - Slash
-  - Guard
+  - Walk
+  - Wound
+  - Cure
+  - Walk
+  - Cure
+  - Cure
+  - Wound
+  - Walk
   canAttack: 0
   canSupport: 0
+  energy: 2
 --- !u!114 &7232603518593366301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,10 +297,11 @@ MonoBehaviour:
   deckCardIDs: 
   handCardIDs: 
   drawNum: 3
-  actionPoints: 3
+  actionPoints: 2
   deckIndex: 0
   handDrawn: 0
   handSelected: 0
+  canDraw: 1
   selectedCard: {fileID: 0}
 --- !u!1 &5483545698060636878
 GameObject:
@@ -524,7 +528,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &4421357749340508274
 MonoBehaviour:

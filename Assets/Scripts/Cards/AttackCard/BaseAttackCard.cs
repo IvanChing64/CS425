@@ -15,6 +15,7 @@ public class BaseAttackCard : BaseCard
         {
             player.canAttack = true;
             player.dmg = value;
+            player.attackRange = range;
             Tile currentTile = player.OccupiedTile;
 
             foreach (Tile t in player.GetTilesInAttackRange())
@@ -50,12 +51,12 @@ public class BaseAttackCard : BaseCard
         {
             player.canAttack = false;
             player.dmg = 0;
-            Tile currentTile = player.OccupiedTile;
-            foreach (Tile t in GridManager.Instance.GetNeighborsOf(currentTile))
+            foreach (Tile t in player.GetTilesInAttackRange())
             {
                 if (t.isWalkable)t.ShowHighlight(false, Tile.nonwalkableColor);
             }
-            combatUIManager.Instance.hideCombatOption();
+            player.attackRange = 0;
+            //combatUIManager.Instance.hideCombatOption();
         }
     }
 }

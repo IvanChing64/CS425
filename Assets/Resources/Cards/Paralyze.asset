@@ -15,9 +15,11 @@ MonoBehaviour:
   cardName: Paralyze
   cardDescription: Stun a single enemy
   type: 3
+  range: 0
   value: 2
-  cardBorder: {fileID: 3415117509552882256, guid: 61e5eaad35a0d724da8e0ef45bfe8a09, type: 3}
+  rangeType: 1
   cardIcon: {fileID: 0}
+  cardCorner: {fileID: 0}
   cardBorderColor: {r: 0.45882353, g: 0, b: 1, a: 1}
   supportEffect: -1
   controlEffect: 0

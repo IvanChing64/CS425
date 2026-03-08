@@ -275,8 +275,11 @@ MonoBehaviour:
   - March
   - Slash
   - Guard
+  - Guard
+  - Slash
   canAttack: 0
   canSupport: 0
+  energy: 1
 --- !u!114 &7232603518593366301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,10 +297,11 @@ MonoBehaviour:
   deckCardIDs: 
   handCardIDs: 
   drawNum: 3
-  actionPoints: 3
+  actionPoints: 2
   deckIndex: 0
   handDrawn: 0
   handSelected: 0
+  canDraw: 1
   selectedCard: {fileID: 0}
 --- !u!1 &5483545698060636878
 GameObject:

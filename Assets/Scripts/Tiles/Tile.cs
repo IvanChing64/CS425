@@ -55,6 +55,7 @@ public abstract class Tile : MonoBehaviour
                             BaseSupportCard tempSupport = (BaseSupportCard)CardManager.instance.selectedCard;
                             tempSupport.ApplySupportEffect(OccupiedUnit);
                             CardManager.instance.PlaySelectedCard();
+                            return;
                         }
                     }
                 }

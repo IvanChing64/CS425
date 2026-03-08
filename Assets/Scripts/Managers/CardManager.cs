@@ -15,7 +15,7 @@ public class CardManager : MonoBehaviour
     public BaseCard selectedCard;
     public GameObject cardArea, deckCard;
     public Vector3 cardLocation;
-    [SerializeField] public static int cardSelectOffsetY = 22;
+    [SerializeField] public static int cardSelectOffsetY = 20;
 
     // Initializes instance and calls backdrop creation
     void Awake()
@@ -65,9 +65,7 @@ public class CardManager : MonoBehaviour
     {
         if (selectedCard != null)
         {
-            HandManager selectedHand = selectedPlayer.GetComponent<HandManager>();
-            selectedPlayer.GetComponent<HandManager>().handCardIDs.Remove(selectedHand.handCardIDs[selectedHand.currentHand.IndexOf(selectedCard)]);
-            selectedPlayer.GetComponent<HandManager>().currentHand.Remove(selectedCard);
+            selectedPlayer.GetComponent<HandManager>().RemoveCard(selectedCard);
             Destroy(selectedCard.gameObject);
             DeselectCard();
             selectedPlayer.GetComponent<HandManager>().UpdateHandPositions();
@@ -179,7 +177,7 @@ public class CardManager : MonoBehaviour
     {
         if (selectedPlayer != null)
         {
-            if (selectedPlayer.GetComponent<HandManager>().actionPoints != 0 && selectedPlayer.GetComponent<HandManager>().currentHand.Count == HandManager.maxHandSize)
+            if (selectedPlayer.GetComponent<HandManager>().canDraw == false)
             {
                 deckCard.GetComponentInChildren<Button>().interactable = false;
                 deckCard.GetComponentInChildren<TextMeshProUGUI>().SetText("X");
@@ -197,34 +195,5 @@ public class CardManager : MonoBehaviour
     private void moveCard ()
     {
         
-    }
-
-    private void WaitForCardAnimations(bool selected)
-    {
-        float elapsedTime = 0f;
-        float duration = 0.1f; // Duration of the animation in seconds
-
-        Vector3 newPosition = selectedCard.cardHolder.transform.localPosition;
-        if (selected)
-        {
-            newPosition += new Vector3(0, cardSelectOffsetY, 0);
-            Debug.Log("Selecting card: " + selectedCard.cardName);
-        }
-        else
-        {
-            newPosition -= new Vector3(0, cardSelectOffsetY, 0);
-            Debug.Log("Deselecting card: " + selectedCard.cardName);
-        }
-        Vector3 originalPosition = selectedCard.cardHolder.transform.localPosition;
-        while (elapsedTime < duration)
-        {
-            selectedCard.cardHolder.transform.localPosition = Vector3.Lerp(originalPosition, newPosition, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            //yield return null; // Wait until the next frame
-        }
-
-        selectedCard.cardHolder.transform.localPosition = newPosition; // Ensure final position is set
-        Debug.Log("Animation complete for card: " + selectedCard.cardName + " at position: " + selectedCard.cardHolder.transform.localPosition);
-        //yield return null; // Wait until the next frame
     }
 }

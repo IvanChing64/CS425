@@ -22,13 +22,14 @@ public class HandManager : MonoBehaviour
     [SerializeField] public List<int> deckCardIDs = new List<int>();
     [SerializeField] public List<int> handCardIDs = new List<int>();
     public int drawNum = 3; // Equal to initial hand size
-    public int actionPoints = 3; // 3 for each unit:0-Bury Card, 1-Draw Random, 2-Shuffle & Redraw Hand, 3-Draw Specific Card
+    public int actionPoints = 2; // 3 for each unit:0-Bury Card, 1-Draw Random, 2-Shuffle & Redraw Hand, 3-Draw Specific Card
     [SerializeField] private int deckIndex = 0; // Points to card to draw from deck
     public bool handDrawn = false;
     public bool handSelected = false;
+    public bool canDraw = true;
     public BaseCard selectedCard;
     public static int cardPositionOffsetX = 198, cardPositionOffsetY = -402; // X: How far cards are from each other, Y: How close cards are to the bottom
-    public static int maxHandSize = 6;
+    public static int maxHandSize = 5, maxActionPoints = 5;
 
     //Initalizes instance and fills deck
     void Awake()
@@ -63,6 +64,8 @@ public class HandManager : MonoBehaviour
             deckCardIDs[randomIndex] = tempID;
             
         }
+        deckIndex = 0;
+        canDraw = true;
         //Debug.Log("Deck Shuffled");
     }
 
@@ -114,83 +117,6 @@ public class HandManager : MonoBehaviour
         {
             //Debug.Log("Drawing card " + (i + 1) + " of " + cardsToDraw);
             DrawCard(false);
-
-            // // Reset deckIndex, if it exceeds deck size, to the top of the deck and reshuffle
-            // if (deckIndex >= currentDeck.Count)
-            // {
-            //     deckIndex = 0;
-            //     ShuffleDeck();
-            //     if (currentHand.Count != 0)
-            //     {
-            //         return;
-            //     }
-            // }
-
-            // ScriptableCard drawnCard = currentDeck[deckIndex];
-            // GameObject newCard = null;
-            // Vector3 spawnPos = new Vector3(currentHand.Count * cardPositionOffsetX - cardPositionOffsetX, cardPositionOffsetY, 0);
-
-            // //Check if drawn card is already in hand, if so, skip and draw next card
-            
-            // bool notInHand = false;
-
-            // if (currentHand.Count >= currentDeck.Count)
-            // {
-            //     Debug.Log("No More Cards to draw");
-            //     return;
-            // }
-
-            // while (!notInHand)
-            // {
-            //     notInHand = true;
-            //     for (int j = 0; j < currentHand.Count; j++)
-            //     {
-            //         if (handCardIDs.Count > j && handCardIDs[j] == deckCardIDs[deckIndex])
-            //         {
-            //             Debug.Log("Card already in hand: " + drawnCard.cardName);
-            //             deckIndex++;
-            //             if (deckIndex >= currentDeck.Count)
-            //             {
-            //                 deckIndex = 0;
-            //                 ShuffleDeck();
-            //             }
-            //             drawnCard = currentDeck[deckIndex];
-            //             notInHand = false;
-            //             break;
-            //         }
-            //     }
-            // }
-            
-
-            // //Instantiate card based on its type
-            // switch (drawnCard.type)
-            // {
-            //     case Type.Support:
-            //         newCard = Instantiate(supportCardPrefab, spawnPos, Quaternion.identity);
-            //         break;
-            //     case Type.Attack:
-            //         newCard = Instantiate(attackCardPrefab, spawnPos, Quaternion.identity);
-            //         break;
-            //     case Type.Movement:
-            //         newCard = Instantiate(movementCardPrefab, spawnPos, Quaternion.identity);
-            //         break;
-
-            //     case Type.Control:
-            //         newCard = Instantiate(controlCardPrefab, spawnPos, Quaternion.identity);
-            //         break;
-
-            //     default:
-            //         Debug.LogWarning("Unknown card type: " + drawnCard.type);
-            //         continue;
-            // }
-
-            // //Add new card to current hand and copy properties from scriptable card
-            // currentHand.Add(newCard.GetComponent<BaseCard>());
-            // newCard.GetComponent<BaseCard>().cardHolder.transform.localPosition = spawnPos;
-            // handCardIDs.Add(deckCardIDs[deckIndex]);
-            // newCard.GetComponent<CardDisplay>().cardData = drawnCard;
-            // newCard.GetComponent<BaseCard>().CopyScriptableCard(drawnCard);
-            // deckIndex++;
         }
 
         handDrawn = true;
@@ -200,6 +126,10 @@ public class HandManager : MonoBehaviour
 
     public void DrawCard(bool extraDraw)
     {
+        if (!canDraw)
+        {
+            return;
+        }
         bool notInHand = false;
 
         if (currentDeck.Count == 0) return;
@@ -209,11 +139,13 @@ public class HandManager : MonoBehaviour
         if (deckIndex >= currentDeck.Count)
         {
             deckIndex = 0;
-            ShuffleDeck();
-            if (currentHand.Count != 0)
-            {
-                return;
-            }
+            canDraw = false;
+            return;
+            // ShuffleDeck();
+            // if (currentHand.Count != 0)
+            // {
+            //     return;
+            // }
         }
 
         if (extraDraw)
@@ -233,12 +165,6 @@ public class HandManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(currentHand.Count * cardPositionOffsetX - cardPositionOffsetX, cardPositionOffsetY, 0);
 
         //Check if drawn card is already in hand, if so, skip and draw next card
-        if (currentHand.Count >= currentDeck.Count)
-        {
-            Debug.Log("No More Cards to draw " + currentHand.Count);
-            return;
-        }
-
         while (!notInHand)
         {
             notInHand = true;
@@ -251,7 +177,8 @@ public class HandManager : MonoBehaviour
                     if (deckIndex >= currentDeck.Count)
                     {
                         deckIndex = 0;
-                        ShuffleDeck();
+                        canDraw = false;
+                        return; 
                     }
                     drawnCard = currentDeck[deckIndex];
                     notInHand = false;
@@ -289,6 +216,11 @@ public class HandManager : MonoBehaviour
         newCard.GetComponent<CardDisplay>().cardData = drawnCard;
         newCard.GetComponent<BaseCard>().CopyScriptableCard(drawnCard);
         deckIndex++;
+
+        if (deckIndex >= currentDeck.Count || currentHand.Count >= maxHandSize)
+        {
+            canDraw = false;
+        }
     }
 
     // Populate `currentDeck` from Player Deck Data
@@ -311,10 +243,14 @@ public class HandManager : MonoBehaviour
     public void NextTurn()
     {
         handDrawn = false;
-        this.GetComponentInParent<BasePlayer>().ResetCardValues();
-        //ShuffleDeck();
+        GetComponentInParent<BasePlayer>().ResetCardValues();
+        ShuffleDeck();
         DrawHand();
-        actionPoints = 3;
+        actionPoints += this.GetComponentInParent<BasePlayer>().energy;
+        if (actionPoints > maxActionPoints)
+        {
+            actionPoints = maxActionPoints;
+        }
         UpdateHandPositions();
     }
 
@@ -346,7 +282,17 @@ public class HandManager : MonoBehaviour
         }
     }
 
-    //Move cards to the right in hand
+    //Remove played card
+    public void RemoveCard(BaseCard removedCard)
+    {
+        handCardIDs.Remove(handCardIDs[currentHand.IndexOf(removedCard)]);
+        currentHand.Remove(removedCard);
+        if (currentHand.Count != maxHandSize && deckIndex < currentDeck.Count)
+        {
+            canDraw = true;
+        }
+    }
+
     //Move cards dynamically based on hand size and card index to keep them centered
     public void UpdateHandPositions()
     {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 //Developer: Bailey Escritor
@@ -21,7 +22,14 @@ public class BaseSupportCard : BaseCard
 
         if (player != null)
         {
+            player.attackRange = range;
             player.canSupport = true;
+
+            List<Tile> tilesInRange = player.GetTilesInAttackRange();
+            foreach (Tile t in tilesInRange)
+            {
+                t.ShowHighlight(true, Tile.supportableColor);
+            }
             player.OccupiedTile.ShowHighlight(true, Tile.supportableColor);
         }
     }
@@ -35,6 +43,11 @@ public class BaseSupportCard : BaseCard
         {
             player.canSupport = false;
             player.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
+            foreach (Tile t in player.GetTilesInAttackRange())
+            {
+                if (t.isWalkable)t.ShowHighlight(false, Tile.nonwalkableColor);
+            }
+            player.attackRange = 0;
         }
     }
 
