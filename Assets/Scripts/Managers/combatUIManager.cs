@@ -36,8 +36,6 @@ public class combatUIManager : MonoBehaviour
         targetEnemy = enemy;
 
         combatPanel.SetActive(true);
-        //combatButton.onClick.RemoveAllListeners();
-        //combatButton.onClick.AddListener(() => ExecuteCombat());
     }
     
     //hides button when not in use
@@ -49,7 +47,6 @@ public class combatUIManager : MonoBehaviour
     //damage step
     public void ExecuteCombat()
     {
-        //SoundFXManager.instance.PlaySoundFXClip(damageSoundClips, transform, 1f);
         if (targetEnemy != null)
         {
             Animator playerAnim = targetPlayer.GetComponent<Animator>();
@@ -92,11 +89,10 @@ public class combatUIManager : MonoBehaviour
         CardManager.instance.PlaySelectedCard();
     }
 
+    //End Turn button
     public void ShowEndTurnOption()
     {
         endTurnPanel.SetActive(true);
-        //endTurnButton.onClick.RemoveAllListeners();
-        //endTurnButton.onClick.AddListener(() => ExecuteEndTurn());
     }
 
     public void hideEndTurnOption()
@@ -104,6 +100,8 @@ public class combatUIManager : MonoBehaviour
         endTurnPanel.SetActive(false);
     }
 
+
+    //end turn functionality
     public void ExecuteEndTurn()
     {
         hideEndTurnOption();
@@ -121,6 +119,6 @@ public class combatUIManager : MonoBehaviour
 
     public void ToggleBlocker(bool isActive)
     {
-        //blocker.SetActive(isActive);
+        blocker.SetActive(isActive);
     }
 }

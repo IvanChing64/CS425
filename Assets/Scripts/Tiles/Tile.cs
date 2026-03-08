@@ -29,17 +29,6 @@ public abstract class Tile : MonoBehaviour
         
     }
 
-    //Hover Highlight code
-    // void OnMouseEnter()
-    // {
-    //     highlight.SetActive(true);
-    // }
-
-    // void OnMouseExit()
-    // {
-    //     highlight.SetActive(false);
-    // }
-
     //Player movement testing
     private void OnMouseDown()
     {
@@ -241,13 +230,4 @@ public abstract class Tile : MonoBehaviour
             highlight.GetComponent<SpriteRenderer>().color = color;
         }
     }
-
-    // Highlight player movement range
-    /*
-    public void HighlightMovementRange()
-    {
-        List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
-        foreach (Tile t in tilesInRange) t.highlight.SetActive(true);
-    }
-    */
 }

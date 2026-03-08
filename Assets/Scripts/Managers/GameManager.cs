@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
+
+        //Game State of the game and the ability to switch the state of game
         switch (gameState)
         {
             case GameState.GenerateGrid:
