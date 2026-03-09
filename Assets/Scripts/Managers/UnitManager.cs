@@ -117,11 +117,15 @@ public class UnitManager : MonoBehaviour
         if (SelectedUnit != null && SelectedUnit != unit)
         {
             // Deselect current unit and hide move range highlights
+            if (SelectedEnemy != null)
+            {
+                RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, SelectedEnemy.moveRange+SelectedEnemy.attackRange).ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
+            }
             SelectedUnit.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             SelectedUnit.GetTilesInAttackRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             SelectedUnit.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
 
-            //set selection indicator onto unit
+            //enable and move selection indicator onto unit
         }
 
         SelectedUnit = unit;
@@ -160,24 +164,16 @@ public class UnitManager : MonoBehaviour
         Debug.Log("Selected Enemy: " + SelectedEnemy.name);
 
         // Show move and attack range highlights for enemy unit
-        int overlapRange = Math.Min(SelectedEnemy.attackRange, SelectedEnemy.moveRange);
+        int totalRange = SelectedEnemy.attackRange + SelectedEnemy.moveRange;
 
-        if (overlapRange == SelectedEnemy.attackRange)
+        if (totalRange > 0)
         {
-            RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, SelectedEnemy.moveRange).ForEach(t => t.ShowHighlight(true, Tile.walkableColor));
-            SelectedEnemy.OccupiedTile.ShowHighlight(true, Tile.walkableColor);
-        }
-        else
-        {
-            RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, SelectedEnemy.attackRange).ForEach(t => t.ShowHighlight(true, Tile.attackableColor));
-            SelectedEnemy.OccupiedTile.ShowHighlight(true, Tile.attackableColor);
+            RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, totalRange).ForEach(t => t.ShowHighlight(true, Tile.attackableColor));
         }
 
-        if (overlapRange > 0)
+        if (SelectedEnemy.moveRange > 0)
         {
-            RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, overlapRange).ForEach(t => t.ShowHighlight(true, Tile.walkAttackOverlapColor));
-            SelectedEnemy.OccupiedTile.ShowHighlight(true, Tile.walkAttackOverlapColor);
-
+            SelectedEnemy.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(true, Tile.walkableColor));
         }
     }
 
