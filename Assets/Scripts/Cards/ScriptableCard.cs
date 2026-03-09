@@ -32,7 +32,8 @@ public enum SupportEffect
 {
     None = -1,
     Heal = 0,
-    Guard = 1
+    Guard = 1,
+    
 }
 
 //Control effect types

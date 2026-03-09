@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameState gameState;
     public int turnNumber;
+    public bool unitMoving = false;
 
     void Awake()
     {

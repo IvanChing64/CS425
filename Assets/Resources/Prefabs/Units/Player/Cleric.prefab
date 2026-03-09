@@ -276,7 +276,6 @@ MonoBehaviour:
   - Cure
   - Cure
   - Wound
-  - Walk
   canAttack: 0
   canSupport: 0
   energy: 2

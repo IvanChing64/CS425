@@ -276,7 +276,6 @@ MonoBehaviour:
   - Slash
   - Guard
   - Guard
-  - Slash
   canAttack: 0
   canSupport: 0
   energy: 1

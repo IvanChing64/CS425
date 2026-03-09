@@ -274,9 +274,8 @@ MonoBehaviour:
   - Dash
   - Bow Shot
   - Bow Shot
-  - Walk
-  - Walk
-  - Bow Shot
+  - Rations
+  - Dash
   canAttack: 0
   canSupport: 0
   energy: 1
