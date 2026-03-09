@@ -10,7 +10,7 @@ using UnityEngine;
 public class NPC_Controller: MonoBehaviour
 {
     public static NPC_Controller Instance;
-    public float moveSpeed = 0.1f;
+    public float moveSpeed = 0.5f;
     public int tilesPerMove = 4;
 
     public List<Tile> path;
@@ -28,7 +28,7 @@ public class NPC_Controller: MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance == null) return;
+       /* if (GameManager.Instance == null) return;
 
         if (GameManager.Instance.gameState != GameState.EnemyTurn) return;
 
@@ -72,7 +72,7 @@ public class NPC_Controller: MonoBehaviour
             //Debug.Log("NPC reached tile: " + currentTargetTile.name);
             pathIndex++;
             tilesMovedThisTurn++;
-        }
+        }*/
     }
 
     public void SetTarget(Tile startTile, Tile endTile = null)
@@ -130,7 +130,7 @@ public class NPC_Controller: MonoBehaviour
 
         pathIndex = 0;
         tilesMovedThisTurn = 0;
-        isMoving = true;
+        //isMoving = true;
 
         Debug.Log("Enemy target set to: " + endTile.name);
 
@@ -202,14 +202,14 @@ public class NPC_Controller: MonoBehaviour
     {
         CheckAndAttack();
         HasFinishedTurn = true;
-        StartCoroutine(EndTurnDelay());
+        //StartCoroutine(EndTurnDelay());
     }
 
     public void BeginTurn()
     {
         tilesMovedThisTurn = 0;
         HasFinishedTurn = false;
-        isMoving = false;
+        //isMoving = false;
         //New: Ensure targeting happens first
         var targeting = GetComponent<EnemyTargetingManager>();
         if (targeting != null || targeting.CurrentTarget.gameObject == null)
@@ -217,8 +217,16 @@ public class NPC_Controller: MonoBehaviour
             targeting.SelectTarget();
         }
         Tile startTile = npcUnit.OccupiedTile;
+        if (startTile == null)
+        {
+            Debug.LogError($"{name} has no OccupiedTile placeholder!");
+            HasFinishedTurn = true;
+            return;
+            
+        }
         //GetComponent<EnemyTargetingManager>().SelectTarget();
         SetTarget(startTile);
+        //StartCoroutine(MoveAlongPath());
         //Update();
         
     }
@@ -228,7 +236,7 @@ public class NPC_Controller: MonoBehaviour
 
     private void FinishedMoves()
     {
-        isMoving = false;
+        //isMoving = false;
         Tile old = npcUnit.OccupiedTile;
 
         if (path != null && path.Count > 0)
@@ -249,11 +257,64 @@ public class NPC_Controller: MonoBehaviour
         Debug.Log($"{gameObject.name} finished moving.");
         ExecuteAttacks();
         HasFinishedTurn = true;
-        StartCoroutine(EndTurnDelay());
+        //StartCoroutine(EndTurnDelay());
     }
 
     private IEnumerator EndTurnDelay()
     {
+        yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.ChangeState(GameState.PlayerTurn);
+    }
+
+   
+
+    public IEnumerator TakeTurn()
+    {
+        tilesMovedThisTurn = 0;
+        HasFinishedTurn = false;
+        
+        //Select target
+        var targeting = GetComponent<EnemyTargetingManager>();
+        if (targeting != null)
+            targeting.SelectTarget();
+
+        Tile startTile = npcUnit.OccupiedTile;
+        if (startTile == null)
+        {
+            Debug.LogError($"{name} has no OccupiedTile placeholder!");
+            HasFinishedTurn = true;
+            yield break;
+        }
+
+        SetTarget(startTile);
+
+        while (pathIndex < path.Count && tilesMovedThisTurn < tilesPerMove)
+        {
+            Tile currentTargetTile = path[pathIndex];
+            if (currentTargetTile == null) break;
+
+            Vector2 targetPos = currentTargetTile.transform.position;
+
+            while (Vector2.Distance(transform.position, targetPos) > 0.1f)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+                yield return null;
+            }
+            pathIndex++;
+            tilesMovedThisTurn++;
+            yield return null;
+        }
+        FinishedMoves();
+    }
+
+    public static IEnumerator RunEnemyTurn(List<NPC_Controller> enemies)
+    {
+        foreach (var npc in enemies)
+        {
+            if (npc == null) continue;
+
+            yield return npc.StartCoroutine(npc.TakeTurn());
+        }
         yield return new WaitForSeconds(0.5f);
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
