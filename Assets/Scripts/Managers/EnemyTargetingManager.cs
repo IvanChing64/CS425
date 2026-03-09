@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 public class EnemyTargetingManager : MonoBehaviour
 {
@@ -19,8 +20,9 @@ public class EnemyTargetingManager : MonoBehaviour
 
 
         List<BasePlayer> deadKeys = new List<BasePlayer>();
-        foreach (var kvp in TargetCounts)
+        foreach (var kvp in TargetCounts.ToList())
         {
+            
             if (kvp.Key == null || kvp.Key.gameObject == null)
             {
                 deadKeys.Add(kvp.Key);
