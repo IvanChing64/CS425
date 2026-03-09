@@ -13,9 +13,8 @@ public abstract class BaseCard : MonoBehaviour
     //[SerializeField] private GameObject highlightEffect;
     public string cardName;
     public Type cardType;
-    public int value;
+    public int range, value;
     public bool isPlayed;
-    public HashSet<Tile> validTiles;
     public GameObject cardHolder; // Reference to the card holder GameObject
     //public float drawChance;
 
@@ -41,7 +40,8 @@ public abstract class BaseCard : MonoBehaviour
         cardName = card.cardName;
         cardType = card.type;
         value = card.value;
-        Debug.Log("Card Copied: " + cardName);
+        range = card.range;
+        //Debug.Log("Card Copied: " + cardName);
     }
 
     public virtual void ButtonPressed()

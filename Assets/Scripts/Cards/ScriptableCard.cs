@@ -10,12 +10,12 @@ public class ScriptableCard : ScriptableObject
 {
     public string cardName, cardDescription;
     public Type type;
-    public int value;
+    public int range, value;
+    public RangeType rangeType;
     public Sprite cardIcon, cardCorner;
     public Color cardBorderColor;
     public SupportEffect supportEffect;
     public ControlEffect controlEffect;
-    public Dictionary<Vector2, Tile> validTiles;
 }
 
 //Card types
@@ -32,7 +32,8 @@ public enum SupportEffect
 {
     None = -1,
     Heal = 0,
-    Guard = 1
+    Guard = 1,
+    
 }
 
 //Control effect types
