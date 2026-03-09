@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameState gameState;
     public int turnNumber;
-    public bool unitMoving = false;
 
     void Awake()
     {
@@ -47,40 +46,40 @@ public class GameManager : MonoBehaviour
             }
         }
 
-
-        //Game State of the game and the ability to switch the state of game
         switch (gameState)
         {
             case GameState.GenerateGrid:
                 turnNumber = 0;
                 GridManager.Instance.GenerateGrid();
-                // Debug.Log($"Changing States (Generate Grid -> Spawn Players)");
+                Debug.Log($"Changing States (Generate Grid -> Spawn Players)");
                 break;
             case GameState.SpawnPlayers:
                 UnitManager.Instance.SpawnPlayers();
-                // Debug.Log($"Changing States (Spawn Players -> Spawn Enemies)");
+                Debug.Log($"Changing States (Spawn Players -> Spawn Enemies)");
                 break;
             case GameState.SpawnEnemies:
                 UnitManager.Instance.SpawnEnemies();
-                // Debug.Log($"Changing States (Spawn Enemies -> Player Turn)");
+                Debug.Log($"Changing States (Spawn Enemies -> Player Turn)");
                 break;
             case GameState.PlayerTurn:
                 turnNumber += 1;
-                // Debug.Log("Player Turn");
-                // Debug.Log("Turn Number" + turnNumber);
+                Debug.Log("Player Turn");
+                Debug.Log("Turn Number" + turnNumber);
                 combatUIManager.Instance.ShowEndTurnOption();
                 TurnUIManager.Instance.UpdateTurnText(turnNumber);
                 CardManager.instance.NextTurn();
                 break;
             case GameState.EnemyTurn:
+                turnNumber += 1;
                 Debug.Log("Enemy Turn");
                 Debug.Log("Turn Number" + turnNumber);
+                TurnUIManager.Instance.UpdateTurnText(turnNumber);
                 combatUIManager.Instance.hideEndTurnOption();
                 UnitManager.Instance.BeginEnemyTurn();
                 CardManager.instance.ToggleCardArea(false);
                 break;
             case GameState.EndScreen:
-                //Debug.Log("End screen reached");
+                Debug.Log("End screen reached");
                 EndScreenManager.Instance.ShowEndScreen();
                 break;
             default:

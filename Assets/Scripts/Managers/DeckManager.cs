@@ -6,7 +6,7 @@ using UnityEngine;
 public class DeckManager : MonoBehaviour
 {
     public static DeckManager instance {get; private set;}
-    public static GameObject attackCardPrefab, movementCardPrefab, supportCardPrefab, controlCardPrefab;
+    public GameObject attackCardPrefab, movementCardPrefab, supportCardPrefab, controlCardPrefab;
     public List<ScriptableCard> allCards = new List<ScriptableCard>();
     private bool initialized = false;
 

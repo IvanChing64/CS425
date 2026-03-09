@@ -80,11 +80,11 @@ public class InputManager : MonoBehaviour
                 if (t.isWalkable) t.ShowHighlight(false, Tile.nonwalkableColor);
             }
 
+            CardManager.instance.DeselectCard();
             UnitManager.Instance.SelectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(false);
             UnitManager.Instance.SetSelectedPlayer(null);
 
             if(CardManager.instance != null){
-                CardManager.instance.DeselectCard();
                 CardManager.instance.SetSelectedPlayer(null);
             }
             if(combatUIManager.Instance != null)

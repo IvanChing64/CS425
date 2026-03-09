@@ -2,7 +2,6 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 
 public class EnemyTargetingManager : MonoBehaviour
 {
@@ -17,38 +16,12 @@ public class EnemyTargetingManager : MonoBehaviour
 
     public void SelectTarget(){
 
-
-
-        List<BasePlayer> deadKeys = new List<BasePlayer>();
-        foreach (var kvp in TargetCounts.ToList())
-        {
-            
-            if (kvp.Key == null || kvp.Key.gameObject == null)
-            {
-                deadKeys.Add(kvp.Key);
-            }
-            foreach (var key in deadKeys)
-            {
-                TargetCounts.Remove(key);
-            }
-        }
-
         var players = UnitManager.Instance.playersSpawned;
-        if (players == null || players.Count == 0) 
-        {
+
+        if (players == null || players.Count == 0) {
             CurrentTarget = null;
             return;
         }
-        
-        players.RemoveAll(p => p == null || p.gameObject == null);
-
-        if (players.Count == 0)
-        {
-            CurrentTarget = null;
-            return;
-        }
-
-        
         
 
         BasePlayer bestPlayer = null;
@@ -64,9 +37,9 @@ public class EnemyTargetingManager : MonoBehaviour
 
             //Section to ask how many npc's are targetting one unit.
 
-            /*int load = EnemyTargetingManager.TargetCounts.ContainsKey(p)
+            int load = EnemyTargetingManager.TargetCounts.ContainsKey(p)
                 ? EnemyTargetingManager.TargetCounts[p]
-                : 0;*/
+                : 0;
 
             if (dist < bestDistance)
             {
@@ -74,20 +47,15 @@ public class EnemyTargetingManager : MonoBehaviour
                 bestPlayer = p;
             }
         }
-        if (bestPlayer == null)
-        {
-            CurrentTarget = null;
-            return;
-        }
 
         CurrentTarget = bestPlayer;
 
-        if (!TargetCounts.ContainsKey(bestPlayer))
+        if (!EnemyTargetingManager.TargetCounts.ContainsKey(bestPlayer))
         {
-            TargetCounts[bestPlayer] = 0;
+            EnemyTargetingManager.TargetCounts[bestPlayer] = 0;
+
+            EnemyTargetingManager.TargetCounts[bestPlayer]++;
         }
-     TargetCounts[bestPlayer]++;
-        
 
     }
     

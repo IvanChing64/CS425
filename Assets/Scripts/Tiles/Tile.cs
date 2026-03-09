@@ -29,6 +29,17 @@ public abstract class Tile : MonoBehaviour
         
     }
 
+    //Hover Highlight code
+    // void OnMouseEnter()
+    // {
+    //     highlight.SetActive(true);
+    // }
+
+    // void OnMouseExit()
+    // {
+    //     highlight.SetActive(false);
+    // }
+
     //Player movement testing
     private void OnMouseDown()
     {
@@ -36,7 +47,6 @@ public abstract class Tile : MonoBehaviour
         //if (combatUIManager.Instance != null && combatUIManager.Instance.IsCombatMenuOpen) return;
         //Checks if it is player's turn
         if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
-        if (GameManager.Instance.unitMoving == true) return;
 
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
@@ -56,7 +66,6 @@ public abstract class Tile : MonoBehaviour
                             BaseSupportCard tempSupport = (BaseSupportCard)CardManager.instance.selectedCard;
                             tempSupport.ApplySupportEffect(OccupiedUnit);
                             CardManager.instance.PlaySelectedCard();
-                            return;
                         }
                     }
                 }
@@ -184,12 +193,6 @@ public abstract class Tile : MonoBehaviour
 
     private IEnumerator MoveUnitPath(BaseUnit unit, List<Tile> path)
     {
-        GameManager.Instance.unitMoving = true;
-        Animator UnitAnimator = unit.GetComponent<Animator>();
-        if(UnitAnimator != null)
-        {
-            UnitAnimator.SetBool("isMoving", true);
-        }
         if (unit.OccupiedTile != null)
         {
             unit.OccupiedTile.OccupiedUnit = null;
@@ -212,10 +215,6 @@ public abstract class Tile : MonoBehaviour
 
             unit.transform.position = endPos;
         }
-        if (UnitAnimator != null)
-        {
-            UnitAnimator.SetBool("isMoving", false);
-        }
 
         combatUIManager.Instance.ToggleBlocker(false);
         CardManager.instance.ToggleCardArea(true);
@@ -223,7 +222,6 @@ public abstract class Tile : MonoBehaviour
         OccupiedUnit = unit;
         unit.OccupiedTile = this;
         unit.moveRange = 0;
-        GameManager.Instance.unitMoving = false;
     }
 
     public void ShowHighlight(bool state, Color color)
@@ -234,4 +232,13 @@ public abstract class Tile : MonoBehaviour
             highlight.GetComponent<SpriteRenderer>().color = color;
         }
     }
+
+    // Highlight player movement range
+    /*
+    public void HighlightMovementRange()
+    {
+        List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
+        foreach (Tile t in tilesInRange) t.highlight.SetActive(true);
+    }
+    */
 }

@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 //Developer: Ivan Ching
 
-//Changes the Turn number text on the screen
 public class TurnUIManager : MonoBehaviour
 {
     public static TurnUIManager Instance;

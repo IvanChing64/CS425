@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using Unity.VisualScripting;
-using TMPro;
 
 //Developer: Bailey Escritor
 //Manages card selection and playing
@@ -13,9 +12,9 @@ public class CardManager : MonoBehaviour
     public static CardManager instance;
     public BasePlayer selectedPlayer;
     public BaseCard selectedCard;
-    public GameObject cardArea, deckCard;
+    public GameObject cardArea;
     public Vector3 cardLocation;
-    [SerializeField] public static int cardSelectOffsetY = 20;
+    [SerializeField] public static int cardSelectOffsetY = 22;
 
     // Initializes instance and calls backdrop creation
     void Awake()
@@ -65,11 +64,12 @@ public class CardManager : MonoBehaviour
     {
         if (selectedCard != null)
         {
-            selectedPlayer.GetComponent<HandManager>().RemoveCard(selectedCard);
+            HandManager selectedHand = selectedPlayer.GetComponent<HandManager>();
+            selectedPlayer.GetComponent<HandManager>().handCardIDs.Remove(selectedHand.handCardIDs[selectedHand.currentHand.IndexOf(selectedCard)]);
+            selectedPlayer.GetComponent<HandManager>().currentHand.Remove(selectedCard);
             Destroy(selectedCard.gameObject);
             DeselectCard();
             selectedPlayer.GetComponent<HandManager>().UpdateHandPositions();
-            UpdateDeckCard();
         }
     }
 
@@ -91,18 +91,9 @@ public class CardManager : MonoBehaviour
             }
         }
 
-        UpdateDeckCard();
+        //ToggleCardArea(true);
     }
-
-    //Draws a card from the selected player's deck into their hand
-    public void DrawDeckCard()
-    {
-        if (selectedPlayer == null) return;
-        if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
-        selectedPlayer.GetComponent<HandManager>().DrawCard(true);
-        selectedPlayer.GetComponent<HandManager>().UpdateHandPositions();
-        UpdateDeckCard();
-    }
+    
 
     //Shows hand of selected player and hides previous player's hand
     public void SetSelectedPlayer(BasePlayer player)
@@ -113,13 +104,9 @@ public class CardManager : MonoBehaviour
 
         if (selectedPlayer == null)
         {
-            ToggleDeckCard(false);
             Debug.Log("No player selected.");
             return;
         }
-
-        ToggleDeckCard(true);
-        UpdateDeckCard();
 
         if (selectedPlayer.GetComponent<HandManager>().currentDeck.Count == 0) 
         {
@@ -136,7 +123,6 @@ public class CardManager : MonoBehaviour
         if (selectedPlayer != previousPlayer)
         {
             selectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(true);
-
         }
     }
 
@@ -148,7 +134,6 @@ public class CardManager : MonoBehaviour
             if (selectedPlayer != null)
             {
                 selectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(true);
-                ToggleDeckCard(true);
             }
         }
         else {
@@ -156,44 +141,41 @@ public class CardManager : MonoBehaviour
             if (selectedPlayer != null)
             {
                 selectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(false);
-                ToggleDeckCard(false);
             }
-        }
-    }
-
-    //Toggles deck card visibility
-    public void ToggleDeckCard(bool show)
-    {
-        if (show) { 
-            deckCard.SetActive(true);
-        }
-        else {
-            deckCard.SetActive(false);
-        }
-    }
-
-    //Sets number of action points on deck card
-    public void UpdateDeckCard()
-    {
-        if (selectedPlayer != null)
-        {
-            if (selectedPlayer.GetComponent<HandManager>().canDraw == false)
-            {
-                deckCard.GetComponentInChildren<Button>().interactable = false;
-                deckCard.GetComponentInChildren<TextMeshProUGUI>().SetText("X");
-                deckCard.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-                return;
-            } else if (!deckCard.GetComponentInChildren<Button>().interactable)
-            {
-                deckCard.GetComponentInChildren<Button>().interactable = true;
-                deckCard.GetComponentInChildren<TextMeshProUGUI>().color = new Color(140f/255f, 12f/255f, 252f/255f, 1);
-            }
-            deckCard.GetComponentInChildren<TextMeshProUGUI>().SetText(selectedPlayer.GetComponent<HandManager>().actionPoints.ToString());
         }
     }
 
     private void moveCard ()
     {
         
+    }
+
+    private void WaitForCardAnimations(bool selected)
+    {
+        float elapsedTime = 0f;
+        float duration = 0.1f; // Duration of the animation in seconds
+
+        Vector3 newPosition = selectedCard.cardHolder.transform.localPosition;
+        if (selected)
+        {
+            newPosition += new Vector3(0, cardSelectOffsetY, 0);
+            Debug.Log("Selecting card: " + selectedCard.cardName);
+        }
+        else
+        {
+            newPosition -= new Vector3(0, cardSelectOffsetY, 0);
+            Debug.Log("Deselecting card: " + selectedCard.cardName);
+        }
+        Vector3 originalPosition = selectedCard.cardHolder.transform.localPosition;
+        while (elapsedTime < duration)
+        {
+            selectedCard.cardHolder.transform.localPosition = Vector3.Lerp(originalPosition, newPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            //yield return null; // Wait until the next frame
+        }
+
+        selectedCard.cardHolder.transform.localPosition = newPosition; // Ensure final position is set
+        Debug.Log("Animation complete for card: " + selectedCard.cardName + " at position: " + selectedCard.cardHolder.transform.localPosition);
+        //yield return null; // Wait until the next frame
     }
 }

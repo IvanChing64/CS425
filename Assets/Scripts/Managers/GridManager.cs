@@ -126,6 +126,8 @@ public class GridManager : MonoBehaviour
                 //Checkerboard coloring
                 var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
 
+                //Shows tiles name in debug console
+                //Debug.Log($"Creating {spawnedTile.name} offset={isOffset}");
                 spawnedTile.Init(x,y);
 
                 tiles[currentPos] = spawnedTile;
@@ -204,10 +206,10 @@ public class GridManager : MonoBehaviour
         {
             Vector2 neighborPos = tileCoords + offset;
 
-            //Check if the neighbor tile exists in the dictionary
+            // 1. Check if the neighbor tile exists in the dictionary
             if (tiles.TryGetValue(neighborPos, out Tile neighborTile))
             {
-                //Check if the neighbor tile is a mountain tile
+                // 2. Check if the neighbor tile is a mountain tile
                 if (neighborTile.gameObject.name.Contains("mountain"))
                 {
                     mountainCount++;
@@ -235,6 +237,7 @@ public class GridManager : MonoBehaviour
         }
 
         return availableTiles.OrderBy(t => UnityEngine.Random.value).First();
+        //return mainArea.Where(t => t.Position.x < 2 && !IsSurroundedByMountains(t) && t.OccupiedUnit==null).OrderBy(t => UnityEngine.Random.value).First();
     }
 
     public Tile GetEnemySpawnTile()

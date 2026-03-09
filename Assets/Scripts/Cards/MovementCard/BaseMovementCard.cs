@@ -38,10 +38,10 @@ public class BaseMovementCard : BaseCard
 
         if(player != null)
         {
-            player.moveRange = range;
+            player.moveRange = value;
 
             List<Tile> tilesInRange = player.GetTilesInMoveRange();
-            foreach (Tile t in tilesInRange)
+            foreach(Tile t in tilesInRange)
             {
                 t.ShowHighlight(true, Tile.walkableColor);
             }
