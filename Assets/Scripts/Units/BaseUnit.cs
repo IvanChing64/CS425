@@ -12,13 +12,17 @@ public class BaseUnit : MonoBehaviour
     public float dmg;
     public int moveRange;
     public int attackRange;
+    public Animator UnitAnimator;
     [SerializeField] healthbar healthbar;
     [SerializeField] private AudioClip[] hurtSFX;
 
     public List<Tile> GetTilesInMoveRange() => RangeManager.GetTilesInRange(OccupiedTile, moveRange, RangeType.FloodMovement);
     public List<Tile> GetTilesInAttackRange() => RangeManager.GetTilesInRange(OccupiedTile, attackRange, RangeType.FloodTargeting);
 
-
+    private void Awake()
+    {
+        UnitAnimator = GetComponent<Animator>();
+    }
     //damage functions
     public void takeDamage(float damageAmount)
     {
