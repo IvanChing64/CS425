@@ -271,10 +271,10 @@ MonoBehaviour:
   startingDeck:
   - Walk
   - Wound
-  - Cure
+  - Heal
   - Walk
-  - Cure
-  - Cure
+  - Heal
+  - Heal
   - Wound
   - Walk
   canAttack: 0
