@@ -209,6 +209,7 @@ public class UnitManager : MonoBehaviour
 
         int attackRange = SelectedEnemy.attackRange;
         int moveRange = NPC_Controller.Instance.tilesPerMove;
+        // TODO: enemies should be initialized with correct movement range
         //int moveRange = SelectedEnemy.moveRange;
 
         Debug.Log("Selected Enemy: " + SelectedEnemy.name);
