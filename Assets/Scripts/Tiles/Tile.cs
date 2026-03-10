@@ -36,6 +36,7 @@ public abstract class Tile : MonoBehaviour
         //if (combatUIManager.Instance != null && combatUIManager.Instance.IsCombatMenuOpen) return;
         //Checks if it is player's turn
         if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
+        if (GameManager.Instance.unitMoving == true) return;
 
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
@@ -183,6 +184,7 @@ public abstract class Tile : MonoBehaviour
 
     private IEnumerator MoveUnitPath(BaseUnit unit, List<Tile> path)
     {
+        GameManager.Instance.unitMoving = true;
         Animator UnitAnimator = unit.GetComponent<Animator>();
         if(UnitAnimator != null)
         {
@@ -221,6 +223,7 @@ public abstract class Tile : MonoBehaviour
         OccupiedUnit = unit;
         unit.OccupiedTile = this;
         unit.moveRange = 0;
+        GameManager.Instance.unitMoving = false;
     }
 
     public void ShowHighlight(bool state, Color color)

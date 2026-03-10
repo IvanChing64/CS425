@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecbbd051c48c50848b01c66bf32e150d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_Controller
-  moveSpeed: 0.7
+  moveSpeed: 2.5
   tilesPerMove: 4
   path: []
 --- !u!95 &738936172720448078
