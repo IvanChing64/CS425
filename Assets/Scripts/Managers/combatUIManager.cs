@@ -108,6 +108,8 @@ public class combatUIManager : MonoBehaviour
         hideCombatOption();
         
         CardManager.instance.DeselectCard();
+        UnitManager.Instance.SetSelectedPlayer(null);
+
         if (CardManager.instance.selectedPlayer != null)
         {
             CardManager.instance.selectedPlayer.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));

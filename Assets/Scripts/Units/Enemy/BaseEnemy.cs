@@ -2,15 +2,8 @@ using UnityEngine;
 
 public class BaseEnemy : BaseUnit
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void SelectUnit()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
