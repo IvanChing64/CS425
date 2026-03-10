@@ -24,6 +24,7 @@ public class UnitManager : MonoBehaviour
     private List<Tile> enemyTiles = new List<Tile>();
 
     public BaseUnit SelectedUnit;
+    //public GameObject selector;
 
     public List<BasePlayer> playersSpawned = new List<BasePlayer>();
     public List<BaseEnemy> enemiesSpawned = new List<BaseEnemy>();
@@ -141,7 +142,7 @@ public class UnitManager : MonoBehaviour
     //}
 
 
-    public void SetSelectedUnit(BaseUnit unit)
+    private void SetSelectedUnit(BaseUnit unit)
     {
         if (SelectedUnit != null && SelectedUnit != unit)
         {
@@ -153,16 +154,20 @@ public class UnitManager : MonoBehaviour
             SelectedUnit.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             SelectedUnit.GetTilesInAttackRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             SelectedUnit.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
-
-            //enable and move selection indicator onto unit
         }
 
         SelectedUnit = unit;
 
-        if (SelectedUnit == null)
-        {
-            //disable selection indicator or move it out of view
-        }
+        //if (SelectedUnit == null)
+        //{
+        //    selector.SetActive(false);
+        //}
+        //else
+        //{
+        //    selector.SetActive(true);
+        //    selector.transform.position = SelectedUnit.OccupiedTile.Position;
+        //    selector.transform.position += Vector3.back;
+        //}
     }
 
     public void SetSelectedPlayer(BasePlayer player)

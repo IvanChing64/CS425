@@ -34,7 +34,8 @@ public abstract class Tile : MonoBehaviour
     {
         //Checks if the combat menu is open on screen
         //if (combatUIManager.Instance != null && combatUIManager.Instance.IsCombatMenuOpen) return;
-        //Checks if it is player's turn
+
+        //Check if it is the player's turn and no units are currently moving
         if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
         if (GameManager.Instance.unitMoving == true) return;
 
