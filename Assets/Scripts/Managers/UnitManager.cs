@@ -149,8 +149,10 @@ public class UnitManager : MonoBehaviour
             // Deselect current unit and hide move range highlights
             if (SelectedEnemy != null)
             {
-                RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, SelectedEnemy.moveRange+SelectedEnemy.attackRange).ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
+                int totalRange = SelectedEnemy.attackRange + NPC_Controller.Instance.tilesPerMove;
+                RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, totalRange).ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             }
+
             SelectedUnit.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             SelectedUnit.GetTilesInAttackRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             SelectedUnit.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
@@ -173,8 +175,13 @@ public class UnitManager : MonoBehaviour
     public void SetSelectedPlayer(BasePlayer player)
     {
         SetSelectedUnit(player);
+        CardManager.instance.SetSelectedPlayer(SelectedPlayer);
 
-        if (SelectedPlayer == null) return;
+        if (SelectedPlayer == null)
+        {
+            Debug.Log("UnitManager selected null player");
+            return;
+        }
         
         Debug.Log("Selected Player: " + SelectedPlayer.name);
 
@@ -192,22 +199,32 @@ public class UnitManager : MonoBehaviour
     public void SetSelectedEnemy(BaseEnemy enemy)
     {
         SetSelectedUnit(enemy);
+        CardManager.instance.SetSelectedPlayer(null);
 
-        if (SelectedEnemy == null) return;
+        if (SelectedEnemy == null)
+        {
+            Debug.Log("UnitManager selected null enemy");
+            return;
+        }
+
+        int attackRange = SelectedEnemy.attackRange;
+        int moveRange = NPC_Controller.Instance.tilesPerMove;
+        //int moveRange = SelectedEnemy.moveRange;
 
         Debug.Log("Selected Enemy: " + SelectedEnemy.name);
 
         // Show move and attack range highlights for enemy unit
-        int totalRange = SelectedEnemy.attackRange + SelectedEnemy.moveRange;
+        int totalRange = attackRange + moveRange;
 
         if (totalRange > 0)
         {
             RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, totalRange).ForEach(t => t.ShowHighlight(true, Tile.attackableColor));
         }
 
-        if (SelectedEnemy.moveRange > 0)
+        if (moveRange > 0)
         {
-            SelectedEnemy.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(true, Tile.walkableColor));
+            RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, moveRange).ForEach(t => t.ShowHighlight(false, Tile.walkableColor));
+            RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, moveRange).ForEach(t => t.ShowHighlight(true, Tile.walkableColor));
         }
     }
 
