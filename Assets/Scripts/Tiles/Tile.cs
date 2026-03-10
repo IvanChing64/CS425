@@ -61,6 +61,7 @@ public abstract class Tile : MonoBehaviour
             }
 
             // If the card is a movement card, move to the tile
+            /* TODO: This part is still gross, some of this functionality should be extracted */
             List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
             if (tilesInRange.Contains(this))
             {
