@@ -117,8 +117,12 @@ public class CardManager : MonoBehaviour
 
         if (selectedPlayer == null)
         {
-            ToggleDeckCard(false);
             Debug.Log("No player selected.");
+
+            ToggleDeckCard(false);
+            if (previousPlayer != null)
+                previousPlayer.GetComponent<HandManager>().ToggleHandVisibility(false);
+
             return;
         }
 

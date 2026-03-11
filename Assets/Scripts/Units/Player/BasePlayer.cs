@@ -17,4 +17,9 @@ public class BasePlayer : BaseUnit
         attackBoost = 1;
         defenseBoost = 1;
     }
+
+    public override void SelectUnit()
+    {
+
+    }
 }
