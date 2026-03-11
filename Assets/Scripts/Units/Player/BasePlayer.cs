@@ -8,11 +8,13 @@ public class BasePlayer : BaseUnit
     public int energy;
 
     //Resets a units card values at the end of their turn
-    public void ResetCardValues()
+    public void ResetValues()
     {
         moveRange = 0;
         attackRange = 0;
         dmg = 0;
         canAttack = false;
+        attackBoost = 1;
+        defenseBoost = 1;
     }
 }

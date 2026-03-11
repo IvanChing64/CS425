@@ -259,6 +259,8 @@ MonoBehaviour:
   health: 80
   guard: 0
   dmg: 0
+  attackBoost: 1
+  defenseBoost: 1
   moveRange: 0
   attackRange: 1
   UnitAnimator: {fileID: 7650870887470218107}
@@ -269,13 +271,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   startingDeck:
-  - Dash
+  - March
   - Bow Shot
   - Dash
-  - Bow Shot
   - Bow Shot
   - Rations
-  - Dash
+  - Rations
   canAttack: 0
   canSupport: 0
   energy: 1

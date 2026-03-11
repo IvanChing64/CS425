@@ -17,29 +17,29 @@ public class BaseControlCard : BaseCard
     //Applies control effect when the card is played
     public override void PlayCard()
     {
-        ApplyControlEffect();
+        //ApplyControlEffect();
         isPlayed = true;
         Debug.Log("Control Card Played with " + effect + " of value: " + value);
     }
 
     //Applies the control effect to the selected enemy
-    public void ApplyControlEffect()
-    {
-        //BasePlayer player = CardManager.instance.currentPlayer;
+    // public void ApplyControlEffect()
+    // {
+    //     //BasePlayer player = CardManager.instance.currentPlayer;
 
-        switch (effect)
-        {
-            case ControlEffect.Stun:
-                //target.Stun(value);
-                break;
+    //     switch (effect)
+    //     {
+    //         case ControlEffect.Stun:
+    //             //target.Stun(value);
+    //             break;
 
-            case ControlEffect.Poison:
-                //target.Poison(value);
-                break;
+    //         case ControlEffect.Daze:
+    //             //target.Poison(value);
+    //             break;
 
-            default:
-                Debug.LogWarning("Unknown control effect: " + effect);
-                break;
-        }
-    }
+    //         default:
+    //             Debug.LogWarning("Unknown control effect: " + effect);
+    //             break;
+    //     }
+    // }
 }

@@ -5,14 +5,15 @@ using UnityEngine;
 //Derived class for support cards
 public class BaseSupportCard : BaseCard
 {
-    public SupportEffect effect;
+    public SupportEffect primaryEffect, secondaryEffect;
     //public int value;
 
     //Copies properties from ScriptableCard including support effect
     public override void CopyScriptableCard(ScriptableCard card)
     {
         base.CopyScriptableCard(card);
-        effect = card.supportEffect;
+        primaryEffect = card.primarySupportEffect;
+        secondaryEffect = card.secondarySupportEffect;
     }
 
     public override void SelectCard()
@@ -23,7 +24,10 @@ public class BaseSupportCard : BaseCard
         if (player != null)
         {
             player.attackRange = range;
-            player.canSupport = true;
+            if (!(player.GetComponent<HandManager>().actionPoints < cost))
+            {
+                player.canSupport = true;
+            }
 
             List<Tile> tilesInRange = player.GetTilesInAttackRange();
             foreach (Tile t in tilesInRange)
@@ -54,8 +58,11 @@ public class BaseSupportCard : BaseCard
     //Applies the support effect to the selected player
     public void ApplySupportEffect(BaseUnit targetPlayer)
     {
-        switch (effect)
+        switch (primaryEffect)
         {
+            case SupportEffect.None:
+                break;
+            
             case SupportEffect.Heal:
                 targetPlayer.Heal(value);
                 break;
@@ -64,10 +71,52 @@ public class BaseSupportCard : BaseCard
                 targetPlayer.Guard(value);
                 break;
 
+            case SupportEffect.Bless:
+                targetPlayer.Bless();
+                break;
+
+            case SupportEffect.Cleanse:
+                targetPlayer.Cleanse();
+                break;
+
+            case SupportEffect.Energize:
+                targetPlayer.Energize(1);
+                break;
+
             default:
-                Debug.LogWarning("Unknown support effect: " + effect);
+                Debug.LogWarning("Unknown support effect: " + primaryEffect);
                 break;
         }
-        Debug.Log("Support Card Played with " + effect + " of value: " + value);
+
+        switch (secondaryEffect)
+        {
+            case SupportEffect.None:
+                break;
+            
+            case SupportEffect.Heal:
+                targetPlayer.Heal(value);
+                break;
+
+            case SupportEffect.Guard:
+                targetPlayer.Guard(value);
+                break;
+
+            case SupportEffect.Bless:
+                targetPlayer.Bless();
+                break;
+
+            case SupportEffect.Cleanse:
+                targetPlayer.Cleanse();
+                break;
+
+            case SupportEffect.Energize:
+                targetPlayer.Energize(1);
+                break;
+
+            default:
+                Debug.LogWarning("Unknown support effect: " + secondaryEffect);
+                break;
+        }
+        Debug.Log("Support Card Played with " + primaryEffect + " and " + secondaryEffect);
     }
 }

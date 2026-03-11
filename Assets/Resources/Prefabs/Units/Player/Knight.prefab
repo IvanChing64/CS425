@@ -275,7 +275,6 @@ MonoBehaviour:
   - March
   - Slash
   - Guard
-  - Guard
   canAttack: 0
   canSupport: 0
   energy: 1

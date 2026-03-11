@@ -23,12 +23,12 @@ public class HandManager : MonoBehaviour
     [SerializeField] public List<int> handCardIDs = new List<int>();
     public int drawNum = 3; // Equal to initial hand size
     public int actionPoints = 2; // 3 for each unit:0-Bury Card, 1-Draw Random, 2-Shuffle & Redraw Hand, 3-Draw Specific Card
-    [SerializeField] private int deckIndex = 0; // Points to card to draw from deck
+    [SerializeField] public int deckIndex = 0; // Points to card to draw from deck
     public bool handDrawn = false;
     public bool handSelected = false;
     public bool canDraw = true;
     public BaseCard selectedCard;
-    public static int cardPositionOffsetX = 198, cardPositionOffsetY = -402; // X: How far cards are from each other, Y: How close cards are to the bottom
+    public static int cardPositionOffsetX = 198, cardPositionOffsetY = -398; // X: How far cards are from each other, Y: How close cards are to the bottom
     public static int maxHandSize = 5, maxActionPoints = 5;
 
     //Initalizes instance and fills deck
@@ -243,7 +243,7 @@ public class HandManager : MonoBehaviour
     public void NextTurn()
     {
         handDrawn = false;
-        GetComponentInParent<BasePlayer>().ResetCardValues();
+        GetComponentInParent<BasePlayer>().ResetValues();
         ShuffleDeck();
         DrawHand();
         actionPoints += this.GetComponentInParent<BasePlayer>().energy;

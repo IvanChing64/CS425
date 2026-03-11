@@ -13,9 +13,9 @@ public class CardManager : MonoBehaviour
     public static CardManager instance;
     public BasePlayer selectedPlayer;
     public BaseCard selectedCard;
-    public GameObject cardArea, deckCard;
+    public GameObject cardArea, deckCard, actionPointCounter;
     public Vector3 cardLocation;
-    [SerializeField] public static int cardSelectOffsetY = 20;
+    [SerializeField] public static int cardSelectOffsetY = 18;
 
     // Initializes instance and calls backdrop creation
     void Awake()
@@ -65,11 +65,13 @@ public class CardManager : MonoBehaviour
     {
         if (selectedCard != null)
         {
+            selectedCard.PlayCard();
             selectedPlayer.GetComponent<HandManager>().RemoveCard(selectedCard);
             Destroy(selectedCard.gameObject);
             DeselectCard();
             selectedPlayer.GetComponent<HandManager>().UpdateHandPositions();
             UpdateDeckCard();
+            UpdateAPCounter();
         }
     }
 
@@ -92,6 +94,7 @@ public class CardManager : MonoBehaviour
         }
 
         UpdateDeckCard();
+        UpdateAPCounter();
     }
 
     //Draws a card from the selected player's deck into their hand
@@ -102,6 +105,7 @@ public class CardManager : MonoBehaviour
         selectedPlayer.GetComponent<HandManager>().DrawCard(true);
         selectedPlayer.GetComponent<HandManager>().UpdateHandPositions();
         UpdateDeckCard();
+        UpdateAPCounter();
     }
 
     //Shows hand of selected player and hides previous player's hand
@@ -120,6 +124,7 @@ public class CardManager : MonoBehaviour
 
         ToggleDeckCard(true);
         UpdateDeckCard();
+        UpdateAPCounter();
 
         if (selectedPlayer.GetComponent<HandManager>().currentDeck.Count == 0) 
         {
@@ -172,28 +177,45 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    //Sets number of action points on deck card
+    //Sets number of cards left in deck on deck card
     public void UpdateDeckCard()
     {
         if (selectedPlayer != null)
         {
+            HandManager selected = selectedPlayer.GetComponent<HandManager>();
             if (selectedPlayer.GetComponent<HandManager>().canDraw == false)
             {
                 deckCard.GetComponentInChildren<Button>().interactable = false;
-                deckCard.GetComponentInChildren<TextMeshProUGUI>().SetText("X");
                 deckCard.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-                return;
             } else if (!deckCard.GetComponentInChildren<Button>().interactable)
             {
                 deckCard.GetComponentInChildren<Button>().interactable = true;
                 deckCard.GetComponentInChildren<TextMeshProUGUI>().color = new Color(140f/255f, 12f/255f, 252f/255f, 1);
             }
-            deckCard.GetComponentInChildren<TextMeshProUGUI>().SetText(selectedPlayer.GetComponent<HandManager>().actionPoints.ToString());
+            deckCard.GetComponentInChildren<TextMeshProUGUI>().SetText((selected.currentDeck.Count - selected.deckIndex).ToString());
         }
     }
 
-    private void moveCard ()
+    //Sets Action Point Counter
+
+    private void UpdateAPCounter()
     {
-        
+        if (selectedPlayer != null)
+        {
+            HandManager selected = selectedPlayer.GetComponent<HandManager>();
+            int ap = selected.actionPoints;
+            if (ap > 5)
+            {
+                actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().color = Color.softYellow;
+            }else if (ap > 0)
+            {
+                actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+            } else
+            {
+                actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().color = Color.darkGray;
+            }
+
+            actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().SetText(ap.ToString());
+        }
     }
 }

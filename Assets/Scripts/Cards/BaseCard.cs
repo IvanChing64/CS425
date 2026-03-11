@@ -13,7 +13,7 @@ public abstract class BaseCard : MonoBehaviour
     //[SerializeField] private GameObject highlightEffect;
     public string cardName;
     public Type cardType;
-    public int range, value;
+    public int range, value, cost;
     public bool isPlayed;
     public GameObject cardHolder; // Reference to the card holder GameObject
     //public float drawChance;
@@ -21,6 +21,7 @@ public abstract class BaseCard : MonoBehaviour
     //Play the card's effect, overridden in derived classes
     public virtual void PlayCard()
     {
+        CardManager.instance.selectedPlayer.GetComponent<HandManager>().actionPoints -= cost;
         isPlayed = true;
     }
 
@@ -41,6 +42,7 @@ public abstract class BaseCard : MonoBehaviour
         cardType = card.type;
         value = card.value;
         range = card.range;
+        cost = card.cost;
         //Debug.Log("Card Copied: " + cardName);
     }
 
@@ -70,39 +72,4 @@ public abstract class BaseCard : MonoBehaviour
             SelectCard();
         }
     }
-
-    // //Selects or plays the card on mouse click during player's turn
-    // private void OnMouseDown()
-    // {
-    //     if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
-    //     if (CardManager.instance == null)
-    //     {
-    //         Debug.LogWarning("CardManager.instance is null.");
-    //         return;
-    //     }
-    //     if(CardManager.instance.selectedCard == this)
-    //     {
-    //         if(UnitManager.Instance.SelectedPlayer != null)
-    //         {
-    //             CardManager.instance.PlaySelectedCard(this);
-    //         }
-    //         else
-    //         {
-    //             Debug.Log("Select a unit.");
-    //         }
-    //     }
-    //     else
-    //     {
-    //         CardManager.instance.SelectCard(this);
-    //     }
-
-    //     //if (CardManager.instance.selectedCard != this)
-    //     //{
-    //     //    CardManager.instance.SelectCard(this);
-    //     //}
-    //     //else if (CardManager.instance.selectedCard == this)
-    //     //{
-    //     //    CardManager.instance.PlaySelectedCard();
-    //     //}
-    // }
 }

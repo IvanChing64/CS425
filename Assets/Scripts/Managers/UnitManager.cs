@@ -184,6 +184,7 @@ public class UnitManager : MonoBehaviour
         foreach (var enemy in enemiesSpawned)
         {
             if (enemy == null || enemy.gameObject == null) continue;
+            enemy.defenseBoost = 1;
 
             var npc = enemy.GetComponent<NPC_Controller>();
             if (npc != null)

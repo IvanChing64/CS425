@@ -10,6 +10,8 @@ public class BaseUnit : MonoBehaviour
     public float health;
     public float guard;
     public float dmg;
+    public float attackBoost = 1;
+    public float defenseBoost = 1;
     public int moveRange;
     public int attackRange;
     public Animator UnitAnimator;
@@ -33,7 +35,7 @@ public class BaseUnit : MonoBehaviour
         
 
         healthbar = GetComponentInChildren<healthbar>();
-        float damage = damageAmount;
+        float damage = damageAmount * defenseBoost;
 
         if (guard > 0)
         {
@@ -74,6 +76,60 @@ public class BaseUnit : MonoBehaviour
         if (guard > maxHealth) { guard = maxHealth; }
         Debug.Log("Guard increased by " + guardAmount + ". Current Guard: " + guard);
         UpdateHealth();
+    }
+
+    public void Bless()
+    {
+        attackBoost += 0.25f;
+        if (attackBoost > 2)
+        {
+            attackBoost = 2;
+        } else if (attackBoost < 0)
+        {
+            attackBoost = 0;
+        }
+
+        defenseBoost -= 0.25f;
+        if (defenseBoost < 0)
+        {
+            defenseBoost = 0;
+        } else if (defenseBoost > 2)
+        {
+            defenseBoost = 2;
+        }
+        Debug.Log("Blessed: Attack Boost = " + attackBoost + ", Defense Boost = " + defenseBoost);
+    }
+
+    public void Cleanse()
+    {
+        //Clear Debuffs
+        //Temporary Implementation
+        if (attackBoost < 1)
+        {
+            attackBoost = 1;
+        }
+        if (defenseBoost > 1)
+        {
+            defenseBoost = 1;
+        }
+    }
+
+    public void Energize(int energy)
+    {
+        GetComponent<HandManager>().actionPoints += energy;
+    }
+
+    public void Daze()
+    {
+        
+    }
+
+    public void Stun()
+    {
+        if (Faction == Faction.Player)
+        {
+            
+        }
     }
 
     public void UpdateHealth()

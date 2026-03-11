@@ -5,6 +5,13 @@ using UnityEngine;
 //Derived class for attack cards
 public class BaseAttackCard : BaseCard
 {
+    public ControlEffect effect;
+
+    public override void CopyScriptableCard(ScriptableCard card)
+    {
+        base.CopyScriptableCard(card);
+        effect = card.controlEffect;
+    }
 
     public override void SelectCard()
     {
@@ -13,7 +20,10 @@ public class BaseAttackCard : BaseCard
 
         if(player != null)
         {
-            player.canAttack = true;
+            if (!(player.GetComponent<HandManager>().actionPoints < cost))
+            {
+                player.canAttack = true;
+            }
             player.dmg = value;
             player.attackRange = range;
             Tile currentTile = player.OccupiedTile;
@@ -57,6 +67,23 @@ public class BaseAttackCard : BaseCard
             }
             player.attackRange = 0;
             //combatUIManager.Instance.hideCombatOption();
+        }
+    }
+
+    public void ApplyControlEffect(BaseUnit targetEnemy)
+    {
+        switch (effect)
+        {
+            case ControlEffect.None:
+                break;
+            
+            case ControlEffect.Daze:
+                targetEnemy.Daze();
+                break;
+
+            case ControlEffect.Stun:
+                targetEnemy.Stun();
+                break;
         }
     }
 }

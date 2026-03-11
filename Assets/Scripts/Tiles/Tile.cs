@@ -117,7 +117,7 @@ public abstract class Tile : MonoBehaviour
                     {
                         BaseEnemy enemy = (BaseEnemy)n.OccupiedUnit;
                         BasePlayer player = UnitManager.Instance.SelectedPlayer;
-                        combatUIManager.Instance.showCombatOption(player, enemy);
+                        //combatUIManager.Instance.showCombatOption(player, enemy);
                         break;
                     }
                 }

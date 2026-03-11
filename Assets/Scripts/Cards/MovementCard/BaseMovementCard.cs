@@ -46,6 +46,10 @@ public class BaseMovementCard : BaseCard
                 t.ShowHighlight(true, Tile.walkableColor);
             }
             player.OccupiedTile.ShowHighlight(true, Tile.walkableColor);
+            if (player.GetComponent<HandManager>().actionPoints < cost)
+            {
+                player.moveRange = 0;
+            }
         }
     }
 
