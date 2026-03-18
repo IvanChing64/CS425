@@ -114,6 +114,7 @@ public class CardManager : MonoBehaviour
         DeselectCard();
         BasePlayer previousPlayer = selectedPlayer;
         selectedPlayer = player;
+        HandManager selectedHand;
 
         if (selectedPlayer == null)
         {
@@ -123,14 +124,36 @@ public class CardManager : MonoBehaviour
             if (previousPlayer != null)
                 previousPlayer.GetComponent<HandManager>().ToggleHandVisibility(false);
 
+            UpdateAPCounter();
             return;
         }
 
+        selectedHand = selectedPlayer.GetComponent<HandManager>();
+
         ToggleDeckCard(true);
+        if (selectedHand.actionPoints > 0 && selectedHand.deckIndex != -1 && selectedHand.deckIndex < selectedHand.currentDeck.Count)
+        {
+            if (selectedHand.currentHand.Count < 5 && selectedPlayer.stunned == 0)
+            {
+                selectedPlayer.GetComponent<HandManager>().canDraw = true;
+            } else
+            {
+                selectedPlayer.GetComponent<HandManager>().canDraw = false;
+            }
+        } else
+        {
+            selectedPlayer.GetComponent<HandManager>().canDraw = false;
+        }
+
+        if (!selectedHand.handDrawn)
+        {
+            selectedPlayer.GetComponent<HandManager>().DrawHand();
+        }
+
         UpdateDeckCard();
         UpdateAPCounter();
 
-        if (selectedPlayer.GetComponent<HandManager>().currentDeck.Count == 0) 
+        if (selectedHand.currentDeck.Count == 0) 
         {
             selectedPlayer.GetComponent<HandManager>().FillDeckFromResources();
             selectedPlayer.GetComponent<HandManager>().NextTurn();
@@ -187,7 +210,13 @@ public class CardManager : MonoBehaviour
         if (selectedPlayer != null)
         {
             HandManager selected = selectedPlayer.GetComponent<HandManager>();
-            if (selectedPlayer.GetComponent<HandManager>().canDraw == false)
+
+            if (selected.actionPoints == 0)
+            {
+                selectedPlayer.GetComponent<HandManager>().canDraw = false;
+            }
+
+            if (selected.canDraw == false)
             {
                 deckCard.GetComponentInChildren<Button>().interactable = false;
                 deckCard.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
@@ -196,7 +225,13 @@ public class CardManager : MonoBehaviour
                 deckCard.GetComponentInChildren<Button>().interactable = true;
                 deckCard.GetComponentInChildren<TextMeshProUGUI>().color = new Color(140f/255f, 12f/255f, 252f/255f, 1);
             }
-            deckCard.GetComponentInChildren<TextMeshProUGUI>().SetText((selected.currentDeck.Count - selected.deckIndex).ToString());
+            if (selected.deckIndex == -1)
+            {
+                deckCard.GetComponentInChildren<TextMeshProUGUI>().SetText("0");
+            } else
+            {
+                deckCard.GetComponentInChildren<TextMeshProUGUI>().SetText((selected.currentDeck.Count - selected.deckIndex).ToString());
+            }
         }
     }
 
@@ -220,6 +255,10 @@ public class CardManager : MonoBehaviour
             }
 
             actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().SetText(ap.ToString());
+        } else
+        {
+            actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().SetText("");
         }
+
     }
 }

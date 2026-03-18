@@ -266,7 +266,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1086, y: -528.3}
+  m_AnchoredPosition: {x: -1086, y: -504.3}
   m_SizeDelta: {x: -2485.6372, y: -1380.8086}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &113478784
@@ -1372,6 +1372,7 @@ GameObject:
   - component: {fileID: 732287340}
   - component: {fileID: 732287342}
   - component: {fileID: 732287341}
+  - component: {fileID: 732287343}
   m_Layer: 5
   m_Name: CardPanel
   m_TagString: Untagged
@@ -1395,7 +1396,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.28430557}
-  m_AnchoredPosition: {x: 2.6362305, y: -13}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 65.4614, y: 43.84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &732287341
@@ -1436,6 +1437,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732287339}
   m_CullTransparentMesh: 0
+--- !u!95 &732287343
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732287339}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b41be36e0580fe54ead5af8328b22683, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &739442278
 GameObject:
   m_ObjectHideFlags: 0
@@ -3011,15 +3034,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitManager
   playersToSpawn:
-  - {fileID: 11400000, guid: f2d5425ab28ecbb4ebb8bc1550f29a69, type: 2}
   - {fileID: 11400000, guid: dcd44c3bb5910cf4bbc22ad9c62d1afa, type: 2}
   - {fileID: 11400000, guid: 252e01cc4b26ef545be3cf3f36c85ce5, type: 2}
-  - {fileID: 11400000, guid: bd85134c64687194690aa1e0e21a8b7e, type: 2}
+  - {fileID: 11400000, guid: 6ad7c5ced806cee49b29d02030fb56c1, type: 2}
+  - {fileID: 11400000, guid: 1dfd4a66ce32563418c45deb80c7ffe7, type: 2}
   enemiesToSpawn:
   - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
   - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
+  - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
+  - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
+  - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
+  - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
   SelectedUnit: {fileID: 0}
-  selector: {fileID: 1616993709}
   playersSpawned: []
   enemiesSpawned: []
   enemyUnitCount: 0
@@ -3099,6 +3125,10 @@ PrefabInstance:
     - target: {fileID: 6683488165029853410, guid: 65117172fe3868e4b9b5b91d4e114fb9, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220610403087784672, guid: 65117172fe3868e4b9b5b91d4e114fb9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -390
       objectReference: {fileID: 0}
     - target: {fileID: 7902260680168895071, guid: 65117172fe3868e4b9b5b91d4e114fb9, type: 3}
       propertyPath: m_Name

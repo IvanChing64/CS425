@@ -16,6 +16,13 @@ public class BasePlayer : BaseUnit
         canAttack = false;
         attackBoost = 1;
         defenseBoost = 1;
+        if (stunned > 0)
+        {
+            stunned--;
+        } else
+        {
+            stunned = 0;
+        }
     }
 
     public override void SelectUnit()

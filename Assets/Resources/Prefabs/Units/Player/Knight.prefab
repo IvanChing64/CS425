@@ -259,6 +259,9 @@ MonoBehaviour:
   health: 100
   guard: 0
   dmg: 0
+  attackBoost: 1
+  defenseBoost: 1
+  stunned: 0
   moveRange: 0
   attackRange: 1
   UnitAnimator: {fileID: 7650870887470218107}
@@ -298,7 +301,6 @@ MonoBehaviour:
   actionPoints: 2
   deckIndex: 0
   handDrawn: 0
-  handSelected: 0
   canDraw: 1
   selectedCard: {fileID: 0}
 --- !u!1 &5483545698060636878

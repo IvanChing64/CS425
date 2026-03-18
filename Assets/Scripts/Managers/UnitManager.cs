@@ -263,10 +263,23 @@ public class UnitManager : MonoBehaviour
         {
             if (enemy == null || enemy.gameObject == null) continue;
             enemy.defenseBoost = 1;
+            if (enemy.stunned > 0)
+            {
+                enemy.stunned--;
+            } else
+            {
+                enemy.stunned = 0;
+            }
 
             var npc = enemy.GetComponent<NPC_Controller>();
-            if (npc != null)
+            if (npc != null) {
+                if (enemy.stunned > 0)
+                {
+                    continue;
+                }    
+
                 enemyControllers.Add(npc);
+            }
 
         }
 

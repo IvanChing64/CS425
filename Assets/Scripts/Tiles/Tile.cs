@@ -48,6 +48,12 @@ public abstract class Tile : MonoBehaviour
             // If the card applies a support effect and an ally is in range, apply it
             if (UnitManager.Instance.SelectedPlayer.canSupport && OccupiedUnit != null && OccupiedUnit.Faction == Faction.Player)
             {
+                Animator playerAnim = UnitManager.Instance.SelectedPlayer.GetComponent<Animator>();
+                UnitManager.Instance.SelectedPlayer.GetComponent<Animator>();
+                if (playerAnim != null)
+                {
+                    playerAnim.SetTrigger("support");
+                }
                 ((BaseSupportCard)CardManager.instance.selectedCard).ApplySupportEffect(OccupiedUnit);
                 CardManager.instance.PlaySelectedCard();
                 return;
@@ -57,6 +63,8 @@ public abstract class Tile : MonoBehaviour
             if (UnitManager.Instance.SelectedPlayer.canAttack && OccupiedUnit != null && OccupiedUnit.Faction == Faction.Enemy)
             {
                 combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, OccupiedUnit);
+                ((BaseAttackCard)CardManager.instance.selectedCard).ApplyControlEffect(OccupiedUnit);
+                CardManager.instance.PlaySelectedCard();
                 return;
             }
 

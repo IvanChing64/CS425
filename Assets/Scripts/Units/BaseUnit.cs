@@ -12,6 +12,7 @@ public class BaseUnit : MonoBehaviour
     public float dmg;
     public float attackBoost = 1;
     public float defenseBoost = 1;
+    public int stunned = 0;
     public int moveRange;
     public int attackRange;
     public Animator UnitAnimator;
@@ -112,6 +113,10 @@ public class BaseUnit : MonoBehaviour
         {
             defenseBoost = 1;
         }
+        if (stunned > 0)
+        {
+            stunned = 0;
+        }
     }
 
     public void Energize(int energy)
@@ -121,16 +126,43 @@ public class BaseUnit : MonoBehaviour
 
     public void Daze()
     {
-        
+        //Reduce Movement by 1
+        //Temporary enemy only implementation
+        if (Faction == Faction.Enemy)
+        {
+            moveRange--;
+        }
     }
 
     public void Stun()
     {
-        if (Faction == Faction.Player)
+        stunned += 2;
+    }
+
+    public void Restrict()
+    {
+        //Reduce Movement to 0
+        //Temporary enemy only implementation
+        if (Faction == Faction.Enemy)
         {
-            
+            moveRange = 0;
         }
     }
+
+    public void Freeze()
+    {
+        stunned += 2;
+        defenseBoost += 0.15f;
+        if (defenseBoost < 0)
+        {
+            defenseBoost = 0;
+        } else if (defenseBoost > 2)
+        {
+            defenseBoost = 2;
+        }
+    }
+
+
 
     public void UpdateHealth()
     {

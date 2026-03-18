@@ -1,3 +1,4 @@
+//using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 
@@ -25,10 +26,10 @@ public class HandManager : MonoBehaviour
     public int actionPoints = 2; // 3 for each unit:0-Bury Card, 1-Draw Random, 2-Shuffle & Redraw Hand, 3-Draw Specific Card
     [SerializeField] public int deckIndex = 0; // Points to card to draw from deck
     public bool handDrawn = false;
-    public bool handSelected = false;
+    //public bool handSelected = false;
     public bool canDraw = true;
     public BaseCard selectedCard;
-    public static int cardPositionOffsetX = 198, cardPositionOffsetY = -398; // X: How far cards are from each other, Y: How close cards are to the bottom
+    public static int cardPositionOffsetX = 198, cardPositionOffsetY = -390; // X: How far cards are from each other, Y: How close cards are to the bottom
     public static int maxHandSize = 5, maxActionPoints = 5;
 
     //Initalizes instance and fills deck
@@ -104,14 +105,19 @@ public class HandManager : MonoBehaviour
             Debug.Log("Current deck is empty - Filling deck from resources.");
         }
 
+        if (GetComponentInParent<BasePlayer>().stunned != 0)
+        {
+            canDraw = false;
+        }
+
         // Draw up to DrawNum cards from the deck starting at deckIndex
         int cardsToDraw = drawNum;
 
-        if (currentHand.Count >= currentDeck.Count || currentHand.Count == maxHandSize)
-        {
-            Debug.Log("Hand is full, cannot draw more cards.");
-            return;
-        }
+        // if (currentHand.Count >= currentDeck.Count || currentHand.Count == maxHandSize)
+        // {
+        //     Debug.Log("Hand is full, cannot draw more cards.");
+        //     return;
+        // }
 
         for (int i = 0; i < cardsToDraw; i++)
         {
@@ -119,7 +125,10 @@ public class HandManager : MonoBehaviour
             DrawCard(false);
         }
 
-        handDrawn = true;
+        if (GetComponentInParent<BasePlayer>().stunned == 0)
+        {
+            handDrawn = true;
+        }
         UpdateHandPositions();
         //Debug.Log("Hand Drawn with " + currentHand.Count + " cards.");
     }
@@ -135,10 +144,10 @@ public class HandManager : MonoBehaviour
         if (currentDeck.Count == 0) return;
         if (currentHand.Count == maxHandSize) return;
 
-        // Reset deckIndex, if it exceeds deck size, to the top of the deck and reshuffle
-        if (deckIndex >= currentDeck.Count)
+        // Set deckIndex to negative integer to indicate no more cards to draw
+        if (deckIndex >= currentDeck.Count || deckIndex == -1)
         {
-            deckIndex = 0;
+            deckIndex = -1;
             canDraw = false;
             return;
             // ShuffleDeck();
@@ -158,7 +167,7 @@ public class HandManager : MonoBehaviour
                 Debug.Log("No More Action Points to use");
                 return;
             }
-        } Debug.Log("Action Points: " + actionPoints);
+        }
 
         ScriptableCard drawnCard = currentDeck[deckIndex];
         GameObject newCard = null;
@@ -176,7 +185,7 @@ public class HandManager : MonoBehaviour
                     deckIndex++;
                     if (deckIndex >= currentDeck.Count)
                     {
-                        deckIndex = 0;
+                        deckIndex = -1;
                         canDraw = false;
                         return; 
                     }
@@ -221,6 +230,10 @@ public class HandManager : MonoBehaviour
         {
             canDraw = false;
         }
+        if (extraDraw && actionPoints <= 0)
+        {
+            canDraw = false;
+        }
     }
 
     // Populate `currentDeck` from Player Deck Data
@@ -246,12 +259,13 @@ public class HandManager : MonoBehaviour
         GetComponentInParent<BasePlayer>().ResetValues();
         ShuffleDeck();
         DrawHand();
-        actionPoints += this.GetComponentInParent<BasePlayer>().energy;
+        actionPoints += GetComponentInParent<BasePlayer>().energy;
         if (actionPoints > maxActionPoints)
         {
             actionPoints = maxActionPoints;
         }
         UpdateHandPositions();
+
     }
 
     //Toggles hand visibility based on input
@@ -269,7 +283,7 @@ public class HandManager : MonoBehaviour
             {
                 card.gameObject.SetActive(true);
             }
-            handSelected = true;
+            //handSelected = true;
             //Debug.Log("Hand is now shown.");
         } else
         {
@@ -277,7 +291,7 @@ public class HandManager : MonoBehaviour
             {
                 card.gameObject.SetActive(false);
             }
-            handSelected = false;
+            //handSelected = false;
             //Debug.Log("Hand is now hidden.");
         }
     }
@@ -287,7 +301,7 @@ public class HandManager : MonoBehaviour
     {
         handCardIDs.Remove(handCardIDs[currentHand.IndexOf(removedCard)]);
         currentHand.Remove(removedCard);
-        if (currentHand.Count != maxHandSize && deckIndex < currentDeck.Count)
+        if (currentHand.Count != maxHandSize && deckIndex < currentDeck.Count && actionPoints > 0)
         {
             canDraw = true;
         }

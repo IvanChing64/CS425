@@ -86,7 +86,6 @@ public class combatUIManager : MonoBehaviour
                 if (t.isWalkable)t.ShowHighlight(false, Tile.nonwalkableColor);
             }
         }
-        CardManager.instance.PlaySelectedCard();
     }
 
     //End Turn button

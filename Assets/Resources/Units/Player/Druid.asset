@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1c202a58a1759443929a093dc659386, type: 3}
-  m_Name: Player5
+  m_Name: Druid
   m_EditorClassIdentifier: Scripts::ScriptableUnit
   Faction: 0
-  UnitPrefab: {fileID: 8223425501525720341, guid: 289c99ff88baa554597a6856b54f18e2, type: 3}
+  UnitPrefab: {fileID: 2518674309491261067, guid: a644a0ccc77231f4e8719a5402f0aa2f, type: 3}
   health: 0
   dmg: 0

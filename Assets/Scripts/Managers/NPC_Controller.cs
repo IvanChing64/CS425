@@ -272,6 +272,7 @@ public class NPC_Controller: MonoBehaviour
     {
         tilesMovedThisTurn = 0;
         HasFinishedTurn = false;
+
         
         //Select target
         var targeting = GetComponent<EnemyTargetingManager>();

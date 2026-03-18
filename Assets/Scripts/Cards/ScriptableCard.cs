@@ -44,5 +44,7 @@ public enum ControlEffect
 {
     None = 0,
     Daze = 1,
-    Stun = 2
+    Stun = 2,
+    Restrict = 3,
+    Freeze = 4,
 }

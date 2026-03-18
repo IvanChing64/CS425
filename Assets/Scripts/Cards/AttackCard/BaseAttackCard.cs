@@ -84,6 +84,14 @@ public class BaseAttackCard : BaseCard
             case ControlEffect.Stun:
                 targetEnemy.Stun();
                 break;
+
+            case ControlEffect.Restrict:
+                targetEnemy.Restrict();
+                break;
+
+            case ControlEffect.Freeze:
+                targetEnemy.Freeze();
+                break;
         }
     }
 }
