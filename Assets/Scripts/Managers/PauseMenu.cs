@@ -95,6 +95,8 @@ public class PauseMenu : MonoBehaviour
         SoundFXManager.instance.PlaySoundFXClip(buttonSFX, transform, 1f);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        pauseMenuUI.SetActive(false);
+        settingUI.SetActive(false);
         SceneManager.LoadScene("MainMenu");
         Debug.Log("Loading Menu");
     }
