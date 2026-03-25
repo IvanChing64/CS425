@@ -16,7 +16,7 @@ MonoBehaviour:
   cardDescription: Damage and Restrict target
   type: 0
   range: 4
-  value: 25
+  value: 20
   cost: 1
   rangeType: 1
   cardIcon: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}

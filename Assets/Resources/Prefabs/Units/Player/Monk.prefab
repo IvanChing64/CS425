@@ -376,9 +376,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   startingDeck:
-  - Dash
+  - March
   - Cure
-  - Cure
+  - Palm Strike
   - Palm Strike
   - Punch
   - Punch
@@ -403,7 +403,7 @@ MonoBehaviour:
   currentHand: []
   deckCardIDs: 
   handCardIDs: 
-  drawNum: 3
+  drawNum: 4
   actionPoints: 2
   deckIndex: 0
   handDrawn: 0

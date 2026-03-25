@@ -40,12 +40,12 @@ public class BaseUnit : MonoBehaviour
 
         if (guard > 0)
         {
-            if (guard >= damage * 0.75f)
+            if (guard >= damage * 0.8f)
             {
-                guard -= damage * 0.75f;
+                guard -= damage * 0.8f;
             } else
             {
-                damage = damage * 0.75f - guard;
+                damage = damage * 0.8f - guard;
                 guard = 0;
                 health -= damage;
             }

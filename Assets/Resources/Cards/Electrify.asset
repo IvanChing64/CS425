@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: Electrify
   cardDescription: Damage and daze target in range
   type: 0
-  range: 4
+  range: 3
   value: 30
   cost: 0
   rangeType: 1

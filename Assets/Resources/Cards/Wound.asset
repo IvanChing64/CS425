@@ -16,7 +16,7 @@ MonoBehaviour:
   cardDescription: Attack a nearby enemy
   type: 0
   range: 2
-  value: 15
+  value: 10
   cost: 0
   rangeType: 1
   cardIcon: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}

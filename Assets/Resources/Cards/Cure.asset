@@ -16,7 +16,7 @@ MonoBehaviour:
   cardDescription: Heal and Cleanse nearby ally
   type: 2
   range: 2
-  value: 20
+  value: 30
   cost: 0
   rangeType: 1
   cardIcon: {fileID: -8714418300613597991, guid: a027c213e88ad1f40994c68276f11c89, type: 3}
