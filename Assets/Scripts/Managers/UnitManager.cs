@@ -114,13 +114,25 @@ public class UnitManager : MonoBehaviour
     {
         enemiesSpawned.Clear();
         enemyTiles.Clear();
-        for (int i = 0; i < enemiesToSpawn.Count; i++)
+
+        StageData data = CurrentSession.ActiveStageData;
+        if(data == null || data.enemyPrefabs == null || data.enemyPrefabs.Count == 0)
         {
-            var unitData = enemiesToSpawn[i];
+            Debug.LogError("UnitManager: No StageData or Enemy prefabs on this stage");
+            GameManager.Instance.ChangeState(GameState.PlayerTurn);
+            return;
+        }
+
+        int countToSpawn = data.enemyCount;
+
+        for (int i = 0; i < countToSpawn; i++)
+        {
+            GameObject prefab = data.enemyPrefabs[Random.Range(0, data.enemyPrefabs.Count)];
+            //var unitData = enemiesToSpawn[i];
             var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
             if(randomSpawnTile != null)
             {
-                BaseEnemy spawnedEnemy = Instantiate((BaseEnemy)unitData.UnitPrefab, randomSpawnTile.transform.position, Quaternion.identity);
+                BaseEnemy spawnedEnemy = Instantiate(prefab.GetComponent<BaseEnemy>(), randomSpawnTile.transform.position, Quaternion.identity);
                 spawnedEnemy.name = $"Enemy_{i}";
                 randomSpawnTile.setUnit(spawnedEnemy);
                 enemiesSpawned.Add(spawnedEnemy);

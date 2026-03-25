@@ -13,6 +13,7 @@ public class levelSelect : MonoBehaviour
 {
     //Variables
     public string stageID;
+    public StageData stageData;
 
     [Header("Grid Settings")]
     public int stageWidthMin;
@@ -86,6 +87,7 @@ public class levelSelect : MonoBehaviour
             GridManager.height = 20;
         }
         CurrentSession.ActiveStageID = stageID;
+        CurrentSession.ActiveStageData = stageData;
         
         SceneManager.LoadScene("Scenes/SampleScene");
     }

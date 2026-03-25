@@ -1364,6 +1364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 11
+  stageData: {fileID: 0}
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 10
@@ -1831,6 +1832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 10
+  stageData: {fileID: 0}
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 10
@@ -3459,6 +3461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 1
+  stageData: {fileID: 11400000, guid: dea111ae8bb11484280e0f2e4af6087d, type: 2}
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -3614,6 +3617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 8
+  stageData: {fileID: 0}
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -3771,6 +3775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 6
+  stageData: {fileID: 0}
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -3926,6 +3931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 9
+  stageData: {fileID: 0}
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -4161,6 +4167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 2
+  stageData: {fileID: 0}
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -5043,6 +5050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 7
+  stageData: {fileID: 0}
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -5440,6 +5448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 5
+  stageData: {fileID: 0}
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -6049,6 +6058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 4
+  stageData: {fileID: 0}
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -6528,6 +6538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 3
+  stageData: {fileID: 0}
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -6683,6 +6694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 12
+  stageData: {fileID: 0}
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 10
