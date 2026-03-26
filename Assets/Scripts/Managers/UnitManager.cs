@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 //Developer: Ivan Ching
@@ -116,7 +113,7 @@ public class UnitManager : MonoBehaviour
         enemyTiles.Clear();
 
         StageData data = CurrentSession.ActiveStageData;
-        if(data == null || data.enemyPrefabs == null || data.enemyPrefabs.Count == 0)
+        if(data == null || data.enemies == null || data.enemies.Count == 0)
         {
             Debug.LogError("UnitManager: No StageData or Enemy prefabs on this stage");
             GameManager.Instance.ChangeState(GameState.PlayerTurn);
@@ -127,7 +124,7 @@ public class UnitManager : MonoBehaviour
 
         for (int i = 0; i < countToSpawn; i++)
         {
-            GameObject prefab = data.enemyPrefabs[Random.Range(0, data.enemyPrefabs.Count)];
+            GameObject prefab = data.enemies[Random.Range(0, data.enemies.Count)];
             //var unitData = enemiesToSpawn[i];
             var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
             if(randomSpawnTile != null)

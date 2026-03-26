@@ -9,7 +9,6 @@ public class StageData : ScriptableObject
     public Tile mountainTilePrefab;
 
     [Header("Enemy Spawning")]
-    public List<GameObject> enemyPrefabs;
+    public List<GameObject> enemies;
     public int enemyCount = 3;
-
 }
