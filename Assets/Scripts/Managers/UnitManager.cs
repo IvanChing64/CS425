@@ -148,7 +148,7 @@ public class UnitManager : MonoBehaviour
             // Deselect current unit and hide move range highlights
             if (SelectedEnemy != null)
             {
-                int totalRange = SelectedEnemy.attackRange + NPC_Controller.Instance.tilesPerMove;
+                int totalRange = SelectedEnemy.attackRange + SelectedEnemy.moveRange;
                 RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, totalRange).ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             }
 
@@ -207,9 +207,9 @@ public class UnitManager : MonoBehaviour
         }
 
         int attackRange = SelectedEnemy.attackRange;
-        int moveRange = NPC_Controller.Instance.tilesPerMove;
+        // int moveRange = NPC_Controller.Instance.tilesPerMove;
         // TODO: enemies should be initialized with correct movement range
-        //int moveRange = SelectedEnemy.moveRange;
+        int moveRange = SelectedEnemy.moveRange;
 
         Debug.Log("Selected Enemy: " + SelectedEnemy.name);
 

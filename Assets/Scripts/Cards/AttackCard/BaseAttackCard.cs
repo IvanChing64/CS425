@@ -33,22 +33,6 @@ public class BaseAttackCard : BaseCard
                 t.ShowHighlight(true, Tile.attackableColor);
             }
             currentTile.ShowHighlight(false, Tile.nonwalkableColor);
-
-            // if(currentTile != null && currentTile.IsNextToEnemy())
-            // {
-            //     Debug.Log("Player is next to an enemy!");
-            //     var neighbors = GridManager.Instance.GetNeighborsOf(currentTile);
-
-            //     foreach (var n in neighbors)
-            //     {
-            //         if (n.OccupiedUnit != null && n.OccupiedUnit.Faction == Faction.Enemy)
-            //         {
-            //             BaseEnemy enemy = (BaseEnemy)n.OccupiedUnit;
-            //             combatUIManager.Instance.showCombatOption(player, enemy);
-            //             break;
-            //         }
-            //     }
-            // }
         }
     }
 

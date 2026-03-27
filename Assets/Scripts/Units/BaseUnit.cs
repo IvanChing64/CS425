@@ -130,12 +130,17 @@ public class BaseUnit : MonoBehaviour
         //Temporary enemy only implementation
         if (Faction == Faction.Enemy)
         {
-            moveRange--;
+            if (moveRange > 0)
+            {
+                moveRange--;
+            }
+            
         }
     }
 
     public void Stun()
     {
+        if (stunned >= 2) return;
         stunned += 2;
     }
 
@@ -151,7 +156,7 @@ public class BaseUnit : MonoBehaviour
 
     public void Freeze()
     {
-        stunned += 2;
+        Stun();
         defenseBoost += 0.15f;
         if (defenseBoost < 0)
         {

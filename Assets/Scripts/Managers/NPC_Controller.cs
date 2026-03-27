@@ -24,6 +24,7 @@ public class NPC_Controller: MonoBehaviour
     {
         Instance = this;
         npcUnit = GetComponent<BaseUnit>();
+        tilesPerMove = npcUnit.moveRange; 
     }
 
     private void Update()
@@ -123,9 +124,9 @@ public class NPC_Controller: MonoBehaviour
             path.RemoveAt(0);
         }
         
-        if (path.Count > tilesPerMove)
+        if (path.Count > npcUnit.moveRange)
         {
-            path = path.GetRange(0, tilesPerMove);
+            path = path.GetRange(0, npcUnit.moveRange);
         }
 
         pathIndex = 0;
@@ -256,6 +257,7 @@ public class NPC_Controller: MonoBehaviour
         }
         Debug.Log($"{gameObject.name} finished moving.");
         ExecuteAttacks();
+        npcUnit.moveRange = tilesPerMove;
         HasFinishedTurn = true;
         //StartCoroutine(EndTurnDelay());
     }
@@ -289,7 +291,7 @@ public class NPC_Controller: MonoBehaviour
 
         SetTarget(startTile);
 
-        while (pathIndex < path.Count && tilesMovedThisTurn < tilesPerMove)
+        while (pathIndex < path.Count && tilesMovedThisTurn < npcUnit.moveRange)
         {
             Tile currentTargetTile = path[pathIndex];
             if (currentTargetTile == null) break;

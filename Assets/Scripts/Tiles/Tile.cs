@@ -250,7 +250,11 @@ public abstract class Tile : MonoBehaviour
         unit.transform.position = transform.position;
         OccupiedUnit = unit;
         unit.OccupiedTile = this;
-        unit.moveRange = 0; //Reset move range after moving
+        if (unit.Faction == Faction.Player)
+        {
+            unit.moveRange = 0; //Reset move range after moving
+        }
+        
     }
 
     private IEnumerator MoveUnitPath(BaseUnit unit, List<Tile> path)
@@ -293,7 +297,11 @@ public abstract class Tile : MonoBehaviour
 
         OccupiedUnit = unit;
         unit.OccupiedTile = this;
-        unit.moveRange = 0;
+        if (unit.Faction == Faction.Player)
+        {
+            unit.moveRange = 0;
+        }
+        
         GameManager.Instance.unitMoving = false;
     }
 
