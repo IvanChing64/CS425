@@ -71,8 +71,8 @@ public class BaseSupportCard : BaseCard
                 targetPlayer.Guard(value);
                 break;
 
-            case SupportEffect.Bless:
-                targetPlayer.Bless();
+            case SupportEffect.Boost:
+                targetPlayer.Boost();
                 break;
 
             case SupportEffect.Cleanse:
@@ -101,8 +101,8 @@ public class BaseSupportCard : BaseCard
                 targetPlayer.Guard(value);
                 break;
 
-            case SupportEffect.Bless:
-                targetPlayer.Bless();
+            case SupportEffect.Boost:
+                targetPlayer.Boost();
                 break;
 
             case SupportEffect.Cleanse:

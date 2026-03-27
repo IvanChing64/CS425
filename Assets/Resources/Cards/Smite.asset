@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Smite
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Smite
-  cardDescription: 'Heavily damage an adjacent target '
+  cardDescription: 'Heavily damage a close target '
   type: 0
   range: 1
   value: 60

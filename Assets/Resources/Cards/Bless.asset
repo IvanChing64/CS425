@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bless
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Bless
-  cardDescription: Bless a nearby target
+  cardDescription: Boost a nearby ally
   type: 2
   range: 2
   value: 1

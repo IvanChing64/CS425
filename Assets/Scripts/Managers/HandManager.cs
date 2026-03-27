@@ -23,7 +23,7 @@ public class HandManager : MonoBehaviour
     [SerializeField] public List<int> deckCardIDs = new List<int>();
     [SerializeField] public List<int> handCardIDs = new List<int>();
     public int drawNum = 3; // Equal to initial hand size
-    public int actionPoints = 2; // 3 for each unit:0-Bury Card, 1-Draw Random, 2-Shuffle & Redraw Hand, 3-Draw Specific Card
+    public float actionPoints = 2; // 3 for each unit:0-Bury Card, 1-Draw Random, 2-Shuffle & Redraw Hand, 3-Draw Specific Card
     [SerializeField] public int deckIndex = 0; // Points to card to draw from deck
     public bool handDrawn = false;
     //public bool handSelected = false;

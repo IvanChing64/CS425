@@ -33,7 +33,7 @@ public enum SupportEffect
     None = 0,
     Heal = 1,
     Guard = 2,
-    Bless = 3,
+    Boost = 3,
     Cleanse = 4,
     Energize = 5
     

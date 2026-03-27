@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Barrier
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Barrier
-  cardDescription: Guard a nearby unit
+  cardDescription: Guard a nearby ally
   type: 2
   range: 2
   value: 10

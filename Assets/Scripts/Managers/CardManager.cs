@@ -14,7 +14,7 @@ public class CardManager : MonoBehaviour
     public BasePlayer selectedPlayer;
     public BaseCard selectedCard;
     public GameObject cardArea, deckCard, actionPointCounter;
-    public Vector3 cardLocation;
+    public Button binButton;
     [SerializeField] public static int cardSelectOffsetY = 18;
 
     // Initializes instance and calls backdrop creation
@@ -41,6 +41,7 @@ public class CardManager : MonoBehaviour
 
         selectedCard.cardHolder.transform.localPosition += new Vector3(0, cardSelectOffsetY, 0);
         selectedPlayer.GetComponent<HandManager>().selectedCard = selectedCard;
+        binButton.interactable = true;
 
         //StartCoroutine(WaitForCardAnimations(selected: true));
         Debug.Log("Card Selected: " + card.cardName);
@@ -50,7 +51,6 @@ public class CardManager : MonoBehaviour
     public void DeselectCard()
     {
         if (selectedCard == null) return;
-        Debug.Log("Card Deselected: " + selectedCard.cardName);
         //StartCoroutine(WaitForCardAnimations(selected: false));
 
         selectedCard.cardHolder.transform.localPosition -= new Vector3(0, cardSelectOffsetY, 0);
@@ -58,6 +58,7 @@ public class CardManager : MonoBehaviour
         selectedCard.DeselectCard();
 
         selectedCard = null;
+        binButton.interactable = false;
     }
 
     //Plays the selected card and removes it from the player's hand
@@ -103,6 +104,20 @@ public class CardManager : MonoBehaviour
         if (selectedPlayer == null) return;
         if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
         selectedPlayer.GetComponent<HandManager>().DrawCard(true);
+        selectedPlayer.GetComponent<HandManager>().UpdateHandPositions();
+        UpdateDeckCard();
+        UpdateAPCounter();
+    }
+
+    //Discards the selected card, Gain Action Points equalt to half the cost rounded down
+    public void DiscardCard()
+    {
+        if (selectedPlayer == null || selectedCard == null) return;
+        if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
+        selectedPlayer.GetComponent<HandManager>().actionPoints += (float)selectedCard.cost / 2;
+        selectedPlayer.GetComponent<HandManager>().RemoveCard(selectedCard);
+        Destroy(selectedCard.gameObject);
+        DeselectCard();
         selectedPlayer.GetComponent<HandManager>().UpdateHandPositions();
         UpdateDeckCard();
         UpdateAPCounter();
@@ -242,7 +257,7 @@ public class CardManager : MonoBehaviour
         if (selectedPlayer != null)
         {
             HandManager selected = selectedPlayer.GetComponent<HandManager>();
-            int ap = selected.actionPoints;
+            int ap = (int)selected.actionPoints;
             if (ap > 5)
             {
                 actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().color = Color.softYellow;
@@ -254,7 +269,14 @@ public class CardManager : MonoBehaviour
                 actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().color = Color.darkGray;
             }
 
-            actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().SetText(ap.ToString());
+            if (selected.actionPoints % 1 != 0)
+            {
+                actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().SetText(ap.ToString() + ".");
+            } else
+            {
+                actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().SetText(ap.ToString());
+            }
+            
         } else
         {
             actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().SetText("");

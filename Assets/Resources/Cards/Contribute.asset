@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Contribute
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Contribute
-  cardDescription: Give 1 Energy to another character.
+  cardDescription: Energize a ranged ally
   type: 2
   range: 3
   value: 1

@@ -60,6 +60,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7548386086184382497, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_text
+      value: '
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 7689900438252451093, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.3055172
@@ -136,6 +142,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BaseAttackCard
   cardName: 
   cardType: 0
+  range: 0
   value: 0
+  cost: 0
   isPlayed: 0
   cardHolder: {fileID: 6332579879432482564}
+  effect: 0

@@ -79,7 +79,7 @@ public class BaseUnit : MonoBehaviour
         UpdateHealth();
     }
 
-    public void Bless()
+    public void Boost()
     {
         attackBoost += 0.25f;
         if (attackBoost > 2)

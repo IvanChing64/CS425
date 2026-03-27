@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Freeze
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Freeze
-  cardDescription: Damage and freeze nearby target
+  cardDescription: Damage and freeze a ranged enemy
   type: 0
   range: 3
   value: 25

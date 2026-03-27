@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Heal
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Heal
-  cardDescription: lightly Heal nearby unit
+  cardDescription: Heal a nearby ally
   type: 2
   range: 2
   value: 20

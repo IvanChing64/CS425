@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Potion
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Potion
-  cardDescription: Heal an adjacent character
+  cardDescription: Heal a nearby ally
   type: 2
-  range: 1
+  range: 2
   value: 20
   cost: 0
   rangeType: 1

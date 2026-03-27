@@ -378,10 +378,10 @@ MonoBehaviour:
   startingDeck:
   - March
   - Cure
-  - Palm Strike
-  - Palm Strike
-  - Punch
-  - Punch
+  - Chi Strike
+  - Chi Strike
+  - Strike
+  - Strike
   - March
   - Bless
   canAttack: 0

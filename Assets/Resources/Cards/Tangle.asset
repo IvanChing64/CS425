@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Tangle
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Tangle
-  cardDescription: Damage and Restrict target
+  cardDescription: Damage and Restrict a distant enemy
   type: 0
-  range: 4
+  range: 3
   value: 20
   cost: 1
   rangeType: 1

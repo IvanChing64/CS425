@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Magic Bolt
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Magic Bolt
-  cardDescription: Damage an enemy at range
+  cardDescription: Damage a ranged enemy
   type: 0
   range: 3
   value: 25

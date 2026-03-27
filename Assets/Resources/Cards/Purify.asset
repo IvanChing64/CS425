@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Purify
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Purify
-  cardDescription: Cleanse and Guard a nearby ally
+  cardDescription: Cleanse and Guard a ranged ally
   type: 2
   range: 3
   value: 20

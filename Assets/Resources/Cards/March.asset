@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: March
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableCard
   cardName: March
-  cardDescription: Gain Medium Movement
+  cardDescription: Gain Ranged Movement
   type: 1
   range: 3
   value: 3

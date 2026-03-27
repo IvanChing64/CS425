@@ -10,7 +10,7 @@ public class CardDisplay : MonoBehaviour
     public ScriptableCard cardData;
     public Image cardBorder;
     public Image cardIcon, cardCorner;
-    public TMP_Text cardName, cardDescription, cardValue;
+    public TMP_Text cardName, cardDescription, cardValue, cardCost;
     public int overrideValue;
 
 
@@ -23,12 +23,11 @@ public class CardDisplay : MonoBehaviour
     // Updates the card display with the current card data
     public void updateCardDisplay()
     {
-        //cardData = GetComponent<ScriptableCard>();
         cardName.text = cardData.cardName;
         cardDescription.text = cardData.cardDescription;
         cardValue.text = cardData.value.ToString();
+        cardCost.text = cardData.cost.ToString();
 
-        //cardBorder.sprite = cardData.cardBorder;
         cardBorder.color = cardData.cardBorderColor;
         cardIcon.sprite = cardData.cardIcon;
         cardCorner.sprite = cardData.cardCorner;

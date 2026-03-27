@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wound
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Wound
-  cardDescription: Attack a nearby enemy
+  cardDescription: Attack a Close enemy
   type: 0
   range: 2
   value: 10

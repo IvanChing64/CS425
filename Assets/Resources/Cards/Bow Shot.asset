@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bow Shot
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Bow Shot
-  cardDescription: Shoot a faraway enemy
+  cardDescription: Shoot a distant enemy
   type: 0
   range: 4
   value: 20

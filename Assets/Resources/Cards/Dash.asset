@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dash
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Dash
-  cardDescription: Gain decent movement
+  cardDescription: Gain Distant movement
   type: 1
   range: 4
   value: 4
