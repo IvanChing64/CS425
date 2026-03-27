@@ -226,7 +226,7 @@ public class CardManager : MonoBehaviour
         {
             HandManager selected = selectedPlayer.GetComponent<HandManager>();
 
-            if (selected.actionPoints == 0)
+            if (selected.actionPoints < 1)
             {
                 selectedPlayer.GetComponent<HandManager>().canDraw = false;
             }
@@ -257,20 +257,22 @@ public class CardManager : MonoBehaviour
         if (selectedPlayer != null)
         {
             HandManager selected = selectedPlayer.GetComponent<HandManager>();
-            int ap = (int)selected.actionPoints;
-            if (ap > 5)
+            
+            if (selected.actionPoints > 5)
             {
                 actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().color = Color.softYellow;
-            }else if (ap > 0)
+            }else if (selected.actionPoints >= 1)
             {
                 actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
             } else
             {
                 actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().color = Color.darkGray;
             }
-
+            
+            int ap = (int)selected.actionPoints;
             if (selected.actionPoints % 1 != 0)
             {
+                
                 actionPointCounter.GetComponentInChildren<TextMeshProUGUI>().SetText(ap.ToString() + ".");
             } else
             {
