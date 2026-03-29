@@ -59,6 +59,7 @@ public class GridManager : MonoBehaviour
     //Switchs game state
     public void GenerateGrid()
     {
+        StageData data = CurrentSession.ActiveStageData;
         //open dictionary for tiles storage and data usage
         tiles = new Dictionary<Vector2, Tile>();
         //2 for loops for width and height for grid
@@ -67,7 +68,7 @@ public class GridManager : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
 
-                Tile tileToSpawn = grassTile;
+                Tile tileToSpawn = data.grassTilePrefab;
                 Vector2 currentPos = new Vector2(x, y);
 
                 bool isNeighborMountain = false;
@@ -97,7 +98,7 @@ public class GridManager : MonoBehaviour
                     // Increase the chance of a mountain
                     if (mountainRoll < neighborMountainMultiplier)  
                     {
-                        tileToSpawn = mountainTile;
+                        tileToSpawn = data.mountainTilePrefab;
                     }
                 }
                 else
@@ -105,7 +106,7 @@ public class GridManager : MonoBehaviour
                     // Use the base chance for an isolated mountain
                     if (mountainRoll == 0) // Only on a roll of 0 (1 in 10 chance)
                     {
-                        tileToSpawn = mountainTile;
+                        tileToSpawn = data.mountainTilePrefab;
                     }
                 }
 
