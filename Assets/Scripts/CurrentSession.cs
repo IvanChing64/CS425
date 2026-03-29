@@ -5,4 +5,5 @@ using UnityEngine;
 public static class CurrentSession
 {
     public static string ActiveStageID;
+    public static StageData ActiveStageData;
 }

@@ -13,6 +13,9 @@ public class levelSelect : MonoBehaviour
 {
     //Variables
     public string stageID;
+    public StageData stageData;
+    [TextArea(3,10)]
+    public string stageDesciption;
 
     [Header("Grid Settings")]
     public int stageWidthMin;
@@ -26,11 +29,13 @@ public class levelSelect : MonoBehaviour
 
     public bool isStart;
     private Button myNodes;
+    private StagePreview previewMenu;
 
     //When entering the scene, checks nodes to see what is available to the player
     private void Start()
     {
         myNodes = GetComponent<Button>();
+        previewMenu = Object.FindFirstObjectByType<StagePreview>();
         RefreshNodes();
     }
 
@@ -76,17 +81,27 @@ public class levelSelect : MonoBehaviour
     //Loads the next scene, in this case, the grid screen
     public void selectStage()
     {
+        if(previewMenu != null)
+        {
+            previewMenu.OpenPreview(this);
+        }
+    }
+
+    public void ConfirmLoadStage()
+    {
         if (isRandomSize)
         {
             GridManager.width = Random.Range(stageWidthMin, stageWidthMax);
             GridManager.height = Random.Range(stageHeightMin, stageWidthMax);
-        } else
+        }
+        else
         {
             GridManager.width = 30;
             GridManager.height = 20;
         }
         CurrentSession.ActiveStageID = stageID;
-        
+        CurrentSession.ActiveStageData = stageData;
+
         SceneManager.LoadScene("Scenes/SampleScene");
     }
 }

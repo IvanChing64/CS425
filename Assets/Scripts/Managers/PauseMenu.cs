@@ -97,6 +97,7 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
         pauseMenuUI.SetActive(false);
         settingUI.SetActive(false);
+        blocker.SetActive(false);
         SceneManager.LoadScene("MainMenu");
         Debug.Log("Loading Menu");
     }
