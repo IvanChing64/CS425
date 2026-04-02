@@ -414,7 +414,7 @@ MonoBehaviour:
   deckCardIDs: 
   handCardIDs: 
   drawNum: 4
-  actionPoints: 2
+  actionPoints: 0
   deckIndex: 0
   handDrawn: 0
   canDraw: 1

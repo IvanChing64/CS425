@@ -22,8 +22,8 @@ public class HandManager : MonoBehaviour
     public List<BaseCard> currentHand = new List<BaseCard>(); // MinInitialSize: 3, MaxInitialSize: 5
     [SerializeField] public List<int> deckCardIDs = new List<int>();
     [SerializeField] public List<int> handCardIDs = new List<int>();
-    public int drawNum = 3; // Equal to initial hand size
-    public float actionPoints = 2; // 3 for each unit:0-Bury Card, 1-Draw Random, 2-Shuffle & Redraw Hand, 3-Draw Specific Card
+    public int drawNum; // Equal to initial hand size
+    public float actionPoints = 0; // Used for extra draws and playing cards, reset at the start of each turn based on player energy
     [SerializeField] public int deckIndex = 0; // Points to card to draw from deck
     public bool handDrawn = false;
     //public bool handSelected = false;
@@ -268,7 +268,7 @@ public class HandManager : MonoBehaviour
 
     }
 
-    //Toggles hand visibility based on input
+    // Toggles hand visibility based on input
     public void ToggleHandVisibility(bool show)
     {
         if (currentHand.Count == 0)
@@ -296,7 +296,7 @@ public class HandManager : MonoBehaviour
         }
     }
 
-    //Remove played card
+    // Remove played card
     public void RemoveCard(BaseCard removedCard)
     {
         handCardIDs.Remove(handCardIDs[currentHand.IndexOf(removedCard)]);
@@ -307,7 +307,16 @@ public class HandManager : MonoBehaviour
         }
     }
 
-    //Move cards dynamically based on hand size and card index to keep them centered
+    // Update card visuals
+    public void UpdateCardVisuals()
+    {
+        foreach (BaseCard card in currentHand)
+        {
+            card.GetComponent<CardDisplay>().updateCardDisplay(GetComponentInParent<BaseUnit>());
+        }
+    }
+
+    // Move cards dynamically based on hand size and card index to keep them centered
     public void UpdateHandPositions()
     {
         // for (int i = 0; i < currentHand.Count; i++)

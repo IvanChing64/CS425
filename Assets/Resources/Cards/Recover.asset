@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92d42e8cdeee7a74ea6ffe4eff42e70c, type: 3}
-  m_Name: Zap
+  m_Name: Recover
   m_EditorClassIdentifier: Scripts::ScriptableCard
-  cardName: Zap
-  cardDescription: Damage and daze a ranged enemy
-  type: 0
-  range: 4
-  value: 30
+  cardName: Recover
+  cardDescription: Heal self
+  type: 2
+  range: 0
+  value: 15
   cost: 0
   rangeType: 1
-  cardIcon: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
-  cardCorner: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
-  cardBorderColor: {r: 1, g: 0, b: 0, a: 1}
-  primarySupportEffect: 0
+  cardIcon: {fileID: -8714418300613597991, guid: a027c213e88ad1f40994c68276f11c89, type: 3}
+  cardCorner: {fileID: -8686425463742581414, guid: 48dcce1cec15ef34cb12d5459f8d55bd, type: 3}
+  cardBorderColor: {r: 0.2509804, g: 0.8, b: 0.12941177, a: 1}
+  primarySupportEffect: 1
   secondarySupportEffect: 0
-  primaryControlEffect: 1
+  primaryControlEffect: 0
   secondaryControlEffect: 0

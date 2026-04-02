@@ -5,12 +5,13 @@ using UnityEngine;
 //Derived class for attack cards
 public class BaseAttackCard : BaseCard
 {
-    public ControlEffect effect;
+    public ControlEffect primaryEffect, secondaryEffect;
 
     public override void CopyScriptableCard(ScriptableCard card)
     {
         base.CopyScriptableCard(card);
-        effect = card.controlEffect;
+        primaryEffect = card.primaryControlEffect;
+        secondaryEffect = card.secondaryControlEffect;
     }
 
     public override void SelectCard()
@@ -56,7 +57,29 @@ public class BaseAttackCard : BaseCard
 
     public void ApplyControlEffect(BaseUnit targetEnemy)
     {
-        switch (effect)
+        switch (primaryEffect)
+        {
+            case ControlEffect.None:
+                break;
+            
+            case ControlEffect.Daze:
+                targetEnemy.Daze();
+                break;
+
+            case ControlEffect.Stun:
+                targetEnemy.Stun();
+                break;
+
+            case ControlEffect.Restrict:
+                targetEnemy.Restrict();
+                break;
+
+            case ControlEffect.Freeze:
+                targetEnemy.Freeze();
+                break;
+        }
+
+        switch (secondaryEffect)
         {
             case ControlEffect.None:
                 break;

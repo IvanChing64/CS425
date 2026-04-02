@@ -628,7 +628,7 @@ MonoBehaviour:
   startingDeck:
   - Walk
   - Walk
-  - Barrier
+  - Protect
   - Magic Bolt
   - Magic Bolt
   - Magic Bolt
@@ -652,7 +652,7 @@ MonoBehaviour:
   deckCardIDs: 
   handCardIDs: 
   drawNum: 3
-  actionPoints: 2
+  actionPoints: 0
   deckIndex: 0
   handDrawn: 0
   canDraw: 1

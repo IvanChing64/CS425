@@ -261,6 +261,8 @@ MonoBehaviour:
   dmg: 0
   attackBoost: 1
   defenseBoost: 1
+  stunned: 0
+  invisible: 0
   moveRange: 0
   attackRange: 1
   UnitAnimator: {fileID: 7650870887470218107}
@@ -275,8 +277,8 @@ MonoBehaviour:
   - Bow Shot
   - Dash
   - Bow Shot
-  - Rations
-  - Rations
+  - Bow Shot
+  - Cloak
   canAttack: 0
   canSupport: 0
   energy: 1
@@ -297,10 +299,9 @@ MonoBehaviour:
   deckCardIDs: 
   handCardIDs: 
   drawNum: 3
-  actionPoints: 2
+  actionPoints: 0
   deckIndex: 0
   handDrawn: 0
-  handSelected: 0
   canDraw: 1
   selectedCard: {fileID: 0}
 --- !u!1 &5483545698060636878

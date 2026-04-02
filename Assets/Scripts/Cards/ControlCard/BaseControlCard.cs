@@ -11,7 +11,7 @@ public class BaseControlCard : BaseCard
     public override void CopyScriptableCard(ScriptableCard card)
     {
         base.CopyScriptableCard(card);
-        effect = card.controlEffect;
+        effect = card.primaryControlEffect;
     }
 
     //Applies control effect when the card is played

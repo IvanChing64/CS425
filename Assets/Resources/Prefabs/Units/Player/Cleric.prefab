@@ -277,7 +277,6 @@ MonoBehaviour:
   - Heal
   - March
   - Heal
-  - Heal
   - Wound
   canAttack: 0
   canSupport: 0
@@ -298,8 +297,8 @@ MonoBehaviour:
   currentHand: []
   deckCardIDs: 
   handCardIDs: 
-  drawNum: 4
-  actionPoints: 2
+  drawNum: 3
+  actionPoints: 0
   deckIndex: 0
   handDrawn: 0
   canDraw: 1

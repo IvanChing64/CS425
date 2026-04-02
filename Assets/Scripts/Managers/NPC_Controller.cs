@@ -181,7 +181,7 @@ public class NPC_Controller: MonoBehaviour
 
         foreach (Tile tile in attackableTiles)
         {
-            if (tile.OccupiedUnit != null && tile.OccupiedUnit.Faction == Faction.Player)
+            if (tile.OccupiedUnit != null && tile.OccupiedUnit.Faction == Faction.Player && tile.OccupiedUnit.invisible == 0)
             {
                 Debug.Log($"Found {tile.OccupiedUnit.name} on tile {tile.name}. Faction: {tile.OccupiedUnit.Faction}");
                 target = tile.OccupiedUnit;

@@ -24,4 +24,5 @@ MonoBehaviour:
   cardBorderColor: {r: 1, g: 0, b: 0, a: 1}
   primarySupportEffect: 0
   secondarySupportEffect: 0
-  controlEffect: 4
+  primaryControlEffect: 4
+  secondaryControlEffect: 0

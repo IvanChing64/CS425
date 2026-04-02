@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Smash
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Smash
-  cardDescription: Damage a close enemy
+  cardDescription: Damage and daze a close enemy
   type: 0
   range: 1
   value: 30
@@ -24,4 +24,5 @@ MonoBehaviour:
   cardBorderColor: {r: 1, g: 0, b: 0, a: 1}
   primarySupportEffect: 0
   secondarySupportEffect: 0
-  controlEffect: 0
+  primaryControlEffect: 1
+  secondaryControlEffect: 0

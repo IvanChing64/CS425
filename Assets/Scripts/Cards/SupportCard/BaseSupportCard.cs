@@ -83,6 +83,10 @@ public class BaseSupportCard : BaseCard
                 targetPlayer.Energize(1);
                 break;
 
+            case SupportEffect.Invisibility:
+                targetPlayer.Invisible();
+                break;
+
             default:
                 Debug.LogWarning("Unknown support effect: " + primaryEffect);
                 break;
@@ -111,6 +115,10 @@ public class BaseSupportCard : BaseCard
 
             case SupportEffect.Energize:
                 targetPlayer.Energize(1);
+                break;
+            
+            case SupportEffect.Invisibility:
+                targetPlayer.Invisible();
                 break;
 
             default:

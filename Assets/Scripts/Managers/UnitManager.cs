@@ -222,6 +222,12 @@ public class UnitManager : MonoBehaviour
 
         Debug.Log("Selected Enemy: " + SelectedEnemy.name);
 
+        if (SelectedEnemy.stunned > 0)
+        {
+            Debug.Log("Enemy is stunned and cannot move or attack.");
+            return;
+        }
+
         // Show move and attack range highlights for enemy unit
         int totalRange = attackRange + moveRange;
 

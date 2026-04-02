@@ -13,6 +13,7 @@ public class BaseUnit : MonoBehaviour
     public float attackBoost = 1;
     public float defenseBoost = 1;
     public int stunned = 0;
+    public int invisible = 0;
     public int moveRange;
     public int attackRange;
     public Animator UnitAnimator;
@@ -98,6 +99,8 @@ public class BaseUnit : MonoBehaviour
         {
             defenseBoost = 2;
         }
+
+        GetComponentInParent<HandManager>().UpdateCardVisuals();
         Debug.Log("Blessed: Attack Boost = " + attackBoost + ", Defense Boost = " + defenseBoost);
     }
 
@@ -117,6 +120,8 @@ public class BaseUnit : MonoBehaviour
         {
             stunned = 0;
         }
+        stunned = 0;
+        GetComponentInParent<HandManager>().UpdateCardVisuals();
     }
 
     public void Energize(int energy)
@@ -165,6 +170,24 @@ public class BaseUnit : MonoBehaviour
         {
             defenseBoost = 2;
         }
+    }
+
+    public void Invisible()
+    {
+        if (invisible != 0) return;
+        invisible = 2;
+        GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.5f);
+        attackBoost += 0.15f;
+        GetComponentInParent<HandManager>().UpdateCardVisuals();
+    }
+
+    public void Visible()
+    {
+        if (invisible == 0) return;
+        invisible = 0;
+        GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.5f);
+        attackBoost -= 0.15f;
+        GetComponentInParent<HandManager>().UpdateCardVisuals();
     }
 
 

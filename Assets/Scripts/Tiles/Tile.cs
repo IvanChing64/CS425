@@ -63,6 +63,7 @@ public abstract class Tile : MonoBehaviour
             if (UnitManager.Instance.SelectedPlayer.canAttack && OccupiedUnit != null && OccupiedUnit.Faction == Faction.Enemy)
             {
                 combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, OccupiedUnit);
+                if (UnitManager.Instance.SelectedPlayer.invisible > 0)UnitManager.Instance.SelectedPlayer.Visible(); // Remove invisibility if player attacks
                 ((BaseAttackCard)CardManager.instance.selectedCard).ApplyControlEffect(OccupiedUnit);
                 CardManager.instance.PlaySelectedCard();
                 return;

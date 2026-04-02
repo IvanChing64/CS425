@@ -366,6 +366,7 @@ MonoBehaviour:
   attackBoost: 1
   defenseBoost: 1
   stunned: 0
+  invisible: 0
   moveRange: 0
   attackRange: 1
   UnitAnimator: {fileID: 2115699827931306872}
@@ -377,12 +378,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   startingDeck:
   - March
+  - Dash
+  - Chi Strike
+  - Strike
+  - Strike
   - Cure
-  - Chi Strike
-  - Chi Strike
-  - Strike
-  - Strike
-  - March
+  - Cure
   - Bless
   canAttack: 0
   canSupport: 0
@@ -404,7 +405,7 @@ MonoBehaviour:
   deckCardIDs: 
   handCardIDs: 
   drawNum: 4
-  actionPoints: 2
+  actionPoints: 0
   deckIndex: 0
   handDrawn: 0
   canDraw: 1

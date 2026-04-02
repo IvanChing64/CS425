@@ -15,7 +15,7 @@ public class ScriptableCard : ScriptableObject
     public Sprite cardIcon, cardCorner;
     public Color cardBorderColor;
     public SupportEffect primarySupportEffect, secondarySupportEffect;
-    public ControlEffect controlEffect;
+    public ControlEffect primaryControlEffect, secondaryControlEffect;
 }
 
 //Card types
@@ -35,7 +35,8 @@ public enum SupportEffect
     Guard = 2,
     Boost = 3,
     Cleanse = 4,
-    Energize = 5
+    Energize = 5,
+    Invisibility = 6,
     
 }
 

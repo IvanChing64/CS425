@@ -58,7 +58,7 @@ public class EnemyTargetingManager : MonoBehaviour
 
         foreach (var p in players)
         {
-            if (p == null || p.gameObject == null) continue;
+            if (p == null || p.gameObject == null || p.invisible != 0) continue;
 
             float dist = Vector2.Distance(transform.position, p.transform.position);
 

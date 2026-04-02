@@ -16,6 +16,7 @@ public class BasePlayer : BaseUnit
         canAttack = false;
         attackBoost = 1;
         defenseBoost = 1;
+
         if (stunned > 0)
         {
             stunned--;
@@ -23,6 +24,23 @@ public class BasePlayer : BaseUnit
         {
             stunned = 0;
         }
+
+        if (invisible > 0)
+        {
+            invisible--;
+            if (invisible == 0)
+            {
+                Visible();
+            }
+            attackBoost += 0.15f;
+        } else
+        {
+            invisible = 0;
+        }
+
+
+        GetComponentInParent<HandManager>().UpdateCardVisuals();
+        
     }
 
     public override void SelectUnit()
