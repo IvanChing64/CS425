@@ -18,13 +18,30 @@ public class NPC_Controller: MonoBehaviour
     private int tilesMovedThisTurn;
     private bool isMoving;
 
-    private BaseUnit npcUnit; 
+    private BaseUnit npcUnit;
+
+    private Enemy1 enemy1;
 
     private void Awake()
     {
+        enemy1 = GetComponent<Enemy1>();
         Instance = this;
         npcUnit = GetComponent<BaseUnit>();
         tilesPerMove = npcUnit.moveRange; 
+    }
+
+    //MovementBehavior logic: Andrew Shelton
+
+    private Tile GetRangedTarget()
+    {
+        var targeting = GetComponent<EnemyTargetingManager>();
+        targeting.SelectTarget();
+
+        Tile playerTile = GridManager.Instance.GetTileForUnit(targeting.CurrentTarget.gameObject);
+
+        //Moves to a tile within attack range of the player
+        List<Tile> tiles = RangeManager.GetTilesInRange(playerTile, npcUnit.attackRange, RangeType.FloodTargeting);
+        return tiles.Count > 0 ? tiles[0] : playerTile; // Default to player's tile if no valid tiles found
     }
 
     private void Update()
@@ -74,6 +91,39 @@ public class NPC_Controller: MonoBehaviour
             pathIndex++;
             tilesMovedThisTurn++;
         }*/
+    }
+    //New: Function for setting enemy behavior for movement based on current flag
+
+    public void SetBehaviorTarget(Tile startTile)
+    {
+        //Added for if target is already in attackRange:
+        var targeting = GetComponent<EnemyTargetingManager>();
+        if (targeting.CurrentTarget == null)
+            targeting.SelectTarget();
+
+        Tile targetTile = GridManager.Instance.GetTileForUnit(GetComponent<EnemyTargetingManager>().CurrentTarget.gameObject);
+
+        if (RangeManager.GetTilesInRange(startTile, npcUnit.attackRange, RangeType.FloodTargeting).Contains(targetTile))
+        {
+            SetTarget(startTile, startTile);
+            return;
+        }
+
+        Tile chosenTile = null;
+
+        switch (enemy1.movementBehavior)
+        {
+            case Enemy1.MovementBehavior.Ranged:
+                chosenTile = GetRangedTarget();
+                break;
+            //Future cases for other behaviors here
+
+            default:
+                targeting.SelectTarget();
+                chosenTile = GridManager.Instance.GetTileForUnit(targeting.CurrentTarget.gameObject);
+                break;
+        }
+        SetTarget(startTile, chosenTile);
     }
 
     public void SetTarget(Tile startTile, Tile endTile = null)
@@ -226,10 +276,13 @@ public class NPC_Controller: MonoBehaviour
             
         }
         //GetComponent<EnemyTargetingManager>().SelectTarget();
-        SetTarget(startTile);
+        //SetTarget(startTile);
+
+        //Changed to set behavior target for movement based on current flag
+        SetBehaviorTarget(startTile);
         //StartCoroutine(MoveAlongPath());
         //Update();
-        
+
     }
 
 
@@ -289,7 +342,8 @@ public class NPC_Controller: MonoBehaviour
             yield break;
         }
 
-        SetTarget(startTile);
+        //SetTarget(startTile);
+        SetBehaviorTarget(startTile);
 
         while (pathIndex < path.Count && tilesMovedThisTurn < npcUnit.moveRange)
         {
