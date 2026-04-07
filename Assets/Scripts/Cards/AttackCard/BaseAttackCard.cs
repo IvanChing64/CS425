@@ -77,6 +77,10 @@ public class BaseAttackCard : BaseCard
             case ControlEffect.Freeze:
                 targetEnemy.Freeze();
                 break;
+
+            case ControlEffect.Poison:
+                targetEnemy.Poison();
+                break; 
         }
 
         switch (secondaryEffect)
@@ -98,6 +102,10 @@ public class BaseAttackCard : BaseCard
 
             case ControlEffect.Freeze:
                 targetEnemy.Freeze();
+                break;
+            
+            case ControlEffect.Poison:
+                targetEnemy.Poison();
                 break;
         }
     }

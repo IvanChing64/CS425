@@ -526,9 +526,18 @@ MonoBehaviour:
   health: 60
   guard: 0
   dmg: 0
-  attackBoost: 1
-  defenseBoost: 1
+  attackModifier: 1
+  defenseModifier: 1
+  moveModifier: 0
+  boost: 0
+  dmgUp: 0
+  defUp: 0
+  defiant: 0
   stunned: 0
+  invisible: 0
+  dodge: 0
+  poison: 0
+  agility: 0
   moveRange: 0
   attackRange: 1
   UnitAnimator: {fileID: 3776181224013974453}
@@ -539,17 +548,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   startingDeck:
-  - March
-  - Tailwind
-  - Tangle
-  - Tangle
-  - Zap
-  - Zap
+  - Walk
+  - Walk
+  - Earth Trap
+  - Thorn Vine
+  - Thorn Vine
+  - Venom
   - Freeze
-  - Purify
+  - Tailwind
   canAttack: 0
   canSupport: 0
-  energy: 2
+  energy: 3
 --- !u!114 &3154836614328175104
 MonoBehaviour:
   m_ObjectHideFlags: 0

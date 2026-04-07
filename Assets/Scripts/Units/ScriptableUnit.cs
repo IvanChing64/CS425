@@ -15,4 +15,11 @@ public enum Faction
     Player = 0,
     Enemy = 1
 }
+
+public enum EffectFlag : byte
+{
+    Start = 2,
+    End = 1,
+    None = 0
+}
     

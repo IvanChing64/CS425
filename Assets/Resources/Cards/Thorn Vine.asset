@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92d42e8cdeee7a74ea6ffe4eff42e70c, type: 3}
-  m_Name: Smite
+  m_Name: Thorn Vine
   m_EditorClassIdentifier: Scripts::ScriptableCard
-  cardName: Smite
-  cardDescription: 'Heavily damage a close enemy '
+  cardName: Thorn Vine
+  cardDescription: Damage a ranged enemy
   type: 0
-  range: 1
-  value: 50
-  cost: 1
+  range: 3
+  value: 35
+  cost: 0
   rangeType: 1
   cardIcon: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
   cardCorner: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}

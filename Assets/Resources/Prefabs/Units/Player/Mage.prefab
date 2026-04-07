@@ -613,9 +613,14 @@ MonoBehaviour:
   health: 60
   guard: 0
   dmg: 0
-  attackBoost: 1
-  defenseBoost: 1
+  attackModifier: 1
+  defenseModifier: 1
+  moveModifier: 0
+  boost: 0
+  defiant: 0
   stunned: 0
+  invisible: 0
+  dodge: 0
   moveRange: 0
   attackRange: 1
   UnitAnimator: {fileID: 4242761465610104570}
@@ -628,10 +633,10 @@ MonoBehaviour:
   startingDeck:
   - Walk
   - Walk
+  - Magic Bolt
+  - Magic Bolt
+  - Magic Bolt
   - Protect
-  - Magic Bolt
-  - Magic Bolt
-  - Magic Bolt
   canAttack: 0
   canSupport: 0
   energy: 1

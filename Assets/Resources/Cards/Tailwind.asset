@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: Tailwind
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Tailwind
-  cardDescription: Gain Far Movement
-  type: 1
-  range: 6
-  value: 6
-  cost: 1
-  rangeType: 0
-  cardIcon: {fileID: -1950848172343218298, guid: 4a21f531e8fe56f48ae9ab6df04e55aa, type: 3}
-  cardCorner: {fileID: -1950848172343218298, guid: 4a21f531e8fe56f48ae9ab6df04e55aa, type: 3}
-  cardBorderColor: {r: 0, g: 0.06666667, b: 1, a: 1}
-  primarySupportEffect: 0
+  cardDescription: Grant agility to a ranged ally
+  type: 2
+  range: 2
+  value: 1
+  cost: 0
+  areaEffect: 1
+  rangeType: 1
+  cardIcon: {fileID: -7963849903453386218, guid: c1dcb2816f4ef5b40bb5be84eea93fea, type: 3}
+  cardCorner: {fileID: -8686425463742581414, guid: 48dcce1cec15ef34cb12d5459f8d55bd, type: 3}
+  cardBorderColor: {r: 0.2509804, g: 0.8, b: 0.12941177, a: 1}
+  primarySupportEffect: 9
   secondarySupportEffect: 0
-  controlEffect: 0
+  primaryControlEffect: 0
+  secondaryControlEffect: 0

@@ -293,14 +293,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player1
   OccupiedTile: {fileID: 0}
   Faction: 0
-  maxHealth: 80
-  health: 80
+  maxHealth: 70
+  health: 70
   guard: 0
   dmg: 0
-  attackBoost: 1
-  defenseBoost: 1
+  attackModifier: 1
+  defenseModifier: 1
+  moveModifier: 0
+  boost: 0
+  defiant: 0
   stunned: 0
   invisible: 0
+  dodge: 0
+  poison: 0
+  agility: 0
   moveRange: 0
   attackRange: 1
   UnitAnimator: {fileID: 6196690734373523334}
@@ -315,7 +321,7 @@ MonoBehaviour:
   - Dash
   - Long Bow
   - Long Bow
-  - Wealth
+  - Steal
   - Wealth
   - Wealth
   - Cloak

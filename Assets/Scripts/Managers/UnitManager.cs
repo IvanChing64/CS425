@@ -222,7 +222,7 @@ public class UnitManager : MonoBehaviour
 
         Debug.Log("Selected Enemy: " + SelectedEnemy.name);
 
-        if (SelectedEnemy.stunned > 0)
+        if ((int)SelectedEnemy.stunned > 1)
         {
             Debug.Log("Enemy is stunned and cannot move or attack.");
             return;
@@ -277,14 +277,7 @@ public class UnitManager : MonoBehaviour
         foreach (var enemy in enemiesSpawned)
         {
             if (enemy == null || enemy.gameObject == null) continue;
-            enemy.defenseBoost = 1;
-            if (enemy.stunned > 0)
-            {
-                enemy.stunned--;
-            } else
-            {
-                enemy.stunned = 0;
-            }
+            enemy.ResetValues();
 
             var npc = enemy.GetComponent<NPC_Controller>();
             if (npc != null) {

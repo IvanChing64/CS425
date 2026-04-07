@@ -25,29 +25,56 @@ public class CardDisplay : MonoBehaviour
     {
         if (cardData.type == Type.Attack)
         {
-            overrideValue = unit.attackBoost;
+            overrideValue = unit.attackModifier;
         } else if (cardData.type == Type.Movement)
         {
-            //overrideValue = GetComponentInParent<BaseCard>().GetComponentInParent<BaseUnit>().moveRange;
+            overrideValue = unit.moveModifier;
         } else
         {
             overrideValue = cardData.value;
         }
         cardName.text = cardData.cardName;
         cardDescription.text = cardData.cardDescription;
+        cardValue.color = Color.black;
         cardValue.text = cardData.value.ToString();
-        if (cardData.type == Type.Attack && overrideValue != 1f)
+
+        switch (cardData.type)
         {
-            cardValue.text = ((int)(cardData.value * overrideValue)).ToString();
-            if (overrideValue > 1f)
-            {
-                cardValue.color = Color.red;
-            } else if (overrideValue < 1f)
-            {
-                cardValue.color = Color.blue;
-            }
+            case Type.Attack:
+                cardValue.text = ((int)(cardData.value * overrideValue)).ToString();
+                if (overrideValue > 1f)
+                {
+                    cardValue.color = Color.red;
+                } else if (overrideValue < 1f)
+                {
+                    cardValue.color = Color.blue;
+                }
+                break;
+        
+            case Type.Movement:
+                if (overrideValue > 0f)
+                {
+                    cardValue.color = Color.blue;
+                } else if (overrideValue < 0f)
+                {
+                    cardValue.color = Color.red;
+                    if (-overrideValue >= cardData.value)
+                    {
+                        cardValue.text = "0";
+                        break;
+                    }
+                }
+                cardValue.text = ((int)(cardData.value + overrideValue)).ToString();
+                break;
         }
-        cardCost.text = cardData.cost.ToString();
+
+        if (cardData.cost >= 0)
+        {
+            cardCost.text = cardData.cost.ToString();
+        } else
+        {
+            cardCost.text = "0";
+        }
 
         cardBorder.color = cardData.cardBorderColor;
         cardIcon.sprite = cardData.cardIcon;

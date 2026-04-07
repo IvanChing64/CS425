@@ -54,7 +54,21 @@ public abstract class Tile : MonoBehaviour
                 {
                     playerAnim.SetTrigger("support");
                 }
-                ((BaseSupportCard)CardManager.instance.selectedCard).ApplySupportEffect(OccupiedUnit);
+
+                if (!CardManager.instance.selectedCard.AoE)
+                {
+                    ((BaseSupportCard)CardManager.instance.selectedCard).ApplySupportEffect(OccupiedUnit);
+                } else
+                {
+                    foreach (Tile t in UnitManager.Instance.SelectedPlayer.GetTilesInAttackRange())
+                    {
+                        if (t.OccupiedUnit != null && t.OccupiedUnit.Faction == Faction.Player)
+                        {
+                            ((BaseSupportCard)CardManager.instance.selectedCard).ApplySupportEffect(t.OccupiedUnit);
+                        }
+                    }
+                }
+                    
                 CardManager.instance.PlaySelectedCard();
                 return;
             }
@@ -62,9 +76,31 @@ public abstract class Tile : MonoBehaviour
             // If the card is an attack card and an enemy is in range, 
             if (UnitManager.Instance.SelectedPlayer.canAttack && OccupiedUnit != null && OccupiedUnit.Faction == Faction.Enemy)
             {
-                combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, OccupiedUnit);
-                if (UnitManager.Instance.SelectedPlayer.invisible > 0)UnitManager.Instance.SelectedPlayer.Visible(); // Remove invisibility if player attacks
-                ((BaseAttackCard)CardManager.instance.selectedCard).ApplyControlEffect(OccupiedUnit);
+                if (!CardManager.instance.selectedCard.AoE)
+                {
+                    // Attack the enemy
+                    combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, OccupiedUnit);
+
+                    // Apply control effects
+                    ((BaseAttackCard)CardManager.instance.selectedCard).ApplyControlEffect(OccupiedUnit);
+                } else
+                {
+                    foreach (Tile t in UnitManager.Instance.SelectedPlayer.GetTilesInAttackRange())
+                    {
+                        if (t.OccupiedUnit != null && t.OccupiedUnit.Faction == Faction.Enemy)
+                        {
+                            // Attack the enemy
+                            combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, t.OccupiedUnit);
+
+                            // Apply control effects
+                            ((BaseAttackCard)CardManager.instance.selectedCard).ApplyControlEffect(t.OccupiedUnit);
+                        }   
+                    }
+                }
+
+                // Remove invisibility if player attacks
+                if (UnitManager.Instance.SelectedPlayer.invisible > 0 && CardManager.instance.selectedCard.cardName != "Backstab") UnitManager.Instance.SelectedPlayer.Visible();
+                
                 CardManager.instance.PlaySelectedCard();
                 return;
             }

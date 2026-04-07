@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Zap
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Zap
-  cardDescription: Damage and daze a ranged enemy
+  cardDescription: Damage and daze a distant enemy
   type: 0
-  range: 4
+  range: 3
   value: 30
   cost: 0
   rangeType: 1
