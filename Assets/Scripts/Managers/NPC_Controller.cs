@@ -44,6 +44,32 @@ public class NPC_Controller: MonoBehaviour
         return tiles.Count > 0 ? tiles[0] : playerTile; // Default to player's tile if no valid tiles found
     }
 
+    private Tile GetSupportTarget()
+    {
+        BaseUnit closestAlly = null;
+        float closestDist = Mathf.Infinity;
+
+        foreach (var unit in UnitManager.Instance.enemiesSpawned)
+        {
+            if (unit == npcUnit) continue;
+
+            float dist = Vector2.Distance(npcUnit.OccupiedTile.transform.position, unit.OccupiedTile.transform.position);
+
+            if (dist < closestDist)
+            {
+                closestDist = dist;
+                closestAlly = unit;
+
+            }
+
+        }
+
+        if (closestAlly == null)
+            return npcUnit.OccupiedTile;
+
+        return closestAlly.OccupiedTile;
+    }
+
     private void Update()
     {
        /* if (GameManager.Instance == null) return;
@@ -117,6 +143,11 @@ public class NPC_Controller: MonoBehaviour
                 chosenTile = GetRangedTarget();
                 break;
             //Future cases for other behaviors here
+
+            case Enemy1.MovementBehavior.Support:
+                chosenTile = GetSupportTarget();
+                break;
+
 
             default:
                 targeting.SelectTarget();

@@ -37,12 +37,8 @@ public class BaseUnit : MonoBehaviour
     public enum MovementBehavior
     {
         Default,
-        Aggressive,
-        Defensive,
         Ranged,
         Support,
-        Cowardly,
-        Patrol
     }
 
     public virtual void ApplyFlags()

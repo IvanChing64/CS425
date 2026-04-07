@@ -11,15 +11,10 @@ public class Enemy1 : BaseEnemy
         switch (enemyFlag)
         {
             case EnemyFlag.Ranged:
-                attackRange += 3;
-                maxHealth -= 20;
-                health -= 20;
                 movementBehavior = MovementBehavior.Ranged;
                 break;
 
             case EnemyFlag.Support:
-                //attackBoost += 0.5f;
-                defenseBoost += 0.5f;
                 movementBehavior = MovementBehavior.Support;
                 break;
 
