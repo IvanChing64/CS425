@@ -46,28 +46,34 @@ public class NPC_Controller: MonoBehaviour
 
     private Tile GetSupportTarget()
     {
-        BaseUnit closestAlly = null;
-        float closestDist = Mathf.Infinity;
+        BaseUnit lowestHealthAlly = null;
+        float lowestHealth = Mathf.Infinity;
 
         foreach (var unit in UnitManager.Instance.enemiesSpawned)
         {
             if (unit == npcUnit) continue;
 
-            float dist = Vector2.Distance(npcUnit.OccupiedTile.transform.position, unit.OccupiedTile.transform.position);
 
-            if (dist < closestDist)
+            if (unit.health < lowestHealth)
             {
-                closestDist = dist;
-                closestAlly = unit;
+                lowestHealth = unit.health;
+                lowestHealthAlly = unit;
 
             }
 
         }
 
-        if (closestAlly == null)
-            return npcUnit.OccupiedTile;
+        if (lowestHealthAlly != null)
+            return lowestHealthAlly.OccupiedTile;
 
-        return closestAlly.OccupiedTile;
+        return GetRandomTile();
+    }
+
+    private Tile GetRandomTile()
+    {
+       var tiles = GridManager.Instance.AllTiles;
+        int index = UnityEngine.Random.Range(0, tiles.Count);
+        return tiles[index];
     }
 
     private void Update()
@@ -374,6 +380,8 @@ public class NPC_Controller: MonoBehaviour
         }
 
         //SetTarget(startTile);
+
+        //Changed to set behavior target for movement based on current flag
         SetBehaviorTarget(startTile);
 
         while (pathIndex < path.Count && tilesMovedThisTurn < npcUnit.moveRange)
