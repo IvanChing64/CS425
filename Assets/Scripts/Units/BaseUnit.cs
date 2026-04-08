@@ -1,6 +1,11 @@
+using Codice.Client.Common.GameUI;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
+
+
+
+
 
 public class BaseUnit : MonoBehaviour
 {
@@ -28,6 +33,32 @@ public class BaseUnit : MonoBehaviour
     [SerializeField] healthbar healthbar;
     [SerializeField] private AudioClip[] hurtSFX;
 
+    //Enemy Flags: Andrew Shelton
+    public enum EnemyFlag
+    {
+        Ranged,
+        Default,
+        Support
+
+    }
+
+    public enum MovementBehavior
+    {
+        Default,
+        Ranged,
+        Support,
+    }
+
+    public virtual void ApplyFlags()
+    {
+        //Does nothing in the base class, overridden
+    }
+
+    private void Start()
+    {
+        ApplyFlags();
+    }
+    //End of new stuff.
     public List<Tile> GetTilesInMoveRange() => RangeManager.GetTilesInRange(OccupiedTile, moveRange, RangeType.FloodMovement);
     public List<Tile> GetTilesInAttackRange() => RangeManager.GetTilesInRange(OccupiedTile, attackRange, RangeType.FloodTargeting);
 
