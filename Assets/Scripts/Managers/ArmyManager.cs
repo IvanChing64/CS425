@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Script for handling the player's army across levels
@@ -8,8 +9,9 @@ using UnityEngine;
 public class ArmyManager : MonoBehaviour
 {
     public static ArmyManager Instance;
+    public static Dictionary<string, ScriptableUnit> AllPlayerUnits;
 
-    public List<ScriptableUnit> UnitsInArmy { get; private set; }
+    [SerializeField] private List<ScriptableUnit> unitsInArmy;
     public int currency;
 
     private void Awake()
@@ -19,22 +21,35 @@ public class ArmyManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+        
         Instance = this;
+
+        ScriptableUnit[] loadedUnits = Resources.LoadAll<ScriptableUnit>("Units");
+        foreach (ScriptableUnit unit in loadedUnits)
+        {
+            AllPlayerUnits.Add(unit.name, unit);
+        }
+
+        if (unitsInArmy.Count == 0) GenerateStartingArmy();
+        
         DontDestroyOnLoad(gameObject);
     }
 
-    public void AddUnitToArmy(ScriptableUnit unit) => UnitsInArmy.Add(unit);
+    public void AddUnitToArmy(ScriptableUnit unit) => unitsInArmy.Add(unit);
+    public void AddUnitToArmy(string unitName) => AddUnitToArmy(AllPlayerUnits[unitName]);
     
-    public bool HasUnitInArmy(ScriptableUnit unit) => UnitsInArmy.Contains(unit);
+    public bool HasUnitInArmy(ScriptableUnit unit) => unitsInArmy.Contains(unit);
+    public bool HasUnitInArmy(string unitName) => HasUnitInArmy(AllPlayerUnits[unitName]);
 
-    public bool RemoveUnitFromArmy(ScriptableUnit unit) => UnitsInArmy.Remove(unit);
+    public bool RemoveUnitFromArmy(ScriptableUnit unit) => unitsInArmy.Remove(unit);
+    public bool RemoveUnitFromArmy(string unitName) => RemoveUnitFromArmy(AllPlayerUnits[unitName]);
 
-    public void RandomizeStartingArmy()
+    public void GenerateStartingArmy()
     {
-        const int size = 3;
-
-        
+        AddUnitToArmy("Knight");
+        AddUnitToArmy("Archer");
+        AddUnitToArmy("Mage");
+        AddUnitToArmy("Cleric");
     }
 
 }
