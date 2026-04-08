@@ -72,7 +72,11 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Boost:
-                targetPlayer.Boost();
+                if (!(targetPlayer.boost > 0))
+                {
+                    targetPlayer.boost = EffectFlag.Start;
+                    targetPlayer.Boost();
+                }
                 break;
 
             case SupportEffect.Cleanse:
@@ -80,15 +84,42 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Energize:
-                targetPlayer.Energize(1);
+                targetPlayer.Energize(value);
                 break;
 
             case SupportEffect.Invisibility:
                 targetPlayer.Invisible();
                 break;
 
+            case SupportEffect.Dodge:
+                targetPlayer.Dodge();
+                break;
+
+            case SupportEffect.Defiant:
+                targetPlayer.Defiant();
+                break;
+            
+            case SupportEffect.Agility:
+                targetPlayer.Agility();
+                break;
+
+            case SupportEffect.DamageUp:
+                if (!(targetPlayer.dmgUp > 0))
+                {
+                    targetPlayer.dmgUp = EffectFlag.Start;
+                    targetPlayer.DamageUp();
+                }
+                break;
+
+            case SupportEffect.DefenseUp:
+                if (!(targetPlayer.defUp > 0))
+                {
+                    targetPlayer.defUp = EffectFlag.Start;
+                    targetPlayer.DefenseUp();
+                }
+                break;
+
             default:
-                Debug.LogWarning("Unknown support effect: " + primaryEffect);
                 break;
         }
 
@@ -106,7 +137,11 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Boost:
-                targetPlayer.Boost();
+                if (!(targetPlayer.boost > 0))
+                {
+                    targetPlayer.boost = EffectFlag.Start;
+                    targetPlayer.Boost();
+                }
                 break;
 
             case SupportEffect.Cleanse:
@@ -114,15 +149,42 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Energize:
-                targetPlayer.Energize(1);
+                targetPlayer.Energize(value);
                 break;
             
             case SupportEffect.Invisibility:
                 targetPlayer.Invisible();
                 break;
 
+            case SupportEffect.Dodge:
+                targetPlayer.Dodge();
+                break;
+
+            case SupportEffect.Defiant:
+                targetPlayer.Defiant();
+                break;
+
+            case SupportEffect.Agility:
+                targetPlayer.Agility();
+                break;
+
+            case SupportEffect.DamageUp:
+                if (!(targetPlayer.dmgUp > 0))
+                {
+                    targetPlayer.dmgUp = EffectFlag.Start;
+                    targetPlayer.DamageUp();
+                }
+                break;
+
+            case SupportEffect.DefenseUp:
+                if (!(targetPlayer.defUp > 0))
+                {
+                    targetPlayer.defUp = EffectFlag.Start;
+                    targetPlayer.DefenseUp();
+                }
+                break;
+
             default:
-                Debug.LogWarning("Unknown support effect: " + secondaryEffect);
                 break;
         }
         Debug.Log("Support Card Played with " + primaryEffect + " and " + secondaryEffect);

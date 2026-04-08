@@ -14,9 +14,8 @@ public abstract class BaseCard : MonoBehaviour
     public string cardName;
     public Type cardType;
     public int range, value, cost;
-    public bool isPlayed;
+    public bool isPlayed, AoE;
     public GameObject cardHolder; // Reference to the card holder GameObject
-    //public float drawChance;
 
     //Play the card's effect, overridden in derived classes
     public virtual void PlayCard()
@@ -43,6 +42,7 @@ public abstract class BaseCard : MonoBehaviour
         value = card.value;
         range = card.range;
         cost = card.cost;
+        AoE = card.areaEffect;
         //Debug.Log("Card Copied: " + cardName);
     }
 

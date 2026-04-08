@@ -280,7 +280,7 @@ public class NPC_Controller: MonoBehaviour
         if(target != null)
         {
             Debug.Log($"{npcUnit.name} attacks {target.name}");
-            target.takeDamage(npcUnit.dmg * npcUnit.attackBoost);
+            target.takeDamage(npcUnit.dmg * npcUnit.attackModifier);
         } else {
              Debug.Log("nothing happened!");
         }

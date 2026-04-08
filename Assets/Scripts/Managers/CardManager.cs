@@ -73,6 +73,7 @@ public class CardManager : MonoBehaviour
             selectedPlayer.GetComponent<HandManager>().UpdateHandPositions();
             UpdateDeckCard();
             UpdateAPCounter();
+            selectedPlayer.GetComponent<HandManager>().UpdateCardVisuals();
         }
     }
 

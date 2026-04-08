@@ -38,7 +38,7 @@ public class BaseMovementCard : BaseCard
 
         if(player != null)
         {
-            player.moveRange = range;
+            player.moveRange = range + player.moveModifier;
 
             List<Tile> tilesInRange = player.GetTilesInMoveRange();
             foreach (Tile t in tilesInRange)
@@ -62,7 +62,7 @@ public class BaseMovementCard : BaseCard
 
         if(player != null)
         {
-            player.moveRange = range;
+            player.moveRange = range + player.moveModifier;
             List<Tile> tilesInRange = player.GetTilesInMoveRange();
             foreach(Tile t in tilesInRange)
             {

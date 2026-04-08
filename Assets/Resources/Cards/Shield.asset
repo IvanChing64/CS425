@@ -16,7 +16,7 @@ MonoBehaviour:
   cardDescription: Guard a close ally
   type: 2
   range: 1
-  value: 25
+  value: 30
   cost: 0
   rangeType: 1
   cardIcon: {fileID: 1853853189450526911, guid: bb481a5c8f8f6dd49a1c49ec4eca01db, type: 3}
@@ -24,4 +24,5 @@ MonoBehaviour:
   cardBorderColor: {r: 0.2509804, g: 0.8, b: 0.12941177, a: 1}
   primarySupportEffect: 2
   secondarySupportEffect: 0
-  controlEffect: 0
+  primaryControlEffect: 0
+  secondaryControlEffect: 0
