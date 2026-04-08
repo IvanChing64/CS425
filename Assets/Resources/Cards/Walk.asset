@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Walk
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Walk
-  cardDescription: Gain Close Movement
+  cardDescription: Gain Nearby Movement
   type: 1
   range: 2
   value: 2
@@ -24,4 +24,5 @@ MonoBehaviour:
   cardBorderColor: {r: 0, g: 0.06666667, b: 1, a: 1}
   primarySupportEffect: 0
   secondarySupportEffect: 0
-  controlEffect: 0
+  primaryControlEffect: 0
+  secondaryControlEffect: 0

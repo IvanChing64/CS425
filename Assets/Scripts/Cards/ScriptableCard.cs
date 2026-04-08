@@ -11,6 +11,7 @@ public class ScriptableCard : ScriptableObject
     public string cardName, cardDescription;
     public Type type;
     public int range, value, cost;
+    public bool areaEffect;
     public RangeType rangeType;
     public Sprite cardIcon, cardCorner;
     public Color cardBorderColor;
@@ -24,7 +25,7 @@ public enum Type
     Attack = 0,
     Movement = 1,
     Support = 2,
-    Control = 3
+    Summon = 3
 }
 
 //Support effect types
@@ -37,6 +38,12 @@ public enum SupportEffect
     Cleanse = 4,
     Energize = 5,
     Invisibility = 6,
+    Dodge = 7,
+    Defiant = 8,
+    Agility = 9,
+    DamageUp = 10,
+    DefenseUp = 11,
+
     
 }
 
@@ -48,4 +55,8 @@ public enum ControlEffect
     Stun = 2,
     Restrict = 3,
     Freeze = 4,
+    Poison = 5, 
+    
 }
+
+

@@ -54,7 +54,7 @@ public class combatUIManager : MonoBehaviour
             {
                 playerAnim.SetTrigger("attack");
             }
-            targetEnemy.takeDamage(targetPlayer.dmg * targetPlayer.attackBoost);
+            targetEnemy.takeDamage(targetPlayer.dmg * targetPlayer.attackModifier);
             targetPlayer.canAttack = false;
             targetPlayer.dmg = 0;
             foreach (Tile t in GridManager.Instance.GetNeighborsOf(targetPlayer.OccupiedTile))
@@ -78,7 +78,7 @@ public class combatUIManager : MonoBehaviour
             {
                 playerAnim.SetTrigger("attack");
             }
-            defender.takeDamage(attacker.dmg * attacker.attackBoost);
+            defender.takeDamage(attacker.dmg * attacker.attackModifier);
             attacker.canAttack = false;
             attacker.dmg = 0;
             foreach (Tile t in GridManager.Instance.GetNeighborsOf(attacker.OccupiedTile))

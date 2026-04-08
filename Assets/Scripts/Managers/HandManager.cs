@@ -92,7 +92,6 @@ public class HandManager : MonoBehaviour
             if (currentHand[i] != null)
             {
                 Destroy(currentHand[i].gameObject);
-                Debug.Log("Destroyed card: " + currentHand[i].name);
             }
         }
         currentHand.Clear();
@@ -209,8 +208,8 @@ public class HandManager : MonoBehaviour
                 newCard = Instantiate(DeckManager.movementCardPrefab, spawnPos, Quaternion.identity);
                 break;
 
-            case Type.Control:
-                newCard = Instantiate(DeckManager.controlCardPrefab, spawnPos, Quaternion.identity);
+            case Type.Summon:
+                newCard = Instantiate(DeckManager.summonCardPrefab, spawnPos, Quaternion.identity);
                 break;
 
             default:
