@@ -22,6 +22,8 @@ public class GridManager : MonoBehaviour
     //default 10
     public static int height = 10;
 
+    public List<Tile> AllTiles => tiles.Values.ToList();
+
     private void Awake()
     {
         Instance = this;

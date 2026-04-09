@@ -5230,7 +5230,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 1
   stageData: {fileID: 11400000, guid: dea111ae8bb11484280e0f2e4af6087d, type: 2}
-  stageDesciption: This is a test for the first stage of the game.
+  stageDesciption: 'You walk into ruins and encounter a group of enemies. Watch out!
+
+
+    Enemies:
+    3 Soldiers'
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7

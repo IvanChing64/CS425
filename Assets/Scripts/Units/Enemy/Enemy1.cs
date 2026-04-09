@@ -2,9 +2,31 @@ using UnityEngine;
 
 public class Enemy1 : BaseEnemy
 {
+    //New stuff: Enemy Flags - Andrew Shelton
+    public EnemyFlag enemyFlag;
+    public MovementBehavior movementBehavior = MovementBehavior.Default;
+
+    public override void ApplyFlags()
+    {
+        switch (enemyFlag)
+        {
+            case EnemyFlag.Ranged:
+                movementBehavior = MovementBehavior.Ranged;
+                break;
+
+            case EnemyFlag.Support:
+                movementBehavior = MovementBehavior.Support;
+                break;
+
+            case EnemyFlag.Default:
+                // No changes for default
+                break;
+        }
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        ApplyFlags();
         
     }
 
