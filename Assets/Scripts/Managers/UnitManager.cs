@@ -28,6 +28,15 @@ public class UnitManager : MonoBehaviour
     public int enemyUnitCount;
     public int playerUnitCount;
 
+    public static float boostHinderValue = 0.25f;
+    public static float strengthenWeakenValue = 0.25f;
+    public static float resistantVulnerableValue = 0.25f;
+    public static float invisibleAttackBoost = 0.15f;
+    public static float frozenDefenseDown = 0.1f;
+    public static float poisonAttackDown = 0.1f;
+    public static float maxDodgeChance = 0.85f;
+    public static float guardEfficiency = 0.85f;
+
     public BasePlayer SelectedPlayer
     {
         get => SelectedUnit as BasePlayer;
@@ -124,7 +133,7 @@ public class UnitManager : MonoBehaviour
 
         for (int i = 0; i < countToSpawn; i++)
         {
-            GameObject prefab = data.enemies[Random.Range(0, data.enemies.Count)];
+            GameObject prefab = data.enemies[i % data.enemies.Count];
             //var unitData = enemiesToSpawn[i];
             var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
             if(randomSpawnTile != null)
@@ -157,7 +166,7 @@ public class UnitManager : MonoBehaviour
             // Deselect current unit and hide move range highlights
             if (SelectedEnemy != null)
             {
-                int totalRange = SelectedEnemy.attackRange + SelectedEnemy.moveRange;
+                int totalRange = SelectedEnemy.attackRange + SelectedEnemy.moveRange + SelectedEnemy.moveModifier;
                 RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, totalRange).ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             }
 
@@ -218,9 +227,12 @@ public class UnitManager : MonoBehaviour
         int attackRange = SelectedEnemy.attackRange;
         // int moveRange = NPC_Controller.Instance.tilesPerMove;
         // TODO: enemies should be initialized with correct movement range
-        int moveRange = SelectedEnemy.moveRange;
+        int moveRange = SelectedEnemy.moveRange + SelectedEnemy.moveModifier;
 
-        Debug.Log("Selected Enemy: " + SelectedEnemy.name);
+        if ((int)SelectedEnemy.restricted > 1)
+        {
+            moveRange = 0;
+        }
 
         if ((int)SelectedEnemy.stunned > 1)
         {
