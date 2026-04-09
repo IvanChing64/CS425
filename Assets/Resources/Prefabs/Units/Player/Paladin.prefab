@@ -323,8 +323,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7384290322352760091, guid: 728135fe2ac4b434ab56e445d647d2a0, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.91183233, a: 1}
+  m_Sprite: {fileID: 8793639957104055765, guid: e2813a56c80d66443aedce0553824a40, type: 3}
+  m_Color: {r: 1, g: 1, b: 0.91183233, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -343,7 +343,7 @@ Animator:
   m_GameObject: {fileID: 2677205254773082411}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b96f062c1d073496fb335d14ea81c2ec, type: 2}
+  m_Controller: {fileID: 9100000, guid: cb335b7fce2f6114e926b1aa544a2b0a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -377,10 +377,14 @@ MonoBehaviour:
   defenseModifier: 1
   moveModifier: 0
   boost: 0
+  dmgUp: 0
+  defUp: 0
   defiant: 0
   stunned: 0
   invisible: 0
   dodge: 0
+  poison: 0
+  agility: 0
   moveRange: 0
   attackRange: 1
   UnitAnimator: {fileID: 3788511747401468238}
