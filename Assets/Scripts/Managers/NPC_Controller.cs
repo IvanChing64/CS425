@@ -384,7 +384,7 @@ public class NPC_Controller: MonoBehaviour
 
     //Added for support behavior: checks for lowest-health ally in range after moving and heals if possible
 
-   /* private void CheckForHealAfterMove()
+    private void CheckForHealAfterMove()
     {
         BaseUnit lowest = null;
         float lowestHealth = Mathf.Infinity;
@@ -413,9 +413,11 @@ public class NPC_Controller: MonoBehaviour
         {
             HealTarget(lowest, healAmount);
         }
-    }*/
+    }
 
-   
+
+
+
 
     public IEnumerator TakeTurn()
     {
@@ -457,8 +459,9 @@ public class NPC_Controller: MonoBehaviour
             tilesMovedThisTurn++;
             yield return null;
         }
-        //CheckForHealAfterMove();
+        
         FinishedMoves();
+        CheckForHealAfterMove();
     }
 
     public static IEnumerator RunEnemyTurn(List<NPC_Controller> enemies)
