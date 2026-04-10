@@ -206,17 +206,27 @@ MonoBehaviour:
   attackModifier: 1
   defenseModifier: 1
   moveModifier: 0
-  boost: 0
-  dmgUp: 0
-  defUp: 0
-  defiant: 0
-  stunned: 0
-  invisible: 0
-  dodge: 0
-  poison: 0
-  agility: 0
   moveRange: 4
   attackRange: 1
+  boost: 0
+  strengthen: 0
+  resistant: 0
+  invisible: 0
+  absorb: 0
+  stunned: 0
+  restricted: 0
+  frozen: 0
+  flaming: 0
+  weaken: 0
+  vulnerable: 0
+  hinder: 0
+  regeneration: 0
+  dodge: 0
+  agility: 0
+  reflect: 0
+  defiant: 0
+  daze: 0
+  poison: 0
   UnitAnimator: {fileID: 738936172720448078}
   healthbar: {fileID: 1811933326703943321}
   hurtSFX:

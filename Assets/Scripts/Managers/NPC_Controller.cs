@@ -21,12 +21,14 @@ public class NPC_Controller: MonoBehaviour
     private BaseUnit npcUnit;
 
     private Enemy1 enemy1;
+    private Animator unitAnimator;
 
     private void Awake()
     {
         enemy1 = GetComponent<Enemy1>();
         Instance = this;
         npcUnit = GetComponent<BaseUnit>();
+        unitAnimator = GetComponent<Animator>();
         tilesPerMove = npcUnit.moveRange + npcUnit.moveModifier;; 
     }
 
@@ -279,6 +281,10 @@ public class NPC_Controller: MonoBehaviour
 
         if(target != null)
         {
+            if (unitAnimator != null)
+            {
+                unitAnimator.SetTrigger("attack");
+            }
             Debug.Log($"{npcUnit.name} attacks {target.name}");
             target.takeDamage(npcUnit.dmg * npcUnit.attackModifier);
         } else {
@@ -383,6 +389,10 @@ public class NPC_Controller: MonoBehaviour
             yield break;
         }
 
+        if(unitAnimator != null)
+        {
+            unitAnimator.SetBool("isMoving", true);
+        }
         //SetTarget(startTile);
 
         //Changed to set behavior target for movement based on current flag
@@ -403,6 +413,10 @@ public class NPC_Controller: MonoBehaviour
             pathIndex++;
             tilesMovedThisTurn++;
             yield return null;
+        }
+        if (unitAnimator != null)
+        {
+            unitAnimator.SetBool("isMoving", false);
         }
         FinishedMoves();
     }
