@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Script for handling the player's army across levels
@@ -47,10 +49,57 @@ public class ArmyManager : MonoBehaviour
     /// <remarks><em>Only generated if ArmyManager instance does not already have units</em></remarks>
     public void GenerateStartingArmy()
     {
-        AddUnit("Knight");
-        AddUnit("Archer");
-        AddUnit("Mage");
-        AddUnit("Cleric");
+        // Add the team's melee unit
+        int random = Random.Range(0, 3);
+        switch (random)
+        {
+            case 0: AddUnit("Knight"); break;
+            case 1: AddUnit("Pioneer"); break;
+            case 2: AddUnit("Robot"); break;
+            default:
+                Debug.Log("Army generation out of range");
+                AddUnit("Knight");
+                break;
+        }
+
+        // Add the team's ranged unit
+        random = Random.Range(0, 3);
+        switch (random)
+        {
+            case 0: AddUnit("Archer"); break;
+            case 1: AddUnit("Cowboy"); break;
+            case 2: AddUnit("Soldier"); break;
+            default:
+                Debug.Log("Army generation out of range");
+                AddUnit("Archer");
+                break;
+        }
+
+        // Add the team's support unit
+        random = Random.Range(0, 3);
+        switch (random)
+        {
+            case 0: AddUnit("Cleric"); break;
+            case 1: AddUnit("Huckster"); break;
+            case 2: AddUnit("Scientist"); break;
+            default:
+                Debug.Log("Army generation out of range");
+                AddUnit("Cleric");
+                break;
+        }
+
+        // Add the team's glass cannon unit
+        random = Random.Range(0, 3);
+        switch (random)
+        {
+            case 0: AddUnit("Mage"); break;
+            case 1: AddUnit("Gunner"); break;
+            case 2: AddUnit("Spy"); break;
+            default:
+                Debug.Log("Army generation out of range");
+                AddUnit("Mage");
+                break;
+        }
     }
 
 }
