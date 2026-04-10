@@ -23,6 +23,7 @@ public class ArmyManager : MonoBehaviour
         }
         
         Instance = this;
+        AllPlayerUnits = new Dictionary<string, ScriptableUnit>();
 
         ScriptableUnit[] loadedUnits = Resources.LoadAll<ScriptableUnit>("Units");
         foreach (ScriptableUnit unit in loadedUnits)
