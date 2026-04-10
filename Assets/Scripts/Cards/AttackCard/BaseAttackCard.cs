@@ -5,6 +5,7 @@ using UnityEngine;
 //Derived class for attack cards
 public class BaseAttackCard : BaseCard
 {
+    public bool damaging;
     public ControlEffect primaryEffect, secondaryEffect;
 
     public override void CopyScriptableCard(ScriptableCard card)
@@ -12,6 +13,7 @@ public class BaseAttackCard : BaseCard
         base.CopyScriptableCard(card);
         primaryEffect = card.primaryControlEffect;
         secondaryEffect = card.secondaryControlEffect;
+        damaging = card.damaging;
     }
 
     public override void SelectCard()

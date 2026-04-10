@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d42e8cdeee7a74ea6ffe4eff42e70c, type: 3}
+  m_Name: Remedy
+  m_EditorClassIdentifier: Scripts::ScriptableCard
+  cardName: Remedy
+  cardDescription: Heal and Regenerate a nearby ally
+  type: 2
+  range: 2
+  value: 10
+  cost: 0
+  damaging: 0
+  areaEffect: 0
+  rangeType: 1
+  cardIcon: {fileID: -8714418300613597991, guid: a027c213e88ad1f40994c68276f11c89, type: 3}
+  cardCorner: {fileID: -8686425463742581414, guid: 48dcce1cec15ef34cb12d5459f8d55bd, type: 3}
+  cardBorderColor: {r: 0.2509804, g: 0.8, b: 0.12941177, a: 1}
+  primarySupportEffect: 1
+  secondarySupportEffect: 13
+  primaryControlEffect: 0
+  secondaryControlEffect: 0

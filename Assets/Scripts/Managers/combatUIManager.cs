@@ -68,7 +68,7 @@ public class combatUIManager : MonoBehaviour
     }
 
     //ADDED FOR CLICK ON TILE COMBAT
-    public void Attack(BasePlayer attacker, BaseUnit defender)
+    public void Attack(BasePlayer attacker, BaseUnit defender, bool reset = false)
     {
         Animator playerAnim = attacker.GetComponent<Animator>();
         if (defender != null && attacker != null)
@@ -78,7 +78,24 @@ public class combatUIManager : MonoBehaviour
             {
                 playerAnim.SetTrigger("attack");
             }
-            defender.takeDamage(attacker.dmg * attacker.attackModifier);
+
+            if (((BaseAttackCard)CardManager.instance.selectedCard).damaging)
+            {
+                if (attacker.invisible > 0 && CardManager.instance.selectedCard.cardName == "Backstab")
+                {
+                    defender.takeDamage((attacker.dmg + UnitManager.backstabInvisibleBonus) * attacker.attackModifier, attacker);
+                } else
+                {
+                    defender.takeDamage(attacker.dmg * attacker.attackModifier, attacker);
+                }
+                
+            } else
+            {
+                defender.takeDamage(0);
+            }
+
+            if (reset) return;
+            
             attacker.canAttack = false;
             attacker.dmg = 0;
             foreach (Tile t in GridManager.Instance.GetNeighborsOf(attacker.OccupiedTile))
