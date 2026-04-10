@@ -113,7 +113,7 @@ public class BaseUnit : MonoBehaviour
         UnitAnimator = GetComponent<Animator>();
     }
     //damage functions
-    public void takeDamage(float damageAmount, bool dodgeable = true, BaseUnit attacker = null)
+    public void takeDamage(float damageAmount, bool dodgeable = true)
     {
         // Check for Dodge
         if (dodgeable && dodge > 0)
@@ -121,10 +121,11 @@ public class BaseUnit : MonoBehaviour
             float dodgeChance = dodge * 0.05f;
             if (dodgeChance > UnitManager.maxDodgeChance)
             {
-                dodgeChance = 0.85f;
+                dodgeChance = UnitManager.maxDodgeChance;
             }
-            if (Random.value < UnitManager.maxDodgeChance)
+            if (Random.value < dodgeChance)
             {
+                dodge--;
                 return;
             }
         }
@@ -135,11 +136,19 @@ public class BaseUnit : MonoBehaviour
         }
 
         healthbar = GetComponentInChildren<healthbar>();
+
         float damage = damageAmount * defenseModifier;
 
-        if (reflect && attacker != null)
+        if (reflect)
         {
-            attacker.takeDamage(damage * 0.25f);
+            damage -= damage * UnitManager.reflectEfficiency;
+        }
+
+        float absorbAmount = 0;
+        if (absorb > 0)
+        {
+            absorbAmount = damage * UnitManager.absorbEfficiency;
+            damage -= damage * UnitManager.absorbEfficiency;
         }
 
         if (guard > 0)
@@ -160,7 +169,7 @@ public class BaseUnit : MonoBehaviour
 
         if (absorb > 0)
         {
-            Heal(damage * 0.25f);
+            Heal(absorbAmount);
         }
 
         UpdateHealth();
@@ -301,7 +310,7 @@ public class BaseUnit : MonoBehaviour
         {
             // Become Invisible
             if (invisible != 0) return;
-            invisible = EffectFlag.Middle;
+            invisible = EffectFlag.Start;
             GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.5f);
             attackModifier += UnitManager.invisibleAttackBoost;
             if (Faction == Faction.Player)
@@ -314,7 +323,7 @@ public class BaseUnit : MonoBehaviour
     // Apply 2 stacks of dodge, each giving a 5% chance to avoid attacks
     public void Dodge()
     {
-        dodge += 2;
+        dodge += 3;
         if (dodge > 17)
         {
             dodge = 17;
@@ -356,6 +365,8 @@ public class BaseUnit : MonoBehaviour
                 strengthen = EffectFlag.Middle;
                 return;
             }
+
+            strengthen = EffectFlag.Middle;
         }
 
         attackModifier += UnitManager.strengthenWeakenValue;
@@ -380,6 +391,8 @@ public class BaseUnit : MonoBehaviour
                 resistant = EffectFlag.Middle;
                 return;
             }
+
+            resistant = EffectFlag.Middle;
         }
 
         defenseModifier -= UnitManager.resistantVulnerableValue;
@@ -403,8 +416,11 @@ public class BaseUnit : MonoBehaviour
     // Heal for 10% times number of stacksof max health at the end of the turn
     public void Regeneration()
     {
-        if (regeneration >= 8) return;
-        regeneration++;
+        regeneration += 2;
+        if (regeneration >= 6)
+        {
+            regeneration = 6;
+        }
     }
 
     // Heal 20% of damage dealt to the player
@@ -496,6 +512,8 @@ public class BaseUnit : MonoBehaviour
                 weaken = EffectFlag.Middle;
                 return;
             }
+
+            weaken = EffectFlag.Middle;
         }
 
         attackModifier -= UnitManager.strengthenWeakenValue;
@@ -520,6 +538,8 @@ public class BaseUnit : MonoBehaviour
                 vulnerable = EffectFlag.Middle;
                 return;
             }
+
+            vulnerable = EffectFlag.Middle;
         }
 
         defenseModifier += UnitManager.resistantVulnerableValue;

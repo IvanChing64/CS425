@@ -99,11 +99,18 @@ public abstract class Tile : MonoBehaviour
                         if (t.OccupiedUnit != null && t.OccupiedUnit.Faction == Faction.Enemy)
                         {
                             // Attack the enemy
-                            combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, t.OccupiedUnit);
+                            combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, t.OccupiedUnit, true);
 
                             // Apply control effects
                             ((BaseAttackCard)CardManager.instance.selectedCard).ApplyControlEffect(t.OccupiedUnit);
                         }   
+                    }
+
+                    UnitManager.Instance.SelectedPlayer.canAttack = false;
+                    UnitManager.Instance.SelectedPlayer.dmg = 0;
+                    foreach (Tile t in GridManager.Instance.GetNeighborsOf(UnitManager.Instance.SelectedPlayer.OccupiedTile))
+                    {
+                        if (t.isWalkable)t.ShowHighlight(false, Tile.nonwalkableColor);
                     }
                 }
 
