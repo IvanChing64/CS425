@@ -203,11 +203,19 @@ MonoBehaviour:
   health: 120
   guard: 0
   dmg: 40
-  attackBoost: 1
-  defenseBoost: 1
+  attackModifier: 1
+  defenseModifier: 1
+  moveModifier: 0
+  boost: 0
+  dmgUp: 0
+  defUp: 0
+  defiant: 0
   stunned: 0
   invisible: 0
-  moveRange: 4
+  dodge: 0
+  poison: 0
+  agility: 0
+  moveRange: 8
   attackRange: 1
   UnitAnimator: {fileID: 738936172720448078}
   healthbar: {fileID: 1811933326703943321}
@@ -245,6 +253,7 @@ MonoBehaviour:
   moveSpeed: 2.5
   tilesPerMove: 4
   path: []
+  healAmount: 10
 --- !u!95 &738936172720448078
 Animator:
   serializedVersion: 7

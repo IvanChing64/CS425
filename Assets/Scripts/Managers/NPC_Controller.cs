@@ -44,6 +44,8 @@ public class NPC_Controller: MonoBehaviour
         return tiles.Count > 0 ? tiles[0] : playerTile; // Default to player's tile if no valid tiles found
     }
 
+    [SerializeField] private int healAmount = 10;
+
     private Tile GetSupportTarget()
     {
         BaseUnit lowestHealthAlly = null;
@@ -63,17 +65,39 @@ public class NPC_Controller: MonoBehaviour
 
         }
 
-        if (lowestHealthAlly != null)
+        if (lowestHealthAlly == null)
+            return GetRandomTile();
+
+        Tile allyTile = lowestHealthAlly.OccupiedTile;
+
+        bool inHealRange = RangeManager.GetTilesInRange(npcUnit.OccupiedTile, npcUnit.attackRange, RangeType.FloodTargeting).Contains(allyTile);
+
+        if (lowestHealthAlly.health < lowestHealthAlly.maxHealth && inHealRange)
+        {
+            HealTarget(lowestHealthAlly, healAmount);
             return lowestHealthAlly.OccupiedTile;
 
-        return GetRandomTile();
+        }
+
+        return allyTile;
     }
+
+   
 
     private Tile GetRandomTile()
     {
        var tiles = GridManager.Instance.AllTiles;
         int index = UnityEngine.Random.Range(0, tiles.Count);
         return tiles[index];
+    }
+
+    private void HealTarget(BaseUnit target, int healAmount)
+    {
+        if (target == null) return;
+
+        target.health = Mathf.Min(target.health + healAmount, target.maxHealth);
+
+        target.UpdateHealth();
     }
 
     private void Update()
@@ -358,6 +382,39 @@ public class NPC_Controller: MonoBehaviour
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
 
+    //Added for support behavior: checks for lowest-health ally in range after moving and heals if possible
+
+   /* private void CheckForHealAfterMove()
+    {
+        BaseUnit lowest = null;
+        float lowestHealth = Mathf.Infinity;
+
+        // Find lowest-health ally
+        foreach (var unit in UnitManager.Instance.enemiesSpawned)
+        {
+            if (unit == npcUnit) continue;
+
+            if (unit.health < lowestHealth)
+            {
+                lowestHealth = unit.health;
+                lowest = unit;
+            }
+        }
+
+        if (lowest == null) return;
+
+        Tile allyTile = lowest.OccupiedTile;
+
+        bool inHealRange = RangeManager
+            .GetTilesInRange(npcUnit.OccupiedTile, npcUnit.attackRange, RangeType.FloodTargeting)
+            .Contains(allyTile);
+
+        if (inHealRange && lowest.health < lowest.maxHealth)
+        {
+            HealTarget(lowest, healAmount);
+        }
+    }*/
+
    
 
     public IEnumerator TakeTurn()
@@ -400,6 +457,7 @@ public class NPC_Controller: MonoBehaviour
             tilesMovedThisTurn++;
             yield return null;
         }
+        //CheckForHealAfterMove();
         FinishedMoves();
     }
 
