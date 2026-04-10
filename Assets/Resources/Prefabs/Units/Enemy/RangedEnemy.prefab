@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 738936172720448078}
   - component: {fileID: -6658566611899959939}
   m_Layer: 0
-  m_Name: enemytest
+  m_Name: RangedEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,8 +199,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
   OccupiedTile: {fileID: 0}
   Faction: 1
-  maxHealth: 100
-  health: 100
+  maxHealth: 80
+  health: 80
   guard: 0
   dmg: 40
   attackBoost: 1
@@ -208,7 +208,7 @@ MonoBehaviour:
   stunned: 0
   invisible: 0
   moveRange: 4
-  attackRange: 1
+  attackRange: 5
   UnitAnimator: {fileID: 738936172720448078}
   healthbar: {fileID: 1811933326703943321}
   hurtSFX:
@@ -216,8 +216,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 91c9ddbccc0cd9f42a0d5e9e6d94f0ef, type: 3}
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
-  enemyFlag: 1
-  movementBehavior: 0
+  enemyFlag: 0
+  movementBehavior: 1
 --- !u!114 &751289258245009956
 MonoBehaviour:
   m_ObjectHideFlags: 0

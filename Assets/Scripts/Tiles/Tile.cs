@@ -55,14 +55,23 @@ public abstract class Tile : MonoBehaviour
                     playerAnim.SetTrigger("support");
                 }
 
-                if (!CardManager.instance.selectedCard.AoE)
+                if (CardManager.instance.selectedCard.AoE == AreaOfEffectType.None)
                 {
                     ((BaseSupportCard)CardManager.instance.selectedCard).ApplySupportEffect(OccupiedUnit);
-                } else
+                } else if (CardManager.instance.selectedCard.AoE == AreaOfEffectType.Inclusive)
                 {
                     foreach (Tile t in UnitManager.Instance.SelectedPlayer.GetTilesInAttackRange())
                     {
                         if (t.OccupiedUnit != null && t.OccupiedUnit.Faction == Faction.Player)
+                        {
+                            ((BaseSupportCard)CardManager.instance.selectedCard).ApplySupportEffect(t.OccupiedUnit);
+                        }
+                    }
+                } else if (CardManager.instance.selectedCard.AoE == AreaOfEffectType.Exclusive)
+                {
+                    foreach (Tile t in UnitManager.Instance.SelectedPlayer.GetTilesInAttackRange())
+                    {
+                        if (t.OccupiedUnit != null && t.OccupiedUnit != UnitManager.Instance.SelectedPlayer && t.OccupiedUnit.Faction == Faction.Player)
                         {
                             ((BaseSupportCard)CardManager.instance.selectedCard).ApplySupportEffect(t.OccupiedUnit);
                         }
@@ -76,7 +85,7 @@ public abstract class Tile : MonoBehaviour
             // If the card is an attack card and an enemy is in range, 
             if (UnitManager.Instance.SelectedPlayer.canAttack && OccupiedUnit != null && OccupiedUnit.Faction == Faction.Enemy)
             {
-                if (!CardManager.instance.selectedCard.AoE)
+                if (CardManager.instance.selectedCard.AoE == AreaOfEffectType.None)
                 {
                     // Attack the enemy
                     combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, OccupiedUnit);
@@ -99,7 +108,7 @@ public abstract class Tile : MonoBehaviour
                 }
 
                 // Remove invisibility if player attacks
-                if (UnitManager.Instance.SelectedPlayer.invisible > 0 && CardManager.instance.selectedCard.cardName != "Backstab") UnitManager.Instance.SelectedPlayer.Visible();
+                if (UnitManager.Instance.SelectedPlayer.invisible > 0) UnitManager.Instance.SelectedPlayer.Invisible(true);
                 
                 CardManager.instance.PlaySelectedCard();
                 return;

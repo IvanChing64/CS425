@@ -301,12 +301,16 @@ MonoBehaviour:
   defenseModifier: 1
   moveModifier: 0
   boost: 0
-  defiant: 0
+  dmgUp: 0
+  defUp: 0
   stunned: 0
+  restricted: 0
   invisible: 0
   dodge: 0
   poison: 0
   agility: 0
+  daze: 0
+  defiant: 0
   moveRange: 0
   attackRange: 1
   UnitAnimator: {fileID: 6196690734373523334}
@@ -321,10 +325,10 @@ MonoBehaviour:
   - Dash
   - Long Bow
   - Long Bow
-  - Steal
+  - Rob
   - Wealth
   - Wealth
-  - Cloak
+  - Riches
   canAttack: 1
   canSupport: 0
   energy: 3

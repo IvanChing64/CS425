@@ -81,6 +81,26 @@ public class BaseAttackCard : BaseCard
             case ControlEffect.Poison:
                 targetEnemy.Poison();
                 break; 
+
+            case ControlEffect.Flaming:
+                targetEnemy.Flaming();
+                break;
+
+            case ControlEffect.Weaken:
+                targetEnemy.Weaken();
+                break;
+
+            case ControlEffect.Vulnerable:
+                targetEnemy.Vulnerable();
+                break;
+
+            case ControlEffect.Hinder:
+                targetEnemy.Hinder();
+                break;
+
+            case ControlEffect.Expose:
+                targetEnemy.Expose();
+                break;
         }
 
         switch (secondaryEffect)
@@ -106,6 +126,26 @@ public class BaseAttackCard : BaseCard
             
             case ControlEffect.Poison:
                 targetEnemy.Poison();
+                break;
+            
+            case ControlEffect.Flaming:
+                targetEnemy.Flaming();
+                break;
+
+            case ControlEffect.Weaken:
+                targetEnemy.Weaken();
+                break;
+
+            case ControlEffect.Vulnerable:
+                targetEnemy.Vulnerable();
+                break;
+
+            case ControlEffect.Hinder:
+                targetEnemy.Hinder();
+                break;
+
+            case ControlEffect.Expose:
+                targetEnemy.Expose();
                 break;
         }
     }

@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92d42e8cdeee7a74ea6ffe4eff42e70c, type: 3}
-  m_Name: Tailwind
+  m_Name: Rob
   m_EditorClassIdentifier: Scripts::ScriptableCard
-  cardName: Tailwind
-  cardDescription: Grant agility to all ranged allies and self
-  type: 2
-  range: 3
-  value: 1
-  cost: 0
-  areaEffect: 1
+  cardName: Rob
+  cardDescription: Damage a close enemy and energize self
+  type: 0
+  range: 2
+  value: 15
+  cost: -1
+  areaEffect: 0
   rangeType: 1
-  cardIcon: {fileID: -7963849903453386218, guid: c1dcb2816f4ef5b40bb5be84eea93fea, type: 3}
-  cardCorner: {fileID: -8686425463742581414, guid: 48dcce1cec15ef34cb12d5459f8d55bd, type: 3}
-  cardBorderColor: {r: 0.2509804, g: 0.8, b: 0.12941177, a: 1}
-  primarySupportEffect: 9
+  cardIcon: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
+  cardCorner: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
+  cardBorderColor: {r: 1, g: 0, b: 0, a: 1}
+  primarySupportEffect: 0
   secondarySupportEffect: 0
   primaryControlEffect: 0
   secondaryControlEffect: 0

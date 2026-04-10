@@ -377,10 +377,19 @@ MonoBehaviour:
   defenseModifier: 1
   moveModifier: 0
   boost: 0
-  defiant: 0
+  strengthen: 0
+  resistant: 0
   stunned: 0
+  restricted: 0
   invisible: 0
+  reflect: 0
+  absorb: 0
+  regeneration: 0
   dodge: 0
+  poison: 0
+  agility: 0
+  daze: 0
+  defiant: 0
   moveRange: 0
   attackRange: 1
   UnitAnimator: {fileID: 3788511747401468238}
@@ -394,7 +403,7 @@ MonoBehaviour:
   - March
   - March
   - Smash
-  - Smite
+  - Smash
   - Smite
   - Shield
   - Bless

@@ -5986,7 +5986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 2
-  stageData: {fileID: 0}
+  stageData: {fileID: 11400000, guid: 755a440ef3cfdb14ba88ddea94cb2033, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -9107,7 +9107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 3
-  stageData: {fileID: 0}
+  stageData: {fileID: 11400000, guid: 755a440ef3cfdb14ba88ddea94cb2033, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
