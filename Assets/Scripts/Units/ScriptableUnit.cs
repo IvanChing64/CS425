@@ -16,9 +16,13 @@ public enum Faction
     Enemy = 1
 }
 
+/// <summary>
+/// Describes how many turns an effect is active
+/// </summary>
 public enum EffectFlag : byte
 {
-    Start = 2,
+    Start = 3,
+    Middle = 2,
     End = 1,
     None = 0
 }

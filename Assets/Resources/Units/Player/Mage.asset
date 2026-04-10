@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1c202a58a1759443929a093dc659386, type: 3}
-  m_Name: Player1
-  m_EditorClassIdentifier: Assembly-CSharp::ScriptableUnit
+  m_Name: Mage
+  m_EditorClassIdentifier: Scripts::ScriptableUnit
   Faction: 0
-  UnitPrefab: {fileID: 1672246827751298856, guid: 8ba5165623a50134fbc1bd28f265cc11, type: 3}
+  UnitPrefab: {fileID: 8572756612522690484, guid: 5f092785be89fdf4684df4ce977b120d, type: 3}
+  health: 0
+  dmg: 0

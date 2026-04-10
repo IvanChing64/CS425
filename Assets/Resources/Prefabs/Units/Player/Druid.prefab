@@ -530,14 +530,18 @@ MonoBehaviour:
   defenseModifier: 1
   moveModifier: 0
   boost: 0
-  dmgUp: 0
-  defUp: 0
-  defiant: 0
+  strengthen: 0
+  resistant: 0
   stunned: 0
+  restricted: 0
   invisible: 0
+  regeneration: 0
   dodge: 0
+  negate: 0
   poison: 0
   agility: 0
+  daze: 0
+  defiant: 0
   moveRange: 0
   attackRange: 1
   UnitAnimator: {fileID: 3776181224013974453}
@@ -549,7 +553,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   startingDeck:
   - Walk
-  - Walk
+  - March
   - Earth Trap
   - Thorn Vine
   - Thorn Vine

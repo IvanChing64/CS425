@@ -14,7 +14,9 @@ public abstract class BaseCard : MonoBehaviour
     public string cardName;
     public Type cardType;
     public int range, value, cost;
-    public bool isPlayed, AoE;
+    public AreaOfEffectType AoE;
+    public bool isPlayed;
+    [Tooltip("Game Object for visible card")]
     public GameObject cardHolder; // Reference to the card holder GameObject
 
     //Play the card's effect, overridden in derived classes
