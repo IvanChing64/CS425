@@ -11,7 +11,7 @@ public class ArmyManager : MonoBehaviour
     public static ArmyManager Instance;
     public static Dictionary<string, ScriptableUnit> AllPlayerUnits;
 
-    [SerializeField] private List<ScriptableUnit> unitsInArmy;
+    public List<ScriptableUnit> unitsInArmy;
     public int currency;
 
     private void Awake()
@@ -45,6 +45,7 @@ public class ArmyManager : MonoBehaviour
     public bool RemoveUnitFromArmy(ScriptableUnit unit) => unitsInArmy.Remove(unit);
     public bool RemoveUnitFromArmy(string unitName) => RemoveUnitFromArmy(AllPlayerUnits[unitName]);
 
+    /// <remarks><em>Only generated if ArmyManager instance does not already have units</em></remarks>
     public void GenerateStartingArmy()
     {
         AddUnitToArmy("Knight");
