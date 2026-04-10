@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 /// <summary>
 /// Script for handling the player's army across levels
@@ -36,22 +35,22 @@ public class ArmyManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void AddUnitToArmy(ScriptableUnit unit) => unitsInArmy.Add(unit);
-    public void AddUnitToArmy(string unitName) => AddUnitToArmy(AllPlayerUnits[unitName]);
+    public void AddUnit(ScriptableUnit unit) => unitsInArmy.Add(unit);
+    public void AddUnit(string unitName) => AddUnit(AllPlayerUnits[unitName]);
     
-    public bool HasUnitInArmy(ScriptableUnit unit) => unitsInArmy.Contains(unit);
-    public bool HasUnitInArmy(string unitName) => HasUnitInArmy(AllPlayerUnits[unitName]);
+    public bool HasUnit(ScriptableUnit unit) => unitsInArmy.Contains(unit);
+    public bool HasUnit(string unitName) => HasUnit(AllPlayerUnits[unitName]);
 
-    public bool RemoveUnitFromArmy(ScriptableUnit unit) => unitsInArmy.Remove(unit);
-    public bool RemoveUnitFromArmy(string unitName) => RemoveUnitFromArmy(AllPlayerUnits[unitName]);
+    public bool RemoveUnit(ScriptableUnit unit) => unitsInArmy.Remove(unit);
+    public bool RemoveUnit(string unitName) => RemoveUnit(AllPlayerUnits[unitName]);
 
     /// <remarks><em>Only generated if ArmyManager instance does not already have units</em></remarks>
     public void GenerateStartingArmy()
     {
-        AddUnitToArmy("Knight");
-        AddUnitToArmy("Archer");
-        AddUnitToArmy("Mage");
-        AddUnitToArmy("Cleric");
+        AddUnit("Knight");
+        AddUnit("Archer");
+        AddUnit("Mage");
+        AddUnit("Cleric");
     }
 
 }
