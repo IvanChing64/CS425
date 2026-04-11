@@ -1968,6 +1968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeckManager
   allCards: []
+  DEBUGTEAMSELECTOR: 0
 --- !u!1 &1146347545
 GameObject:
   m_ObjectHideFlags: 0
@@ -3144,7 +3145,7 @@ MonoBehaviour:
   MU:
   - {fileID: 11400000, guid: dcd44c3bb5910cf4bbc22ad9c62d1afa, type: 2}
   - {fileID: 11400000, guid: 252e01cc4b26ef545be3cf3f36c85ce5, type: 2}
-  - {fileID: 11400000, guid: 6ad7c5ced806cee49b29d02030fb56c1, type: 2}
+  - {fileID: 11400000, guid: c0a0892fa2952b44b93069ce623fe9d3, type: 2}
   - {fileID: 11400000, guid: 1dfd4a66ce32563418c45deb80c7ffe7, type: 2}
   WU:
   - {fileID: 11400000, guid: 34a1d9c152fcc174bb56424bd1cd48bc, type: 2}

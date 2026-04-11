@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92d42e8cdeee7a74ea6ffe4eff42e70c, type: 3}
-  m_Name: Burst
+  m_Name: Penance
   m_EditorClassIdentifier: Scripts::ScriptableCard
-  cardName: Burst
-  cardDescription: Damage all nearby enemies
+  cardName: Penance
+  cardDescription: Purely damage all ranged enemies
   type: 0
   range: 3
   value: 30
   cost: 1
-  damaging: 1
+  damaging: 0
+  piercing: 1
   areaEffect: 2
   rangeType: 1
-  cardIcon: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
+  cardIcon: {fileID: -2430602730412623136, guid: af3bba22266425b46b6956234487048a, type: 3}
   cardCorner: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
   cardBorderColor: {r: 1, g: 0, b: 0, a: 1}
   primarySupportEffect: 0

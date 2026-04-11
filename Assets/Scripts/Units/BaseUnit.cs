@@ -138,20 +138,31 @@ public class BaseUnit : MonoBehaviour
         healthbar = GetComponentInChildren<healthbar>();
 
         float damage = damageAmount * defenseModifier;
-
-        if (reflect)
-        {
-            damage -= damage * UnitManager.reflectEfficiency;
-        }
-
         float absorbAmount = 0;
-        if (absorb > 0)
+
+        if (!CardManager.instance.selectedCard.pierce)
         {
-            absorbAmount = damage * UnitManager.absorbEfficiency;
-            damage -= damage * UnitManager.absorbEfficiency;
+            if (reflect)
+            {
+                damage -= damage * UnitManager.reflectEfficiency;
+            }
+
+            if (absorb > 0)
+            {
+                absorbAmount = damage * UnitManager.absorbEfficiency;
+                damage -= damage * UnitManager.absorbEfficiency;
+            } 
+        } else
+        {
+            if (damage < damageAmount)
+            {
+                damage = damageAmount;
+            }
         }
 
-        if (guard > 0)
+        
+
+        if (guard > 0 && !CardManager.instance.selectedCard.pierce)
         {
             if (guard >= damage * UnitManager.guardEfficiency)
             {
