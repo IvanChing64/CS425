@@ -292,10 +292,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   startingDeck:
   - Advance
+  - Walk
   - Ray Gun
   - Heal Ray
   - Kinetic
-  - Nanobots
   - Nanobots
   canAttack: 0
   canSupport: 0

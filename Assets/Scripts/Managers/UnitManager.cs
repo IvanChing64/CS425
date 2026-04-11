@@ -14,7 +14,6 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private List<ScriptableUnit> playersToSpawn = new List<ScriptableUnit>();
     [SerializeField] private List<ScriptableUnit> enemiesToSpawn = new List<ScriptableUnit>();
 
-    private List<ScriptableUnit> units;
     //Adding reference to player tile.
     private Tile playerTile;
     private List<Tile> enemyTiles = new List<Tile>();
@@ -40,6 +39,14 @@ public class UnitManager : MonoBehaviour
     public static float reflectEfficiency = 0.25f;
     public static int backstabInvisibleBonus = 15;
 
+    public List<ScriptableUnit> MB;
+    public List<ScriptableUnit> WB;
+    public List<ScriptableUnit> FB;
+    public List<ScriptableUnit> MU;
+    public List<ScriptableUnit> WU;
+    public List<ScriptableUnit> FU;
+
+
     public BasePlayer SelectedPlayer
     {
         get => SelectedUnit as BasePlayer;
@@ -55,6 +62,33 @@ public class UnitManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        switch(DeckManager.instance.DEBUGTEAMSELECTOR)
+        {
+            case 0:
+                playersToSpawn = MB;
+                break;
+
+            case 1:
+                playersToSpawn = WB;
+                break;
+
+            case 2:
+                playersToSpawn = FB;
+                break;
+
+            case 3:
+                playersToSpawn = MU;
+                break;
+
+            case 4:
+                playersToSpawn = WU;
+                break;
+
+            case 5:
+                playersToSpawn = FU;
+                break;
+        }
     }
 
 

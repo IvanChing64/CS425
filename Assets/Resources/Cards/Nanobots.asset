@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Nanobots
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Nanobots
-  cardDescription: Grant a ranged ally Absorb
+  cardDescription: Grant a ranged ally Absorb and Agility
   type: 2
   range: 3
   value: 1

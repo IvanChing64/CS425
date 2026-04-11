@@ -299,7 +299,7 @@ MonoBehaviour:
   - Recover
   canAttack: 0
   canSupport: 0
-  energy: 1
+  energy: 2
 --- !u!114 &7232603518593366301
 MonoBehaviour:
   m_ObjectHideFlags: 0

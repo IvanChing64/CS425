@@ -318,7 +318,7 @@ MonoBehaviour:
   currentHand: []
   deckCardIDs: 
   handCardIDs: 
-  drawNum: 3
+  drawNum: 4
   actionPoints: 0
   deckIndex: 0
   handDrawn: 0

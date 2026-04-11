@@ -3110,10 +3110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitManager
   playersToSpawn:
-  - {fileID: 11400000, guid: ef734037b8e7f7c4893980cf3a110262, type: 2}
-  - {fileID: 11400000, guid: 55a12e113d12ca944b867525fec19c31, type: 2}
-  - {fileID: 11400000, guid: 9dde388e36f795d4083dbd0bd1b91217, type: 2}
-  - {fileID: 11400000, guid: a79e227108a1f394892f78bb50a9fdaa, type: 2}
+  - {fileID: 11400000, guid: dcd44c3bb5910cf4bbc22ad9c62d1afa, type: 2}
+  - {fileID: 11400000, guid: 252e01cc4b26ef545be3cf3f36c85ce5, type: 2}
+  - {fileID: 11400000, guid: 6ad7c5ced806cee49b29d02030fb56c1, type: 2}
+  - {fileID: 11400000, guid: bd85134c64687194690aa1e0e21a8b7e, type: 2}
   enemiesToSpawn:
   - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
   - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
@@ -3126,6 +3126,36 @@ MonoBehaviour:
   enemiesSpawned: []
   enemyUnitCount: 0
   playerUnitCount: 0
+  MB:
+  - {fileID: 11400000, guid: f2d5425ab28ecbb4ebb8bc1550f29a69, type: 2}
+  - {fileID: 11400000, guid: d502f600d9ca1be40a72b0264cc05c2f, type: 2}
+  - {fileID: 11400000, guid: bd85134c64687194690aa1e0e21a8b7e, type: 2}
+  - {fileID: 11400000, guid: c9fc47d75230a4a4db5cd4f426f749f1, type: 2}
+  WB:
+  - {fileID: 11400000, guid: d5407282cbc87f04caafc3681c0c63b4, type: 2}
+  - {fileID: 11400000, guid: ce58c233f3eb9254abc193e417798e34, type: 2}
+  - {fileID: 11400000, guid: c01e7227687912743982f8a00d0af5cb, type: 2}
+  - {fileID: 11400000, guid: 5bd8c363ee2c6804bb093c5489902b27, type: 2}
+  FB:
+  - {fileID: 11400000, guid: ef734037b8e7f7c4893980cf3a110262, type: 2}
+  - {fileID: 11400000, guid: 55a12e113d12ca944b867525fec19c31, type: 2}
+  - {fileID: 11400000, guid: 9dde388e36f795d4083dbd0bd1b91217, type: 2}
+  - {fileID: 11400000, guid: a79e227108a1f394892f78bb50a9fdaa, type: 2}
+  MU:
+  - {fileID: 11400000, guid: dcd44c3bb5910cf4bbc22ad9c62d1afa, type: 2}
+  - {fileID: 11400000, guid: 252e01cc4b26ef545be3cf3f36c85ce5, type: 2}
+  - {fileID: 11400000, guid: 6ad7c5ced806cee49b29d02030fb56c1, type: 2}
+  - {fileID: 11400000, guid: 1dfd4a66ce32563418c45deb80c7ffe7, type: 2}
+  WU:
+  - {fileID: 11400000, guid: 34a1d9c152fcc174bb56424bd1cd48bc, type: 2}
+  - {fileID: 11400000, guid: 53c034363bef54546844ada15886500a, type: 2}
+  - {fileID: 11400000, guid: c1819edbf424c554f894b5b793fb2cf9, type: 2}
+  - {fileID: 11400000, guid: 8c2871f16f205e646ac8e683608a3882, type: 2}
+  FU:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &2041420433
 Transform:
   m_ObjectHideFlags: 0

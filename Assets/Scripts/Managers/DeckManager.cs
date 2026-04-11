@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Developer: Bailey Escritor
 //Holds all available cards and manages deck creation
@@ -9,6 +10,9 @@ public class DeckManager : MonoBehaviour
     public static GameObject attackCardPrefab, movementCardPrefab, supportCardPrefab, summonCardPrefab;
     public List<ScriptableCard> allCards = new List<ScriptableCard>();
     private bool initialized = false;
+
+
+    public int DEBUGTEAMSELECTOR = 0;
 
     //Initializes singleton instance and loads all cards from Resources
     void Awake()
@@ -24,6 +28,7 @@ public class DeckManager : MonoBehaviour
             movementCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/MovementCardPrefab");
             supportCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/SupportCardPrefab");
             summonCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/SummonCardPrefab");
+            DEBUGTEAMSELECTOR = 0;
 
             Debug.Log("DeckManager Instance Created & Initialized");
         } else
@@ -50,6 +55,14 @@ public class DeckManager : MonoBehaviour
         } else
         {
             Debug.Log("DeckManager already initialized");
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            instance.DEBUGTEAMSELECTOR = (instance.DEBUGTEAMSELECTOR + 1) % 6;
         }
     }
 

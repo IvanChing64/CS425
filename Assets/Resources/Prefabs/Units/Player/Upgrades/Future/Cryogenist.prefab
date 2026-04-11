@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 1672246827751298856}
   - component: {fileID: 7232603518593366301}
   m_Layer: 0
-  m_Name: Spy
+  m_Name: Cryogenist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +209,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8793639957104055765, guid: 3e65a482877430f44932acdb44d6c34f, type: 3}
+  m_Sprite: {fileID: 8793639957104055765, guid: 242606ea3a5337c498839e854e7a1759, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -229,7 +229,7 @@ Animator:
   m_GameObject: {fileID: 3038541109350415365}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c7c5d748223d22c46b837afbe8895743, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7e606214963c74e2abeac068dfaea9ba, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -291,12 +291,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   startingDeck:
-  - Dash
-  - Dash
-  - Blade
-  - Backstab
-  - Sabotage
-  - Cloak
+  - Advance
+  - Freeze
+  - Freeze
+  - Subzero
+  - Frost
+  - Frost
+  - Snow Veil
+  - Cold Aura
   canAttack: 0
   canSupport: 0
   energy: 2
@@ -316,7 +318,7 @@ MonoBehaviour:
   currentHand: []
   deckCardIDs: 
   handCardIDs: 
-  drawNum: 3
+  drawNum: 4
   actionPoints: 0
   deckIndex: 0
   handDrawn: 0
