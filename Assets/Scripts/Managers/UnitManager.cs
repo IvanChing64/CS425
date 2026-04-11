@@ -11,7 +11,6 @@ public class UnitManager : MonoBehaviour
 {
     public static UnitManager Instance;
 
-    [SerializeField] private bool playerSpawnOverride = false;
     [SerializeField] private List<ScriptableUnit> playersToSpawn = new List<ScriptableUnit>();
     [SerializeField] private List<ScriptableUnit> enemiesToSpawn = new List<ScriptableUnit>();
 
@@ -89,6 +88,10 @@ public class UnitManager : MonoBehaviour
             case 5:
                 playersToSpawn = FU;
                 break;
+
+            default:
+                playersToSpawn = ArmyManager.Instance.unitsInArmy;
+                break;
         }
     }
 
@@ -111,11 +114,6 @@ public class UnitManager : MonoBehaviour
     //Spawns players on random spaces
     public void SpawnPlayers()
     {
-        if (!playerSpawnOverride && ArmyManager.Instance != null)
-        {
-            playersToSpawn = ArmyManager.Instance.unitsInArmy;
-        }
-
         playersSpawned.Clear();
 
         for (int i = 0; i < playersToSpawn.Count; i++)
@@ -221,6 +219,7 @@ public class UnitManager : MonoBehaviour
         SelectedUnit = unit;
 
         selector.PlaceOnUnit(SelectedUnit);
+        UnitInfo.Instance.UpdatePanel();
     }
 
     public void SetSelectedPlayer(BasePlayer player)

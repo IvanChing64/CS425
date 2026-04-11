@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UnitSelector : MonoBehaviour
 {
@@ -14,6 +13,11 @@ public class UnitSelector : MonoBehaviour
         MoveToUnit(unit);
         Show();
         return true;
+
+    }
+
+    public void UpdateStatPanel()
+    {
 
     }
 
