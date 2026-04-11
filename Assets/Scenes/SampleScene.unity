@@ -2684,6 +2684,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1616993711}
   - component: {fileID: 1616993710}
+  - component: {fileID: 1616993712}
   m_Layer: 0
   m_Name: UnitSelector
   m_TagString: Untagged
@@ -2765,6 +2766,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2041420433}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1616993712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616993709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4dde67240b08914382d7dee2ba5ca3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::UnitSelector
 --- !u!1 &1638802087
 GameObject:
   m_ObjectHideFlags: 0
@@ -3109,6 +3122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57992a209eeeeb84da058583231e104d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitManager
+  playerSpawnOverride: 0
   playersToSpawn:
   - {fileID: 11400000, guid: ef734037b8e7f7c4893980cf3a110262, type: 2}
   - {fileID: 11400000, guid: 55a12e113d12ca944b867525fec19c31, type: 2}
@@ -3122,6 +3136,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
   - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
   SelectedUnit: {fileID: 0}
+  selector: {fileID: 1616993712}
   playersSpawned: []
   enemiesSpawned: []
   enemyUnitCount: 0
