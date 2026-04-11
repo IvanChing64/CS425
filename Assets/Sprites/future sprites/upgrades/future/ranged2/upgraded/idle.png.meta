@@ -26,9 +26,6 @@ TextureImporter:
   - first:
       213: -2073685336235588006
     second: idle_7
-  - first:
-      213: 512795395688303107
-    second: idle_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -61,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -99,7 +96,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -127,10 +124,10 @@ TextureImporter:
       name: idle_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 120
-        width: 122
-        height: 239
+        x: 21
+        y: 324
+        width: 199
+        height: 406
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,10 +146,10 @@ TextureImporter:
       name: idle_1
       rect:
         serializedVersion: 2
-        x: 178
-        y: 120
-        width: 122
-        height: 234
+        x: 250
+        y: 324
+        width: 203
+        height: 404
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,10 +168,10 @@ TextureImporter:
       name: idle_2
       rect:
         serializedVersion: 2
-        x: 337
-        y: 120
-        width: 123
-        height: 239
+        x: 438
+        y: 656
+        width: 21
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,10 +190,10 @@ TextureImporter:
       name: idle_3
       rect:
         serializedVersion: 2
-        x: 448
-        y: 318
-        width: 13
-        height: 16
+        x: 483
+        y: 324
+        width: 198
+        height: 404
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,10 +212,10 @@ TextureImporter:
       name: idle_4
       rect:
         serializedVersion: 2
-        x: 498
-        y: 120
-        width: 123
-        height: 239
+        x: 712
+        y: 324
+        width: 200
+        height: 406
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,10 +234,10 @@ TextureImporter:
       name: idle_5
       rect:
         serializedVersion: 2
-        x: 657
-        y: 120
-        width: 123
-        height: 239
+        x: 934
+        y: 324
+        width: 204
+        height: 404
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,10 +256,10 @@ TextureImporter:
       name: idle_6
       rect:
         serializedVersion: 2
-        x: 818
-        y: 120
-        width: 122
-        height: 239
+        x: 1160
+        y: 324
+        width: 202
+        height: 405
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +278,10 @@ TextureImporter:
       name: idle_7
       rect:
         serializedVersion: 2
-        x: 977
-        y: 120
-        width: 122
-        height: 239
+        x: 1388
+        y: 324
+        width: 197
+        height: 404
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -295,28 +292,6 @@ TextureImporter:
       bones: []
       spriteID: a56cdbd6c2ac833e0800000000000000
       internalID: -2073685336235588006
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: idle_8
-      rect:
-        serializedVersion: 2
-        x: 1135
-        y: 120
-        width: 122
-        height: 239
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 30a057a02b0dd1700800000000000000
-      internalID: 512795395688303107
       vertices: []
       indices: 
       edges: []
@@ -343,7 +318,6 @@ TextureImporter:
       idle_5: -148617073940163930
       idle_6: 4729606205655721961
       idle_7: -2073685336235588006
-      idle_8: 512795395688303107
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
