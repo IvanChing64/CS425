@@ -12,7 +12,7 @@ public class ScriptableCard : ScriptableObject
     [Tooltip("Attack, Movement, Support, or Summon")]
     public Type type;
     public int range, value, cost;
-    public bool damaging;
+    public bool damaging, piercing;
     [Tooltip("If and How it targets multiple units")]
     public AreaOfEffectType areaEffect;
     public RangeType rangeType;

@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: Burst
   cardDescription: Damage all nearby enemies
   type: 0
-  range: 2
+  range: 3
   value: 30
   cost: 1
   damaging: 1

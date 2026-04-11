@@ -412,7 +412,7 @@ MonoBehaviour:
   - Smite
   - Shield
   - Bless
-  - Cure
+  - Divinity
   canAttack: 0
   canSupport: 0
   energy: 2

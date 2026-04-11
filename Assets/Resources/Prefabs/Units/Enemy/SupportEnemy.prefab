@@ -202,11 +202,11 @@ MonoBehaviour:
   maxHealth: 120
   health: 120
   guard: 0
-  dmg: 40
+  dmg: 15
   attackModifier: 1
   defenseModifier: 1
   moveModifier: 0
-  moveRange: 4
+  moveRange: 3
   attackRange: 1
   boost: 0
   strengthen: 0
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_Controller
   moveSpeed: 2.5
-  tilesPerMove: 4
+  tilesPerMove: 3
   path: []
 --- !u!95 &738936172720448078
 Animator:

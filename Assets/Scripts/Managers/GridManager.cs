@@ -245,7 +245,7 @@ public class GridManager : MonoBehaviour
         Tile startPoint = tiles.Values.First(t => t.Position.x == 0 && t.isWalkable);
         var mainArea = GetReachableTiles(startPoint);
 
-        return mainArea.Where(t => t.Position.x >= width -2 && !IsSurroundedByMountains(t) && t.OccupiedUnit == null).OrderBy(t => UnityEngine.Random.value).First();
+        return mainArea.Where(t => t.Position.x >= width -4 && !IsSurroundedByMountains(t) && t.OccupiedUnit == null).OrderBy(t => UnityEngine.Random.value).First();
     }
 
     //Helper functions: Get tiles  

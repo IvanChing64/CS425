@@ -210,7 +210,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8793639957104055765, guid: 3e65a482877430f44932acdb44d6c34f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.56181026, g: 0.9528302, b: 0.5826317, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -229,7 +229,7 @@ Animator:
   m_GameObject: {fileID: 3038541109350415365}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c7c5d748223d22c46b837afbe8895743, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3d6bc7e65b243c44d90314df25c79afa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -293,7 +293,7 @@ MonoBehaviour:
   startingDeck:
   - Dash
   - Dash
-  - Backstab
+  - Blade
   - Backstab
   - Sabotage
   - Cloak

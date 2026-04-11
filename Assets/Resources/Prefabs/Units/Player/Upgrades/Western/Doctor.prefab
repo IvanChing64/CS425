@@ -210,7 +210,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8793639957104055765, guid: e386646eb6c125a4386b29cc976b7d1b, type: 3}
-  m_Color: {r: 1, g: 0.39811313, b: 0.39811313, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -229,7 +229,7 @@ Animator:
   m_GameObject: {fileID: 3038541109350415365}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7e606214963c74e2abeac068dfaea9ba, type: 2}
+  m_Controller: {fileID: 9100000, guid: 444b5ddf963f20541b48147e39cc662d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
   currentHand: []
   deckCardIDs: 
   handCardIDs: 
-  drawNum: 3
+  drawNum: 4
   actionPoints: 0
   deckIndex: 0
   handDrawn: 0

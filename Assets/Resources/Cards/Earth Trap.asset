@@ -16,7 +16,7 @@ MonoBehaviour:
   cardDescription: Damage and restrict a ranged enemy
   type: 0
   range: 3
-  value: 25
+  value: 30
   cost: 1
   damaging: 1
   areaEffect: 0
