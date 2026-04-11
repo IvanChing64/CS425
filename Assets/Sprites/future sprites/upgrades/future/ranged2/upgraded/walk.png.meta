@@ -26,6 +26,9 @@ TextureImporter:
   - first:
       213: -6780060589664581786
     second: walk_7
+  - first:
+      213: 2251703588619409307
+    second: walk_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +61,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -96,7 +99,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -124,10 +127,10 @@ TextureImporter:
       name: walk_0
       rect:
         serializedVersion: 2
-        x: 24
-        y: 132
-        width: 120
-        height: 227
+        x: 22
+        y: 314
+        width: 195
+        height: 397
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,10 +149,10 @@ TextureImporter:
       name: walk_1
       rect:
         serializedVersion: 2
-        x: 179
-        y: 133
-        width: 122
-        height: 220
+        x: 240
+        y: 313
+        width: 215
+        height: 396
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,10 +171,10 @@ TextureImporter:
       name: walk_2
       rect:
         serializedVersion: 2
-        x: 337
-        y: 134
-        width: 120
-        height: 220
+        x: 441
+        y: 637
+        width: 15
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,10 +193,10 @@ TextureImporter:
       name: walk_3
       rect:
         serializedVersion: 2
-        x: 497
-        y: 132
-        width: 124
-        height: 221
+        x: 446
+        y: 638
+        width: 20
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -212,10 +215,10 @@ TextureImporter:
       name: walk_4
       rect:
         serializedVersion: 2
-        x: 660
-        y: 130
-        width: 126
-        height: 221
+        x: 482
+        y: 313
+        width: 210
+        height: 396
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +237,10 @@ TextureImporter:
       name: walk_5
       rect:
         serializedVersion: 2
-        x: 824
-        y: 131
-        width: 121
-        height: 218
+        x: 711
+        y: 313
+        width: 208
+        height: 395
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,10 +259,10 @@ TextureImporter:
       name: walk_6
       rect:
         serializedVersion: 2
-        x: 977
-        y: 132
-        width: 122
-        height: 217
+        x: 953
+        y: 313
+        width: 201
+        height: 396
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,10 +281,10 @@ TextureImporter:
       name: walk_7
       rect:
         serializedVersion: 2
-        x: 1141
-        y: 130
-        width: 120
-        height: 226
+        x: 1186
+        y: 313
+        width: 197
+        height: 396
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,6 +295,28 @@ TextureImporter:
       bones: []
       spriteID: 667ca65e0d268e1a0800000000000000
       internalID: -6780060589664581786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_8
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 314
+        width: 200
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b97d12bdb78af3f10800000000000000
+      internalID: 2251703588619409307
       vertices: []
       indices: 
       edges: []
@@ -318,6 +343,7 @@ TextureImporter:
       walk_5: -1800561202758830752
       walk_6: -7072565547094396234
       walk_7: -6780060589664581786
+      walk_8: 2251703588619409307
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

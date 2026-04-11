@@ -3110,10 +3110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitManager
   playersToSpawn:
-  - {fileID: 11400000, guid: ef734037b8e7f7c4893980cf3a110262, type: 2}
-  - {fileID: 11400000, guid: 55a12e113d12ca944b867525fec19c31, type: 2}
-  - {fileID: 11400000, guid: 9dde388e36f795d4083dbd0bd1b91217, type: 2}
-  - {fileID: 11400000, guid: a79e227108a1f394892f78bb50a9fdaa, type: 2}
+  - {fileID: 11400000, guid: 252e01cc4b26ef545be3cf3f36c85ce5, type: 2}
+  - {fileID: 11400000, guid: bd85134c64687194690aa1e0e21a8b7e, type: 2}
+  - {fileID: 11400000, guid: 6ad7c5ced806cee49b29d02030fb56c1, type: 2}
+  - {fileID: 11400000, guid: dcd44c3bb5910cf4bbc22ad9c62d1afa, type: 2}
   enemiesToSpawn:
   - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
   - {fileID: 11400000, guid: e74d1ee58dce77e4fa80f55eee4d20d1, type: 2}
