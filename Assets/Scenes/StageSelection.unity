@@ -1739,8 +1739,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 11
-  stageData: {fileID: 0}
+  stageID: 16
+  stageData: {fileID: 11400000, guid: 04f0eb05325830b4f9658fba5bbcf1ef, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -2610,8 +2610,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 6
-  stageData: {fileID: 0}
+  stageID: 9
+  stageData: {fileID: 11400000, guid: 8520f328a73a1e646874815c9891c8ee, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -2904,8 +2904,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 4
-  stageData: {fileID: 0}
+  stageID: 7
+  stageData: {fileID: 11400000, guid: 8100362cb732c894783a78125ff3d20a, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -3062,8 +3062,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 10
-  stageData: {fileID: 0}
+  stageID: 15
+  stageData: {fileID: 11400000, guid: 89b56d9167bd379449d3fbe3a9e61373, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -4139,7 +4139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 11
-  stageData: {fileID: 0}
+  stageData: {fileID: 11400000, guid: 9633e160f4d96b44a877a9dd32001906, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -4992,7 +4992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 10
-  stageData: {fileID: 0}
+  stageData: {fileID: 11400000, guid: 79ab8631e2ea5ab4d86b9b2dd859204c, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -5229,7 +5229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 1
-  stageData: {fileID: 11400000, guid: dea111ae8bb11484280e0f2e4af6087d, type: 2}
+  stageData: {fileID: 11400000, guid: ee3628c3eb197614792e879b81c4bdda, type: 2}
   stageDesciption: 'You walk into ruins and encounter a group of enemies. Watch out!
 
 
@@ -5389,8 +5389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 8
-  stageData: {fileID: 0}
+  stageID: 13
+  stageData: {fileID: 11400000, guid: 44f5a50bcd275914fb37805703f67061, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -5547,7 +5547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 6
-  stageData: {fileID: 0}
+  stageData: {fileID: 11400000, guid: 72ecd8b1242b20f46a06b276fe1db4e1, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -5703,8 +5703,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 9
-  stageData: {fileID: 0}
+  stageID: 14
+  stageData: {fileID: 11400000, guid: 6d992fabd9cc34b4db6cbc71cdb7b489, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -5940,7 +5940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 2
-  stageData: {fileID: 11400000, guid: 755a440ef3cfdb14ba88ddea94cb2033, type: 2}
+  stageData: {fileID: 11400000, guid: 38317e8499517ce4f91068b45e169f98, type: 2}
   stageDesciption: 'The party encounters an enemy camp!
 
 
@@ -6952,8 +6952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 5
-  stageData: {fileID: 0}
+  stageID: 8
+  stageData: {fileID: 11400000, guid: a6b5bea95a7a8f94bb2d5b8a2604b9db, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -7109,8 +7109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 7
-  stageData: {fileID: 0}
+  stageID: 12
+  stageData: {fileID: 11400000, guid: ee3628c3eb197614792e879b81c4bdda, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -7508,7 +7508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 5
-  stageData: {fileID: 0}
+  stageData: {fileID: 11400000, guid: c7e29c6073a441648b88b861cbcd430f, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -8281,7 +8281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 4
-  stageData: {fileID: 0}
+  stageData: {fileID: 11400000, guid: caf34e53ff3b311438b4a17f5af15ba1, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -9111,7 +9111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 3
-  stageData: {fileID: 11400000, guid: 755a440ef3cfdb14ba88ddea94cb2033, type: 2}
+  stageData: {fileID: 11400000, guid: 8474337d01ca68543b6242983cc3d04b, type: 2}
   stageDesciption: 
   stageWidthMin: 10
   stageWidthMax: 15
@@ -9267,9 +9267,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 12
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageID: 17
+  stageData: {fileID: 11400000, guid: 78a45c7baa6e4dc4386ffaba54ed5af1, type: 2}
+  stageDesciption: Boss Stage!
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 10
