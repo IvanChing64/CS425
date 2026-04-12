@@ -72,10 +72,18 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5189440373543139223, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.0666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 5189440373543139223, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.0666667
+      objectReference: {fileID: 0}
     - target: {fileID: 5483862036735999224, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300058, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
+      objectReference: {fileID: 1143301120, guid: 3d467143d9b4c194aae52493df34013f, type: 3}
     - target: {fileID: 5483862036735999224, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -90,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6663077133559630390, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_Name
-      value: Grass Tile
+      value: FutureWalkable
       objectReference: {fileID: 0}
     - target: {fileID: 7832129910396769477, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_IsActive
@@ -133,12 +141,10 @@ MonoBehaviour:
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   offsetColor: {r: 1, g: 1, b: 1, a: 1}
   grassSprites:
-  - {fileID: 21300058, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
-  - {fileID: 21300050, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
-  - {fileID: 21300012, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
-  - {fileID: 21300078, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
-  - {fileID: 21300122, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
-  - {fileID: 21300030, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
+  - {fileID: 1143301120, guid: 3d467143d9b4c194aae52493df34013f, type: 3}
+  - {fileID: -8478280, guid: 3d467143d9b4c194aae52493df34013f, type: 3}
+  - {fileID: -389638024, guid: 3d467143d9b4c194aae52493df34013f, type: 3}
+  - {fileID: -735065441, guid: 3d467143d9b4c194aae52493df34013f, type: 3}
 --- !u!1 &7615237263825248722 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7832129910396769477, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}

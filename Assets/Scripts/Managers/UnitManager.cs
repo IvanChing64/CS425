@@ -19,7 +19,7 @@ public class UnitManager : MonoBehaviour
     private List<Tile> enemyTiles = new List<Tile>();
 
     public BaseUnit SelectedUnit;
-    //public GameObject selector;
+    public UnitSelector selector;
 
     public List<BasePlayer> playersSpawned = new List<BasePlayer>();
     public List<BaseEnemy> enemiesSpawned = new List<BaseEnemy>();
@@ -86,6 +86,10 @@ public class UnitManager : MonoBehaviour
 
             case 5:
                 playersToSpawn = FU;
+                break;
+
+            default:
+                playersToSpawn = ArmyManager.Instance.unitsInArmy;
                 break;
         }
     }
@@ -213,16 +217,8 @@ public class UnitManager : MonoBehaviour
 
         SelectedUnit = unit;
 
-        //if (SelectedUnit == null)
-        //{
-        //    selector.SetActive(false);
-        //}
-        //else
-        //{
-        //    selector.SetActive(true);
-        //    selector.transform.position = SelectedUnit.OccupiedTile.Position;
-        //    selector.transform.position += Vector3.back;
-        //}
+        selector.PlaceOnUnit(SelectedUnit);
+        UnitInfo.Instance.UpdatePanel();
     }
 
     public void SetSelectedPlayer(BasePlayer player)

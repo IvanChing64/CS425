@@ -48,25 +48,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5189440373543139223, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.1153846
+      objectReference: {fileID: 0}
+    - target: {fileID: 5189440373543139223, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.0461539
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483862036735999224, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1233918110, guid: c72a540c1656d0e4faafb13376706d80, type: 3}
     - target: {fileID: 5483862036735999224, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5483862036735999224, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_Color.b
-      value: 0.1462264
+      value: 0.5566038
       objectReference: {fileID: 0}
     - target: {fileID: 5483862036735999224, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_Color.g
-      value: 0.3652268
+      value: 0.23366857
       objectReference: {fileID: 0}
     - target: {fileID: 5483862036735999224, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_Color.r
-      value: 0.5849056
+      value: 0.28327873
       objectReference: {fileID: 0}
     - target: {fileID: 6663077133559630390, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}
       propertyPath: m_Name
-      value: Mountain Tile
+      value: FutureNonWalkable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -98,9 +110,8 @@ MonoBehaviour:
   isWalkable: 0
   OccupiedUnit: {fileID: 0}
   mountainSprites:
-  - {fileID: 21300008, guid: 9f8f114589864b6489859a58fbb6baf9, type: 3}
-  - {fileID: 21300012, guid: 9f8f114589864b6489859a58fbb6baf9, type: 3}
-  - {fileID: 21300010, guid: 9f8f114589864b6489859a58fbb6baf9, type: 3}
+  - {fileID: -1233918110, guid: c72a540c1656d0e4faafb13376706d80, type: 3}
+  - {fileID: 1855168775, guid: c72a540c1656d0e4faafb13376706d80, type: 3}
 --- !u!212 &6730385207579466638 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5483862036735999224, guid: 9473c54b1d032e044883ae3728a93e93, type: 3}

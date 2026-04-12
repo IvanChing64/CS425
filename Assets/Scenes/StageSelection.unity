@@ -1739,9 +1739,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 11
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageID: 16
+  stageData: {fileID: 11400000, guid: 04f0eb05325830b4f9658fba5bbcf1ef, type: 2}
+  stageDesciption: 'A discarded tablet screen flickers with life, offering digital
+    upgrades and "cheat codes" in exchange for Maya''s plastic tokens.
+
+    Shop
+    Encounter'
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 10
@@ -2610,9 +2614,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 6
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageID: 9
+  stageData: {fileID: 11400000, guid: 8520f328a73a1e646874815c9891c8ee, type: 2}
+  stageDesciption: "The King\u2019s law doesn\u2019t reach this far. The stone path
+    has turned to dirt, and the local guards have traded their spears for badges.
+    It\u2019s a lawless land now, where the fastest draw wins the day."
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -2904,9 +2910,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 4
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageID: 7
+  stageData: {fileID: 11400000, guid: 8100362cb732c894783a78125ff3d20a, type: 2}
+  stageDesciption: Pandora's knights find a strange, sandy desert. The swords feel
+    heavier, and the air smells like old leather.
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -3062,9 +3069,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 10
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageID: 15
+  stageData: {fileID: 11400000, guid: 89b56d9167bd379449d3fbe3a9e61373, type: 2}
+  stageDesciption: A holographic army flickers into existence, blocking the path
+    to the desk-lamp sun.
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 10
@@ -4139,8 +4147,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 11
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageData: {fileID: 11400000, guid: 9633e160f4d96b44a877a9dd32001906, type: 2}
+  stageDesciption: The last of the gunslingers face a mysterious, glowing threat
+    that doesn't bleed.
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 10
@@ -4992,8 +5001,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 10
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageData: {fileID: 11400000, guid: 79ab8631e2ea5ab4d86b9b2dd859204c, type: 2}
+  stageDesciption: Bandits have surrounded the party! It's time for a high-noon showdown!
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 10
@@ -5230,11 +5239,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 1
   stageData: {fileID: 11400000, guid: dea111ae8bb11484280e0f2e4af6087d, type: 2}
-  stageDesciption: 'You walk into ruins and encounter a group of enemies. Watch out!
+  stageDesciption: 'Pandora opens the lid. Dust motes dance in the light like magical
+    spores. The floorboards disappear; the adventure begins.
 
 
-    Enemies:
-    1 Grunt 1 Archer 1 Cultist '
+    Enemies: 1 Grunt
+    1 Archer 1 Cultist '
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -5389,9 +5399,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 8
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageID: 13
+  stageData: {fileID: 11400000, guid: 44f5a50bcd275914fb37805703f67061, type: 2}
+  stageDesciption: "That\u2019s no gunslinger in the distance\u2014it\u2019s a hologram.
+    The tumbleweeds are now floating scrap-bots."
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -5547,8 +5558,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 6
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageData: {fileID: 11400000, guid: 72ecd8b1242b20f46a06b276fe1db4e1, type: 2}
+  stageDesciption: A fortress of pillows blocks the way. Defeat the archers to get
+    through!
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -5703,9 +5715,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 9
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageID: 14
+  stageData: {fileID: 11400000, guid: 6d992fabd9cc34b4db6cbc71cdb7b489, type: 2}
+  stageDesciption: Around the campfire, the revolver clicks and hums with static.
+    The barrel begins to glow with plasma energy.
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -5940,12 +5953,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 2
-  stageData: {fileID: 11400000, guid: 755a440ef3cfdb14ba88ddea94cb2033, type: 2}
-  stageDesciption: 'The party encounters an enemy camp!
+  stageData: {fileID: 11400000, guid: 38317e8499517ce4f91068b45e169f98, type: 2}
+  stageDesciption: 'Directed to venture east, the party encounters an enemy camp!
 
 
-    Enemies: 6 Grunts 3
-    Archers'
+    Enemies:
+    6 Grunts 3 Archers'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -6952,9 +6965,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 5
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageID: 8
+  stageData: {fileID: 11400000, guid: a6b5bea95a7a8f94bb2d5b8a2604b9db, type: 2}
+  stageDesciption: The knight trades his heavy shield for a wide-brimmed hat. The
+    green forests are drying up into golden canyons.
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -7109,9 +7123,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 7
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageID: 12
+  stageData: {fileID: 11400000, guid: ee3628c3eb197614792e879b81c4bdda, type: 2}
+  stageDesciption: Pandora finds a flashlight. The beams cut through the dust storms,
+    pointing toward the stars.
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -7508,8 +7523,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 5
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageData: {fileID: 11400000, guid: c7e29c6073a441648b88b861cbcd430f, type: 2}
+  stageDesciption: "The King\u2019s vanguard fights a holding action as the lush
+    meadows begin to turn to dust."
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -8281,8 +8297,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 4
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageData: {fileID: 11400000, guid: caf34e53ff3b311438b4a17f5af15ba1, type: 2}
+  stageDesciption: 'A plastic gold coin buys a shiny sticker of bravery. Even heroes
+    need a snack break.
+
+
+    Shop Encounter!'
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -9111,8 +9131,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stageID: 3
-  stageData: {fileID: 11400000, guid: 755a440ef3cfdb14ba88ddea94cb2033, type: 2}
-  stageDesciption: 
+  stageData: {fileID: 11400000, guid: 8474337d01ca68543b6242983cc3d04b, type: 2}
+  stageDesciption: 'Directed to venture east, the party wanders into a forest and
+    finds an enemy camp!
+
+
+    Enemies: 6 Grunts 3 Archers'
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -9267,9 +9291,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b8438979fd3146a18e46a30a84c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stageID: 12
-  stageData: {fileID: 0}
-  stageDesciption: 
+  stageID: 17
+  stageData: {fileID: 11400000, guid: 78a45c7baa6e4dc4386ffaba54ed5af1, type: 2}
+  stageDesciption: "All eras collide. The ultimate villain stands at the toybox edge.
+    Win now, or it\u2019s time to brush teeth.\n\nBoss Stage!"
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 10

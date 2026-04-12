@@ -81,7 +81,8 @@ public abstract class Tile : MonoBehaviour
                         }
                     }
                 }
-                    
+                
+                UnitInfo.Instance.UpdatePanel();
                 CardManager.instance.PlaySelectedCard();
                 return;
             }
@@ -144,6 +145,7 @@ public abstract class Tile : MonoBehaviour
                 //BasePlayer playerPath = UnitManager.Instance.SelectedPlayer;
                 List<Tile> path = AStarManager.Instance.GeneratePath(player.OccupiedTile, this);
                 UnitManager.Instance.SelectedPlayer.OccupiedTile.highlight.SetActive(false);
+                UnitManager.Instance.selector.Hide();
                 combatUIManager.Instance.ToggleBlocker(true);
                 CardManager.instance.PlaySelectedCard();
                 CardManager.instance.ToggleCardArea(false);
@@ -362,6 +364,7 @@ public abstract class Tile : MonoBehaviour
 
         combatUIManager.Instance.ToggleBlocker(false);
         CardManager.instance.ToggleCardArea(true);
+        UnitManager.Instance.selector.PlaceOnUnit(UnitManager.Instance.SelectedUnit);
 
         OccupiedUnit = unit;
         unit.OccupiedTile = this;

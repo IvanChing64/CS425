@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a0b715f65ab98b429ffd2f342a198b0, type: 3}
-  m_Name: Stage1
+  m_Name: Stage-01
   m_EditorClassIdentifier: Scripts::StageData
   grassTilePrefab: {fileID: -8581200666732430661, guid: 9689771e00856ca40a9f4cc2e7c0b32b, type: 3}
   mountainTilePrefab: {fileID: -4349095895413475627, guid: a7b239b3627e03b4e8582a9709e90e3a, type: 3}

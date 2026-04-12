@@ -13,7 +13,7 @@ public class DeckManager : MonoBehaviour
     private bool initialized = false;
 
 
-    public int DEBUGTEAMSELECTOR = 0;
+    public int DEBUGTEAMSELECTOR = -1;
 
     // Initializes singleton instance and loads all cards from Resources
     void Awake()
@@ -31,7 +31,7 @@ public class DeckManager : MonoBehaviour
             summonCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/SummonCardPrefab");
             ScriptableUnit[] summons = Resources.LoadAll<ScriptableUnit>("Summons");
             allSummons.AddRange(summons);
-            DEBUGTEAMSELECTOR = 0;
+            DEBUGTEAMSELECTOR = -1;
 
             Debug.Log("DeckManager Instance Created & Initialized");
         } else
