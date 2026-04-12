@@ -11,6 +11,7 @@ using System.Collections.Generic;
 
 public class levelSelect : MonoBehaviour
 {
+    public static bool devMode = false;
     //Variables
     public string stageID;
     public StageData stageData;
@@ -39,6 +40,15 @@ public class levelSelect : MonoBehaviour
         RefreshNodes();
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.K))
+        {
+            devMode = !devMode;
+            RefreshNodes();
+        }
+    }
+
     //Function to 'refresh' the nodes.
     //Checks the availability if the stage is selectable with stage completion requirements.
     //Colors the node according to if the stage is unlocked to be played or not
@@ -46,7 +56,7 @@ public class levelSelect : MonoBehaviour
     {
         bool isUnlocked = false;
 
-        if (isStart)
+        if (isStart || devMode)
         {
             isUnlocked = true;
         }
