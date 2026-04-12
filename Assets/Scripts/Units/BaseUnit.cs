@@ -140,7 +140,7 @@ public class BaseUnit : MonoBehaviour
         float damage = damageAmount * defenseModifier;
         float absorbAmount = 0;
 
-        if (!CardManager.instance.selectedCard.pierce)
+        if (CardManager.instance.selectedCard != null && !CardManager.instance.selectedCard.pierce)
         {
             if (reflect)
             {
@@ -162,7 +162,7 @@ public class BaseUnit : MonoBehaviour
 
         
 
-        if (guard > 0 && !CardManager.instance.selectedCard.pierce)
+        if (guard > 0 && CardManager.instance.selectedCard != null && !CardManager.instance.selectedCard.pierce)
         {
             if (guard >= damage * UnitManager.guardEfficiency)
             {
