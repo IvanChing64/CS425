@@ -16,11 +16,6 @@ public class UnitSelector : MonoBehaviour
 
     }
 
-    public void UpdateStatPanel()
-    {
-
-    }
-
     public void Hide() => gameObject.SetActive(false);
 
     /// <summary>
