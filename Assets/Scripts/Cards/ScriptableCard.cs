@@ -20,6 +20,7 @@ public class ScriptableCard : ScriptableObject
     public Color cardBorderColor;
     public SupportEffect primarySupportEffect, secondarySupportEffect;
     public ControlEffect primaryControlEffect, secondaryControlEffect;
+    public Summons summon;
 }
 
 /// <summary>

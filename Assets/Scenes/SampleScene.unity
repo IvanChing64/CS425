@@ -1968,6 +1968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeckManager
   allCards: []
+  allSummons: []
   DEBUGTEAMSELECTOR: 0
 --- !u!1 &1146347545
 GameObject:
@@ -3153,10 +3154,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c1819edbf424c554f894b5b793fb2cf9, type: 2}
   - {fileID: 11400000, guid: 8c2871f16f205e646ac8e683608a3882, type: 2}
   FU:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a8bc1354113c59c4da3b7f50fb401f9d, type: 2}
+  - {fileID: 11400000, guid: 683f96d00b38cf346a9d982aaa302743, type: 2}
+  - {fileID: 11400000, guid: 70703edf9d426784ea79bac5a2988c80, type: 2}
+  - {fileID: 11400000, guid: 66bd5b647404e7740a21d399177e29c4, type: 2}
 --- !u!4 &2041420433
 Transform:
   m_ObjectHideFlags: 0

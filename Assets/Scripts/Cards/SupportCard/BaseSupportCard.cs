@@ -108,7 +108,7 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Reflect:
-                targetPlayer.Reflect();
+                targetPlayer.Reflect(value);
                 break;
 
             case SupportEffect.Regeneration:
@@ -116,7 +116,7 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Absorb:
-                targetPlayer.Absorb();
+                targetPlayer.Absorb(value);
                 break;
 
             default:
@@ -173,7 +173,7 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Reflect:
-                targetPlayer.Reflect();
+                targetPlayer.Reflect(value);
                 break;
 
             case SupportEffect.Regeneration:
@@ -181,7 +181,7 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Absorb:
-                targetPlayer.Absorb();
+                targetPlayer.Absorb(value);
                 break;
 
             default:

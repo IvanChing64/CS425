@@ -5,7 +5,7 @@ using UnityEngine;
 //Derived class for attack cards
 public class BaseAttackCard : BaseCard
 {
-    public bool damaging;
+    public bool damaging, piercing;
     public ControlEffect primaryEffect, secondaryEffect;
 
     public override void CopyScriptableCard(ScriptableCard card)
@@ -14,6 +14,7 @@ public class BaseAttackCard : BaseCard
         primaryEffect = card.primaryControlEffect;
         secondaryEffect = card.secondaryControlEffect;
         damaging = card.damaging;
+        pierce = card.piercing;
     }
 
     public override void SelectCard()

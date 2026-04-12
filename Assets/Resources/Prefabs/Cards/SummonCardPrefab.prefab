@@ -10,7 +10,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2618663787158803041, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_Name
-      value: ControlCardPrefab
+      value: SummonCardPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389921295800311876, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960612361969405961, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960612361969405961, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960612361969405961, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6248795016529294516, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_Colors.m_PressedColor.g
@@ -128,7 +144,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BaseControlCard
   cardName: 
   cardType: 3
+  range: 0
   value: 0
+  cost: 0
+  AoE: 0
   isPlayed: 0
+  pierce: 0
   cardHolder: {fileID: 712323392416690048}
-  effect: -1
+  summon: 0

@@ -16,9 +16,10 @@ MonoBehaviour:
   cardDescription: Guard self
   type: 2
   range: 0
-  value: 20
+  value: 15
   cost: 0
   damaging: 0
+  piercing: 0
   areaEffect: 0
   rangeType: 1
   cardIcon: {fileID: 1853853189450526911, guid: bb481a5c8f8f6dd49a1c49ec4eca01db, type: 3}
@@ -28,3 +29,4 @@ MonoBehaviour:
   secondarySupportEffect: 0
   primaryControlEffect: 0
   secondaryControlEffect: 0
+  summon: 0

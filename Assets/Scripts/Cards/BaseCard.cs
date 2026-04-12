@@ -15,6 +15,7 @@ public abstract class BaseCard : MonoBehaviour
     public Type cardType;
     public int range, value, cost;
     public AreaOfEffectType AoE;
+    public RangeType rangeType;
     public bool isPlayed, pierce;
     [Tooltip("Game Object for visible card")]
     public GameObject cardHolder; // Reference to the card holder GameObject
@@ -45,7 +46,7 @@ public abstract class BaseCard : MonoBehaviour
         range = card.range;
         cost = card.cost;
         AoE = card.areaEffect;
-        pierce = card.piercing;
+        rangeType = card.rangeType;
         //Debug.Log("Card Copied: " + cardName);
     }
 

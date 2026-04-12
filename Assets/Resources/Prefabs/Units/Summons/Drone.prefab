@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 1672246827751298856}
   - component: {fileID: 7232603518593366301}
   m_Layer: 0
-  m_Name: Cryogenist
+  m_Name: Drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,12 +209,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8793639957104055765, guid: 242606ea3a5337c498839e854e7a1759, type: 3}
+  m_Sprite: {fileID: 4112356383579328530, guid: 250dfdab2827ec1459426911392f0ba0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.23, y: 2.26}
+  m_Size: {x: 1.8, y: 0.96}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -229,7 +229,7 @@ Animator:
   m_GameObject: {fileID: 3038541109350415365}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7e606214963c74e2abeac068dfaea9ba, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -255,8 +255,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player1
   OccupiedTile: {fileID: 0}
   Faction: 0
-  maxHealth: 60
-  health: 60
+  summoned: 0
+  lifetime: 0
+  maxHealth: 40
+  health: 40
   guard: 0
   dmg: 0
   attackModifier: 1
@@ -268,7 +270,6 @@ MonoBehaviour:
   strengthen: 0
   resistant: 0
   invisible: 0
-  absorb: 0
   stunned: 0
   restricted: 0
   frozen: 0
@@ -280,6 +281,7 @@ MonoBehaviour:
   dodge: 0
   agility: 0
   reflect: 0
+  absorb: 0
   defiant: 0
   daze: 0
   poison: 0
@@ -291,17 +293,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   startingDeck:
-  - Advance
-  - Freeze
-  - Freeze
-  - Subzero
-  - Frost
-  - Frost
-  - Snow Veil
-  - Cold Aura
+  - Fly
+  - Fly
+  - Blaster
+  - Blaster
+  - Overwatch
   canAttack: 0
   canSupport: 0
-  energy: 2
+  canSummon: 0
+  energy: 3
 --- !u!114 &7232603518593366301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
   currentHand: []
   deckCardIDs: 
   handCardIDs: 
-  drawNum: 4
+  drawNum: 3
   actionPoints: 0
   deckIndex: 0
   handDrawn: 0

@@ -20,10 +20,11 @@ public abstract class Tile : MonoBehaviour
     public Vector2 Position => this.transform.position;
     public List<Tile> Neighbors => GridManager.Instance.GetNeighborsOf(this);
 
-    public static Color walkableColor = new Color(44f/255f, 153f/255f, 1, 120f / 255f);
+    public static Color walkableColor = new Color(44f/255f, 153f/255f, 1, 120f/255f);
     public static Color nonwalkableColor = new Color(0, 0, 0, 0);
-    public static Color attackableColor = new Color(1, 18f/255f, 0, 159f / 255f);
+    public static Color attackableColor = new Color(1, 18f/255f, 0, 159f/255f);
     public static Color supportableColor = new Color(3f/255f, 1, 0, 100f/255f);
+    public static Color summonableColor = new Color(167f/255f, 65f/255f, 1, 155f/255f);
 
     public virtual void Init(int x, int y)
     {
@@ -45,8 +46,11 @@ public abstract class Tile : MonoBehaviour
         // If a unit and card are selected and this tile is in effect range, attempt to apply card effect
         if (UnitManager.Instance.SelectedPlayer != null && CardManager.instance.selectedCard != null && highlight.activeInHierarchy)
         {
+            BasePlayer player = UnitManager.Instance.SelectedPlayer;
+            BaseCard usedCard = CardManager.instance.selectedCard;
+
             // If the card applies a support effect and an ally is in range, apply it
-            if (UnitManager.Instance.SelectedPlayer.canSupport && OccupiedUnit != null && OccupiedUnit.Faction == Faction.Player)
+            if (player.canSupport && OccupiedUnit != null && OccupiedUnit.Faction == Faction.Player)
             {
                 Animator playerAnim = UnitManager.Instance.SelectedPlayer.GetComponent<Animator>();
                 UnitManager.Instance.SelectedPlayer.GetComponent<Animator>();
@@ -55,23 +59,23 @@ public abstract class Tile : MonoBehaviour
                     playerAnim.SetTrigger("support");
                 }
 
-                if (CardManager.instance.selectedCard.AoE == AreaOfEffectType.None)
+                if (usedCard.AoE == AreaOfEffectType.None)
                 {
                     ((BaseSupportCard)CardManager.instance.selectedCard).ApplySupportEffect(OccupiedUnit);
-                } else if (CardManager.instance.selectedCard.AoE == AreaOfEffectType.Inclusive)
+                } else if (usedCard.AoE == AreaOfEffectType.Inclusive)
                 {
-                    foreach (Tile t in UnitManager.Instance.SelectedPlayer.GetTilesInAttackRange())
+                    foreach (Tile t in player.GetTilesInAttackRange())
                     {
                         if (t.OccupiedUnit != null && t.OccupiedUnit.Faction == Faction.Player)
                         {
                             ((BaseSupportCard)CardManager.instance.selectedCard).ApplySupportEffect(t.OccupiedUnit);
                         }
                     }
-                } else if (CardManager.instance.selectedCard.AoE == AreaOfEffectType.Exclusive)
+                } else if (usedCard.AoE == AreaOfEffectType.Exclusive)
                 {
                     foreach (Tile t in UnitManager.Instance.SelectedPlayer.GetTilesInAttackRange())
                     {
-                        if (t.OccupiedUnit != null && t.OccupiedUnit != UnitManager.Instance.SelectedPlayer && t.OccupiedUnit.Faction == Faction.Player)
+                        if (t.OccupiedUnit != null && t.OccupiedUnit != player && t.OccupiedUnit.Faction == Faction.Player)
                         {
                             ((BaseSupportCard)CardManager.instance.selectedCard).ApplySupportEffect(t.OccupiedUnit);
                         }
@@ -83,9 +87,9 @@ public abstract class Tile : MonoBehaviour
             }
 
             // If the card is an attack card and an enemy is in range, 
-            if (UnitManager.Instance.SelectedPlayer.canAttack && OccupiedUnit != null && OccupiedUnit.Faction == Faction.Enemy)
+            if (player.canAttack && OccupiedUnit != null && OccupiedUnit.Faction == Faction.Enemy)
             {
-                if (CardManager.instance.selectedCard.AoE == AreaOfEffectType.None)
+                if (usedCard.AoE == AreaOfEffectType.None)
                 {
                     // Attack the enemy
                     combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, OccupiedUnit);
@@ -121,20 +125,31 @@ public abstract class Tile : MonoBehaviour
                 return;
             }
 
+            //If the card is a summon card, and tile is not occupied
+            if (UnitManager.Instance.SelectedPlayer.canSummon && OccupiedUnit == null)
+            {
+                BasePlayer summonUnit = ((BaseSummonCard)CardManager.instance.selectedCard).SummonUnit(this);
+                ShowHighlight(false, Tile.nonwalkableColor);
+                CardManager.instance.PlaySelectedCard();
+                summonUnit.GetComponent<HandManager>().NextTurn();
+                UnitManager.Instance.SetSelectedPlayer(summonUnit);
+                return;
+            }
+
             // If the card is a movement card, move to the tile
             /* TODO: This part is still gross, some of this functionality should be extracted */
-            List<Tile> tilesInRange = UnitManager.Instance.SelectedPlayer.GetTilesInMoveRange();
+            List<Tile> tilesInRange = player.GetTilesInMoveRange();
             if (tilesInRange.Contains(this))
             {
-                BasePlayer playerPath = UnitManager.Instance.SelectedPlayer;
-                List<Tile> path = AStarManager.Instance.GeneratePath(playerPath.OccupiedTile, this);
+                //BasePlayer playerPath = UnitManager.Instance.SelectedPlayer;
+                List<Tile> path = AStarManager.Instance.GeneratePath(player.OccupiedTile, this);
                 UnitManager.Instance.SelectedPlayer.OccupiedTile.highlight.SetActive(false);
                 combatUIManager.Instance.ToggleBlocker(true);
                 CardManager.instance.PlaySelectedCard();
                 CardManager.instance.ToggleCardArea(false);
                 if (path != null && path.Count > 0)
                 {
-                    StartCoroutine(MoveUnitPath(playerPath, path));
+                    StartCoroutine(MoveUnitPath(player, path));
                 }
 
                 foreach (Tile t in tilesInRange) t.highlight.SetActive(false);

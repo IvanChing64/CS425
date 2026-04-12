@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d42e8cdeee7a74ea6ffe4eff42e70c, type: 3}
+  m_Name: Turret
+  m_EditorClassIdentifier: Scripts::ScriptableCard
+  cardName: Turret
+  cardDescription: Summon a turret
+  type: 3
+  range: 1
+  value: 3
+  cost: 2
+  damaging: 0
+  piercing: 0
+  areaEffect: 0
+  rangeType: 0
+  cardIcon: {fileID: -194131747831355976, guid: 14ae9085ba276b1478188ca241d19240, type: 3}
+  cardCorner: {fileID: 8830836102846377225, guid: a8718e6d87cc16744acb44b12f007ad0, type: 3}
+  cardBorderColor: {r: 0.45882353, g: 0, b: 1, a: 1}
+  primarySupportEffect: 0
+  secondarySupportEffect: 0
+  primaryControlEffect: 0
+  secondaryControlEffect: 0
+  summon: 4
