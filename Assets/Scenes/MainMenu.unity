@@ -1651,6 +1651,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007161620}
   m_CullTransparentMesh: 1
+--- !u!1 &1047772826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1047772828}
+  - component: {fileID: 1047772827}
+  m_Layer: 0
+  m_Name: ArmyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1047772827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047772826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 489f4d5ebb31779469c9d4f33fa4af92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::ArmyManager
+  unitsInArmy: []
+  currency: 0
+--- !u!4 &1047772828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047772826}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.94217, y: 1.92675, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1092207870
 GameObject:
   m_ObjectHideFlags: 0
@@ -4100,12 +4146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeckManager
   allCards: []
-  MB: []
-  WB: []
-  FB: []
-  MU: []
-  WU: []
-  FU: []
+  DEBUGTEAMSELECTOR: -1
 --- !u!4 &1827845494
 Transform:
   m_ObjectHideFlags: 0
@@ -4533,3 +4574,4 @@ SceneRoots:
   - {fileID: 2082349891}
   - {fileID: 338937155}
   - {fileID: 1827845494}
+  - {fileID: 1047772828}
