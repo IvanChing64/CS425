@@ -6573,6 +6573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeckManager
   allCards: []
+  allSummons: []
   DEBUGTEAMSELECTOR: 0
 --- !u!4 &1586457933
 Transform:
@@ -9000,8 +9001,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Stage Number
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
-  m_sharedMaterial: {fileID: 5430595500760780554, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ee341fdc43d76854f9fc1c7e33527d18, type: 2}
+  m_sharedMaterial: {fileID: 3590401021978944721, guid: ee341fdc43d76854f9fc1c7e33527d18, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
