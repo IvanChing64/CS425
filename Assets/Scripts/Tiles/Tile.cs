@@ -77,7 +77,8 @@ public abstract class Tile : MonoBehaviour
                         }
                     }
                 }
-                    
+                
+                UnitInfo.Instance.UpdatePanel();
                 CardManager.instance.PlaySelectedCard();
                 return;
             }
