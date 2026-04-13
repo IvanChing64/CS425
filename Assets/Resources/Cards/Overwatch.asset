@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Overwatch
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Overwatch
-  cardDescription: Greatly Grant Absorb and Regenerate to a ranged ally
+  cardDescription: Grant Absorb and Regenerate to a ranged ally
   type: 2
   range: 3
   value: 2
