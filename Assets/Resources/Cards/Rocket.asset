@@ -10,23 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92d42e8cdeee7a74ea6ffe4eff42e70c, type: 3}
-  m_Name: Turret
+  m_Name: Rocket
   m_EditorClassIdentifier: Scripts::ScriptableCard
-  cardName: Turret
-  cardDescription: Summon a turret
-  type: 3
-  range: 1
-  value: 3
+  cardName: Rocket
+  cardDescription: Damage all distant enemies in a short radius
+  type: 0
+  range: 4
+  areaRange: 1
+  value: 35
   cost: 2
-  damaging: 0
+  damaging: 1
   piercing: 0
-  areaEffect: 0
-  rangeType: 0
-  cardIcon: {fileID: -7598849062996063660, guid: d3c8b5111e49697459789e801f79d23f, type: 3}
-  cardCorner: {fileID: 8830836102846377225, guid: a8718e6d87cc16744acb44b12f007ad0, type: 3}
-  cardBorderColor: {r: 0.45882353, g: 0, b: 1, a: 1}
+  areaEffect: 4
+  rangeType: 1
+  cardIcon: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
+  cardCorner: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
+  cardBorderColor: {r: 1, g: 0, b: 0, a: 1}
   primarySupportEffect: 0
   secondarySupportEffect: 0
   primaryControlEffect: 0
   secondaryControlEffect: 0
-  summon: 3
+  summon: 0

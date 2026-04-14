@@ -609,6 +609,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player1
   OccupiedTile: {fileID: 0}
   Faction: 0
+  summoned: 0
+  lifetime: 0
   maxHealth: 60
   health: 60
   guard: 0
@@ -622,7 +624,6 @@ MonoBehaviour:
   strengthen: 0
   resistant: 0
   invisible: 0
-  absorb: 0
   stunned: 0
   restricted: 0
   frozen: 0
@@ -634,6 +635,7 @@ MonoBehaviour:
   dodge: 0
   agility: 0
   reflect: 0
+  absorb: 0
   defiant: 0
   daze: 0
   poison: 0
@@ -650,7 +652,7 @@ MonoBehaviour:
   - Magic Bolt
   - Magic Bolt
   - Magic Bolt
-  - Protect
+  - Counter
   canAttack: 0
   canSupport: 0
   canSummon: 0

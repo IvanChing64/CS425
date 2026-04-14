@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 1672246827751298856}
   - component: {fileID: 7232603518593366301}
   m_Layer: 0
-  m_Name: Generator
+  m_Name: Grave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +209,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -8011775145534436228, guid: 9d7b4b3038a140546a90eb0e0dc74552, type: 3}
+  m_Sprite: {fileID: 3532992451535655517, guid: eb863bf819e6a1344a516f7102f1b608, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -257,8 +257,8 @@ MonoBehaviour:
   Faction: 0
   summoned: 0
   lifetime: 0
-  maxHealth: 30
-  health: 30
+  maxHealth: 40
+  health: 40
   guard: 0
   dmg: 0
   attackModifier: 1
@@ -293,14 +293,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   startingDeck:
-  - Haze
-  - Power
-  - Mist
-  - Mist
+  - Curse
+  - Curse
+  - Grasp
+  - Bury
   canAttack: 0
   canSupport: 0
   canSummon: 0
-  energy: 2
+  energy: 3
 --- !u!114 &7232603518593366301
 MonoBehaviour:
   m_ObjectHideFlags: 0

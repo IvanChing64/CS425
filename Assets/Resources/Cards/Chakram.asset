@@ -16,7 +16,7 @@ MonoBehaviour:
   cardDescription: Damage and flame a ranged enemy
   type: 0
   range: 3
-  value: 15
+  value: 25
   cost: 1
   damaging: 1
   piercing: 0

@@ -13,7 +13,7 @@ public abstract class BaseCard : MonoBehaviour
     //[SerializeField] private GameObject highlightEffect;
     public string cardName;
     public Type cardType;
-    public int range, value, cost;
+    public int range, areaRange, value, cost;
     public AreaOfEffectType AoE;
     public RangeType rangeType;
     public bool isPlayed, pierce;
@@ -44,6 +44,7 @@ public abstract class BaseCard : MonoBehaviour
         cardType = card.type;
         value = card.value;
         range = card.range;
+        areaRange = card.areaRange;
         cost = card.cost;
         AoE = card.areaEffect;
         rangeType = card.rangeType;

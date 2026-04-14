@@ -563,11 +563,11 @@ MonoBehaviour:
   - Walk
   - March
   - Earth Trap
-  - Earth Trap
   - Thorn Vine
   - Thorn Vine
   - Freeze
   - Tailwind
+  - Counter
   canAttack: 0
   canSupport: 0
   canSummon: 0

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Rob
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Rob
-  cardDescription: Damage and restrict a close enemy. Energize self
+  cardDescription: Damage and restrict a ranged enemy. Energize self
   type: 0
-  range: 2
+  range: 3
+  areaRange: 0
   value: 15
   cost: -1
   damaging: 1

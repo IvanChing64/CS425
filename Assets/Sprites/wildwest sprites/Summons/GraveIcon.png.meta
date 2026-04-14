@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9d7b4b3038a140546a90eb0e0dc74552
+guid: a6962d9168aedfb4a85a44d9e2d64f04
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8011775145534436228
-    second: Generator_0
+      213: 4350523762291180113
+    second: GraveIcon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Generator_0
+      name: GraveIcon_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 96
-        height: 78
-      alignment: 9
-      pivot: {x: 0.5, y: 0.6}
+        x: 25
+        y: 35
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c7ccd1e04f470d090800000000000000
-      internalID: -8011775145534436228
+      spriteID: 152034ecf4a206c30800000000000000
+      internalID: 4350523762291180113
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3328b10b76784924d9fa1a3c57248f28
+    spriteID: f2873782a604c9541a900ab25118881a
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Generator_0: -8011775145534436228
+      GraveIcon_0: 4350523762291180113
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

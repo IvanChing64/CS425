@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Bang
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Bang
-  cardDescription: Shoot a ranged enemy
+  cardDescription: Shoot a distant enemy
   type: 0
   range: 4
+  areaRange: 0
   value: 40
   cost: 1
   damaging: 1

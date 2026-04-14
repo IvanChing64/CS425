@@ -295,7 +295,7 @@ MonoBehaviour:
   startingDeck:
   - Blaster
   - Blaster
-  - Burst
+  - Rocket
   - Flame
   canAttack: 0
   canSupport: 0

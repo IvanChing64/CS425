@@ -31,12 +31,25 @@ public class BaseAttackCard : BaseCard
             player.dmg = value;
             player.attackRange = range;
             Tile currentTile = player.OccupiedTile;
+            
 
-            foreach (Tile t in player.GetTilesInAttackRange())
+            if (AoE == AreaOfEffectType.None || AoE == AreaOfEffectType.AttackSelfCenter)
             {
-                t.ShowHighlight(true, Tile.attackableColor);
+                foreach (Tile t in player.GetTilesInAttackRange())
+                {
+                    t.ShowHighlight(true, Tile.attackableColor);
+                }
+                currentTile.ShowHighlight(false, Tile.nonwalkableColor);
+            } else if (AoE == AreaOfEffectType.AttackRangedCenter)
+            {
+                foreach (Tile t in player.GetTilesInAttackRange())
+                {
+                    t.ShowHighlight(true, Tile.targetableColor);
+                }
+                currentTile.ShowHighlight(false, Tile.nonwalkableColor);
+                UnitManager.Instance.targetting = true;
             }
-            currentTile.ShowHighlight(false, Tile.nonwalkableColor);
+            
         }
     }
 
@@ -44,17 +57,31 @@ public class BaseAttackCard : BaseCard
     {
         //Unhighlight Selectable Tiles and Targets
         BasePlayer player = CardManager.instance.selectedPlayer;
+        UnitManager.Instance.targetting = false;
 
         if(player != null)
         {
             player.canAttack = false;
             player.dmg = 0;
-            foreach (Tile t in player.GetTilesInAttackRange())
+            if (AoE == AreaOfEffectType.None || AoE == AreaOfEffectType.AttackSelfCenter)
             {
-                if (t.isWalkable)t.ShowHighlight(false, Tile.nonwalkableColor);
+                foreach (Tile t in player.GetTilesInAttackRange())
+                {
+                    if (t.isWalkable)t.ShowHighlight(false, Tile.nonwalkableColor);
+                }
+            } else if (AoE == AreaOfEffectType.AttackRangedCenter)
+            {
+                foreach (Tile t in player.GetTilesInAttackRange())
+                {
+                    foreach (Tile p in player.GetTilesInAOEAttackRange(t, areaRange))
+                    {
+                        if (p.isWalkable)p.ShowHighlight(false, Tile.nonwalkableColor);
+                    }
+                    if (t.isWalkable)t.ShowHighlight(false, Tile.nonwalkableColor);
+                }
             }
+            
             player.attackRange = 0;
-            //combatUIManager.Instance.hideCombatOption();
         }
     }
 
@@ -82,7 +109,7 @@ public class BaseAttackCard : BaseCard
                 break;
 
             case ControlEffect.Poison:
-                targetEnemy.Poison();
+                targetEnemy.Poison(value);
                 break; 
 
             case ControlEffect.Flaming:

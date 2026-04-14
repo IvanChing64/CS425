@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Hack
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Hack
-  cardDescription: Inflict Hinder and Vulnerable on a nearby enemy
+  cardDescription: Hinder and Stun a ranged enemy
   type: 0
-  range: 2
+  range: 3
+  areaRange: 0
   value: 1
   cost: 2
   damaging: 0
@@ -28,5 +29,5 @@ MonoBehaviour:
   primarySupportEffect: 0
   secondarySupportEffect: 0
   primaryControlEffect: 9
-  secondaryControlEffect: 8
+  secondaryControlEffect: 2
   summon: 0

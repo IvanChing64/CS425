@@ -22,6 +22,7 @@ public abstract class Tile : MonoBehaviour
 
     public static Color walkableColor = new Color(44f/255f, 153f/255f, 1, 120f/255f);
     public static Color nonwalkableColor = new Color(0, 0, 0, 0);
+    public static Color targetableColor = new Color(1, 1, 1, 120f/255f);
     public static Color attackableColor = new Color(1, 18f/255f, 0, 159f/255f);
     public static Color supportableColor = new Color(3f/255f, 1, 0, 100f/255f);
     public static Color summonableColor = new Color(167f/255f, 65f/255f, 1, 155f/255f);
@@ -62,7 +63,7 @@ public abstract class Tile : MonoBehaviour
                 if (usedCard.AoE == AreaOfEffectType.None)
                 {
                     ((BaseSupportCard)CardManager.instance.selectedCard).ApplySupportEffect(OccupiedUnit);
-                } else if (usedCard.AoE == AreaOfEffectType.Inclusive)
+                } else if (usedCard.AoE == AreaOfEffectType.SupportInclusive)
                 {
                     foreach (Tile t in player.GetTilesInAttackRange())
                     {
@@ -71,7 +72,7 @@ public abstract class Tile : MonoBehaviour
                             ((BaseSupportCard)CardManager.instance.selectedCard).ApplySupportEffect(t.OccupiedUnit);
                         }
                     }
-                } else if (usedCard.AoE == AreaOfEffectType.Exclusive)
+                } else if (usedCard.AoE == AreaOfEffectType.SupportExclusive)
                 {
                     foreach (Tile t in UnitManager.Instance.SelectedPlayer.GetTilesInAttackRange())
                     {
@@ -90,40 +91,99 @@ public abstract class Tile : MonoBehaviour
             // If the card is an attack card and an enemy is in range, 
             if (player.canAttack && OccupiedUnit != null && OccupiedUnit.Faction == Faction.Enemy)
             {
-                if (usedCard.AoE == AreaOfEffectType.None)
+                if (usedCard.AoE != AreaOfEffectType.AttackRangedCenter)
                 {
-                    // Attack the enemy
-                    combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, OccupiedUnit);
-
-                    // Apply control effects
-                    ((BaseAttackCard)CardManager.instance.selectedCard).ApplyControlEffect(OccupiedUnit);
-                } else
-                {
-                    foreach (Tile t in UnitManager.Instance.SelectedPlayer.GetTilesInAttackRange())
+                    if (usedCard.AoE == AreaOfEffectType.None)
                     {
-                        if (t.OccupiedUnit != null && t.OccupiedUnit.Faction == Faction.Enemy)
+                        // Attack the enemy
+                        combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, OccupiedUnit);
+
+                        // Apply control effects
+                        ((BaseAttackCard)CardManager.instance.selectedCard).ApplyControlEffect(OccupiedUnit);
+                    } else if (usedCard.AoE == AreaOfEffectType.AttackSelfCenter)
+                    {
+                        foreach (Tile t in UnitManager.Instance.SelectedPlayer.GetTilesInAttackRange())
                         {
+                            if (t.OccupiedUnit != null && t.OccupiedUnit.Faction == Faction.Enemy)
+                            {
+                                // Attack the enemy
+                                combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, t.OccupiedUnit, true);
+
+                                // Apply control effects
+                                ((BaseAttackCard)CardManager.instance.selectedCard).ApplyControlEffect(t.OccupiedUnit);
+                            }   
+                        }
+
+                        UnitManager.Instance.SelectedPlayer.canAttack = false;
+                        UnitManager.Instance.SelectedPlayer.dmg = 0;
+                        foreach (Tile t in GridManager.Instance.GetNeighborsOf(UnitManager.Instance.SelectedPlayer.OccupiedTile))
+                        {
+                            if (t.isWalkable)t.ShowHighlight(false, Tile.nonwalkableColor);
+                        }
+                    }
+
+                    // Remove invisibility if player attacks
+                    if (UnitManager.Instance.SelectedPlayer.invisible > 0 && ((BaseAttackCard)usedCard).damaging) UnitManager.Instance.SelectedPlayer.Invisible(true);
+                    
+                    CardManager.instance.PlaySelectedCard();
+                    return;
+                }
+                
+            }
+
+            if (player.canAttack && usedCard.AoE == AreaOfEffectType.AttackRangedCenter)
+            {
+                bool attacked = false;
+                bool attackable = false;
+                foreach (Tile t in UnitManager.Instance.SelectedPlayer.GetTilesInAttackRange())
+                {
+                    if (this == t)
+                    {
+                        attackable = true;
+                        break;
+                    }
+                }
+                if (attackable)
+                {
+                    if (OccupiedUnit != null && OccupiedUnit.Faction == Faction.Enemy && highlight.activeInHierarchy)
+                    {
+                        attacked = true;
+                        // Attack the enemy
+                        combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, OccupiedUnit, true);
+
+                        // Apply control effects
+                        ((BaseAttackCard)CardManager.instance.selectedCard).ApplyControlEffect(OccupiedUnit);
+                    }
+
+                    foreach (Tile t in UnitManager.Instance.SelectedPlayer.GetTilesInAOEAttackRange(this, usedCard.areaRange))
+                    {
+                    if (t.OccupiedUnit != null && t.OccupiedUnit.Faction == Faction.Enemy && highlight.activeInHierarchy)
+                        {
+                            attacked = true;
                             // Attack the enemy
                             combatUIManager.Instance.Attack(UnitManager.Instance.SelectedPlayer, t.OccupiedUnit, true);
 
                             // Apply control effects
                             ((BaseAttackCard)CardManager.instance.selectedCard).ApplyControlEffect(t.OccupiedUnit);
-                        }   
+                        } 
                     }
 
-                    UnitManager.Instance.SelectedPlayer.canAttack = false;
-                    UnitManager.Instance.SelectedPlayer.dmg = 0;
-                    foreach (Tile t in GridManager.Instance.GetNeighborsOf(UnitManager.Instance.SelectedPlayer.OccupiedTile))
+                    if (attacked)
                     {
-                        if (t.isWalkable)t.ShowHighlight(false, Tile.nonwalkableColor);
-                    }
-                }
+                        UnitManager.Instance.SelectedPlayer.canAttack = false;
+                        UnitManager.Instance.SelectedPlayer.dmg = 0;
+                        foreach (Tile t in GridManager.Instance.GetNeighborsOf(UnitManager.Instance.SelectedPlayer.OccupiedTile))
+                        {
+                            if (t.isWalkable)t.ShowHighlight(false, Tile.nonwalkableColor);
+                        }
 
-                // Remove invisibility if player attacks
-                if (UnitManager.Instance.SelectedPlayer.invisible > 0) UnitManager.Instance.SelectedPlayer.Invisible(true);
-                
-                CardManager.instance.PlaySelectedCard();
-                return;
+                        // Remove invisibility if player attacks
+                        if (UnitManager.Instance.SelectedPlayer.invisible > 0 && ((BaseAttackCard)usedCard).damaging) UnitManager.Instance.SelectedPlayer.Invisible(true);
+                        
+                        CardManager.instance.PlaySelectedCard();
+                        return;
+                    }
+                }                
             }
 
             //If the card is a summon card, and tile is not occupied

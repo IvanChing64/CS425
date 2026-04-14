@@ -296,9 +296,9 @@ MonoBehaviour:
   - Dash
   - Dash
   - Backstab
+  - Backstab
   - Hack
   - Hack
-  - Virus
   - Virus
   - Cloak
   canAttack: 0

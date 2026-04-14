@@ -111,6 +111,7 @@ public class BaseUnit : MonoBehaviour
     //End of new stuff.
     public List<Tile> GetTilesInMoveRange() => RangeManager.GetTilesInRange(OccupiedTile, moveRange, RangeType.FloodMovement);
     public List<Tile> GetTilesInAttackRange() => RangeManager.GetTilesInRange(OccupiedTile, attackRange, RangeType.FloodTargeting);
+    public List<Tile> GetTilesInAOEAttackRange(Tile rangedCenter, int range) => RangeManager.GetTilesInRange(rangedCenter, range, RangeType.FloodTargeting);
     public List<Tile> GetTilesInUnrestrictedMoveRange() => RangeManager.GetTilesInRange(OccupiedTile, moveRange, RangeType.FloodMovementUnrestricted);
 
     private void Awake()
@@ -121,42 +122,25 @@ public class BaseUnit : MonoBehaviour
     //damage functions
     public void takeDamage(float damageAmount, bool dodgeable = true, bool reflectable = true, BaseUnit attacker = null)
     {
-        // Check for Dodge
-        if (dodgeable && dodge > 0)
-        {
-            float dodgeChance = dodge * 0.05f;
-            if (dodgeChance > UnitManager.maxDodgeChance)
-            {
-                dodgeChance = UnitManager.maxDodgeChance;
-            }
-            if (Random.value < dodgeChance)
-            {
-                dodge--;
-                return;
-            }
-        }
-
-        if(SoundFXManager.instance != null)
-        {
-            SoundFXManager.instance.PlaySoundFXClip(hurtSFX, transform, 1f);
-        }
-
         healthbar = GetComponentInChildren<healthbar>();
 
         float damage = damageAmount * defenseModifier;
-        float absorbAmount = 0;
+        float absorbAmount;
 
         if (GameManager.Instance.gameState == GameState.PlayerTurn)
         {
+            // Check for Pierce Damage
             if (!CardManager.instance.selectedCard.pierce)
             {
+                // Check for Reflect
                 if (reflect > 0 && reflectable)
                 {
-                    attacker.takeDamage(damage, true, false);
+                    attacker.takeDamage(damage * UnitManager.reflectEfficiency, true, false);
                     reflect--;
                     return;
                 }
 
+                // Check for Absorb
                 if (absorb > 0)
                 {
                     absorbAmount = damage * UnitManager.absorbEfficiency;
@@ -164,6 +148,21 @@ public class BaseUnit : MonoBehaviour
                     absorb--;
                     return;
                 } 
+
+                // Check for Dodge
+                if (dodgeable && dodge > 0)
+                {
+                    float dodgeChance = dodge * 0.05f;
+                    if (dodgeChance > UnitManager.maxDodgeChance)
+                    {
+                        dodgeChance = UnitManager.maxDodgeChance;
+                    }
+                    if (Random.value < dodgeChance)
+                    {
+                        dodge--;
+                        return;
+                    }
+                }
             } else
             {
                 if (damage < damageAmount)
@@ -173,13 +172,15 @@ public class BaseUnit : MonoBehaviour
             }
         } else
         {
+            // Check for Reflect
             if (reflect > 0 && reflectable)
             {
-                attacker.takeDamage(damage, true, false);
+                attacker.takeDamage(damage * UnitManager.reflectEfficiency, true, false);
                 reflect--;
                 return;
             }
 
+            // Check for Absorb
             if (absorb > 0)
             {
                 absorbAmount = damage * UnitManager.absorbEfficiency;
@@ -187,6 +188,21 @@ public class BaseUnit : MonoBehaviour
                 absorb--;
                 return;
             } 
+
+            // Check for Dodge
+            if (dodgeable && dodge > 0)
+            {
+                float dodgeChance = dodge * 0.05f;
+                if (dodgeChance > UnitManager.maxDodgeChance)
+                {
+                    dodgeChance = UnitManager.maxDodgeChance;
+                }
+                if (Random.value < dodgeChance)
+                {
+                    dodge--;
+                    return;
+                }
+            }
         }
 
         if (guard > 0)
@@ -222,6 +238,11 @@ public class BaseUnit : MonoBehaviour
         } else
         {
             health -= damage;
+        }
+
+        if(SoundFXManager.instance != null)
+        {
+            SoundFXManager.instance.PlaySoundFXClip(hurtSFX, transform, 1f);
         }
 
         UpdateHealth();
@@ -376,9 +397,9 @@ public class BaseUnit : MonoBehaviour
     public void Dodge()
     {
         dodge += 3;
-        if (dodge > 17)
+        if (dodge > 18)
         {
-            dodge = 17;
+            dodge = 18;
         }
     }
 
@@ -537,15 +558,15 @@ public class BaseUnit : MonoBehaviour
         }
     }
 
-    // Apply 1 poison stack, dealing 8% max health times the stack count as damage at end of turn, decrease damage dealt by 10%
-    public void Poison()
+    // Apply poison stacks, dealing 8% max health times the stack count as damage at end of turn, decrease damage dealt by 10%
+    public void Poison(int stacks = 1)
     {
         if (poison >= 8) return;
         if (poison == 0)
         {
             attackModifier -= UnitManager.poisonAttackDown;
         }
-        poison++;
+        poison += stacks;
     }
     
     // Take flaming damage for 2 turns, equal to 15% of remaining health and 15% of max health each turn
@@ -766,7 +787,7 @@ public class BaseUnit : MonoBehaviour
 
         if (flaming > 0)
         {
-            takeDamage(health * 0.15f, false, false);
+            takeDamage(health * 0.2f, false, false);
             takeDamage(maxHealth * 0.15f, false, false);
             flaming--;
         }
