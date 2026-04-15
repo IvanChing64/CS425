@@ -15,7 +15,8 @@ MonoBehaviour:
   cardName: Repair
   cardDescription: Heal and guard a close ally
   type: 2
-  range: 1
+  range: 2
+  areaRange: 0
   value: 20
   cost: 0
   damaging: 0

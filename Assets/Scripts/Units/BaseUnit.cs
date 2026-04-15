@@ -558,10 +558,14 @@ public class BaseUnit : MonoBehaviour
         }
     }
 
-    // Apply poison stacks, dealing 8% max health times the stack count as damage at end of turn, decrease damage dealt by 10%
+    // Apply poison stacks, dealing 10% of remaining health times the stack count as damage at end of turn, decrease damage dealt by 10%
     public void Poison(int stacks = 1)
     {
-        if (poison >= 8) return;
+        if (poison >= 8) 
+        {
+            poison = 8;
+            return;
+        }
         if (poison == 0)
         {
             attackModifier -= UnitManager.poisonAttackDown;
@@ -569,7 +573,7 @@ public class BaseUnit : MonoBehaviour
         poison += stacks;
     }
     
-    // Take flaming damage for 2 turns, equal to 15% of remaining health and 15% of max health each turn
+    // Take flaming damage for 2 turns, equal to 15% of remaining health and 20% of max health each turn
     public void Flaming()
     {
         flaming = EffectFlag.Start;
@@ -785,21 +789,21 @@ public class BaseUnit : MonoBehaviour
             regeneration--;
         }
 
-        if (flaming > 0)
-        {
-            takeDamage(health * 0.2f, false, false);
-            takeDamage(maxHealth * 0.15f, false, false);
-            flaming--;
-        }
-
         if (poison > 0)
         {
-            takeDamage(maxHealth * 0.09f * poison, false, false);
+            takeDamage(health * 0.1f * poison, false, false);
             poison--;
             if (poison == 0)
             {
                 attackModifier += UnitManager.poisonAttackDown;
             }
+        }
+
+        if (flaming > 0)
+        {
+            takeDamage(health * 0.2f, false, false);
+            takeDamage(maxHealth * 0.15f, false, false);
+            flaming--;
         }
 
         if (boost > 0)
@@ -861,14 +865,17 @@ public class BaseUnit : MonoBehaviour
     {
         Debug.Log($"{name} has died.");
         if (Faction == Faction.Player)
-        {
-            
-        // If this is a player unit
+        { 
+            // If this is a player unit
             UnitManager.Instance.playerUnitCount -= 1; // Decrease the player unit count
             UnitManager.Instance.playersSpawned.Remove((BasePlayer)this);
         }
-        else // Otherwise this is an enemy unit
+        else  
+        {
+            // Otherwise this is an enemy unit
             UnitManager.Instance.enemyUnitCount -= 1; // Decrease the enemy unit count
+            UnitManager.Instance.enemiesSpawned.Remove((BaseEnemy)this);
+        }
         Destroy(gameObject);
     }
 

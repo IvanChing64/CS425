@@ -23,7 +23,7 @@ MonoBehaviour:
   piercing: 0
   areaEffect: 0
   rangeType: 1
-  cardIcon: {fileID: 2083618590921889027, guid: 548c1b1af8268a64d991404ee36236b1, type: 3}
+  cardIcon: {fileID: 2133211109341386859, guid: a590c4738ccd4314aa8901e82e1c9c9b, type: 3}
   cardCorner: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
   cardBorderColor: {r: 1, g: 0, b: 0, a: 1}
   primarySupportEffect: 0

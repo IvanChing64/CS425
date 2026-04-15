@@ -300,7 +300,7 @@ MonoBehaviour:
   - Barricade
   - Absorption
   - Battery
-  - Overclock
+  - Overwatch
   canAttack: 0
   canSupport: 0
   canSummon: 0

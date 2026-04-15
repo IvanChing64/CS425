@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Tonic
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Tonic
-  cardDescription: Energize and Grant Resistant to a nearby ally
+  cardDescription: Grant Resistant and Energy to a nearby ally
   type: 2
   range: 2
+  areaRange: 0
   value: 1
   cost: 1
   damaging: 0
+  piercing: 0
   areaEffect: 0
   rangeType: 1
   cardIcon: {fileID: 3944780313303554582, guid: 46932ac090d56484495ec1827f4451aa, type: 3}
@@ -28,3 +30,4 @@ MonoBehaviour:
   secondarySupportEffect: 5
   primaryControlEffect: 0
   secondaryControlEffect: 0
+  summon: 0

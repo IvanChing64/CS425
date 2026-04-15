@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Absorption
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Absorption
-  cardDescription: Immensely Gain Absorb
+  cardDescription: Greatly Grant Absorb
   type: 2
   range: 0
-  value: 3
+  areaRange: 1
+  value: 2
   cost: 2
   damaging: 0
   piercing: 0

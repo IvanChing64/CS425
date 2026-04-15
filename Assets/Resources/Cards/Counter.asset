@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Counter
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Counter
-  cardDescription: Guard a nearby ally
+  cardDescription: Grant reflect to a nearby ally
   type: 2
   range: 3
   areaRange: 0

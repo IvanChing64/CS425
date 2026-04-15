@@ -194,6 +194,7 @@ public abstract class Tile : MonoBehaviour
                 CardManager.instance.PlaySelectedCard();
                 summonUnit.GetComponent<HandManager>().NextTurn();
                 UnitManager.Instance.SetSelectedPlayer(summonUnit);
+                UnitManager.Instance.SetSelectedPlayer(player);
                 return;
             }
 

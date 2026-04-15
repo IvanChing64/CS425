@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: Upgrade
   cardDescription: Boost and strengthen a nearby ally
   type: 2
-  range: 1
+  range: 2
   areaRange: 0
   value: 1
   cost: 2

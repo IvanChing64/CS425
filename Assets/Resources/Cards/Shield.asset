@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Shield
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Shield
-  cardDescription: Guard a close ally
+  cardDescription: Guard a nearby ally
   type: 2
   range: 2
+  areaRange: 0
   value: 30
   cost: 0
   damaging: 0

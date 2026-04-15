@@ -385,21 +385,32 @@ public class UnitManager : MonoBehaviour
 
         List<NPC_Controller> enemyControllers = new List<NPC_Controller>();
 
-        foreach (var enemy in enemiesSpawned)
+        List<BaseEnemy> enemies = enemiesSpawned;
+
+        for (int i = 1; i <= enemyUnitCount; i++)
+        {
+            int initial = enemyUnitCount;
+            enemies[enemyUnitCount - i].ResetValues();
+            if (initial > enemyUnitCount)
+            {
+                i--;
+            }
+
+        }
+
+        foreach (var enemy in enemies)
         {
             if (enemy == null || enemy.gameObject == null) continue;
-            enemy.ResetValues();
 
             var npc = enemy.GetComponent<NPC_Controller>();
             if (npc != null) {
-                if (enemy.stunned > 0)
+                if ((int)enemy.stunned >= 1)
                 {
                     continue;
                 }    
 
                 enemyControllers.Add(npc);
             }
-
         }
 
         StartCoroutine(NPC_Controller.RunEnemyTurn(enemyControllers));
