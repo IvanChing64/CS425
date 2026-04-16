@@ -55,6 +55,9 @@ public class NPC_Controller: MonoBehaviour
         {
             if (unit == npcUnit) continue;
 
+            if (unit.Faction != npcUnit.Faction) continue;
+
+            if (unit.health >= unit.maxHealth) continue;
 
             if (unit.health < lowestHealth)
             {
@@ -72,16 +75,48 @@ public class NPC_Controller: MonoBehaviour
 
         bool inHealRange = RangeManager.GetTilesInRange(npcUnit.OccupiedTile, npcUnit.attackRange, RangeType.FloodTargeting).Contains(allyTile);
 
-        if (lowestHealthAlly.health < lowestHealthAlly.maxHealth && inHealRange)
+        if (inHealRange)
         {
             HealTarget(lowestHealthAlly, healAmount);
-            return lowestHealthAlly.OccupiedTile;
-
         }
+        //New Things. Set back to return allytile if not working.
 
+        List<Tile> movableTiles = RangeManager.GetTilesInRange(npcUnit.OccupiedTile, npcUnit.moveRange, RangeType.FloodTargeting);
+
+        Tile bestTile = null;
+        float bestScore = Mathf.Infinity;
+
+        foreach (var tile in movableTiles)
+        {
+            if (!tile.isWalkable) continue;
+
+            float distToAlly = Vector2.Distance(tile.transform.position,
+                allyTile.transform.position);
+
+            // Check if this tile would allow healing the ally
+            bool canHealFromTile = distToAlly <= npcUnit.attackRange;
+
+            if (!canHealFromTile) continue;
+          
+
+
+            float distToSelf = Vector2.Distance(tile.transform.position, npcUnit.OccupiedTile.transform.position);
+
+            float score = distToAlly + (distToSelf * 0.1f);
+
+            if (score < bestScore)
+            {
+                bestScore = score;
+                bestTile = tile;
+            }
+        }
+        if (bestTile != null)
+        {
+            return bestTile;
+        }
         return allyTile;
-    }
 
+    }
    
 
     private Tile GetRandomTile()
@@ -154,15 +189,18 @@ public class NPC_Controller: MonoBehaviour
     {
         //Added for if target is already in attackRange:
         var targeting = GetComponent<EnemyTargetingManager>();
-        if (targeting.CurrentTarget == null)
-            targeting.SelectTarget();
-
-        Tile targetTile = GridManager.Instance.GetTileForUnit(GetComponent<EnemyTargetingManager>().CurrentTarget.gameObject);
-
-        if (RangeManager.GetTilesInRange(startTile, npcUnit.attackRange, RangeType.FloodTargeting).Contains(targetTile))
+        if (enemy1.movementBehavior != Enemy1.MovementBehavior.Support)
         {
-            SetTarget(startTile, startTile);
-            return;
+            if (targeting.CurrentTarget == null)
+                targeting.SelectTarget();
+
+            Tile targetTile = GridManager.Instance.GetTileForUnit(GetComponent<EnemyTargetingManager>().CurrentTarget.gameObject);
+
+            if (RangeManager.GetTilesInRange(startTile, npcUnit.attackRange, RangeType.FloodTargeting).Contains(targetTile))
+            {
+                SetTarget(startTile, startTile);
+                return;
+            }
         }
 
         Tile chosenTile = null;
@@ -312,6 +350,12 @@ public class NPC_Controller: MonoBehaviour
 
     private void ExecuteAttacks()
     {
+        if (enemy1.movementBehavior == Enemy1.MovementBehavior.Support)
+        {
+           //Support units won't attack
+           HasFinishedTurn = true;
+           return;
+        }
         CheckAndAttack();
         HasFinishedTurn = true;
         //StartCoroutine(EndTurnDelay());
@@ -324,9 +368,12 @@ public class NPC_Controller: MonoBehaviour
         //isMoving = false;
         //New: Ensure targeting happens first
         var targeting = GetComponent<EnemyTargetingManager>();
-        if (targeting != null || targeting.CurrentTarget.gameObject == null)
+        if (enemy1.movementBehavior != Enemy1.MovementBehavior.Support)
         {
-            targeting.SelectTarget();
+            if (targeting != null || (targeting.CurrentTarget == null || targeting.CurrentTarget.gameObject == null))
+            {
+                targeting.SelectTarget();
+            }
         }
         Tile startTile = npcUnit.OccupiedTile;
         if (startTile == null)
@@ -394,6 +441,8 @@ public class NPC_Controller: MonoBehaviour
         {
             if (unit == npcUnit) continue;
 
+            if (unit.Faction != npcUnit.Faction) continue;
+
             if (unit.health < lowestHealth)
             {
                 lowestHealth = unit.health;
@@ -427,9 +476,10 @@ public class NPC_Controller: MonoBehaviour
         
         //Select target
         var targeting = GetComponent<EnemyTargetingManager>();
-        if (targeting != null)
+        if (enemy1.movementBehavior != Enemy1.MovementBehavior.Support) { 
+            if (targeting != null)
             targeting.SelectTarget();
-
+        }
         Tile startTile = npcUnit.OccupiedTile;
         if (startTile == null)
         {
