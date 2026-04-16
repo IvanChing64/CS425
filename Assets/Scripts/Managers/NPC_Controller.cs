@@ -21,13 +21,15 @@ public class NPC_Controller: MonoBehaviour
     private BaseUnit npcUnit;
 
     private Enemy1 enemy1;
+    private Animator unitAnimator;
 
     private void Awake()
     {
         enemy1 = GetComponent<Enemy1>();
         Instance = this;
         npcUnit = GetComponent<BaseUnit>();
-        tilesPerMove = npcUnit.moveRange; 
+        unitAnimator = GetComponent<Animator>();
+        tilesPerMove = npcUnit.moveRange + npcUnit.moveModifier;; 
     }
 
     //MovementBehavior logic: Andrew Shelton
@@ -273,9 +275,9 @@ public class NPC_Controller: MonoBehaviour
             path.RemoveAt(0);
         }
         
-        if (path.Count > npcUnit.moveRange)
+        if (path.Count > npcUnit.moveRange + npcUnit.moveModifier)
         {
-            path = path.GetRange(0, npcUnit.moveRange);
+            path = path.GetRange(0, npcUnit.moveRange + npcUnit.moveModifier);
         }
 
         pathIndex = 0;
@@ -341,10 +343,14 @@ public class NPC_Controller: MonoBehaviour
 
         if(target != null)
         {
+            if (unitAnimator != null)
+            {
+                unitAnimator.SetTrigger("attack");
+            }
             Debug.Log($"{npcUnit.name} attacks {target.name}");
-            target.takeDamage(npcUnit.dmg * npcUnit.attackModifier);
+            target.takeDamage(npcUnit.dmg * npcUnit.attackModifier, true, true, npcUnit);
         } else {
-             Debug.Log("nothing happened!");
+            Debug.Log("nothing happened!");
         }
     }
 
@@ -473,6 +479,11 @@ public class NPC_Controller: MonoBehaviour
         tilesMovedThisTurn = 0;
         HasFinishedTurn = false;
 
+        if (!(npcUnit.restricted == EffectFlag.None))
+        {
+            npcUnit.moveRange = 0;
+        }
+
         
         //Select target
         var targeting = GetComponent<EnemyTargetingManager>();
@@ -486,6 +497,11 @@ public class NPC_Controller: MonoBehaviour
             Debug.LogError($"{name} has no OccupiedTile placeholder!");
             HasFinishedTurn = true;
             yield break;
+        }
+
+        if(unitAnimator != null)
+        {
+            unitAnimator.SetBool("IsMoving", true);
         }
 
         //SetTarget(startTile);
@@ -509,7 +525,11 @@ public class NPC_Controller: MonoBehaviour
             tilesMovedThisTurn++;
             yield return null;
         }
-        
+            if(unitAnimator != null)
+            {
+                unitAnimator.SetBool("IsMoving", false);
+        }
+
         FinishedMoves();
         CheckForHealAfterMove();
     }
