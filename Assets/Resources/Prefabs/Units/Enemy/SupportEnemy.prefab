@@ -175,7 +175,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1267550136445687439, guid: ce708530464d9420287f260abd600891, type: 3}
+  m_Sprite: {fileID: 4723107735738678597, guid: 088c72b8c44664ef7ba139bf42990072, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -202,21 +202,31 @@ MonoBehaviour:
   maxHealth: 120
   health: 120
   guard: 0
-  dmg: 40
+  dmg: 15
   attackModifier: 1
   defenseModifier: 1
   moveModifier: 0
-  boost: 0
-  dmgUp: 0
-  defUp: 0
-  defiant: 0
-  stunned: 0
-  invisible: 0
-  dodge: 0
-  poison: 0
-  agility: 0
-  moveRange: 8
+  moveRange: 3
   attackRange: 1
+  boost: 0
+  strengthen: 0
+  resistant: 0
+  invisible: 0
+  absorb: 0
+  stunned: 0
+  restricted: 0
+  frozen: 0
+  flaming: 0
+  weaken: 0
+  vulnerable: 0
+  hinder: 0
+  regeneration: 0
+  dodge: 0
+  agility: 0
+  reflect: 0
+  defiant: 0
+  daze: 0
+  poison: 0
   UnitAnimator: {fileID: 738936172720448078}
   healthbar: {fileID: 1811933326703943321}
   hurtSFX:
@@ -251,9 +261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_Controller
   moveSpeed: 2.5
-  tilesPerMove: 4
+  tilesPerMove: 3
   path: []
-  healAmount: 10
 --- !u!95 &738936172720448078
 Animator:
   serializedVersion: 7
@@ -264,7 +273,7 @@ Animator:
   m_GameObject: {fileID: 1167321167610509267}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 451d5f1d5330e42218c98e0f70cea694, type: 2}
+  m_Controller: {fileID: 9100000, guid: 89982da2b368f41848074f38ca2f2e0a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

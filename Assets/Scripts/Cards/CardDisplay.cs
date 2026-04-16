@@ -41,14 +41,24 @@ public class CardDisplay : MonoBehaviour
         switch (cardData.type)
         {
             case Type.Attack:
-                cardValue.text = ((int)(cardData.value * overrideValue)).ToString();
-                if (overrideValue > 1f)
+                if (cardData.cardName == "Backstab" && CardManager.instance.selectedPlayer != null && CardManager.instance.selectedPlayer.invisible > 0)
                 {
-                    cardValue.color = Color.red;
-                } else if (overrideValue < 1f)
+                    cardValue.text = ((int)((cardData.value + UnitManager.backstabInvisibleBonus) * overrideValue)).ToString();
+                } else
                 {
-                    cardValue.color = Color.blue;
+                    cardValue.text = ((int)(cardData.value * overrideValue)).ToString();
                 }
+                if (cardData.damaging)
+                {
+                    if (overrideValue > 1f)
+                    {
+                        cardValue.color = Color.red;
+                    } else if (overrideValue < 1f)
+                    {
+                        cardValue.color = Color.blue;
+                    }
+                }
+                
                 break;
         
             case Type.Movement:

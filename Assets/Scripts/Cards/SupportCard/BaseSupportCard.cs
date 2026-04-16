@@ -72,11 +72,7 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Boost:
-                if (!(targetPlayer.boost > 0))
-                {
-                    targetPlayer.boost = EffectFlag.Start;
-                    targetPlayer.Boost();
-                }
+                targetPlayer.Boost();
                 break;
 
             case SupportEffect.Cleanse:
@@ -103,20 +99,24 @@ public class BaseSupportCard : BaseCard
                 targetPlayer.Agility();
                 break;
 
-            case SupportEffect.DamageUp:
-                if (!(targetPlayer.dmgUp > 0))
-                {
-                    targetPlayer.dmgUp = EffectFlag.Start;
-                    targetPlayer.DamageUp();
-                }
+            case SupportEffect.Strengthen:
+                targetPlayer.Strengthen();
                 break;
 
-            case SupportEffect.DefenseUp:
-                if (!(targetPlayer.defUp > 0))
-                {
-                    targetPlayer.defUp = EffectFlag.Start;
-                    targetPlayer.DefenseUp();
-                }
+            case SupportEffect.Resistant:
+                targetPlayer.Resistant();
+                break;
+
+            case SupportEffect.Reflect:
+                targetPlayer.Reflect(value);
+                break;
+
+            case SupportEffect.Regeneration:
+                targetPlayer.Regeneration();
+                break;
+
+            case SupportEffect.Absorb:
+                targetPlayer.Absorb(value);
                 break;
 
             default:
@@ -137,11 +137,7 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Boost:
-                if (!(targetPlayer.boost > 0))
-                {
-                    targetPlayer.boost = EffectFlag.Start;
-                    targetPlayer.Boost();
-                }
+                targetPlayer.Boost();
                 break;
 
             case SupportEffect.Cleanse:
@@ -149,7 +145,7 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Energize:
-                targetPlayer.Energize(value);
+                targetPlayer.Energize();
                 break;
             
             case SupportEffect.Invisibility:
@@ -168,20 +164,24 @@ public class BaseSupportCard : BaseCard
                 targetPlayer.Agility();
                 break;
 
-            case SupportEffect.DamageUp:
-                if (!(targetPlayer.dmgUp > 0))
-                {
-                    targetPlayer.dmgUp = EffectFlag.Start;
-                    targetPlayer.DamageUp();
-                }
+            case SupportEffect.Strengthen:
+                targetPlayer.Strengthen();
                 break;
 
-            case SupportEffect.DefenseUp:
-                if (!(targetPlayer.defUp > 0))
-                {
-                    targetPlayer.defUp = EffectFlag.Start;
-                    targetPlayer.DefenseUp();
-                }
+            case SupportEffect.Resistant:
+                targetPlayer.Resistant();
+                break;
+
+            case SupportEffect.Reflect:
+                targetPlayer.Reflect(value);
+                break;
+
+            case SupportEffect.Regeneration:
+                targetPlayer.Regeneration();
+                break;
+
+            case SupportEffect.Absorb:
+                targetPlayer.Absorb(value);
                 break;
 
             default:

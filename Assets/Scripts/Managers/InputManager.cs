@@ -35,7 +35,7 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.Instance.gameState != GameState.PlayerTurn)
+        if(GameManager.Instance.gameState != GameState.PlayerTurn && GameManager.Instance.gameState != GameState.EnemyTurn)
         {
             return;
         }

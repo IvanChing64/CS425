@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: b31c83f95150d8249b08065ee31f4dd9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5329094748296127937
+    second: supportUpgraded_0
+  - first:
+      213: -497377694317146413
+    second: supportUpgraded_1
+  - first:
+      213: 3936607953260810789
+    second: supportUpgraded_2
+  - first:
+      213: 1906048361009836507
+    second: supportUpgraded_3
+  - first:
+      213: -3408824770192417344
+    second: supportUpgraded_4
+  - first:
+      213: 4441790482544012536
+    second: supportUpgraded_5
+  - first:
+      213: 6595964951290851422
+    second: supportUpgraded_6
+  - first:
+      213: 3035726401979918662
+    second: supportUpgraded_7
+  - first:
+      213: -5078150194311770708
+    second: supportUpgraded_8
+  - first:
+      213: -901646574054497322
+    second: supportUpgraded_9
+  - first:
+      213: 4241304538060361738
+    second: supportUpgraded_10
+  - first:
+      213: 876375622054112593
+    second: supportUpgraded_11
+  - first:
+      213: -3942314956740451554
+    second: supportUpgraded_12
+  - first:
+      213: -6267244711128983485
+    second: supportUpgraded_13
+  - first:
+      213: -3216272140134940097
+    second: supportUpgraded_14
+  - first:
+      213: 3792642746874624507
+    second: supportUpgraded_15
+  - first:
+      213: 4310007895831721287
+    second: supportUpgraded_16
+  - first:
+      213: -2049892881865752583
+    second: supportUpgraded_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 250
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: supportUpgraded_0
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 84
+        width: 347
+        height: 347
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c52796507fb4f940800000000000000
+      internalID: 5329094748296127937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_1
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 694
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3de060b4f95f819f0800000000000000
+      internalID: -497377694317146413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_2
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 627
+        width: 72
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52296129314a1a630800000000000000
+      internalID: 3936607953260810789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_3
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 682
+        width: 19
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd1f4bab2e4a37a10800000000000000
+      internalID: 1906048361009836507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_4
+      rect:
+        serializedVersion: 2
+        x: 1870
+        y: 698
+        width: 39
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cdd027aeeb61b0d0800000000000000
+      internalID: -3408824770192417344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_5
+      rect:
+        serializedVersion: 2
+        x: 1949
+        y: 659
+        width: 199
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fc2fb609e864ad30800000000000000
+      internalID: 4441790482544012536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_6
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 83
+        width: 344
+        height: 649
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e503e902d23998b50800000000000000
+      internalID: 6595964951290851422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_7
+      rect:
+        serializedVersion: 2
+        x: 1324
+        y: 616
+        width: 42
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 649a9412411112a20800000000000000
+      internalID: 3035726401979918662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_8
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 608
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cad47ffad49c689b0800000000000000
+      internalID: -5078150194311770708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_9
+      rect:
+        serializedVersion: 2
+        x: 1837
+        y: 530
+        width: 75
+        height: 158
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d3a880d735bc73f0800000000000000
+      internalID: -901646574054497322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_10
+      rect:
+        serializedVersion: 2
+        x: 1918
+        y: 621
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a00175781042cda30800000000000000
+      internalID: 4241304538060361738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_11
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 564
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15de85a2cf2892c00800000000000000
+      internalID: 876375622054112593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_12
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 575
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e13a6c22f651a49c0800000000000000
+      internalID: -3942314956740451554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_13
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 84
+        width: 305
+        height: 478
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34816b8f3264609a0800000000000000
+      internalID: -6267244711128983485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_14
+      rect:
+        serializedVersion: 2
+        x: 1423
+        y: 552
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f32854277818d53d0800000000000000
+      internalID: -3216272140134940097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_15
+      rect:
+        serializedVersion: 2
+        x: 1819
+        y: 530
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf97c67eb7c22a430800000000000000
+      internalID: 3792642746874624507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_16
+      rect:
+        serializedVersion: 2
+        x: 1403
+        y: 515
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 745bd2a885930db30800000000000000
+      internalID: 4310007895831721287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supportUpgraded_17
+      rect:
+        serializedVersion: 2
+        x: 1607
+        y: 84
+        width: 328
+        height: 648
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ff3ac4e8415d83e0800000000000000
+      internalID: -2049892881865752583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 53929b5b5db00ed478d1b739c5e7c62e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      supportUpgraded_0: 5329094748296127937
+      supportUpgraded_1: -497377694317146413
+      supportUpgraded_10: 4241304538060361738
+      supportUpgraded_11: 876375622054112593
+      supportUpgraded_12: -3942314956740451554
+      supportUpgraded_13: -6267244711128983485
+      supportUpgraded_14: -3216272140134940097
+      supportUpgraded_15: 3792642746874624507
+      supportUpgraded_16: 4310007895831721287
+      supportUpgraded_17: -2049892881865752583
+      supportUpgraded_2: 3936607953260810789
+      supportUpgraded_3: 1906048361009836507
+      supportUpgraded_4: -3408824770192417344
+      supportUpgraded_5: 4441790482544012536
+      supportUpgraded_6: 6595964951290851422
+      supportUpgraded_7: 3035726401979918662
+      supportUpgraded_8: -5078150194311770708
+      supportUpgraded_9: -901646574054497322
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

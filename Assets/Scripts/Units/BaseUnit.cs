@@ -1,34 +1,84 @@
-using Codice.Client.Common.GameUI;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
-
-
-
-
 
 public class BaseUnit : MonoBehaviour
 {
+    [Header("Unit Stats")]
+    [Tooltip("Tile the unit is occupying")]
     public Tile OccupiedTile;
+    [Tooltip("Ally or Enemy")]
     public Faction Faction;
+    [Tooltip("Unit was summoned and has a lifetime")]
+    public bool summoned;
+    [Tooltip("Lifetime of summon")]
+    public int lifetime;
+    [Tooltip("Maximum Health of the unit")]
     public float maxHealth;
+    [Tooltip("Current Health of the unit")]
     public float health;
+    [Tooltip("Current Guard of the unit, absorbs damage before health")]
     public float guard;
+    [Tooltip("Amount of damage unit can deal")]
     public float dmg;
+    [Tooltip("Attack Damage Multiplier")]
     public float attackModifier = 1;
+    [Tooltip("Taken Damage Multiplier")]
     public float defenseModifier = 1;
+    [Tooltip("Movement Adder")]
     public int moveModifier = 0;
-    public EffectFlag boost = 0;
-    public EffectFlag dmgUp = 0;
-    public EffectFlag defUp = 0;
-    public bool defiant = false;
-    public EffectFlag stunned = 0;
-    public int invisible = 0;
-    public int dodge = 0;
-    public int poison = 0;
-    public int agility = 0;
+    [Tooltip("Movement Range")]
     public int moveRange;
+    [Tooltip("Attack Range")]
     public int attackRange;
+
+
+    [Header("Buff Flags")]
+    [Tooltip("Increase attack & defense by 25%")]
+    public EffectFlag boost = EffectFlag.None;
+    [Tooltip("Increase attack by 25%")]
+    public EffectFlag strengthen = EffectFlag.None;
+    [Tooltip("Increase defense by 25%")]
+    public EffectFlag resistant = EffectFlag.None;
+    [Tooltip("Increase attack by 15% and become untargetable")]
+    public EffectFlag invisible = EffectFlag.None;
+
+    [Header("Debuff Flags")]
+    [Tooltip("Stop all actions")]
+    public EffectFlag stunned = EffectFlag.None;
+    [Tooltip("Stop all movement")]
+    public EffectFlag restricted = EffectFlag.None;
+    [Tooltip("Stop all actions and take 10% more damage")]
+    public EffectFlag frozen = EffectFlag.None;
+    [Tooltip("Lose 15% of remaing health and take 15% of max health as damage")]
+    public EffectFlag flaming = EffectFlag.None;
+    [Tooltip("Decrease attack by 25%")]
+    public EffectFlag weaken = EffectFlag.None;
+    [Tooltip("Decrease defense by 25%")]
+    public EffectFlag vulnerable = EffectFlag.None;
+    [Tooltip("Decrease attack & defense by 25%")]
+    public EffectFlag hinder = EffectFlag.None;
+
+    [Header("Other Buffs")]
+    [Tooltip("Heal 10% of max health for each stack, decrements")]
+    public int regeneration = 0;
+    [Tooltip("Gain 5% chance to avoid damage for each stack, decrements")]
+    public int dodge = 0;
+    [Tooltip("Increase movement by 1 for each stack")]
+    public int agility = 0;
+    [Tooltip("Reflect an instance of damage taken back to attacker")]
+    public int reflect = 0;
+    [Tooltip("Convert an instance of damage into healing, at 50% conversion")]
+    public int absorb = 0;
+    [Tooltip("Heal to 20% of max health instead of dying")]
+    public bool defiant = false;
+
+    [Header("Other Debuffs")]
+    [Tooltip("Reduce movement by 1 for each stack")]
+    public int daze = 0;
+    [Tooltip("Take 9% of max health as damage for each stack and deal 10% less damage, decrements")]
+    public int poison = 0;
+
+    [Header("Misc. Components")]
     public Animator UnitAnimator;
     [SerializeField] healthbar healthbar;
     [SerializeField] private AudioClip[] hurtSFX;
@@ -61,51 +111,138 @@ public class BaseUnit : MonoBehaviour
     //End of new stuff.
     public List<Tile> GetTilesInMoveRange() => RangeManager.GetTilesInRange(OccupiedTile, moveRange, RangeType.FloodMovement);
     public List<Tile> GetTilesInAttackRange() => RangeManager.GetTilesInRange(OccupiedTile, attackRange, RangeType.FloodTargeting);
+    public List<Tile> GetTilesInAOEAttackRange(Tile rangedCenter, int range) => RangeManager.GetTilesInRange(rangedCenter, range, RangeType.FloodTargeting);
+    public List<Tile> GetTilesInUnrestrictedMoveRange() => RangeManager.GetTilesInRange(OccupiedTile, moveRange, RangeType.FloodMovementUnrestricted);
 
     private void Awake()
     {
         UnitAnimator = GetComponent<Animator>();
     }
+
     //damage functions
-    public void takeDamage(float damageAmount, bool dodgeable = true)
+    public void takeDamage(float damageAmount, bool dodgeable = true, bool reflectable = true, BaseUnit attacker = null)
     {
-        // Check for Dodge
-        if (dodgeable && dodge > 0)
+        healthbar = GetComponentInChildren<healthbar>();
+
+        float damage = damageAmount * defenseModifier;
+        float absorbAmount;
+
+        if (GameManager.Instance.gameState == GameState.PlayerTurn)
         {
-            float dodgeChance = dodge * 0.05f;
-            if (dodgeChance > 0.85f)
+            // Check for Pierce Damage
+            if (!CardManager.instance.selectedCard.pierce)
             {
-                dodgeChance = 0.85f;
+                // Check for Reflect
+                if (reflect > 0 && reflectable)
+                {
+                    attacker.takeDamage(damage * UnitManager.reflectEfficiency, true, false);
+                    reflect--;
+                    return;
+                }
+
+                // Check for Absorb
+                if (absorb > 0)
+                {
+                    absorbAmount = damage * UnitManager.absorbEfficiency;
+                    Heal(absorbAmount);
+                    absorb--;
+                    return;
+                } 
+
+                // Check for Dodge
+                if (dodgeable && dodge > 0)
+                {
+                    float dodgeChance = dodge * 0.05f;
+                    if (dodgeChance > UnitManager.maxDodgeChance)
+                    {
+                        dodgeChance = UnitManager.maxDodgeChance;
+                    }
+                    if (Random.value < dodgeChance)
+                    {
+                        dodge--;
+                        return;
+                    }
+                }
+            } else
+            {
+                if (damage < damageAmount)
+                {
+                    damage = damageAmount;
+                }
             }
-            if (Random.value < dodgeChance)
+        } else
+        {
+            // Check for Reflect
+            if (reflect > 0 && reflectable)
             {
+                attacker.takeDamage(damage * UnitManager.reflectEfficiency, true, false);
+                reflect--;
                 return;
             }
+
+            // Check for Absorb
+            if (absorb > 0)
+            {
+                absorbAmount = damage * UnitManager.absorbEfficiency;
+                Heal(absorbAmount);
+                absorb--;
+                return;
+            } 
+
+            // Check for Dodge
+            if (dodgeable && dodge > 0)
+            {
+                float dodgeChance = dodge * 0.05f;
+                if (dodgeChance > UnitManager.maxDodgeChance)
+                {
+                    dodgeChance = UnitManager.maxDodgeChance;
+                }
+                if (Random.value < dodgeChance)
+                {
+                    dodge--;
+                    return;
+                }
+            }
+        }
+
+        if (guard > 0)
+        {
+            if (Faction == Faction.Enemy)
+            {
+                if (!CardManager.instance.selectedCard.pierce)
+                {
+                    if (guard >= damage * UnitManager.guardEfficiency)
+                    {
+                        guard -= damage * UnitManager.guardEfficiency;
+                    } else
+                    {
+                        damage = damage * UnitManager.guardEfficiency - guard;
+                        guard = 0;
+                        health -= damage;
+                    } 
+                }
+               
+            } else
+            {
+                if (guard >= damage * UnitManager.guardEfficiency)
+                {
+                    guard -= damage * UnitManager.guardEfficiency;
+                } else
+                {
+                    damage = damage * UnitManager.guardEfficiency - guard;
+                    guard = 0;
+                    health -= damage;
+                } 
+            }
+            
+        } else
+        {
+            health -= damage;
         }
 
         if(SoundFXManager.instance != null)
         {
             SoundFXManager.instance.PlaySoundFXClip(hurtSFX, transform, 1f);
-        }
-        
-
-        healthbar = GetComponentInChildren<healthbar>();
-        float damage = damageAmount * defenseModifier;
-
-        if (guard > 0)
-        {
-            if (guard >= damage * 0.8f)
-            {
-                guard -= damage * 0.8f;
-            } else
-            {
-                damage = damage * 0.8f - guard;
-                guard = 0;
-                health -= damage;
-            }
-        } else
-        {
-            health -= damage;
         }
 
         UpdateHealth();
@@ -140,42 +277,36 @@ public class BaseUnit : MonoBehaviour
         UpdateHealth();
     }
 
-    // Increase attack by 25%
-    public void DamageUp()
-    {
-        attackModifier += 0.25f;
-        if (attackModifier > 2)
-        {
-            attackModifier = 2;
-        }
-    }
-
-    //Increase defense by 25%
-    public void DefenseUp()
-    {
-        defenseModifier -= 0.25f;
-        if (defenseModifier < 0)
-        {
-            defenseModifier = 0;
-        }
-    }
-
     // Increase attack and defense by 25%
-    public void Boost()
+    public void Boost(bool reapply = false)
     {
-        attackModifier += 0.25f;
+        if (!reapply)
+        {
+            if ((int)boost > 0)
+            {
+                boost = EffectFlag.Middle;
+                return;
+            }
+            
+            boost = EffectFlag.Middle;
+        }
+
+        attackModifier += UnitManager.boostHinderValue;
         if (attackModifier > 2)
         {
             attackModifier = 2;
         }
 
-        defenseModifier -= 0.25f;
+        defenseModifier -= UnitManager.boostHinderValue;
         if (defenseModifier < 0)
         {
             defenseModifier = 0;
         }
 
-        GetComponentInParent<HandManager>().UpdateCardVisuals();
+        if (Faction == Faction.Player)
+        {
+            GetComponentInParent<HandManager>().UpdateCardVisuals();
+        }
     }
 
     // Remove all debuffs
@@ -187,24 +318,24 @@ public class BaseUnit : MonoBehaviour
         moveModifier = 0;
 
         // Reapply Positive Effects
-        if (dmgUp > 0)
+        if (strengthen > 0)
         {
-            DamageUp();
+            Strengthen(true);
         }
 
-        if (defUp > 0)
+        if (resistant > 0)
         {
-            DefenseUp();
+            Resistant(true);
         }
 
         if (boost > 0)
         {
-            Boost();
+            Boost(true);
         }
 
         if (invisible > 0)
         {
-            attackModifier += 0.15f;
+            attackModifier += UnitManager.invisibleAttackBoost;
         }
 
         if (agility > 0)
@@ -213,44 +344,62 @@ public class BaseUnit : MonoBehaviour
         }
 
         // Remove Debuffs
-        stunned = 0;
+        daze = 0;
         poison = 0;
+        stunned = EffectFlag.None;
+        restricted = EffectFlag.None;
+        frozen = EffectFlag.None;
+        flaming = EffectFlag.None;
+        weaken = EffectFlag.None;
+        vulnerable = EffectFlag.None;
+        hinder = EffectFlag.None;
 
-        GetComponentInParent<HandManager>().UpdateCardVisuals();
+        if (Faction == Faction.Player)
+        {
+            GetComponentInParent<HandManager>().UpdateCardVisuals();
+        }
     }
 
     // Increase action points by given amount
-    public void Energize(int energy)
+    public void Energize(int energy = 1)
     {
         GetComponent<HandManager>().actionPoints += energy;
     }
 
-    // Become untargetable for 2 turns, increase attack by 15%
-    public void Invisible()
+    // Become untargetable, increase attack by 15%
+    public void Invisible(bool visible = false)
     {
-        if (invisible != 0) return;
-        invisible = 3;
-        GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.5f);
-        attackModifier += 0.15f;
-        GetComponentInParent<HandManager>().UpdateCardVisuals();
-    }
-
-    // Remove invisibility and attack bonus
-    public void Visible()
-    {
-        invisible = 0;
-        GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.5f);
-        attackModifier -= 0.15f;
-        GetComponentInParent<HandManager>().UpdateCardVisuals();
+        if (visible)
+        {
+            // Become Visible
+            invisible = 0;
+            GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.5f);
+            attackModifier -= UnitManager.invisibleAttackBoost;
+            if (Faction == Faction.Player)
+            {
+                GetComponentInParent<HandManager>().UpdateCardVisuals();
+            }
+        } else
+        {
+            // Become Invisible
+            if (invisible != 0) return;
+            invisible = EffectFlag.Start;
+            GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.5f);
+            attackModifier += UnitManager.invisibleAttackBoost;
+            if (Faction == Faction.Player)
+            {
+                GetComponentInParent<HandManager>().UpdateCardVisuals();
+            }
+        }
     }
 
     // Apply 2 stacks of dodge, each giving a 5% chance to avoid attacks
     public void Dodge()
     {
-        dodge += 2;
-        if (dodge > 17)
+        dodge += 3;
+        if (dodge > 18)
         {
-            dodge = 17;
+            dodge = 18;
         }
     }
 
@@ -273,118 +422,388 @@ public class BaseUnit : MonoBehaviour
         }
 
         moveModifier++;
-        GetComponentInParent<HandManager>().UpdateCardVisuals();
+        if (Faction == Faction.Player)
+        {
+            GetComponentInParent<HandManager>().UpdateCardVisuals();
+        }
+    }
+
+    // Increase attack by 25%
+    public void Strengthen(bool reapply = false)
+    {
+        if (!reapply)
+        {
+            if ((int)strengthen > 0)
+            {
+                strengthen = EffectFlag.Middle;
+                return;
+            }
+
+            strengthen = EffectFlag.Middle;
+        }
+
+        attackModifier += UnitManager.strengthenWeakenValue;
+        if (attackModifier > 2)
+        {
+            attackModifier = 2;
+        }
+
+        if (Faction == Faction.Player)
+        {
+            GetComponentInParent<HandManager>().UpdateCardVisuals();
+        }
+    }
+
+    // Increase defense by 25%
+    public void Resistant(bool reapply = false)
+    {
+        if (!reapply)
+        {
+            if ((int)resistant > 0)
+            {
+                resistant = EffectFlag.Middle;
+                return;
+            }
+
+            resistant = EffectFlag.Middle;
+        }
+
+        defenseModifier -= UnitManager.resistantVulnerableValue;
+        if (defenseModifier < 0)
+        {
+            defenseModifier = 0;
+        }
+
+        if (Faction == Faction.Player)
+        {
+            GetComponentInParent<HandManager>().UpdateCardVisuals();
+        }
+    }
+
+    // Reflect damage taken back to the attacker
+    public void Reflect(int stacks)
+    {
+        reflect += stacks;
+    }
+
+    // Heal for 10% times number of stacksof max health at the end of the turn
+    public void Regeneration()
+    {
+        regeneration += 2;
+        if (regeneration >= 6)
+        {
+            regeneration = 6;
+        }
+    }
+
+    // Heal 50% of damage dealt to the player
+    public void Absorb(int stacks)
+    {
+        absorb += stacks;
     }
 
     // CONTROL EFFECTS
     // Reduce movement by 1
     public void Daze()
     {
-        if (Faction == Faction.Enemy)
+        if (!(daze >= 3))
         {
-            if (moveRange > 0)
-            {
-                moveRange--;
-            }
-            
-        } else if (Faction == Faction.Player)
+            daze++;
+        } else
         {
-            if (!(moveModifier <= -3))
-            {
-                moveModifier--;
-            }
+            daze = 3;
+            return;   
         }
+
+        moveModifier--;
+        if (Faction == Faction.Player)
+        {
+            GetComponentInParent<HandManager>().UpdateCardVisuals();
+        }
+        
     }
 
     // Stun for 1 turn, preventing card use
     public void Stun()
     {
-        if ((int)stunned == 2) return;
-        stunned = EffectFlag.Start;
+        if (stunned == EffectFlag.Middle) return;
+        stunned = EffectFlag.Middle;
     }
 
     // Reduce movement to 0 for turn
     public void Restrict()
     {
         //Reduce Movement to 0
-        if (Faction == Faction.Enemy)
-        {
-            moveRange = 0;
-        } else if (Faction == Faction.Player)
-        {
-            moveModifier = -99;
-        }
+        if (restricted == EffectFlag.Middle) return;
+        restricted = EffectFlag.Middle;
     }
 
     // Stun for 1 turn and decrease defense by 15%
-    public void Freeze()
+    public void Freeze(bool reapply = false)
     {
+        if (!reapply) {
+            if (frozen == EffectFlag.Middle ) return;
+            if (frozen == EffectFlag.End)
+            {
+                frozen = EffectFlag.Middle;
+                return;
+            }
+        }
+
         Stun();
-        defenseModifier += 0.10f;
-        if (defenseModifier < 0)
-        {
-            defenseModifier = 0;
-        } else if (defenseModifier > 2)
+        defenseModifier += UnitManager.frozenDefenseDown;
+        if (defenseModifier > 2)
         {
             defenseModifier = 2;
         }
     }
 
-    // Apply 1 poison stack, dealing 8% max health times the stack count as damage at end of turn, decrease damage dealt by 10%
-    public void Poison()
+    // Apply poison stacks, dealing 10% of remaining health times the stack count as damage at end of turn, decrease damage dealt by 10%
+    public void Poison(int stacks = 1)
     {
-        if (poison >= 4) return;
+        if (poison >= 8) 
+        {
+            poison = 8;
+            return;
+        }
         if (poison == 0)
         {
-            attackModifier -= 0.1f;
+            attackModifier -= UnitManager.poisonAttackDown;
         }
-        poison++;
-
+        poison += stacks;
+    }
+    
+    // Take flaming damage for 2 turns, equal to 15% of remaining health and 20% of max health each turn
+    public void Flaming()
+    {
+        flaming = EffectFlag.Start;
     }
 
-
-    public virtual void ResetValues()
+    // Reduce attack by 25% for 2 turns
+    public void Weaken(bool reapply = false)
     {
+        if (!reapply)
+        {
+            if ((int)weaken > 0)
+            {
+                weaken = EffectFlag.Middle;
+                return;
+            }
+
+            weaken = EffectFlag.Middle;
+        }
+
+        attackModifier -= UnitManager.strengthenWeakenValue;
+        if (attackModifier < 0)
+        {
+            attackModifier = 0;
+        }
+
+        if (Faction == Faction.Player)
+        {
+            GetComponentInParent<HandManager>().UpdateCardVisuals();
+        }
+    }
+
+    // Reduce defense by 25% for 2 turns
+    public void Vulnerable(bool reapply = false)
+    {
+        if (!reapply)
+        {
+            if ((int)vulnerable > 0)
+            {
+                vulnerable = EffectFlag.Middle;
+                return;
+            }
+
+            vulnerable = EffectFlag.Middle;
+        }
+
+        defenseModifier += UnitManager.resistantVulnerableValue;
+        if (defenseModifier > 2)
+        {
+            defenseModifier = 2;
+        }
+
+        if (Faction == Faction.Player)
+        {
+            GetComponentInParent<HandManager>().UpdateCardVisuals();
+        }
+    }
+
+    // Reduce attack and defense by 25% for 2 turns
+    public void Hinder(bool reapply = false)
+    {
+        if (!reapply)
+        {
+            if ((int)hinder > 0)
+            {
+                hinder = EffectFlag.Middle;
+                return;
+            }
+            
+            hinder = EffectFlag.Middle;
+        }
+
+        attackModifier -= UnitManager.boostHinderValue;
+        if (attackModifier < 0)
+        {
+            attackModifier = 0;
+        }
+
+        defenseModifier += UnitManager.boostHinderValue;
+        if (defenseModifier > 2)
+        {
+            defenseModifier = 2;
+        }
+
+        if (Faction == Faction.Player)
+        {
+            GetComponentInParent<HandManager>().UpdateCardVisuals();
+        }
+    }
+
+    // Remove all buffs
+    public void Expose()
+    {
+        // Reset modifiers
         attackModifier = 1;
         defenseModifier = 1;
         moveModifier = 0;
-        defiant = false;
-        agility = 0;
 
-        if (stunned > 0)
+        // Reapply Negative Effects
+        if (weaken > 0)
         {
-            stunned--;
-        } else
+            Weaken(true);
+        }
+
+        if (vulnerable > 0)
         {
-            stunned = 0;
+            Vulnerable(true);
+        }
+
+        if (hinder > 0)
+        {
+            Hinder(true);
+        }
+
+        if (frozen > 0)
+        {
+            Freeze(true);
+        }
+
+        if (daze > 0)
+        {
+            moveModifier -= daze;
         }
 
         if (poison > 0)
         {
-            takeDamage(maxHealth * 0.08f * poison, false);
+            attackModifier -= UnitManager.poisonAttackDown;
+        }
+
+        // Remove Buffs
+        dodge = 0;
+        agility = 0;
+        regeneration = 0;
+        reflect = 0;
+        absorb = 0;
+        defiant = false;
+        boost = EffectFlag.None;
+        strengthen = EffectFlag.None;
+        resistant = EffectFlag.None;
+        invisible = EffectFlag.None;
+
+        if (Faction == Faction.Player)
+        {
+            GetComponentInParent<HandManager>().UpdateCardVisuals();
+        }
+    }
+
+    // Reset all values and decrement all effects at the end of the turn
+    public virtual void ResetValues()
+    {
+        if (summoned)
+        {
+            lifetime--;
+            if (lifetime == 0)
+            {
+                Die();
+            }
+        }
+
+        attackModifier = 1;
+        defenseModifier = 1;
+        moveModifier = 0;
+        reflect = 0;
+        absorb = 0;
+        defiant = false;
+        agility = 0;
+        daze = 0;
+
+        if (invisible > 0)
+        {
+            invisible--;
+            attackModifier += UnitManager.invisibleAttackBoost;
+            if (invisible == 0)
+            {
+                Invisible(true);
+            }
+        }
+
+        if (strengthen > 0)
+        {
+            strengthen--;
+            if (strengthen > 0)
+            {
+                Strengthen(true);
+            }
+        }
+
+        if (stunned > 0)
+        {
+            stunned--;
+        }
+
+        if (frozen > 0)
+        {
+            frozen--;
+            if (frozen > 0)
+            {
+                Freeze(true);
+            }
+        }
+
+        if (weaken > 0)
+        {
+            weaken--;
+            if (weaken > 0)
+            {
+                Weaken(true);
+            }
+        }
+
+        if (regeneration > 0)
+        {
+            Heal(maxHealth * 0.1f * regeneration);
+            regeneration--;
+        }
+
+        if (poison > 0)
+        {
+            takeDamage(health * 0.1f * poison, false, false);
             poison--;
             if (poison == 0)
             {
-                attackModifier += 0.1f;
+                attackModifier += UnitManager.poisonAttackDown;
             }
         }
 
-        if (dmgUp > 0)
+        if (flaming > 0)
         {
-            dmgUp--;
-            if (dmgUp > 0)
-            {
-                DamageUp();
-            }
-        }
-
-        if (defUp > 0)
-        {
-            defUp--;
-            if (defUp > 0)
-            {
-                DefenseUp();
-            }
+            takeDamage(health * 0.2f, false, false);
+            takeDamage(maxHealth * 0.15f, false, false);
+            flaming--;
         }
 
         if (boost > 0)
@@ -392,28 +811,49 @@ public class BaseUnit : MonoBehaviour
             boost--;
             if (boost > 0)
             {
-                Boost();
+                Boost(true);
             }
         }
 
-        if (invisible > 0)
+        if (hinder > 0)
         {
-            invisible--;
-            if (invisible == 0)
+            hinder--;
+            if (hinder > 0)
             {
-                Visible();
+                Hinder(true);
             }
-            attackModifier += 0.15f;
-        } else
+        }
+
+        if (resistant > 0)
         {
-            invisible = 0;
+            resistant--;
+            if (resistant > 0)
+            {
+                Resistant(true);
+            }
+        }
+
+        if (vulnerable > 0)
+        {
+            vulnerable--;
+            if (vulnerable > 0)
+            {
+                Vulnerable(true);
+            }
+        }
+
+        if (restricted > 0)
+        {
+            restricted--;
         }
 
         if (dodge > 0)
         {
             dodge--;
         }
+
     }
+
 
     public void UpdateHealth()
     {
@@ -424,10 +864,18 @@ public class BaseUnit : MonoBehaviour
     void Die()
     {
         Debug.Log($"{name} has died.");
-        if (Faction == Faction.Player) // If this is a player unit
+        if (Faction == Faction.Player)
+        { 
+            // If this is a player unit
             UnitManager.Instance.playerUnitCount -= 1; // Decrease the player unit count
-        else // Otherwise this is an enemy unit
+            UnitManager.Instance.playersSpawned.Remove((BasePlayer)this);
+        }
+        else  
+        {
+            // Otherwise this is an enemy unit
             UnitManager.Instance.enemyUnitCount -= 1; // Decrease the enemy unit count
+            UnitManager.Instance.enemiesSpawned.Remove((BaseEnemy)this);
+        }
         Destroy(gameObject);
     }
 

@@ -40,7 +40,16 @@ public class BaseMovementCard : BaseCard
         {
             player.moveRange = range + player.moveModifier;
 
-            List<Tile> tilesInRange = player.GetTilesInMoveRange();
+            
+            List<Tile> tilesInRange = null;
+            if (rangeType == RangeType.FloodMovementUnrestricted)
+            {
+                tilesInRange = player.GetTilesInUnrestrictedMoveRange();
+            } else
+            {
+                tilesInRange = player.GetTilesInMoveRange();
+            }
+            
             foreach (Tile t in tilesInRange)
             {
                 t.ShowHighlight(true, Tile.walkableColor);

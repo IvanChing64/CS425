@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 //Developer: Ivan Ching
@@ -14,19 +16,40 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private List<ScriptableUnit> playersToSpawn = new List<ScriptableUnit>();
     [SerializeField] private List<ScriptableUnit> enemiesToSpawn = new List<ScriptableUnit>();
 
-    private List<ScriptableUnit> units;
     //Adding reference to player tile.
     private Tile playerTile;
+    public bool targetting = false;
+    public Tile targettedTile, previousTile; 
     private List<Tile> enemyTiles = new List<Tile>();
 
     public BaseUnit SelectedUnit;
-    //public GameObject selector;
+    public UnitSelector selector;
 
     public List<BasePlayer> playersSpawned = new List<BasePlayer>();
     public List<BaseEnemy> enemiesSpawned = new List<BaseEnemy>();
 
     public int enemyUnitCount;
     public int playerUnitCount;
+
+    public static float boostHinderValue = 0.25f;
+    public static float strengthenWeakenValue = 0.25f;
+    public static float resistantVulnerableValue = 0.25f;
+    public static float invisibleAttackBoost = 0.15f;
+    public static float frozenDefenseDown = 0.1f;
+    public static float poisonAttackDown = 0.1f;
+    public static float maxDodgeChance = 0.85f;
+    public static float guardEfficiency = 0.85f;
+    public static float reflectEfficiency = 0.75f;
+    public static float absorbEfficiency = 0.5f;
+    public static int backstabInvisibleBonus = 15;
+
+    public List<ScriptableUnit> MB;
+    public List<ScriptableUnit> WB;
+    public List<ScriptableUnit> FB;
+    public List<ScriptableUnit> MU;
+    public List<ScriptableUnit> WU;
+    public List<ScriptableUnit> FU;
+
 
     public BasePlayer SelectedPlayer
     {
@@ -43,6 +66,99 @@ public class UnitManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        switch(DeckManager.instance.DEBUGTEAMSELECTOR)
+        {
+            case 0:
+                playersToSpawn = MB;
+                break;
+
+            case 1:
+                playersToSpawn = WB;
+                break;
+
+            case 2:
+                playersToSpawn = FB;
+                break;
+
+            case 3:
+                playersToSpawn = MU;
+                break;
+
+            case 4:
+                playersToSpawn = WU;
+                break;
+
+            case 5:
+                playersToSpawn = FU;
+                break;
+
+            default:
+                playersToSpawn = ArmyManager.Instance.unitsInArmy;
+                break;
+        }
+    }
+
+    private void Update()
+    {
+        if (targetting && !PauseMenu.instance.blocker.activeInHierarchy)
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+            int range = CardManager.instance.selectedCard.areaRange;
+
+            if (hit.collider != null)
+            {
+                GameObject objectOver = hit.collider.gameObject;
+                if (previousTile != targettedTile)
+                {
+                    previousTile = targettedTile;
+                }
+                
+                targettedTile = objectOver.GetComponent<Tile>();
+                if (targettedTile != null)
+                {
+                    if (previousTile != null)
+                    {
+                        foreach (Tile t in SelectedPlayer.GetTilesInAOEAttackRange(previousTile, range))
+                        {
+                            t.ShowHighlight(true, Tile.nonwalkableColor);
+                        }
+                    }
+
+                    foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
+                    {
+                        t.ShowHighlight(true, Tile.targetableColor);
+                    }
+
+                    SelectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
+
+                    foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
+                    {
+                        if (targettedTile == t)
+                        {
+                            foreach (Tile p in SelectedPlayer.GetTilesInAOEAttackRange(targettedTile, range))
+                            {
+                                p.ShowHighlight(true, Tile.attackableColor);
+                            }
+                            t.ShowHighlight(true, Tile.attackableColor);
+                            break;
+                        }
+                    }
+                } else
+                {
+                    if (previousTile != null)
+                    {
+                        foreach (Tile t in SelectedPlayer.GetTilesInAOEAttackRange(previousTile, range))
+                        {
+                            t.ShowHighlight(true, Tile.nonwalkableColor);
+                        }
+                    }
+                }
+            }
+        } 
     }
 
 
@@ -124,7 +240,7 @@ public class UnitManager : MonoBehaviour
 
         for (int i = 0; i < countToSpawn; i++)
         {
-            GameObject prefab = data.enemies[Random.Range(0, data.enemies.Count)];
+            GameObject prefab = data.enemies[i % data.enemies.Count];
             //var unitData = enemiesToSpawn[i];
             var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
             if(randomSpawnTile != null)
@@ -157,27 +273,19 @@ public class UnitManager : MonoBehaviour
             // Deselect current unit and hide move range highlights
             if (SelectedEnemy != null)
             {
-                int totalRange = SelectedEnemy.attackRange + SelectedEnemy.moveRange;
+                int totalRange = SelectedEnemy.attackRange + SelectedEnemy.moveRange + SelectedEnemy.moveModifier;
                 RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, totalRange).ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             }
 
             SelectedUnit.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             SelectedUnit.GetTilesInAttackRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             SelectedUnit.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
-        }
 
+        }
         SelectedUnit = unit;
 
-        //if (SelectedUnit == null)
-        //{
-        //    selector.SetActive(false);
-        //}
-        //else
-        //{
-        //    selector.SetActive(true);
-        //    selector.transform.position = SelectedUnit.OccupiedTile.Position;
-        //    selector.transform.position += Vector3.back;
-        //}
+        selector.PlaceOnUnit(SelectedUnit);
+        UnitInfo.Instance.UpdatePanel();
     }
 
     public void SetSelectedPlayer(BasePlayer player)
@@ -218,9 +326,12 @@ public class UnitManager : MonoBehaviour
         int attackRange = SelectedEnemy.attackRange;
         // int moveRange = NPC_Controller.Instance.tilesPerMove;
         // TODO: enemies should be initialized with correct movement range
-        int moveRange = SelectedEnemy.moveRange;
+        int moveRange = SelectedEnemy.moveRange + SelectedEnemy.moveModifier;
 
-        Debug.Log("Selected Enemy: " + SelectedEnemy.name);
+        if ((int)SelectedEnemy.restricted > 1)
+        {
+            moveRange = 0;
+        }
 
         if ((int)SelectedEnemy.stunned > 1)
         {
@@ -274,21 +385,32 @@ public class UnitManager : MonoBehaviour
 
         List<NPC_Controller> enemyControllers = new List<NPC_Controller>();
 
-        foreach (var enemy in enemiesSpawned)
+        List<BaseEnemy> enemies = enemiesSpawned;
+
+        for (int i = 1; i <= enemyUnitCount; i++)
+        {
+            int initial = enemyUnitCount;
+            enemies[enemyUnitCount - i].ResetValues();
+            if (initial > enemyUnitCount)
+            {
+                i--;
+            }
+
+        }
+
+        foreach (var enemy in enemies)
         {
             if (enemy == null || enemy.gameObject == null) continue;
-            enemy.ResetValues();
 
             var npc = enemy.GetComponent<NPC_Controller>();
             if (npc != null) {
-                if (enemy.stunned > 0)
+                if ((int)enemy.stunned >= 1)
                 {
                     continue;
                 }    
 
                 enemyControllers.Add(npc);
             }
-
         }
 
         StartCoroutine(NPC_Controller.RunEnemyTurn(enemyControllers));

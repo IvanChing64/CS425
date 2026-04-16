@@ -1,7 +1,8 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 /// <summary>
 /// Script for handling movement and attack range
@@ -17,6 +18,8 @@ public static class RangeManager
                 return GetPathsFlood(startTile, range, false);
             case RangeType.FloodTargeting:
                 return GetPathsFlood(startTile, range, true);
+            case RangeType.FloodMovementUnrestricted:
+                return GetPathsFlood(startTile, range, false, true);
             default:
                 Debug.LogError("Invalid range type.");
                 return null;
@@ -99,6 +102,35 @@ public static class RangeManager
 
         return tilePathsInRange;
     }
+
+    /*public static List<Tile> GetEnemyRange(Tile startTile, int moveRange, int atkRange, bool incorporeal)
+    {
+        Dictionary<Tile, Tile> tilePathsInRange = new();
+        Queue<Tile> visitQueue = new();
+        visitQueue.Enqueue(startTile);
+
+        // Constrain the total number of moves made to the range
+        for (int i = 0; i < range; i++)
+        {
+            Queue<Tile> addQueue = new();
+
+            while (visitQueue.TryDequeue(out Tile visitedTile))
+            {
+                foreach (Tile neighbor in visitedTile.Neighbors.Where(t => !tilePathsInRange.Keys.Contains(t) && (ignoreBlockers || t.isWalkable) && (ignoreOccupation || t.OccupiedUnit == null)))
+                {
+                    tilePathsInRange.Add(neighbor, visitedTile);
+                    addQueue.Enqueue(neighbor);
+                }
+            }
+
+            while (addQueue.TryDequeue(out Tile nextTile))
+            {
+                visitQueue.Enqueue(nextTile);
+            }
+        }
+
+        return new List<Tile>();
+    }*/
 }
 
 /// <summary>
@@ -110,5 +142,8 @@ public enum RangeType
     FloodMovement,
 
     /// <summary>Range type for targeting that respects blockers</summary>
-    FloodTargeting
+    FloodTargeting,
+    
+    /// <summary>Range type for movement that respects occupied tiles</summary>
+    FloodMovementUnrestricted,
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Developer: Bailey Escritor
 //Holds all available cards and manages deck creation
@@ -8,9 +9,13 @@ public class DeckManager : MonoBehaviour
     public static DeckManager instance {get; private set;}
     public static GameObject attackCardPrefab, movementCardPrefab, supportCardPrefab, summonCardPrefab;
     public List<ScriptableCard> allCards = new List<ScriptableCard>();
+    public List<ScriptableUnit> allSummons = new List<ScriptableUnit>();
     private bool initialized = false;
 
-    //Initializes singleton instance and loads all cards from Resources
+
+    public int DEBUGTEAMSELECTOR = -1;
+
+    // Initializes singleton instance and loads all cards from Resources
     void Awake()
     {
         if (instance == null)
@@ -24,6 +29,9 @@ public class DeckManager : MonoBehaviour
             movementCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/MovementCardPrefab");
             supportCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/SupportCardPrefab");
             summonCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/SummonCardPrefab");
+            ScriptableUnit[] summons = Resources.LoadAll<ScriptableUnit>("Summons");
+            allSummons.AddRange(summons);
+            DEBUGTEAMSELECTOR = -1;
 
             Debug.Log("DeckManager Instance Created & Initialized");
         } else
@@ -33,7 +41,7 @@ public class DeckManager : MonoBehaviour
         }
     }
 
-    //Enforces single initialization
+    // Enforces single initialization
     void Start()
     {
         if (!initialized)
@@ -45,6 +53,9 @@ public class DeckManager : MonoBehaviour
             movementCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/MovementCardPrefab");
             supportCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/SupportCardPrefab");
             summonCardPrefab = Resources.Load<GameObject>("Prefabs/Cards/SummonCardPrefab");
+            ScriptableUnit[] summons = Resources.LoadAll<ScriptableUnit>("Summons");
+            allSummons.AddRange(summons);
+            DEBUGTEAMSELECTOR = 0;
 
             Debug.Log("DeckManager Initialized");
         } else
@@ -53,7 +64,15 @@ public class DeckManager : MonoBehaviour
         }
     }
 
-    //Returns a unit's deck based on their startingDeck list
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            instance.DEBUGTEAMSELECTOR = (instance.DEBUGTEAMSELECTOR + 1) % 6;
+        }
+    }
+
+    // Returns a unit's deck based on their startingDeck list
     public void GetDeck(HandManager handManager)
     {
         BasePlayer unit = handManager.GetComponent<BasePlayer>();
@@ -76,9 +95,15 @@ public class DeckManager : MonoBehaviour
         }
     }
 
-    //Gets card by name from allCards list
+    // Gets card by name from allCards list
     public ScriptableCard GetCardByName(string newCardName)
     {
         return allCards.Find(card => card.cardName == newCardName);
+    }
+
+    // Gets a summon by enum from allSummons list
+    public ScriptableUnit GetSummonByName(string summonName)
+    {
+        return allSummons.Find(ScriptableObject => ScriptableObject.name == summonName);
     }
 }

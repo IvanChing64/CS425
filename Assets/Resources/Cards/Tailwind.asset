@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: Tailwind
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Tailwind
-  cardDescription: Grant agility to a ranged ally
+  cardDescription: Grant agility to self and all ranged allies
   type: 2
-  range: 2
+  range: 3
+  areaRange: 0
   value: 1
   cost: 0
+  damaging: 0
+  piercing: 0
   areaEffect: 1
   rangeType: 1
   cardIcon: {fileID: -7963849903453386218, guid: c1dcb2816f4ef5b40bb5be84eea93fea, type: 3}
@@ -27,3 +30,4 @@ MonoBehaviour:
   secondarySupportEffect: 0
   primaryControlEffect: 0
   secondaryControlEffect: 0
+  summon: 0
