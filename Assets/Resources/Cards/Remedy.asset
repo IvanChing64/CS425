@@ -16,9 +16,11 @@ MonoBehaviour:
   cardDescription: Heal and Regenerate a nearby ally
   type: 2
   range: 2
+  areaRange: 0
   value: 10
   cost: 0
   damaging: 0
+  piercing: 0
   areaEffect: 0
   rangeType: 1
   cardIcon: {fileID: -8714418300613597991, guid: a027c213e88ad1f40994c68276f11c89, type: 3}
@@ -28,3 +30,4 @@ MonoBehaviour:
   secondarySupportEffect: 13
   primaryControlEffect: 0
   secondaryControlEffect: 0
+  summon: 0

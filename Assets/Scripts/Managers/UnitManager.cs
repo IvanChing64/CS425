@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 //Developer: Ivan Ching
@@ -16,6 +18,8 @@ public class UnitManager : MonoBehaviour
 
     //Adding reference to player tile.
     private Tile playerTile;
+    public bool targetting = false;
+    public Tile targettedTile, previousTile; 
     private List<Tile> enemyTiles = new List<Tile>();
 
     public BaseUnit SelectedUnit;
@@ -35,8 +39,8 @@ public class UnitManager : MonoBehaviour
     public static float poisonAttackDown = 0.1f;
     public static float maxDodgeChance = 0.85f;
     public static float guardEfficiency = 0.85f;
-    public static float absorbEfficiency = 0.25f;
-    public static float reflectEfficiency = 0.25f;
+    public static float reflectEfficiency = 0.75f;
+    public static float absorbEfficiency = 0.5f;
     public static int backstabInvisibleBonus = 15;
 
     public List<ScriptableUnit> MB;
@@ -93,6 +97,68 @@ public class UnitManager : MonoBehaviour
                 playersToSpawn = ArmyManager.Instance.unitsInArmy;
                 break;
         }
+    }
+
+    private void Update()
+    {
+        if (targetting && !PauseMenu.instance.blocker.activeInHierarchy)
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+            int range = CardManager.instance.selectedCard.areaRange;
+
+            if (hit.collider != null)
+            {
+                GameObject objectOver = hit.collider.gameObject;
+                if (previousTile != targettedTile)
+                {
+                    previousTile = targettedTile;
+                }
+                
+                targettedTile = objectOver.GetComponent<Tile>();
+                if (targettedTile != null)
+                {
+                    if (previousTile != null)
+                    {
+                        foreach (Tile t in SelectedPlayer.GetTilesInAOEAttackRange(previousTile, range))
+                        {
+                            t.ShowHighlight(true, Tile.nonwalkableColor);
+                        }
+                    }
+
+                    foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
+                    {
+                        t.ShowHighlight(true, Tile.targetableColor);
+                    }
+
+                    SelectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
+
+                    foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
+                    {
+                        if (targettedTile == t)
+                        {
+                            foreach (Tile p in SelectedPlayer.GetTilesInAOEAttackRange(targettedTile, range))
+                            {
+                                p.ShowHighlight(true, Tile.attackableColor);
+                            }
+                            t.ShowHighlight(true, Tile.attackableColor);
+                            break;
+                        }
+                    }
+                } else
+                {
+                    if (previousTile != null)
+                    {
+                        foreach (Tile t in SelectedPlayer.GetTilesInAOEAttackRange(previousTile, range))
+                        {
+                            t.ShowHighlight(true, Tile.nonwalkableColor);
+                        }
+                    }
+                }
+            }
+        } 
     }
 
 
@@ -214,8 +280,8 @@ public class UnitManager : MonoBehaviour
             SelectedUnit.GetTilesInMoveRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             SelectedUnit.GetTilesInAttackRange().ForEach(t => t.ShowHighlight(false, Tile.nonwalkableColor));
             SelectedUnit.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
-        }
 
+        }
         SelectedUnit = unit;
 
         selector.PlaceOnUnit(SelectedUnit);
@@ -319,21 +385,32 @@ public class UnitManager : MonoBehaviour
 
         List<NPC_Controller> enemyControllers = new List<NPC_Controller>();
 
-        foreach (var enemy in enemiesSpawned)
+        List<BaseEnemy> enemies = enemiesSpawned;
+
+        for (int i = 1; i <= enemyUnitCount; i++)
+        {
+            int initial = enemyUnitCount;
+            enemies[enemyUnitCount - i].ResetValues();
+            if (initial > enemyUnitCount)
+            {
+                i--;
+            }
+
+        }
+
+        foreach (var enemy in enemies)
         {
             if (enemy == null || enemy.gameObject == null) continue;
-            enemy.ResetValues();
 
             var npc = enemy.GetComponent<NPC_Controller>();
             if (npc != null) {
-                if (enemy.stunned > 0)
+                if ((int)enemy.stunned >= 1)
                 {
                     continue;
                 }    
 
                 enemyControllers.Add(npc);
             }
-
         }
 
         StartCoroutine(NPC_Controller.RunEnemyTurn(enemyControllers));

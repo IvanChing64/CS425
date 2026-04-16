@@ -16,11 +16,12 @@ MonoBehaviour:
   cardDescription: Purely damage all ranged enemies
   type: 0
   range: 3
+  areaRange: 0
   value: 30
   cost: 1
-  damaging: 0
+  damaging: 1
   piercing: 1
-  areaEffect: 2
+  areaEffect: 3
   rangeType: 1
   cardIcon: {fileID: -2430602730412623136, guid: af3bba22266425b46b6956234487048a, type: 3}
   cardCorner: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
@@ -29,3 +30,4 @@ MonoBehaviour:
   secondarySupportEffect: 0
   primaryControlEffect: 0
   secondaryControlEffect: 0
+  summon: 0

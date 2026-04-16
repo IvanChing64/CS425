@@ -255,6 +255,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player1
   OccupiedTile: {fileID: 0}
   Faction: 0
+  summoned: 0
+  lifetime: 0
   maxHealth: 70
   health: 70
   guard: 0
@@ -268,7 +270,6 @@ MonoBehaviour:
   strengthen: 0
   resistant: 0
   invisible: 0
-  absorb: 0
   stunned: 0
   restricted: 0
   frozen: 0
@@ -280,6 +281,7 @@ MonoBehaviour:
   dodge: 0
   agility: 0
   reflect: 0
+  absorb: 0
   defiant: 0
   daze: 0
   poison: 0
@@ -291,16 +293,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   startingDeck:
-  - Advance
-  - Advance
-  - Blaster
-  - Blaster
+  - Dash
+  - Dash
+  - Chakram
+  - Chakram
   - Blade
   - Blade
   - Deflect
-  - Swift
+  - Reflex
   canAttack: 0
   canSupport: 0
+  canSummon: 0
   energy: 2
 --- !u!114 &7232603518593366301
 MonoBehaviour:

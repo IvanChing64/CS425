@@ -11,7 +11,7 @@ public class ScriptableCard : ScriptableObject
     public string cardName, cardDescription;
     [Tooltip("Attack, Movement, Support, or Summon")]
     public Type type;
-    public int range, value, cost;
+    public int range, areaRange, value, cost;
     public bool damaging, piercing;
     [Tooltip("If and How it targets multiple units")]
     public AreaOfEffectType areaEffect;
@@ -20,6 +20,7 @@ public class ScriptableCard : ScriptableObject
     public Color cardBorderColor;
     public SupportEffect primarySupportEffect, secondarySupportEffect;
     public ControlEffect primaryControlEffect, secondaryControlEffect;
+    public Summons summon;
 }
 
 /// <summary>
@@ -79,8 +80,10 @@ public enum ControlEffect
 public enum AreaOfEffectType
 {
     None = 0,
-    Inclusive = 1,
-    Exclusive = 2,
+    SupportInclusive = 1,
+    SupportExclusive = 2,
+    AttackSelfCenter = 3,
+    AttackRangedCenter = 4
 }
 
 /// <summary>
@@ -90,9 +93,8 @@ public enum Summons
 {
     None = 0,
     Pawn = 1,
-    Raven = 2,
-    Snake = 3, 
-    Turret = 4, 
-    Generator = 5,
-    Drone = 6, 
+    Grave= 2,
+    Turret = 3, 
+    Generator = 4,
+    Drone = 5, 
 }

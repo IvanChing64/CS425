@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Divinity
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Divinity
-  cardDescription: Heal and Cleanse all ranged allies and self
+  cardDescription: Heal and Cleanse self and all ranged allies
   type: 2
   range: 3
+  areaRange: 0
   value: 40
   cost: 1
   damaging: 0
@@ -29,3 +30,4 @@ MonoBehaviour:
   secondarySupportEffect: 4
   primaryControlEffect: 0
   secondaryControlEffect: 0
+  summon: 0

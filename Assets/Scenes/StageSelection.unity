@@ -5002,7 +5002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 10
   stageData: {fileID: 11400000, guid: 79ab8631e2ea5ab4d86b9b2dd859204c, type: 2}
-  stageDesciption: Bandits have surrounded the party! It's time for a high-noon showdown!
+  stageDesciption: Robbers have surrounded the party! It's time for a high-noon showdown!
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 10
@@ -5244,7 +5244,7 @@ MonoBehaviour:
 
 
     Enemies: 1 Grunt
-    1 Archer 1 Cultist '
+    1 Bandit 1 Cultist '
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -5954,11 +5954,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 2
   stageData: {fileID: 11400000, guid: 38317e8499517ce4f91068b45e169f98, type: 2}
-  stageDesciption: 'Directed to venture east, the party encounters an enemy camp!
+  stageDesciption: 'Directed to venture West, the party encounters a group of bandits!
 
 
     Enemies:
-    6 Grunts 3 Archers'
+    4 Bandits'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -6573,6 +6573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeckManager
   allCards: []
+  allSummons: []
   DEBUGTEAMSELECTOR: 0
 --- !u!4 &1586457933
 Transform:
@@ -9000,8 +9001,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Stage Number
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
-  m_sharedMaterial: {fileID: 5430595500760780554, guid: 3dd39dabae7da9443838f19b7ffdd4c6, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ee341fdc43d76854f9fc1c7e33527d18, type: 2}
+  m_sharedMaterial: {fileID: 5418399235429956811, guid: ee341fdc43d76854f9fc1c7e33527d18, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9132,11 +9133,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 3
   stageData: {fileID: 11400000, guid: 8474337d01ca68543b6242983cc3d04b, type: 2}
-  stageDesciption: 'Directed to venture east, the party wanders into a forest and
-    finds an enemy camp!
+  stageDesciption: 'Directed to venture East, the party wanders into the forest and
+    finds a small enemy camp!
 
 
-    Enemies: 6 Grunts 3 Archers'
+    Enemies: 4 Grunts 2 Archers'
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -9293,8 +9294,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 17
   stageData: {fileID: 11400000, guid: 78a45c7baa6e4dc4386ffaba54ed5af1, type: 2}
-  stageDesciption: "All eras collide. The ultimate villain stands at the toybox edge.
-    Win now, or it\u2019s time to brush teeth.\n\nBoss Stage!"
+  stageDesciption: 'Worlds collide. The ultimate enemy stands before you. Win now,
+    or miss bedtime.
+
+
+    Boss Stage!'
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 10

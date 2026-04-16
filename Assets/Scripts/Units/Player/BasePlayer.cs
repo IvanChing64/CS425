@@ -5,7 +5,7 @@ public class BasePlayer : BaseUnit
 {
     [Tooltip("Card Set for Combat")]
     public List<string> startingDeck = new List<string>();
-    public bool canAttack = false, canSupport = false;
+    public bool canAttack = false, canSupport = false, canSummon = false;
     [Tooltip("Used for Drawing or Playing")]
     public int energy;
 

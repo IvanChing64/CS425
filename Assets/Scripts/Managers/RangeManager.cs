@@ -18,6 +18,8 @@ public static class RangeManager
                 return GetPathsFlood(startTile, range, false);
             case RangeType.FloodTargeting:
                 return GetPathsFlood(startTile, range, true);
+            case RangeType.FloodMovementUnrestricted:
+                return GetPathsFlood(startTile, range, false, true);
             default:
                 Debug.LogError("Invalid range type.");
                 return null;
@@ -140,5 +142,8 @@ public enum RangeType
     FloodMovement,
 
     /// <summary>Range type for targeting that respects blockers</summary>
-    FloodTargeting
+    FloodTargeting,
+    
+    /// <summary>Range type for movement that respects occupied tiles</summary>
+    FloodMovementUnrestricted,
 }

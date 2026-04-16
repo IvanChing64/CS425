@@ -48,13 +48,17 @@ public class CardDisplay : MonoBehaviour
                 {
                     cardValue.text = ((int)(cardData.value * overrideValue)).ToString();
                 }
-                if (overrideValue > 1f)
+                if (cardData.damaging)
                 {
-                    cardValue.color = Color.red;
-                } else if (overrideValue < 1f)
-                {
-                    cardValue.color = Color.blue;
+                    if (overrideValue > 1f)
+                    {
+                        cardValue.color = Color.red;
+                    } else if (overrideValue < 1f)
+                    {
+                        cardValue.color = Color.blue;
+                    }
                 }
+                
                 break;
         
             case Type.Movement:
