@@ -16,6 +16,6 @@ public class ShopManager : MonoBehaviour
 
     void GenerateShop()
     {
-
+        
     }
 }

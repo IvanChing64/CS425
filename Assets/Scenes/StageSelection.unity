@@ -1746,10 +1746,10 @@ MonoBehaviour:
 
     Shop
     Encounter'
-  stageWidthMin: 10
+  stageWidthMin: 12
   stageWidthMax: 15
-  stageHeightMin: 10
-  stageHeightMax: 15
+  stageHeightMin: 12
+  stageHeightMax: 14
   isRandomSize: 1
   requiredStageIDs:
   - 14
@@ -2621,8 +2621,8 @@ MonoBehaviour:
     It\u2019s a lawless land now, where the fastest draw wins the day."
   stageWidthMin: 10
   stageWidthMax: 15
-  stageHeightMin: 7
-  stageHeightMax: 10
+  stageHeightMin: 10
+  stageHeightMax: 13
   isRandomSize: 1
   requiredStageIDs:
   - 5
@@ -2916,8 +2916,8 @@ MonoBehaviour:
     heavier, and the air smells like old leather.
   stageWidthMin: 10
   stageWidthMax: 15
-  stageHeightMin: 7
-  stageHeightMax: 10
+  stageHeightMin: 10
+  stageHeightMax: 13
   isRandomSize: 1
   requiredStageIDs:
   - 4
@@ -3073,10 +3073,10 @@ MonoBehaviour:
   stageData: {fileID: 11400000, guid: 89b56d9167bd379449d3fbe3a9e61373, type: 2}
   stageDesciption: A holographic army flickers into existence, blocking the path
     to the desk-lamp sun.
-  stageWidthMin: 10
+  stageWidthMin: 12
   stageWidthMax: 15
-  stageHeightMin: 10
-  stageHeightMax: 15
+  stageHeightMin: 11
+  stageHeightMax: 12
   isRandomSize: 1
   requiredStageIDs:
   - 12
@@ -4152,8 +4152,8 @@ MonoBehaviour:
     that doesn't bleed.
   stageWidthMin: 10
   stageWidthMax: 15
-  stageHeightMin: 10
-  stageHeightMax: 15
+  stageHeightMin: 11
+  stageHeightMax: 12
   isRandomSize: 1
   requiredStageIDs:
   - 9
@@ -5005,8 +5005,8 @@ MonoBehaviour:
   stageDesciption: Robbers have surrounded the party! It's time for a high-noon showdown!
   stageWidthMin: 10
   stageWidthMax: 15
-  stageHeightMin: 10
-  stageHeightMax: 15
+  stageHeightMin: 11
+  stageHeightMax: 12
   isRandomSize: 1
   requiredStageIDs:
   - 7
@@ -5405,8 +5405,8 @@ MonoBehaviour:
     The tumbleweeds are now floating scrap-bots."
   stageWidthMin: 10
   stageWidthMax: 15
-  stageHeightMin: 7
-  stageHeightMax: 10
+  stageHeightMin: 11
+  stageHeightMax: 12
   isRandomSize: 1
   requiredStageIDs:
   - 11
@@ -5563,7 +5563,7 @@ MonoBehaviour:
     through!
   stageWidthMin: 10
   stageWidthMax: 15
-  stageHeightMin: 7
+  stageHeightMin: 10
   stageHeightMax: 10
   isRandomSize: 1
   requiredStageIDs:
@@ -5721,8 +5721,8 @@ MonoBehaviour:
     The barrel begins to glow with plasma energy.
   stageWidthMin: 10
   stageWidthMax: 15
-  stageHeightMin: 7
-  stageHeightMax: 10
+  stageHeightMin: 11
+  stageHeightMax: 12
   isRandomSize: 1
   requiredStageIDs:
   - 11
@@ -5961,7 +5961,7 @@ MonoBehaviour:
     4 Bandits'
   stageWidthMin: 12
   stageWidthMax: 15
-  stageHeightMin: 10
+  stageHeightMin: 7
   stageHeightMax: 10
   isRandomSize: 1
   requiredStageIDs:
@@ -6972,8 +6972,8 @@ MonoBehaviour:
     green forests are drying up into golden canyons.
   stageWidthMin: 10
   stageWidthMax: 15
-  stageHeightMin: 7
-  stageHeightMax: 10
+  stageHeightMin: 10
+  stageHeightMax: 13
   isRandomSize: 1
   requiredStageIDs:
   - 5
@@ -7130,8 +7130,8 @@ MonoBehaviour:
     pointing toward the stars.
   stageWidthMin: 10
   stageWidthMax: 15
-  stageHeightMin: 7
-  stageHeightMax: 10
+  stageHeightMin: 11
+  stageHeightMax: 12
   isRandomSize: 1
   requiredStageIDs:
   - 10
@@ -7529,7 +7529,7 @@ MonoBehaviour:
     meadows begin to turn to dust."
   stageWidthMin: 10
   stageWidthMax: 15
-  stageHeightMin: 7
+  stageHeightMin: 10
   stageHeightMax: 10
   isRandomSize: 1
   requiredStageIDs:
@@ -8304,7 +8304,7 @@ MonoBehaviour:
 
 
     Shop Encounter!'
-  stageWidthMin: 10
+  stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 7
   stageHeightMax: 10
@@ -9138,7 +9138,7 @@ MonoBehaviour:
 
 
     Enemies: 4 Grunts 2 Archers'
-  stageWidthMin: 10
+  stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 7
   stageHeightMax: 10
@@ -9299,10 +9299,10 @@ MonoBehaviour:
 
 
     Boss Stage!'
-  stageWidthMin: 10
-  stageWidthMax: 15
-  stageHeightMin: 10
-  stageHeightMax: 15
+  stageWidthMin: 20
+  stageWidthMax: 20
+  stageHeightMin: 12
+  stageHeightMax: 12
   isRandomSize: 1
   requiredStageIDs:
   - 15
