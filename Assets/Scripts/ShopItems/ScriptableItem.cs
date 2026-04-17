@@ -19,8 +19,10 @@ public enum ItemType
     UnitUpgrade = 1,
     // Adds a unit to the party
     NewUnit = 2,
-    // 
+    // Buffs the party's stats
     PartyBuff = 3,
-    Other = 4
+    // Adds a card each of the party member's decks
+    DeckAddition = 4,
+
 
 }

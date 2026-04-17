@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Barrier
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Barrier
-  cardDescription: Guard self
+  cardDescription: Guard all nearby allies
   type: 2
-  range: 0
-  value: 40
+  range: 2
+  areaRange: 0
+  value: 15
   cost: 1
   damaging: 0
   piercing: 0
-  areaEffect: 0
+  areaEffect: 1
   rangeType: 1
   cardIcon: {fileID: 1853853189450526911, guid: bb481a5c8f8f6dd49a1c49ec4eca01db, type: 3}
   cardCorner: {fileID: -8686425463742581414, guid: 48dcce1cec15ef34cb12d5459f8d55bd, type: 3}

@@ -4146,6 +4146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeckManager
   allCards: []
+  allSummons: []
   DEBUGTEAMSELECTOR: -1
 --- !u!4 &1827845494
 Transform:
