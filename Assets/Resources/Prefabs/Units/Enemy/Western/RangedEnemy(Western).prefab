@@ -199,10 +199,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
   OccupiedTile: {fileID: 0}
   Faction: 1
+  summoned: 0
+  lifetime: 0
   maxHealth: 80
   health: 80
   guard: 0
-  dmg: 25
+  dmg: 30
   attackModifier: 1
   defenseModifier: 1
   moveModifier: 0
@@ -212,7 +214,6 @@ MonoBehaviour:
   strengthen: 0
   resistant: 0
   invisible: 0
-  absorb: 0
   stunned: 0
   restricted: 0
   frozen: 0
@@ -224,6 +225,7 @@ MonoBehaviour:
   dodge: 0
   agility: 0
   reflect: 0
+  absorb: 0
   defiant: 0
   daze: 0
   poison: 0

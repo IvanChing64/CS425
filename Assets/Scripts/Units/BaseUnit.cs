@@ -4,6 +4,8 @@ using UnityEngine;
 public class BaseUnit : MonoBehaviour
 {
     [Header("Unit Stats")]
+    [Tooltip("Unit Name")]
+    public string Name;
     [Tooltip("Tile the unit is occupying")]
     public Tile OccupiedTile;
     [Tooltip("Ally or Enemy")]
@@ -117,6 +119,7 @@ public class BaseUnit : MonoBehaviour
     private void Awake()
     {
         UnitAnimator = GetComponent<Animator>();
+        
     }
 
     //damage functions
@@ -262,7 +265,7 @@ public class BaseUnit : MonoBehaviour
 
     // SUPPORT EFFECTS
     // Heal given amount, up to max health
-    public void Heal(float healthAmount)
+    public void Heal(float healthAmount = 15)
     {
         health += healthAmount;
         if (health > maxHealth) { health = maxHealth; }
@@ -270,7 +273,7 @@ public class BaseUnit : MonoBehaviour
     }
 
     // Give guard equal to given amount, up to max health
-    public void Guard(float guardAmount)
+    public void Guard(float guardAmount = 15)
     {
         guard += guardAmount;
         if (guard > maxHealth) { guard = maxHealth; }
@@ -739,7 +742,6 @@ public class BaseUnit : MonoBehaviour
         absorb = 0;
         defiant = false;
         agility = 0;
-        daze = 0;
 
         if (invisible > 0)
         {
@@ -749,6 +751,11 @@ public class BaseUnit : MonoBehaviour
             {
                 Invisible(true);
             }
+        }
+
+        if (daze > 0)
+        {
+            daze--;
         }
 
         if (strengthen > 0)

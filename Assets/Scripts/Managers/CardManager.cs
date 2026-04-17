@@ -1,10 +1,7 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using System.Collections;
-using Unity.VisualScripting;
 using TMPro;
+using System.Collections;
 
 //Developer: Bailey Escritor
 //Manages card selection and playing
@@ -15,6 +12,7 @@ public class CardManager : MonoBehaviour
     public BaseCard selectedCard;
     public GameObject cardArea, deckCard, actionPointCounter;
     public Button binButton;
+    private UnityEngine.Coroutine routine;
     [SerializeField] public static int cardSelectOffsetY = 18;
 
     // Initializes instance and calls backdrop creation
@@ -30,6 +28,43 @@ public class CardManager : MonoBehaviour
         }
     }
 
+    public void moveCard(GameObject card, bool forward, bool wait, Vector3 end)
+    {
+        //StopCoroutine(move(card, !forward, wait, end));
+        StartCoroutine(move(card, forward, wait, end));
+    }
+
+    private IEnumerator move(GameObject card, bool forward, bool wait, Vector3 endPosition)
+    {
+        if (wait)
+        {
+            if (!forward)
+            {
+                yield return new WaitForSeconds(0.1f);
+            } else
+            {
+                yield return new WaitForSeconds(0.05f);
+            }
+
+            yield return new WaitForSecondsRealtime(0.025f);
+        }
+        
+        Vector3 start = card.transform.position;
+        Vector3 end = endPosition;
+         
+        
+        float elapsed = 0;
+
+        while (elapsed < 0.2)
+        {
+            card.transform.position = Vector3.Lerp(start, end, elapsed/0.2f);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        card.transform.position = end;
+    } 
+
     //Selects a card and raises its position
     public void SelectCard(BaseCard card)
     {
@@ -39,21 +74,14 @@ public class CardManager : MonoBehaviour
         }
         selectedCard = card;
 
-        selectedCard.cardHolder.transform.localPosition += new Vector3(0, cardSelectOffsetY, 0);
         selectedPlayer.GetComponent<HandManager>().selectedCard = selectedCard;
         binButton.interactable = true;
-
-        //StartCoroutine(WaitForCardAnimations(selected: true));
-        Debug.Log("Card Selected: " + card.cardName);
     }
 
     //Deselects the currently selected card and lowers its position
     public void DeselectCard()
     {
         if (selectedCard == null) return;
-        //StartCoroutine(WaitForCardAnimations(selected: false));
-
-        selectedCard.cardHolder.transform.localPosition -= new Vector3(0, cardSelectOffsetY, 0);
 
         selectedCard.DeselectCard();
 
@@ -104,8 +132,12 @@ public class CardManager : MonoBehaviour
     {
         if (selectedPlayer == null) return;
         if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
+        
         selectedPlayer.GetComponent<HandManager>().DrawCard(true);
         selectedPlayer.GetComponent<HandManager>().UpdateHandPositions();
+        GameObject newCardHolder = selectedPlayer.GetComponent<HandManager>().currentHand[selectedPlayer.GetComponent<HandManager>().currentHand.Count - 1].cardHolder;
+        Vector3 posit = new Vector3(newCardHolder.transform.position.x, 100, newCardHolder.transform.position.z);
+        moveCard(selectedPlayer.GetComponent<HandManager>().currentHand[selectedPlayer.GetComponent<HandManager>().currentHand.Count - 1].cardHolder, false, false, posit);
         UpdateDeckCard();
         UpdateAPCounter();
     }
@@ -115,18 +147,34 @@ public class CardManager : MonoBehaviour
     {
         if (selectedPlayer == null || selectedCard == null) return;
         if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
+        Vector3 posit = new Vector3(selectedCard.cardHolder.transform.position.x, -800, selectedCard.cardHolder.transform.position.z);
+        routine = StartCoroutine(move(selectedCard.cardHolder, false, false, posit));
         selectedPlayer.GetComponent<HandManager>().actionPoints += (float)selectedCard.cost / 2;
         selectedPlayer.GetComponent<HandManager>().RemoveCard(selectedCard);
-        Destroy(selectedCard.gameObject);
+        StartCoroutine(destroy(selectedCard.gameObject));
         DeselectCard();
         selectedPlayer.GetComponent<HandManager>().UpdateHandPositions();
         UpdateDeckCard();
         UpdateAPCounter();
     }
 
+    private IEnumerator destroy(GameObject card)
+    {
+        if (routine != null)
+        {
+            yield return routine;
+        }
+        Destroy(card);
+    }
+
     //Shows hand of selected player and hides previous player's hand
     public void SetSelectedPlayer(BasePlayer player)
     {
+        if (selectedCard != null)
+        {
+            Vector3 posit = new Vector3(selectedCard.cardHolder.transform.position.x, 100, selectedCard.cardHolder.transform.position.z);
+            moveCard(selectedCard.cardHolder, false, false, posit);
+        }
         DeselectCard();
         BasePlayer previousPlayer = selectedPlayer;
         selectedPlayer = player;
@@ -164,6 +212,18 @@ public class CardManager : MonoBehaviour
         if (!selectedHand.handDrawn)
         {
             selectedPlayer.GetComponent<HandManager>().DrawHand();
+            foreach (BaseCard card in selectedPlayer.GetComponent<HandManager>().currentHand)
+            {
+                Vector3 posit = new Vector3(card.cardHolder.transform.position.x, 100, card.cardHolder.transform.position.z);
+                moveCard(card.cardHolder, false, false, posit);
+            }
+        } else
+        {
+            foreach (BaseCard card in selectedPlayer.GetComponent<HandManager>().currentHand)
+            {
+                Vector3 posit = new Vector3(card.cardHolder.transform.position.x, 100, card.cardHolder.transform.position.z);
+                moveCard(card.cardHolder, false, false, posit);
+            }
         }
 
         UpdateDeckCard();

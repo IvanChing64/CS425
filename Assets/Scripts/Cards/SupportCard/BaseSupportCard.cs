@@ -18,6 +18,8 @@ public class BaseSupportCard : BaseCard
 
     public override void SelectCard()
     {
+        base.SelectCard();
+
         //Highlight Selectable Tiles and Targets
         BasePlayer player = CardManager.instance.selectedPlayer;
 
@@ -40,6 +42,8 @@ public class BaseSupportCard : BaseCard
 
     public override void DeselectCard()
     {
+        base.DeselectCard();
+        
         //Unhighlight Selectable Tiles and Targets
         BasePlayer player = CardManager.instance.selectedPlayer;
 

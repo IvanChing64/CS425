@@ -192,16 +192,15 @@ public abstract class Tile : MonoBehaviour
                 BasePlayer summonUnit = ((BaseSummonCard)CardManager.instance.selectedCard).SummonUnit(this);
                 ShowHighlight(false, Tile.nonwalkableColor);
                 CardManager.instance.PlaySelectedCard();
+                summonUnit.Stun();
                 summonUnit.GetComponent<HandManager>().NextTurn();
-                UnitManager.Instance.SetSelectedPlayer(summonUnit);
-                UnitManager.Instance.SetSelectedPlayer(player);
                 return;
             }
 
             // If the card is a movement card, move to the tile
             /* TODO: This part is still gross, some of this functionality should be extracted */
             List<Tile> tilesInRange = player.GetTilesInMoveRange();
-            if (tilesInRange.Contains(this))
+            if (tilesInRange.Contains(this) && CardManager.instance.selectedCard.cardType == Type.Movement)
             {
                 //BasePlayer playerPath = UnitManager.Instance.SelectedPlayer;
                 List<Tile> path = AStarManager.Instance.GeneratePath(player.OccupiedTile, this);

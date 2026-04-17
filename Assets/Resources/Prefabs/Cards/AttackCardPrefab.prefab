@@ -8,6 +8,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 99814739800486740, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 99814739800486740, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 99814739800486740, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4386690818074591292}
+    - target: {fileID: 99814739800486740, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4386690818074591292}
+    - target: {fileID: 99814739800486740, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: moveCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 99814739800486740, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: moveCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 99814739800486740, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BaseAttackCard, Scripts
+      objectReference: {fileID: 0}
+    - target: {fileID: 99814739800486740, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BaseAttackCard, Scripts
+      objectReference: {fileID: 0}
+    - target: {fileID: 99814739800486740, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 99814739800486740, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 99814739800486740, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 957922254755591547, guid: 616bc22cdc60f184caec8c5f64ddf4f5, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -143,8 +187,15 @@ MonoBehaviour:
   cardName: 
   cardType: 0
   range: 0
+  areaRange: 0
   value: 0
   cost: 0
-  isPlayed: 0
+  AoE: 0
+  rangeType: 0
+  selected: 0
+  pierce: 0
   cardHolder: {fileID: 6332579879432482564}
-  effect: 0
+  damaging: 0
+  piercing: 0
+  primaryEffect: 0
+  secondaryEffect: 0
