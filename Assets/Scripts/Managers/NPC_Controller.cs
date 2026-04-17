@@ -34,6 +34,29 @@ public class NPC_Controller: MonoBehaviour
 
     //MovementBehavior logic: Andrew Shelton
 
+    private bool HasLineOfSight(Tile from, Tile to)
+    {
+        Vector2 start = from.transform.position;
+        Vector2 end = to.transform.position;
+
+        Vector2 direction = (end - start).normalized;
+        float distance = Vector2.Distance(start, end);
+
+        RaycastHit2D hit = Physics2D.Raycast(start, direction, distance);
+
+        if (hit.collider == null)
+        {
+            return true; // No obstacles in the way
+        }
+
+        Tile hitTile = hit.collider.GetComponent<Tile>();
+
+        if (hitTile != null && hitTile != to)
+        {
+            if (!hitTile.isWalkable) return false;
+        }
+        return true;
+    }
     private Tile GetRangedTarget()
     {
         var targeting = GetComponent<EnemyTargetingManager>();
@@ -42,8 +65,45 @@ public class NPC_Controller: MonoBehaviour
         Tile playerTile = GridManager.Instance.GetTileForUnit(targeting.CurrentTarget.gameObject);
 
         //Moves to a tile within attack range of the player
-        List<Tile> tiles = RangeManager.GetTilesInRange(playerTile, npcUnit.attackRange, RangeType.FloodTargeting);
-        return tiles.Count > 0 ? tiles[0] : playerTile; // Default to player's tile if no valid tiles found
+        //List<Tile> tiles = RangeManager.GetTilesInRange(playerTile, npcUnit.attackRange, RangeType.FloodTargeting);
+        //return tiles.Count > 0 ? tiles[0] : playerTile; // Default to player's tile if no valid tiles found
+
+        List<Tile> movableTiles = RangeManager.GetTilesInRange(npcUnit.OccupiedTile,
+            npcUnit.moveRange, RangeType.FloodTargeting);
+
+        Tile bestTile = null;
+        float bestScore = Mathf.Infinity;
+
+        foreach (var tile in movableTiles)
+        { 
+            if (!tile.isWalkable) continue;
+
+            float distToPlayer = Vector2.Distance(tile.transform.position,
+                playerTile.transform.position);
+
+            if (distToPlayer > npcUnit.attackRange) continue;
+
+            if (!HasLineOfSight(tile, playerTile)) continue;
+
+            float score = distToPlayer;
+
+            if (score < bestScore)
+            {
+                bestScore = score;
+                bestTile = tile;
+            }
+
+
+
+        }
+
+        if (bestTile != null)
+        {
+            return bestTile;
+        }
+
+        return playerTile;
+
     }
 
     [SerializeField] private int healAmount = 10;
@@ -137,6 +197,40 @@ public class NPC_Controller: MonoBehaviour
         target.UpdateHealth();
     }
 
+    private Tile GetClosestReachablePlayerTile(Tile startTile)
+    {
+        BaseUnit bestTarget = null;
+        float closestDist = Mathf.Infinity;
+
+        foreach (var unit in UnitManager.Instance.playersSpawned)
+        {
+            if (unit == null) continue;
+            if (unit.invisible != 0) continue;
+
+            Tile targetTile = unit.OccupiedTile;
+            if (targetTile == null) continue;
+
+            //Try to make a path
+
+            List<Tile> path = AStarManager.Instance.GeneratePath(startTile, targetTile);
+
+            if (path == null || path.Count == 0) continue;
+
+            float dist = path.Count;
+
+            if (dist < closestDist)
+            {
+                closestDist = dist;
+                bestTarget = unit;
+            }
+        }
+        if (bestTarget == null)
+        {
+            return GetRandomTile();
+        }
+        return bestTarget.OccupiedTile;
+    }
+
     private void Update()
     {
        /* if (GameManager.Instance == null) return;
@@ -221,7 +315,8 @@ public class NPC_Controller: MonoBehaviour
 
             default:
                 targeting.SelectTarget();
-                chosenTile = GridManager.Instance.GetTileForUnit(targeting.CurrentTarget.gameObject);
+                //chosenTile = GridManager.Instance.GetTileForUnit(targeting.CurrentTarget.gameObject);
+                chosenTile = GetClosestReachablePlayerTile(startTile);
                 break;
         }
         SetTarget(startTile, chosenTile);
@@ -332,7 +427,8 @@ public class NPC_Controller: MonoBehaviour
 
         foreach (Tile tile in attackableTiles)
         {
-            if (tile.OccupiedUnit != null && tile.OccupiedUnit.Faction == Faction.Player && tile.OccupiedUnit.invisible == 0)
+            //Changed a little bit
+            if (tile.OccupiedUnit != null && tile.OccupiedUnit.Faction == Faction.Player && tile.OccupiedUnit.invisible == 0 && HasLineOfSight(npcUnit.OccupiedTile, tile))
             {
                 Debug.Log($"Found {tile.OccupiedUnit.name} on tile {tile.name}. Faction: {tile.OccupiedUnit.Faction}");
                 target = tile.OccupiedUnit;
