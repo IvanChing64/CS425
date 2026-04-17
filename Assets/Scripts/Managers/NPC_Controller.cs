@@ -9,6 +9,17 @@ using UnityEngine;
 
 public class NPC_Controller: MonoBehaviour
 {
+    //Added TurnState to begin enum turn stuff: Andrew Shelton
+    private enum TurnState
+    {
+        Idle,
+        BeginTurn,
+        Targeting,
+        Moving,
+        Acting,
+        EndTurn
+    }
+
     public static NPC_Controller Instance;
     public float moveSpeed = 0.5f;
     public int tilesPerMove = 4;
@@ -112,6 +123,7 @@ public class NPC_Controller: MonoBehaviour
     {
         BaseUnit lowestHealthAlly = null;
         float lowestHealth = Mathf.Infinity;
+
 
         foreach (var unit in UnitManager.Instance.enemiesSpawned)
         {
