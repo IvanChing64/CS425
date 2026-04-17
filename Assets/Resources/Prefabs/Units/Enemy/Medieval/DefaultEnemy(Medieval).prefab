@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 738936172720448078}
   - component: {fileID: -6658566611899959939}
   m_Layer: 0
-  m_Name: SupportEnemy
+  m_Name: DefaultEnemy(Medieval)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,7 +175,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4723107735738678597, guid: 088c72b8c44664ef7ba139bf42990072, type: 3}
+  m_Sprite: {fileID: -5948806968594788206, guid: 765cca1a0021749bb9646e4062ec7824, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -199,34 +199,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
   OccupiedTile: {fileID: 0}
   Faction: 1
-  maxHealth: 120
-  health: 120
+  maxHealth: 100
+  health: 100
   guard: 0
-  dmg: 15
+  dmg: 40
   attackModifier: 1
   defenseModifier: 1
   moveModifier: 0
-  moveRange: 3
-  attackRange: 1
   boost: 0
-  strengthen: 0
-  resistant: 0
-  invisible: 0
-  absorb: 0
-  stunned: 0
-  restricted: 0
-  frozen: 0
-  flaming: 0
-  weaken: 0
-  vulnerable: 0
-  hinder: 0
-  regeneration: 0
-  dodge: 0
-  agility: 0
-  reflect: 0
+  dmgUp: 0
+  defUp: 0
   defiant: 0
-  daze: 0
+  stunned: 0
+  invisible: 0
+  dodge: 0
   poison: 0
+  agility: 0
+  moveRange: 4
+  attackRange: 1
   UnitAnimator: {fileID: 738936172720448078}
   healthbar: {fileID: 1811933326703943321}
   hurtSFX:
@@ -234,8 +224,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 91c9ddbccc0cd9f42a0d5e9e6d94f0ef, type: 3}
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
-  enemyFlag: 2
-  movementBehavior: 2
+  enemyFlag: 1
+  movementBehavior: 0
 --- !u!114 &751289258245009956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_Controller
   moveSpeed: 2.5
-  tilesPerMove: 3
+  tilesPerMove: 4
   path: []
 --- !u!95 &738936172720448078
 Animator:
@@ -273,7 +263,7 @@ Animator:
   m_GameObject: {fileID: 1167321167610509267}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 89982da2b368f41848074f38ca2f2e0a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 451d5f1d5330e42218c98e0f70cea694, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
