@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efead496cd676ad49b7245ff8fbde53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player1
+  Name: 
   OccupiedTile: {fileID: 0}
   Faction: 0
   summoned: 0
@@ -294,8 +295,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   startingDeck:
   - Advance
-  - Crush
-  - Crush
+  - Smash
+  - Smash
   - Blaster
   - Barricade
   - Absorption

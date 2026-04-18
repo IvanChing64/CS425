@@ -29,7 +29,7 @@ public class HandManager : MonoBehaviour
     //public bool handSelected = false;
     public bool canDraw = true;
     public BaseCard selectedCard;
-    public static int cardPositionOffsetX = 198, cardPositionOffsetY = -390; // X: How far cards are from each other, Y: How close cards are to the bottom
+    public static int cardPositionOffsetX = 198, cardPositionOffsetY = -440; // X: How far cards are from each other, Y: How close cards are to the bottom
     public static int maxHandSize = 5, maxActionPoints = 5;
 
     //Initalizes instance and fills deck
@@ -112,15 +112,8 @@ public class HandManager : MonoBehaviour
         // Draw up to DrawNum cards from the deck starting at deckIndex
         int cardsToDraw = drawNum;
 
-        // if (currentHand.Count >= currentDeck.Count || currentHand.Count == maxHandSize)
-        // {
-        //     Debug.Log("Hand is full, cannot draw more cards.");
-        //     return;
-        // }
-
         for (int i = 0; i < cardsToDraw; i++)
         {
-            //Debug.Log("Drawing card " + (i + 1) + " of " + cardsToDraw);
             DrawCard(false);
         }
 
@@ -129,7 +122,6 @@ public class HandManager : MonoBehaviour
             handDrawn = true;
         }
         UpdateHandPositions();
-        //Debug.Log("Hand Drawn with " + currentHand.Count + " cards.");
     }
 
     public void DrawCard(bool extraDraw)
@@ -149,11 +141,6 @@ public class HandManager : MonoBehaviour
             deckIndex = -1;
             canDraw = false;
             return;
-            // ShuffleDeck();
-            // if (currentHand.Count != 0)
-            // {
-            //     return;
-            // }
         }
 
         if (extraDraw)
@@ -170,8 +157,16 @@ public class HandManager : MonoBehaviour
 
         ScriptableCard drawnCard = currentDeck[deckIndex];
         GameObject newCard = null;
-        Vector3 spawnPos = new Vector3(currentHand.Count * cardPositionOffsetX - cardPositionOffsetX, cardPositionOffsetY, 0);
+        Vector3 spawnPos;
 
+        if ((currentHand.Count + 1) % 2 == 1)
+        {
+            spawnPos = new Vector3(((currentHand.Count - 0 - (currentHand.Count / 2)) * cardPositionOffsetX) + 0, -800, 0);
+        } else
+        {
+            spawnPos = new Vector3(((currentHand.Count - 1 - (currentHand.Count / 2 - 0.5f)) * cardPositionOffsetX) + 0, -800, 0);
+        }
+        
         //Check if drawn card is already in hand, if so, skip and draw next card
         while (!notInHand)
         {
@@ -258,11 +253,15 @@ public class HandManager : MonoBehaviour
         GetComponentInParent<BasePlayer>().ResetValues();
         ShuffleDeck();
         DrawHand();
-        actionPoints += GetComponentInParent<BasePlayer>().energy;
-        if (actionPoints > maxActionPoints)
+        if (GetComponentInParent<BasePlayer>().stunned == 0)
         {
-            actionPoints = maxActionPoints;
+            actionPoints += GetComponentInParent<BasePlayer>().energy;
+            if (actionPoints > maxActionPoints)
+            {
+                actionPoints = maxActionPoints;
+            }
         }
+        
         UpdateHandPositions();
 
     }
@@ -272,7 +271,6 @@ public class HandManager : MonoBehaviour
     {
         if (currentHand.Count == 0)
         {
-            //Debug.Log("No cards in hand to show.");
             return;
         }
 
@@ -282,16 +280,12 @@ public class HandManager : MonoBehaviour
             {
                 card.gameObject.SetActive(true);
             }
-            //handSelected = true;
-            //Debug.Log("Hand is now shown.");
         } else
         {
             foreach (BaseCard card in currentHand)
             {
                 card.gameObject.SetActive(false);
             }
-            //handSelected = false;
-            //Debug.Log("Hand is now hidden.");
         }
     }
 
@@ -318,18 +312,8 @@ public class HandManager : MonoBehaviour
     // Move cards dynamically based on hand size and card index to keep them centered
     public void UpdateHandPositions()
     {
-        // for (int i = 0; i < currentHand.Count; i++)
-        // {
-        //     if (currentHand[i] != null)
-        //     {
-        //         Vector3 targetPos = CardManager.instance.cardLocation + new Vector3(i * 30, 0, 0);
-        //         currentHand[i].cardHolder.transform.localPosition = targetPos;
-        //     }
-        // }
-
         if (currentHand.Count == 0)
         {
-            //Debug.Log("No cards in hand to position.");
             return;
         }
 
@@ -339,30 +323,43 @@ public class HandManager : MonoBehaviour
             {
                 if (currentHand[i] != null)
                 {
-                    Vector3 targetPos = new Vector3((i - (currentHand.Count / 2 - 0.5f)) * cardPositionOffsetX, cardPositionOffsetY, 0);
-                    currentHand[i].cardHolder.transform.localPosition = targetPos;
-                    if (currentHand[i] == CardManager.instance.selectedCard)
-                    {
-                        currentHand[i].cardHolder.transform.localPosition += new Vector3(0, CardManager.cardSelectOffsetY, 0);
-                    }
+                    float yPosition = currentHand[i].cardHolder.transform.position.y;
+                    Vector3 targetPos = new Vector3(((i - (currentHand.Count / 2 - 0.5f)) * cardPositionOffsetX) + 960, yPosition, 0);
+                    //currentHand[i].cardHolder.transform.localPosition = targetPos;
+                    CardManager.instance.moveCard(currentHand[i].cardHolder, false, false, targetPos);
                 }
             }
-            //Debug.Log("Current hand size is even, centering cards between two middle cards.");
+
+            for (int i = 0; i < currentHand.Count; i++)
+            {
+                if (currentHand[i] != null)
+                {
+                    float yPosition = currentHand[i].cardHolder.transform.localPosition.y;
+                    Vector3 targetPos = new Vector3((i - (currentHand.Count / 2 - 0.5f)) * cardPositionOffsetX, yPosition, 0);
+                    currentHand[i].cardHolder.transform.localPosition = targetPos;
+                }
+            }
         } else if (currentHand.Count % 2 == 1) 
         {
-                for (int i = 0; i < currentHand.Count; i++)
-                {
-                    if (currentHand[i] != null)
-                    {   
-                        Vector3 targetPos = new Vector3((i - (currentHand.Count / 2)) * cardPositionOffsetX, cardPositionOffsetY, 0);
-                        currentHand[i].cardHolder.transform.localPosition = targetPos;
-                        if (currentHand[i] == CardManager.instance.selectedCard)
-                        {
-                            currentHand[i].cardHolder.transform.localPosition += new Vector3(0, CardManager.cardSelectOffsetY, 0);
-                        }
-                    }
+            for (int i = 0; i < currentHand.Count; i++)
+            {
+                if (currentHand[i] != null)
+                {   
+                    float yPosition = currentHand[i].cardHolder.transform.position.y;
+                    Vector3 targetPos = new Vector3(((i - (currentHand.Count / 2)) * cardPositionOffsetX) + 960, yPosition, 0);
+                    CardManager.instance.moveCard(currentHand[i].cardHolder, false, false, targetPos);
                 }
-            //Debug.Log("Current hand size is odd, centering cards.");
+            }
+
+            for (int i = 0; i < currentHand.Count; i++)
+            {
+                if (currentHand[i] != null)
+                {
+                    float yPosition = currentHand[i].cardHolder.transform.localPosition.y;
+                    Vector3 targetPos = new Vector3((i - (currentHand.Count / 2)) * cardPositionOffsetX, yPosition, 0);
+                    currentHand[i].cardHolder.transform.localPosition = targetPos;
+                }
+            }
         }
     }
 }

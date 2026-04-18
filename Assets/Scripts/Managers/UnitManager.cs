@@ -190,7 +190,7 @@ public class UnitManager : MonoBehaviour
             if (randomSpawnTile != null)
             {
                 BasePlayer spawnedPlayer = Instantiate((BasePlayer)unitData.UnitPrefab, randomSpawnTile.transform.position, Quaternion.identity);
-                spawnedPlayer.name = $"DEBUG_Player_{i}_{randomSpawnTile.Position.x}_{randomSpawnTile.Position.y}";
+                spawnedPlayer.name = unitData.name;
                 Debug.Log($"Found Tile for player{i}");
                 randomSpawnTile.setUnit(spawnedPlayer);
                 playersSpawned.Add(spawnedPlayer);

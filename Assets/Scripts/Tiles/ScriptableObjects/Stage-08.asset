@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a0b715f65ab98b429ffd2f342a198b0, type: 3}
   m_Name: Stage-08
   m_EditorClassIdentifier: Scripts::StageData
-  type: 0
   grassTilePrefab: {fileID: -8581200666732430661, guid: a51a476fa1792f64cbf2f92e911c5802, type: 3}
   mountainTilePrefab: {fileID: -4349095895413475627, guid: c6b55d085b4d57a4da9d83e99a9359e7, type: 3}
   enemies:
-  - {fileID: 1167321167610509267, guid: c1a9f193137bdb0469bf511ae1063fd5, type: 3}
-  enemyCount: 3
-  currency: 200
+  - {fileID: 1167321167610509267, guid: 4e3bc5316c645474b91ad1a6fc8e0f7e, type: 3}
+  - {fileID: 1167321167610509267, guid: f07b503fb7ed0694aaa7dbcfae44871b, type: 3}
+  - {fileID: 1167321167610509267, guid: f07b503fb7ed0694aaa7dbcfae44871b, type: 3}
+  - {fileID: 1167321167610509267, guid: a3a0f7106a7aaa84cbc04d1f0087fac9, type: 3}
+  enemyCount: 4
