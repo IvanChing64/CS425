@@ -15,5 +15,6 @@ MonoBehaviour:
   grassTilePrefab: {fileID: -8581200666732430661, guid: b8ee60a72174f294090435ee37ddd91e, type: 3}
   mountainTilePrefab: {fileID: -4349095895413475627, guid: 39f762b5c03830b4eb002ba872163050, type: 3}
   enemies:
-  - {fileID: 1167321167610509267, guid: c1a9f193137bdb0469bf511ae1063fd5, type: 3}
+  - {fileID: 1167321167610509267, guid: fb236ddf03e02fc468e58762964fab69, type: 3}
+  - {fileID: 1167321167610509267, guid: fb236ddf03e02fc468e58762964fab69, type: 3}
   enemyCount: 3

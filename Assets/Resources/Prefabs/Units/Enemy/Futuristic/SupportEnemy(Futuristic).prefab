@@ -175,8 +175,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4723107735738678597, guid: 088c72b8c44664ef7ba139bf42990072, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 8793639957104055765, guid: 242606ea3a5337c498839e854e7a1759, type: 3}
+  m_Color: {r: 1, g: 0.5882353, b: 0.5882353, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -197,8 +197,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6381d107cad097a41ae24e95fb7a9281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
+  Name: 
   OccupiedTile: {fileID: 0}
   Faction: 1
+  summoned: 0
+  lifetime: 0
   maxHealth: 120
   health: 120
   guard: 0
@@ -212,7 +215,6 @@ MonoBehaviour:
   strengthen: 0
   resistant: 0
   invisible: 0
-  absorb: 0
   stunned: 0
   restricted: 0
   frozen: 0
@@ -224,6 +226,7 @@ MonoBehaviour:
   dodge: 0
   agility: 0
   reflect: 0
+  absorb: 0
   defiant: 0
   daze: 0
   poison: 0
@@ -263,6 +266,7 @@ MonoBehaviour:
   moveSpeed: 2.5
   tilesPerMove: 3
   path: []
+  healAmount: 10
 --- !u!95 &738936172720448078
 Animator:
   serializedVersion: 7
@@ -273,7 +277,7 @@ Animator:
   m_GameObject: {fileID: 1167321167610509267}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 89982da2b368f41848074f38ca2f2e0a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6dad64c5f71d9e84eb5d339a8b64516f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

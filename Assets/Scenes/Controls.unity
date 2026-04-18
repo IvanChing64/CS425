@@ -1639,7 +1639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2bb87a37bcfa14f8ccc61efeb733e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuManager
-  continueButton: {fileID: 0}
+  continueButton: {fileID: 1092207872}
   mainMenuSFX:
   - {fileID: 8300000, guid: aeb2b1f1d428a9549a37a5c62d92b531, type: 3}
   currentScreen: 2
