@@ -53,7 +53,8 @@ public enum SupportEffect
     Resistant = 11,
     Reflect = 12, 
     Regeneration = 13,
-    Absorb = 14
+    Absorb = 14,
+    Immune = 15
 }
 
 /// <summary>

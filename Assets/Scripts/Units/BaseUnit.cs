@@ -43,6 +43,8 @@ public class BaseUnit : MonoBehaviour
     public EffectFlag resistant = EffectFlag.None;
     [Tooltip("Increase attack by 15% and become untargetable")]
     public EffectFlag invisible = EffectFlag.None;
+    [Tooltip("Cleanse and resist control effects")]
+    public EffectFlag immune = EffectFlag.None;
 
     [Header("Debuff Flags")]
     [Tooltip("Stop all actions")]
@@ -483,7 +485,7 @@ public class BaseUnit : MonoBehaviour
         }
     }
 
-    // Reflect damage taken back to the attacker
+    // Reflect 75% damage taken back to the attacker
     public void Reflect(int stacks)
     {
         reflect += stacks;
@@ -503,6 +505,14 @@ public class BaseUnit : MonoBehaviour
     public void Absorb(int stacks)
     {
         absorb += stacks;
+    }
+
+    // Become immune to status effects
+    public void Immune()
+    {
+        Cleanse();
+        if (immune == EffectFlag.Middle) return;
+        immune = EffectFlag.Middle;
     }
 
     // CONTROL EFFECTS
@@ -529,6 +539,10 @@ public class BaseUnit : MonoBehaviour
     // Stun for 1 turn, preventing card use
     public void Stun()
     {
+        if (immune > 0)
+        {
+            return;
+        }
         if (stunned == EffectFlag.Middle) return;
         stunned = EffectFlag.Middle;
     }
@@ -536,7 +550,10 @@ public class BaseUnit : MonoBehaviour
     // Reduce movement to 0 for turn
     public void Restrict()
     {
-        //Reduce Movement to 0
+        if (immune > 0)
+        {
+            return;
+        }
         if (restricted == EffectFlag.Middle) return;
         restricted = EffectFlag.Middle;
     }
@@ -544,6 +561,10 @@ public class BaseUnit : MonoBehaviour
     // Stun for 1 turn and decrease defense by 15%
     public void Freeze(bool reapply = false)
     {
+        if (immune > 0)
+        {
+            return;
+        }
         if (!reapply) {
             if (frozen == EffectFlag.Middle ) return;
             if (frozen == EffectFlag.End)
@@ -564,6 +585,10 @@ public class BaseUnit : MonoBehaviour
     // Apply poison stacks, dealing 10% of remaining health times the stack count as damage at end of turn, decrease damage dealt by 10%
     public void Poison(int stacks = 1)
     {
+        if (immune > 0)
+        {
+            return;
+        }
         if (poison >= 8) 
         {
             poison = 8;
@@ -579,12 +604,20 @@ public class BaseUnit : MonoBehaviour
     // Take flaming damage for 2 turns, equal to 15% of remaining health and 20% of max health each turn
     public void Flaming()
     {
+        if (immune > 0)
+        {
+            return;
+        }
         flaming = EffectFlag.Start;
     }
 
     // Reduce attack by 25% for 2 turns
     public void Weaken(bool reapply = false)
     {
+        if (immune > 0)
+        {
+            return;
+        }
         if (!reapply)
         {
             if ((int)weaken > 0)
@@ -611,6 +644,10 @@ public class BaseUnit : MonoBehaviour
     // Reduce defense by 25% for 2 turns
     public void Vulnerable(bool reapply = false)
     {
+        if (immune > 0)
+        {
+            return;
+        }
         if (!reapply)
         {
             if ((int)vulnerable > 0)
@@ -637,6 +674,10 @@ public class BaseUnit : MonoBehaviour
     // Reduce attack and defense by 25% for 2 turns
     public void Hinder(bool reapply = false)
     {
+        if (immune > 0)
+        {
+            return;
+        }
         if (!reapply)
         {
             if ((int)hinder > 0)
@@ -669,6 +710,10 @@ public class BaseUnit : MonoBehaviour
     // Remove all buffs
     public void Expose()
     {
+        if (immune > 0)
+        {
+            return;
+        }
         // Reset modifiers
         attackModifier = 1;
         defenseModifier = 1;
@@ -742,6 +787,11 @@ public class BaseUnit : MonoBehaviour
         absorb = 0;
         defiant = false;
         agility = 0;
+
+        if (immune > 0)
+        {
+            immune--;
+        }
 
         if (invisible > 0)
         {

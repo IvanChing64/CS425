@@ -140,6 +140,7 @@ public class CardManager : MonoBehaviour
         moveCard(selectedPlayer.GetComponent<HandManager>().currentHand[selectedPlayer.GetComponent<HandManager>().currentHand.Count - 1].cardHolder, false, false, posit);
         UpdateDeckCard();
         UpdateAPCounter();
+        selectedPlayer.GetComponent<HandManager>().UpdateCardVisuals();
     }
 
     //Discards the selected card, Gain Action Points equalt to half the cost rounded down

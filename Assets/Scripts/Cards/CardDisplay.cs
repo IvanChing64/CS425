@@ -37,6 +37,7 @@ public class CardDisplay : MonoBehaviour
         cardDescription.text = cardData.cardDescription;
         cardValue.color = Color.black;
         cardValue.text = cardData.value.ToString();
+        cardCost.color = Color.black;
 
         switch (cardData.type)
         {
@@ -84,6 +85,11 @@ public class CardDisplay : MonoBehaviour
         } else
         {
             cardCost.text = "0";
+        }
+
+        if (CardManager.instance.selectedPlayer != null && CardManager.instance.selectedPlayer.GetComponent<HandManager>().actionPoints < cardData.cost)
+        {
+            cardCost.color = Color.red;
         }
 
         cardBorder.color = cardData.cardBorderColor;

@@ -128,11 +128,23 @@ public class UnitManager : MonoBehaviour
                         }
                     }
 
-                    foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
+                    if (CardManager.instance.selectedCard.cardType == Type.Attack)
                     {
-                        t.ShowHighlight(true, Tile.targetableColor);
+                        foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
+                        {
+                            t.ShowHighlight(true, Tile.targetableColor);
+                        }
+                    } else if (CardManager.instance.selectedCard.cardType == Type.Support)
+                    {
+                        
+                    } else if (CardManager.instance.selectedCard.cardType == Type.Movement)
+                    {
+                        
+                    } else if (CardManager.instance.selectedCard.cardType == Type.Summon)
+                    {
+                        
                     }
-
+                
                     SelectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
 
                     foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())

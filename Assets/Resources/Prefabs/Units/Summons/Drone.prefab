@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efead496cd676ad49b7245ff8fbde53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player1
+  Name: 
   OccupiedTile: {fileID: 0}
   Faction: 0
   summoned: 0
@@ -283,6 +284,7 @@ MonoBehaviour:
   reflect: 0
   absorb: 0
   defiant: 0
+  immune: 0
   daze: 0
   poison: 0
   UnitAnimator: {fileID: 7650870887470218107}
@@ -301,7 +303,7 @@ MonoBehaviour:
   canAttack: 0
   canSupport: 0
   canSummon: 0
-  energy: 3
+  energy: 2
 --- !u!114 &7232603518593366301
 MonoBehaviour:
   m_ObjectHideFlags: 0
