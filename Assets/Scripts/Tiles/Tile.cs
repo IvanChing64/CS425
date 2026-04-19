@@ -20,11 +20,11 @@ public abstract class Tile : MonoBehaviour
     public Vector2 Position => this.transform.position;
     public List<Tile> Neighbors => GridManager.Instance.GetNeighborsOf(this);
 
-    public static Color walkableColor = new Color(44f/255f, 153f/255f, 1, 120f/255f);
+    public static Color walkableColor = new Color(6f/255f, 135f/255f, 1, 170f/255f);
     public static Color nonwalkableColor = new Color(0, 0, 0, 0);
     public static Color targetableColor = new Color(1, 1, 1, 120f/255f);
     public static Color attackableColor = new Color(1, 18f/255f, 0, 159f/255f);
-    public static Color supportableColor = new Color(3f/255f, 1, 0, 100f/255f);
+    public static Color supportableColor = new Color(3f/255f, 1, 0, 152f/255f);
     public static Color summonableColor = new Color(167f/255f, 65f/255f, 1, 155f/255f);
 
     public virtual void Init(int x, int y)

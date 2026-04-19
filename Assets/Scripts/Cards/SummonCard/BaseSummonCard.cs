@@ -35,9 +35,10 @@ public class BaseSummonCard : BaseCard
 
             foreach (Tile t in player.GetTilesInMoveRange())
             {
-                t.ShowHighlight(true, Tile.summonableColor);
+                t.ShowHighlight(true, Tile.targetableColor);
             }
             currentTile.ShowHighlight(false, Tile.nonwalkableColor);
+            UnitManager.Instance.targeting = true;
         }
     }
 
@@ -47,6 +48,7 @@ public class BaseSummonCard : BaseCard
         
         //Unhighlight Selectable Tiles and Targets
         BasePlayer player = CardManager.instance.selectedPlayer;
+        UnitManager.Instance.targeting = false;
 
         if(player != null)
         {

@@ -136,7 +136,7 @@ public class CardManager : MonoBehaviour
         selectedPlayer.GetComponent<HandManager>().DrawCard(true);
         selectedPlayer.GetComponent<HandManager>().UpdateHandPositions();
         GameObject newCardHolder = selectedPlayer.GetComponent<HandManager>().currentHand[selectedPlayer.GetComponent<HandManager>().currentHand.Count - 1].cardHolder;
-        Vector3 posit = new Vector3(newCardHolder.transform.position.x, 100, newCardHolder.transform.position.z);
+        Vector3 posit = new Vector3(newCardHolder.transform.position.x, 96, newCardHolder.transform.position.z);
         moveCard(selectedPlayer.GetComponent<HandManager>().currentHand[selectedPlayer.GetComponent<HandManager>().currentHand.Count - 1].cardHolder, false, false, posit);
         UpdateDeckCard();
         UpdateAPCounter();
@@ -173,7 +173,7 @@ public class CardManager : MonoBehaviour
     {
         if (selectedCard != null)
         {
-            Vector3 posit = new Vector3(selectedCard.cardHolder.transform.position.x, 100, selectedCard.cardHolder.transform.position.z);
+            Vector3 posit = new Vector3(selectedCard.cardHolder.transform.position.x, 96, selectedCard.cardHolder.transform.position.z);
             moveCard(selectedCard.cardHolder, false, false, posit);
         }
         DeselectCard();
@@ -215,14 +215,14 @@ public class CardManager : MonoBehaviour
             selectedPlayer.GetComponent<HandManager>().DrawHand();
             foreach (BaseCard card in selectedPlayer.GetComponent<HandManager>().currentHand)
             {
-                Vector3 posit = new Vector3(card.cardHolder.transform.position.x, 100, card.cardHolder.transform.position.z);
+                Vector3 posit = new Vector3(card.cardHolder.transform.position.x, 96, card.cardHolder.transform.position.z);
                 moveCard(card.cardHolder, false, false, posit);
             }
         } else
         {
             foreach (BaseCard card in selectedPlayer.GetComponent<HandManager>().currentHand)
             {
-                Vector3 posit = new Vector3(card.cardHolder.transform.position.x, 100, card.cardHolder.transform.position.z);
+                Vector3 posit = new Vector3(card.cardHolder.transform.position.x, 96, card.cardHolder.transform.position.z);
                 moveCard(card.cardHolder, false, false, posit);
             }
         }

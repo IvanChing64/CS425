@@ -31,12 +31,33 @@ public class BaseSupportCard : BaseCard
                 player.canSupport = true;
             }
 
-            List<Tile> tilesInRange = player.GetTilesInAttackRange();
-            foreach (Tile t in tilesInRange)
+            if (AoE != AreaOfEffectType.None)
             {
-                t.ShowHighlight(true, Tile.supportableColor);
+                List<Tile> tilesInRange = player.GetTilesInAttackRange();
+                foreach (Tile t in tilesInRange)
+                {
+                    t.ShowHighlight(true, Tile.supportableColor);
+                }
+
+                if (AoE == AreaOfEffectType.SupportExclusive)
+                {
+                    player.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
+                }
+                
+            } else
+            {
+                List<Tile> tilesInRange = player.GetTilesInAttackRange();
+                foreach (Tile t in tilesInRange)
+                {
+                    t.ShowHighlight(true, Tile.targetableColor);
+                }
+
+                if (range == 0)
+                {
+                    player.OccupiedTile.ShowHighlight(true, Tile.targetableColor);
+                }
+                UnitManager.Instance.targeting = true;
             }
-            player.OccupiedTile.ShowHighlight(true, Tile.supportableColor);
         }
     }
 
@@ -46,6 +67,7 @@ public class BaseSupportCard : BaseCard
         
         //Unhighlight Selectable Tiles and Targets
         BasePlayer player = CardManager.instance.selectedPlayer;
+        UnitManager.Instance.targeting = false;
 
         if (player != null)
         {
@@ -53,7 +75,7 @@ public class BaseSupportCard : BaseCard
             player.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
             foreach (Tile t in player.GetTilesInAttackRange())
             {
-                if (t.isWalkable)t.ShowHighlight(false, Tile.nonwalkableColor);
+                t.ShowHighlight(false, Tile.nonwalkableColor);
             }
             player.attackRange = 0;
         }

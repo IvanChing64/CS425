@@ -81,11 +81,11 @@ public abstract class BaseCard : MonoBehaviour
         if (selected) return;
         if (forward)
         {
-            Vector3 posit = new Vector3(cardHolder.transform.position.x, 130, cardHolder.transform.position.z);
+            Vector3 posit = new Vector3(cardHolder.transform.position.x, 140, cardHolder.transform.position.z);
             CardManager.instance.moveCard(cardHolder, forward, true, posit);
         } else
         {
-            Vector3 posit = new Vector3(cardHolder.transform.position.x, 100, cardHolder.transform.position.z);
+            Vector3 posit = new Vector3(cardHolder.transform.position.x, 96, cardHolder.transform.position.z);
             CardManager.instance.moveCard(cardHolder, forward, true, posit);
         }
     }
