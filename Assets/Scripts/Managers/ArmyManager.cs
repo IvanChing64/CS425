@@ -45,6 +45,22 @@ public class ArmyManager : MonoBehaviour
     public bool RemoveUnit(ScriptableUnit unit) => unitsInArmy.Remove(unit);
     public bool RemoveUnit(string unitName) => RemoveUnit(AllPlayerUnits[unitName]);
 
+    public bool UpgradeUnit(ScriptableUnit unit)
+    {
+        if (!HasUnit(unit)) return false;
+
+        switch (unit.UnitPrefab.Name)
+        {
+            case "Knight":
+                RemoveUnit("Knight");
+                AddUnit("Paladin");
+                break;
+
+        }
+
+        return true;
+    }
+
     public int GetCurrency() => currency;
 
     public void GainCurrency(int amount)
