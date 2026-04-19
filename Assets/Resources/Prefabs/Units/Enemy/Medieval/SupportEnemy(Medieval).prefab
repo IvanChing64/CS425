@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 738936172720448078}
   - component: {fileID: -6658566611899959939}
   m_Layer: 0
-  m_Name: SupportEnemy
+  m_Name: SupportEnemy(Medieval)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

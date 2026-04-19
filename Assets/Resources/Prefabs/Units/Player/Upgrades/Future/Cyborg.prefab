@@ -209,7 +209,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8793639957104055765, guid: 85c3052e3b0a6424682d1d353e0181d6, type: 3}
+  m_Sprite: {fileID: 8793639957104055765, guid: da0a4a465bcb095418dadd1200965a07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -229,7 +229,7 @@ Animator:
   m_GameObject: {fileID: 3038541109350415365}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3197d3ae8d1ebad49aeab8ba21aab86f, type: 2}
+  m_Controller: {fileID: 9100000, guid: fab564346fcd00e44aaa04c652087305, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efead496cd676ad49b7245ff8fbde53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player1
+  Name: 
   OccupiedTile: {fileID: 0}
   Faction: 0
   summoned: 0

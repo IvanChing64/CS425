@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 738936172720448078}
   - component: {fileID: -6658566611899959939}
   m_Layer: 0
-  m_Name: RangedEnemy
+  m_Name: SupportEnemy(Western)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,8 +175,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7257567913506708742, guid: 277a50fd24135436398811e3293b2aa2, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 8793639957104055765, guid: 555b5686f997f164e89648ce4fac238b, type: 3}
+  m_Color: {r: 1, g: 0.5882353, b: 0.5882353, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -197,19 +197,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6381d107cad097a41ae24e95fb7a9281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
+  Name: 
   OccupiedTile: {fileID: 0}
   Faction: 1
   summoned: 0
   lifetime: 0
-  maxHealth: 80
-  health: 80
+  maxHealth: 120
+  health: 120
   guard: 0
-  dmg: 30
+  dmg: 15
   attackModifier: 1
   defenseModifier: 1
   moveModifier: 0
   moveRange: 3
-  attackRange: 4
+  attackRange: 1
   boost: 0
   strengthen: 0
   resistant: 0
@@ -236,8 +237,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 91c9ddbccc0cd9f42a0d5e9e6d94f0ef, type: 3}
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
-  enemyFlag: 0
-  movementBehavior: 1
+  enemyFlag: 2
+  movementBehavior: 2
 --- !u!114 &751289258245009956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +266,7 @@ MonoBehaviour:
   moveSpeed: 2.5
   tilesPerMove: 3
   path: []
+  healAmount: 10
 --- !u!95 &738936172720448078
 Animator:
   serializedVersion: 7
@@ -275,7 +277,7 @@ Animator:
   m_GameObject: {fileID: 1167321167610509267}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 098910b1e815348e6bba028403bec1e8, type: 2}
+  m_Controller: {fileID: 9100000, guid: a32c97d0327723a45b2e1312723e0a54, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
