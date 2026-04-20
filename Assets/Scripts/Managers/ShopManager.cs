@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ShopManager : MonoBehaviour
 {
@@ -52,7 +53,15 @@ public class ShopManager : MonoBehaviour
     public void RestockShop()
     {
         // The first two shop items should be new units
-        CurrentItemsInShop[0] = null;
+        CurrentItemsInShop[0] = new NewUnitItem();
+        CurrentItemsInShop[1] = new NewUnitItem();
+
+        // The next three? (maybe two) items should be unit upgrades
+        CurrentItemsInShop[2] = new UnitUpgradeItem();
+        CurrentItemsInShop[3] = new UnitUpgradeItem();
+        CurrentItemsInShop[4] = new UnitUpgradeItem();
+
+        // The next can be whatever
     }
 
     public void RestockItemIn(int slot)
