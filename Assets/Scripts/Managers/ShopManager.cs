@@ -5,30 +5,42 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     public static ShopManager Instance;
+    public static List<ScriptableItem> CurrentItemsInShop;
 
-    public static List<ScriptableItem> ItemsInShop;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         Instance = this;
     }
 
-    bool BuyItem(ScriptableItem item)
+    public bool BuyItem(ScriptableItem item)
     {
         bool purchased = ArmyManager.Instance.AttemptPurchase(item.cost);
         if (!purchased) return false;
 
-        switch (item.type)
+        switch (item.Type)
         {
             case ItemType.UnitUpgrade:
+                UnitUpgradeItem upgradeItem = item as UnitUpgradeItem;
+                if (ArmyManager.Instance.RemoveUnit(upgradeItem.originalUnit))
+                    ArmyManager.Instance.AddUnit(upgradeItem.upgradedUnit);
+                else
+                    Debug.Log("Original unit not found in army");
                 break;
+
             case ItemType.NewUnit:
+                NewUnitItem newUnitItem = item as NewUnitItem;
+                ArmyManager.Instance.AddUnit(newUnitItem.newUnit);
                 break;
+
             case ItemType.PartyBuff:
+                Debug.Log("Party buff item not implemented");
                 break;
+
             case ItemType.DeckAddition:
+                Debug.Log("Deck addition item not implemented");
+                // ArmyManager.Instance.AddCardToDecks(deckAddItem.card);
                 break;
+
             default:
                 Debug.Log("Invalid shop item type");
                 break;
@@ -37,13 +49,19 @@ public class ShopManager : MonoBehaviour
         return true;
     }
 
-    void RestockShop()
+    public void RestockShop()
     {
-
+        // The first two shop items should be new units
+        CurrentItemsInShop[0] = null;
     }
 
-    void RestockItemIn(int slot)
+    public void RestockItemIn(int slot)
     {
-        ItemsInShop[slot] = null;
+        CurrentItemsInShop[slot] = null;
+    }
+
+    public void TestFunction()
+    {
+        ArmyManager.Instance.RemoveUnit("Knight");
     }
 }

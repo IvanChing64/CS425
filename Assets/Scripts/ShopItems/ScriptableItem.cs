@@ -3,9 +3,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item", menuName = "Scriptable Item")]
 
 public class ScriptableItem : ScriptableObject
-{
-    [Tooltip("Describes what the item does")]
-    public ItemType type;
+{ 
+    public virtual ItemType Type => ItemType.DefaultItem;
+
+    //[Tooltip("Describes what the item does")]
+    //public ItemType type;
+
     public Sprite itemSprite;
     public int cost;
 }
@@ -15,14 +18,13 @@ public class ScriptableItem : ScriptableObject
 /// </summary>
 public enum ItemType
 {
-    // Switches out a base unit for a certain upgrade unit
+    DefaultItem = 0,
+    /// <summary>Switches out a base unit for a certain upgrade unit</summary>
     UnitUpgrade = 1,
-    // Adds a unit to the party
+    /// <summary>Adds a unit to the party</summary>
     NewUnit = 2,
-    // Buffs the party's stats
+    /// <summary> Buffs the party's stats</summary>
     PartyBuff = 3,
-    // Adds a card each of the party member's decks
+    /// <summary>Adds a card each of the party member's decks</summary>
     DeckAddition = 4,
-
-
 }
