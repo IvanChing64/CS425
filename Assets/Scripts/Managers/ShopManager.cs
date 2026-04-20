@@ -8,9 +8,20 @@ public class ShopManager : MonoBehaviour
     public static ShopManager Instance;
     public static List<ScriptableItem> CurrentItemsInShop;
 
+    public static bool ItemListsInititialized = false;
+    public static List<UnitUpgradeItem> UnitUpgradeItems;
+    public static List<NewUnitItem> NewUnitItems;
+    //public static List<PartyBuffItem> PartyBuffItems;
+    //public static List<DeckAdditionItem> DeckAdditionItems;
+
     void Awake()
     {
         Instance = this;
+
+        if (ItemListsInititialized) return;
+
+        UnitUpgradeItems = new List<UnitUpgradeItem>(Resources.LoadAll<UnitUpgradeItem>("Items"));
+        NewUnitItems = new List<NewUnitItem>(Resources.LoadAll<NewUnitItem>("Items"));
     }
 
     public bool BuyItem(ScriptableItem item)
@@ -53,13 +64,14 @@ public class ShopManager : MonoBehaviour
     public void RestockShop()
     {
         // The first two shop items should be new units
-        CurrentItemsInShop[0] = new NewUnitItem();
-        CurrentItemsInShop[1] = new NewUnitItem();
+        // TODO: Ensure that two *different* items are always shown
+        CurrentItemsInShop[0] = NewUnitItems[Random.Range(0, NewUnitItems.Count)];
+        CurrentItemsInShop[1] = NewUnitItems[Random.Range(0, NewUnitItems.Count)];
 
         // The next three? (maybe two) items should be unit upgrades
-        CurrentItemsInShop[2] = new UnitUpgradeItem();
-        CurrentItemsInShop[3] = new UnitUpgradeItem();
-        CurrentItemsInShop[4] = new UnitUpgradeItem();
+        CurrentItemsInShop[2] = UnitUpgradeItems[Random.Range(0, UnitUpgradeItems.Count)];
+        CurrentItemsInShop[3] = UnitUpgradeItems[Random.Range(0, UnitUpgradeItems.Count)];
+        CurrentItemsInShop[4] = UnitUpgradeItems[Random.Range(0, UnitUpgradeItems.Count)];
 
         // The next can be whatever
     }
