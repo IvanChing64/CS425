@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::UnitUpgradeItem
   itemSprite: {fileID: 0}
   cost: 0
-  originalUnit: {fileID: 0}
-  upgradedUnit: {fileID: 0}
+  originalUnit: {fileID: 11400000, guid: f2d5425ab28ecbb4ebb8bc1550f29a69, type: 2}
+  upgradedUnit: {fileID: 11400000, guid: dcd44c3bb5910cf4bbc22ad9c62d1afa, type: 2}
