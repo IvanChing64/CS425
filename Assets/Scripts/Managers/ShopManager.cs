@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 using Random = UnityEngine.Random;
 
 public class ShopManager : MonoBehaviour
@@ -64,16 +66,16 @@ public class ShopManager : MonoBehaviour
     public void RestockShop()
     {
         // The first two shop items should be new units
-        // TODO: Ensure that two *different* items are always shown
-        CurrentItemsInShop[0] = NewUnitItems[Random.Range(0, NewUnitItems.Count)];
-        CurrentItemsInShop[1] = NewUnitItems[Random.Range(0, NewUnitItems.Count)];
+        int[] randItems = GetUniqueRandomValues(2, 0, NewUnitItems.Count);
+        CurrentItemsInShop[0] = NewUnitItems[randItems[0]];
+        CurrentItemsInShop[1] = NewUnitItems[randItems[1]];
 
-        // The next three? (maybe two) items should be unit upgrades
-        CurrentItemsInShop[2] = UnitUpgradeItems[Random.Range(0, UnitUpgradeItems.Count)];
-        CurrentItemsInShop[3] = UnitUpgradeItems[Random.Range(0, UnitUpgradeItems.Count)];
-        CurrentItemsInShop[4] = UnitUpgradeItems[Random.Range(0, UnitUpgradeItems.Count)];
+        // The next two items should be unit upgrades
+        randItems = GetUniqueRandomValues(2, 0, UnitUpgradeItems.Count);
+        CurrentItemsInShop[2] = UnitUpgradeItems[randItems[0]];
+        CurrentItemsInShop[3] = UnitUpgradeItems[randItems[1]];
 
-        // The next can be whatever
+        // Other items can be whatever
     }
 
     public void RestockItemIn(int slot)
@@ -84,5 +86,26 @@ public class ShopManager : MonoBehaviour
     public void TestFunction()
     {
         ArmyManager.Instance.RemoveUnit("Knight");
+    }
+
+    public static int[] GetUniqueRandomValues(int n, int minIncl, int maxExcl)
+    {
+        int[] randInts = new int[n];
+        for (int i = 0; i < n; i++)
+        {
+            randInts[i] = maxExcl;
+        }
+
+        for (int i = 0; i < n; i++)
+        {
+            int x = randInts[i];
+            do
+            {
+                randInts[i] = Random.Range(minIncl, maxExcl);
+            }
+            while ((i != 0 && randInts[0..i].Contains(x)) || (i != n && randInts[(i + 1)..].Contains(x)));
+        }
+
+        return randInts;
     }
 }
