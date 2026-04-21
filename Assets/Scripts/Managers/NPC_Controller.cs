@@ -19,6 +19,7 @@ public class NPC_Controller: MonoBehaviour
         Acting,
         EndTurn
     }
+    private TurnState currentState = TurnState.Idle;
 
     public static NPC_Controller Instance;
     public float moveSpeed = 0.5f;
@@ -45,29 +46,7 @@ public class NPC_Controller: MonoBehaviour
 
     //MovementBehavior logic: Andrew Shelton
 
-    private bool HasLineOfSight(Tile from, Tile to)
-    {
-        Vector2 start = from.transform.position;
-        Vector2 end = to.transform.position;
-
-        Vector2 direction = (end - start).normalized;
-        float distance = Vector2.Distance(start, end);
-
-        RaycastHit2D hit = Physics2D.Raycast(start, direction, distance);
-
-        if (hit.collider == null)
-        {
-            return true; // No obstacles in the way
-        }
-
-        Tile hitTile = hit.collider.GetComponent<Tile>();
-
-        if (hitTile != null && hitTile != to)
-        {
-            if (!hitTile.isWalkable) return false;
-        }
-        return true;
-    }
+  
     private Tile GetRangedTarget()
     {
         var targeting = GetComponent<EnemyTargetingManager>();
@@ -75,46 +54,78 @@ public class NPC_Controller: MonoBehaviour
 
         Tile playerTile = GridManager.Instance.GetTileForUnit(targeting.CurrentTarget.gameObject);
 
-        //Moves to a tile within attack range of the player
-        //List<Tile> tiles = RangeManager.GetTilesInRange(playerTile, npcUnit.attackRange, RangeType.FloodTargeting);
-        //return tiles.Count > 0 ? tiles[0] : playerTile; // Default to player's tile if no valid tiles found
-
         List<Tile> movableTiles = RangeManager.GetTilesInRange(npcUnit.OccupiedTile,
             npcUnit.moveRange, RangeType.FloodTargeting);
 
         Tile bestTile = null;
-        float bestScore = Mathf.Infinity;
+        //float bestScore = Mathf.Infinity;
+
+       
+
+        // alreadyInRange = movableTiles.Contains(playerTile);
 
         foreach (var tile in movableTiles)
-        { 
+        {
             if (!tile.isWalkable) continue;
 
-            float distToPlayer = Vector2.Distance(tile.transform.position,
-                playerTile.transform.position);
+            float distToPlayer = Vector2.Distance(
+                tile.transform.position,
+                playerTile.transform.position
+            );
 
-            if (distToPlayer > npcUnit.attackRange) continue;
+            if (distToPlayer > npcUnit.attackRange)
+               continue;
 
-            if (!HasLineOfSight(tile, playerTile)) continue;
-
-            float score = distToPlayer;
+            /*float score = distToPlayer;
 
             if (score < bestScore)
             {
                 bestScore = score;
                 bestTile = tile;
-            }
-
-
+            }*/
 
         }
-
         if (bestTile != null)
         {
             return bestTile;
         }
+        //Pass 2: 
 
+        /*bestScore = Mathf.Infinity;
+
+       foreach (var tile in movableTiles) 
+       {
+            if (!tile.isWalkable) { continue; }
+            if (tile == npcUnit.OccupiedTile) continue;
+
+            //var testPath = AStarManager.Instance.GeneratePath(npcUnit.OccupiedTile, tile);
+             //if (testPath == null || testPath.Count == 0) continue;
+
+            var pathFromTileToPlayer = AStarManager.Instance.GeneratePath(tile, playerTile);
+
+            if (pathFromTileToPlayer == null || pathFromTileToPlayer.Count == 0)
+                continue;
+
+            // combine path cost + distance
+            float score = pathFromTileToPlayer.Count;
+
+            if (score < bestScore)
+             {
+                bestScore = score;
+                bestTile = tile;
+             }
+
+       }*/
+
+       if (bestTile == null)
+        {
+            return GetRandomTile();
+        }
+
+        var debugPath = AStarManager.Instance.GeneratePath(npcUnit.OccupiedTile, bestTile);
+        Debug.Log($"[TARGET] BestTile: {bestTile?.name}, PathLen: {debugPath?.Count}");
+        Debug.Log($"Chosen tile: {bestTile?.name}");
         return playerTile;
-
     }
 
     [SerializeField] private int healAmount = 10;
@@ -299,10 +310,25 @@ public class NPC_Controller: MonoBehaviour
         var targeting = GetComponent<EnemyTargetingManager>();
         if (enemy1.movementBehavior != Enemy1.MovementBehavior.Support)
         {
-            if (targeting.CurrentTarget == null)
-                targeting.SelectTarget();
+            if (targeting == null)
+            {
+                Debug.LogError("Missing EnemyTargetingManager!");
+                return;
+            }
 
-            Tile targetTile = GridManager.Instance.GetTileForUnit(GetComponent<EnemyTargetingManager>().CurrentTarget.gameObject);
+            if (targeting.CurrentTarget == null || targeting.CurrentTarget.gameObject == null)
+            {
+                targeting.SelectTarget();
+            }
+            
+            if (targeting.CurrentTarget == null || targeting.CurrentTarget.gameObject == null) 
+            {
+                Debug.LogWarning("No valid target found.");
+                SetTarget(startTile, startTile); // do nothing
+                return;
+            }
+
+            Tile targetTile = GridManager.Instance.GetTileForUnit(targeting.CurrentTarget.gameObject);
 
             if (RangeManager.GetTilesInRange(startTile, npcUnit.attackRange, RangeType.FloodTargeting).Contains(targetTile))
             {
@@ -365,6 +391,7 @@ public class NPC_Controller: MonoBehaviour
         if (!endTile.isWalkable) Debug.Log("End tile is terrain-blocked");
 
         path = AStarManager.Instance.GeneratePath(startTile, endTile);
+        Debug.Log($"[SETTARGET BEFORE TRIM] PathLen: {path?.Count}");
         if (path != null && path.Count > 1)
         {
             Tile lastTile = path[path.Count - 1];
@@ -386,6 +413,7 @@ public class NPC_Controller: MonoBehaviour
         {
             path = path.GetRange(0, npcUnit.moveRange + npcUnit.moveModifier);
         }
+        Debug.Log($"[SETTARGET AFTER TRIM] PathLen: {path?.Count}");
 
         pathIndex = 0;
         tilesMovedThisTurn = 0;
@@ -432,7 +460,7 @@ public class NPC_Controller: MonoBehaviour
 
     private void CheckAndAttack()
     {
-        List<Tile> attackableTiles = GetTilesInAttackRange(npcUnit.OccupiedTile, npcUnit.attackRange);
+        List<Tile> attackableTiles = RangeManager.GetTilesInRange(npcUnit.OccupiedTile, npcUnit.attackRange, RangeType.FloodTargeting);
         Debug.Log($"NPC checking attack. Range: {npcUnit.attackRange}. Tiles found in range: {attackableTiles.Count}");
         BaseUnit target = null;
         
@@ -440,7 +468,7 @@ public class NPC_Controller: MonoBehaviour
         foreach (Tile tile in attackableTiles)
         {
             //Changed a little bit
-            if (tile.OccupiedUnit != null && tile.OccupiedUnit.Faction == Faction.Player && tile.OccupiedUnit.invisible == 0 && HasLineOfSight(npcUnit.OccupiedTile, tile))
+            if (tile.OccupiedUnit != null && tile.OccupiedUnit.Faction == Faction.Player && tile.OccupiedUnit.invisible == 0)
             {
                 Debug.Log($"Found {tile.OccupiedUnit.name} on tile {tile.name}. Faction: {tile.OccupiedUnit.Faction}");
                 target = tile.OccupiedUnit;
@@ -484,7 +512,7 @@ public class NPC_Controller: MonoBehaviour
         var targeting = GetComponent<EnemyTargetingManager>();
         if (enemy1.movementBehavior != Enemy1.MovementBehavior.Support)
         {
-            if (targeting != null || (targeting.CurrentTarget == null || targeting.CurrentTarget.gameObject == null))
+            if (targeting != null && (targeting.CurrentTarget == null || targeting.CurrentTarget.gameObject == null))
             {
                 targeting.SelectTarget();
             }
@@ -578,13 +606,95 @@ public class NPC_Controller: MonoBehaviour
         }
     }
 
+    private IEnumerator MoveAlongPath()
+    {
+        while (pathIndex < path.Count && tilesMovedThisTurn < npcUnit.moveRange)
+        {
+            Tile currentTargetTile = path[pathIndex];
+            if (currentTargetTile == null) yield break;
+
+            Vector2 targetPos = currentTargetTile.transform.position;
+
+            while (Vector2.Distance(transform.position, targetPos) > 0.1f)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+                yield return null;
+            }
+
+            pathIndex++;
+            tilesMovedThisTurn++;
+            yield return null;
+        }
+    }
 
 
 
 
     public IEnumerator TakeTurn()
     {
-        tilesMovedThisTurn = 0;
+        currentState = TurnState.BeginTurn;
+        HasFinishedTurn = false;
+
+        while (currentState != TurnState.Idle)
+        {
+            switch (currentState)
+            {
+                case TurnState.BeginTurn:
+                    tilesMovedThisTurn = 0;
+
+                    if (npcUnit.restricted != EffectFlag.None)
+                    {
+                        npcUnit.moveRange = 0;
+                    }
+
+                    var targeting = GetComponent<EnemyTargetingManager>();
+                    if (enemy1.movementBehavior != Enemy1.MovementBehavior.Support)
+                    {
+                        if (targeting != null)
+                            targeting.SelectTarget();
+                    }
+
+                    if (npcUnit.OccupiedTile == null)
+                    {
+                        Debug.LogError($"{name} has no OccupiedTile!");
+                        currentState = TurnState.EndTurn;
+                        break;
+                    }
+
+                    currentState = TurnState.Targeting;
+                    break;
+
+                case TurnState.Targeting:
+                    if (unitAnimator != null)
+                        unitAnimator.SetBool("IsMoving", true);
+
+                    SetBehaviorTarget(npcUnit.OccupiedTile);
+                    currentState = TurnState.Moving;
+                    break;
+
+                case TurnState.Moving:
+                    yield return StartCoroutine(MoveAlongPath());
+                    currentState = TurnState.Acting;
+                    break;
+
+                case TurnState.Acting:
+                    if (unitAnimator != null)
+                        unitAnimator.SetBool("IsMoving", false);
+
+                    FinishedMoves();
+                    CheckForHealAfterMove();
+                    currentState = TurnState.EndTurn;
+                    break;
+
+                case TurnState.EndTurn:
+                    HasFinishedTurn = true;
+                    currentState = TurnState.Idle;
+                    break;
+            }
+
+            yield return null;
+        }
+        /*tilesMovedThisTurn = 0;
         HasFinishedTurn = false;
 
         if (!(npcUnit.restricted == EffectFlag.None))
@@ -639,7 +749,7 @@ public class NPC_Controller: MonoBehaviour
         }
 
         FinishedMoves();
-        CheckForHealAfterMove();
+        CheckForHealAfterMove();*/
     }
 
     public static IEnumerator RunEnemyTurn(List<NPC_Controller> enemies)
