@@ -1872,8 +1872,9 @@ MonoBehaviour:
   stageDesciption: 'A discarded tablet screen flickers with life, offering digital
     upgrades and "cheat codes" in exchange for Maya''s plastic tokens.
 
-    Shop
-    Encounter'
+
+    Enemies:
+    1 Robot 3 Soldier 1 Scientist'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 12
@@ -2746,7 +2747,8 @@ MonoBehaviour:
   stageData: {fileID: 11400000, guid: 8520f328a73a1e646874815c9891c8ee, type: 2}
   stageDesciption: "The King\u2019s law doesn\u2019t reach this far. The stone path
     has turned to dirt, and the local guards have traded their spears for badges.
-    It\u2019s a lawless land now, where the fastest draw wins the day."
+    It\u2019s a lawless land now, where the fastest draw wins the day.\n\nEnemies:
+    1 Pioneer 2 Bandit 1 Huckster"
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -3040,8 +3042,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 7
   stageData: {fileID: 11400000, guid: 8100362cb732c894783a78125ff3d20a, type: 2}
-  stageDesciption: Pandora's knights find a strange, sandy desert. The swords feel
+  stageDesciption: 'Pandora''s knights find a strange, sandy desert. The swords feel
     heavier, and the air smells like old leather.
+
+
+    Enemies: 1 Pioneer 3 Huckster '
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -3199,8 +3204,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 15
   stageData: {fileID: 11400000, guid: 89b56d9167bd379449d3fbe3a9e61373, type: 2}
-  stageDesciption: A holographic army flickers into existence, blocking the path
+  stageDesciption: 'A holographic army flickers into existence, blocking the path
     to the desk-lamp sun.
+
+
+    Enemies: 1 Robot 2 Soldier 2 Scientist'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 12
@@ -4276,8 +4284,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 11
   stageData: {fileID: 11400000, guid: 9633e160f4d96b44a877a9dd32001906, type: 2}
-  stageDesciption: The last of the gunslingers face a mysterious, glowing threat
-    that doesn't bleed.
+  stageDesciption: 'The last of the gunslingers face a mysterious, glowing threat
+    that doesn''t bleed.
+
+
+    Enemies: 2 Bandit 1 Elite'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 11
@@ -5130,7 +5141,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 10
   stageData: {fileID: 11400000, guid: 79ab8631e2ea5ab4d86b9b2dd859204c, type: 2}
-  stageDesciption: Robbers have surrounded the party! It's time for a high-noon showdown!
+  stageDesciption: 'Robbers have surrounded the party! It''s time for a high-noon
+    showdown!
+
+
+    Enemies: 2 Pioneer 2 Huckster'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 11
@@ -5372,7 +5387,7 @@ MonoBehaviour:
 
 
     Enemies: 1 Grunt
-    1 Bandit 1 Cultist '
+    1 Archer 1 Cultist '
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -5530,7 +5545,7 @@ MonoBehaviour:
   stageID: 13
   stageData: {fileID: 11400000, guid: 44f5a50bcd275914fb37805703f67061, type: 2}
   stageDesciption: "That\u2019s no gunslinger in the distance\u2014it\u2019s a hologram.
-    The tumbleweeds are now floating scrap-bots."
+    The tumbleweeds are now floating scrap-bots.\n\nEnemies: 4 Robot 1 Soldier"
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 11
@@ -5687,8 +5702,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 6
   stageData: {fileID: 11400000, guid: 72ecd8b1242b20f46a06b276fe1db4e1, type: 2}
-  stageDesciption: A fortress of pillows blocks the way. Defeat the archers to get
+  stageDesciption: 'A fortress of pillows blocks the way. Defeat the archers to get
     through!
+
+
+    Enemies: 1 Grunt 2 Cultist '
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -5845,8 +5863,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 14
   stageData: {fileID: 11400000, guid: 6d992fabd9cc34b4db6cbc71cdb7b489, type: 2}
-  stageDesciption: Around the campfire, the revolver clicks and hums with static.
+  stageDesciption: 'Around the campfire, the revolver clicks and hums with static.
     The barrel begins to glow with plasma energy.
+
+
+    Enemies: 7 Robot'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 11
@@ -6086,7 +6107,7 @@ MonoBehaviour:
 
 
     Enemies:
-    4 Bandits'
+    2 Grunts 1 Archer'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 7
@@ -7182,8 +7203,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 8
   stageData: {fileID: 11400000, guid: a6b5bea95a7a8f94bb2d5b8a2604b9db, type: 2}
-  stageDesciption: The knight trades his heavy shield for a wide-brimmed hat. The
+  stageDesciption: 'The knight trades his heavy shield for a wide-brimmed hat. The
     green forests are drying up into golden canyons.
+
+
+    Enemies: 1 Pioneer 2 Bandit
+    1 Huckster'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -7340,8 +7365,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 12
   stageData: {fileID: 11400000, guid: ee3628c3eb197614792e879b81c4bdda, type: 2}
-  stageDesciption: Pandora finds a flashlight. The beams cut through the dust storms,
+  stageDesciption: 'Pandora finds a flashlight. The beams cut through the dust storms,
     pointing toward the stars.
+
+
+    Enemies: 2 Soldier 1 Elite'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 11
@@ -7740,7 +7768,7 @@ MonoBehaviour:
   stageID: 5
   stageData: {fileID: 11400000, guid: c7e29c6073a441648b88b861cbcd430f, type: 2}
   stageDesciption: "The King\u2019s vanguard fights a holding action as the lush
-    meadows begin to turn to dust."
+    meadows begin to turn to dust.\n\nEnemies: 1 Grunt 1 Elite "
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -8517,7 +8545,7 @@ MonoBehaviour:
     need a snack break.
 
 
-    Shop Encounter!'
+    Enemies: 2 Grunts 1 Archer 1 Cultist'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -9351,7 +9379,7 @@ MonoBehaviour:
     finds a small enemy camp!
 
 
-    Enemies: 4 Grunts 2 Archers'
+    Enemies: 1 Grunts 2 Archers'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 7

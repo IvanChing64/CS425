@@ -14,6 +14,7 @@ public class GridManager : MonoBehaviour
     //[SerializeField] private int width, height;
     [SerializeField] private Tile grassTile, mountainTile;
     [SerializeField] private Transform cam;
+    [SerializeField] private SpriteRenderer backgroundRenderer;
     private Dictionary<Vector2, Tile> tiles;
     //min 10, max 38
     //default 18
@@ -149,6 +150,10 @@ public class GridManager : MonoBehaviour
             return;
         }
 
+        if(backgroundRenderer != null)
+        {
+            ScaleBackground();
+        }
 
         //set camera and change states to spawn units
         //Changed camera settings
@@ -307,6 +312,17 @@ public class GridManager : MonoBehaviour
         }
 
         return neighbors;
+    }
+
+    private void ScaleBackground()
+    {
+        float centerX = (float)width / 2f - 0.5f;
+        float centerY = (float)height / 2f - 0.5f;
+        backgroundRenderer.transform.position = new Vector3(centerX, centerY, 1);
+        Vector2 spriteSize = backgroundRenderer.sprite.bounds.size;
+        float scaleX = (float)(width + 3f) / spriteSize.x;
+        float scaleY = (float)(height + 3f) / spriteSize.y;
+        backgroundRenderer.transform.localScale = new Vector3(scaleX, scaleY, 1);
     }
 
 }
