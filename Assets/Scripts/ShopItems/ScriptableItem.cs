@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Scriptable Items/Default Item")]
 
@@ -9,7 +10,9 @@ public class ScriptableItem : ScriptableObject
     //[Tooltip("Describes what the item does")]
     //public ItemType type;
 
-    public Sprite itemSprite;
+    //public Sprite itemSprite;
+    public Image itemImage;
+    public string itemDesc;
     public int cost;
 }
 
