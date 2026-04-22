@@ -58,7 +58,7 @@ public class NPC_Controller: MonoBehaviour
             npcUnit.moveRange, RangeType.FloodTargeting);
 
         Tile bestTile = null;
-        //float bestScore = Mathf.Infinity;
+        float bestScore = -Mathf.Infinity;
 
        
 
@@ -73,16 +73,18 @@ public class NPC_Controller: MonoBehaviour
                 playerTile.transform.position
             );
 
+            float distFromEnemy = Vector2.Distance(tile.transform.position, npcUnit.OccupiedTile.transform.position);
+
             if (distToPlayer > npcUnit.attackRange)
                continue;
 
-            /*float score = distToPlayer;
+            float score = distFromEnemy;
 
-            if (score < bestScore)
+            if (score > bestScore)
             {
                 bestScore = score;
                 bestTile = tile;
-            }*/
+            }
 
         }
         if (bestTile != null)
@@ -125,13 +127,34 @@ public class NPC_Controller: MonoBehaviour
         var debugPath = AStarManager.Instance.GeneratePath(npcUnit.OccupiedTile, bestTile);
         Debug.Log($"[TARGET] BestTile: {bestTile?.name}, PathLen: {debugPath?.Count}");
         Debug.Log($"Chosen tile: {bestTile?.name}");
-        return playerTile;
+        return bestTile;
     }
 
     [SerializeField] private int healAmount = 10;
 
+    private bool CanSummonThisTurn()
+    {
+        return GameManager.Instance.turnNumber % 2 == 0;
+    }
+
+    /*private void SummonGrunts()
+    {
+        // spawn 2 grunts near the support
+        var neighbors = npcUnit.OccupiedTile.Neighbors;
+        if (neighbors != null && neighbors.Count > 0) { 
+        UnitManager.Instance.SpawnEnemies("Grunt", neighbors[0]);
+        UnitManager.Instance.SpawnEnemies("Grunt", neighbors[1]);
+        }
+    }*/
     private Tile GetSupportTarget()
     {
+        /*bool isElite = npcUnit.isEliteVarient;
+        if (isElite && CanSummonThisTurn)
+        {
+            SummonGrunts();
+
+            return GetRetreatTile();
+        }*/
         BaseUnit lowestHealthAlly = null;
         float lowestHealth = Mathf.Infinity;
 
@@ -254,6 +277,28 @@ public class NPC_Controller: MonoBehaviour
         return bestTarget.OccupiedTile;
     }
 
+  /*private Tile GetBossTarget()
+  {
+        BaseUnit highestHealthPlayer = null;
+        float highestHealth = -Mathf.Infinity;
+
+        foreach (var unit in UnitManager.Instance.playersSpawned)
+        {
+            if (unit == npcUnit) continue;
+
+
+            // Find the highest health instead of lowest
+            if (unit.health > highestHealth)
+            {
+                highestHealth = unit.health;
+                highestHealthPlayer = unit;
+            }
+        }
+
+
+    }*/
+
+
     private void Update()
     {
        /* if (GameManager.Instance == null) return;
@@ -341,6 +386,10 @@ public class NPC_Controller: MonoBehaviour
 
         switch (enemy1.movementBehavior)
         {
+            case Enemy1.MovementBehavior.Melee:
+                chosenTile = GetClosestReachablePlayerTile(startTile);
+                break;
+
             case Enemy1.MovementBehavior.Ranged:
                 chosenTile = GetRangedTarget();
                 break;
@@ -348,6 +397,10 @@ public class NPC_Controller: MonoBehaviour
 
             case Enemy1.MovementBehavior.Support:
                 chosenTile = GetSupportTarget();
+                break;
+
+            case Enemy1.MovementBehavior.Boss:
+                //chosenTile = GetBossTarget();
                 break;
 
 
