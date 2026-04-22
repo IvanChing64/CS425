@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d61b94e333a064fbb87b63f8fac2c8, type: 3}
+  m_Name: ClericToMonk
+  m_EditorClassIdentifier: Scripts::UnitUpgradeItem
+  itemSprite: {fileID: 0}
+  itemDesc: 
+  cost: 0
+  originalUnit: {fileID: 11400000, guid: bd85134c64687194690aa1e0e21a8b7e, type: 2}
+  upgradedUnit: {fileID: 11400000, guid: 6ad7c5ced806cee49b29d02030fb56c1, type: 2}

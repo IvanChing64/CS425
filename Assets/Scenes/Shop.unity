@@ -1909,6 +1909,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 973331934}
+  - component: {fileID: 973331935}
   m_Layer: 5
   m_Name: Shop Slot 1
   m_TagString: Untagged
@@ -1936,6 +1937,21 @@ RectTransform:
   m_AnchoredPosition: {x: -400, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &973331935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973331933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517d3b19e34fa874789d9874632c251d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::ShopItemSlot
+  itemDescription: {fileID: 364736147}
+  costText: {fileID: 681674687}
+  itemImage: {fileID: 1629753915}
 --- !u!1 &1034075777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2607,6 +2623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146301f44399e0a498e8aefaa14a6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::ShopManager
+  itemSlots: []
 --- !u!4 &1361015054
 Transform:
   m_ObjectHideFlags: 0

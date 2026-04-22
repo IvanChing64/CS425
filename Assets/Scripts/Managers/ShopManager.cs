@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 public class ShopManager : MonoBehaviour
 {
     public static ShopManager Instance;
+
+    public static bool StockInitialized = false;
     public static List<ScriptableItem> CurrentItemsInShop;
 
     public static bool ItemListsInititialized = false;
@@ -15,14 +17,31 @@ public class ShopManager : MonoBehaviour
     //public static List<PartyBuffItem> PartyBuffItems;
     //public static List<DeckAdditionItem> DeckAdditionItems;
 
+    public List<ShopItemSlot> itemSlots;
+
     void Awake()
     {
         Instance = this;
 
-        if (ItemListsInititialized) return;
+        if (!ItemListsInititialized)
+        {
+            UnitUpgradeItems = new List<UnitUpgradeItem>(Resources.LoadAll<UnitUpgradeItem>("Items"));
+            NewUnitItems = new List<NewUnitItem>(Resources.LoadAll<NewUnitItem>("Items"));
+            ItemListsInititialized = true;
+        }
 
-        UnitUpgradeItems = new List<UnitUpgradeItem>(Resources.LoadAll<UnitUpgradeItem>("Items"));
-        NewUnitItems = new List<NewUnitItem>(Resources.LoadAll<NewUnitItem>("Items"));
+        if (!StockInitialized)
+        {
+            RestockShop();
+            StockInitialized = true;
+        }
+
+        UpdateItemSlots();
+    }
+
+    public void BuyItemInSlot(int slot)
+    {
+
     }
 
     public bool BuyItem(ScriptableItem item)
@@ -106,5 +125,20 @@ public class ShopManager : MonoBehaviour
         }
 
         return randInts;
+    }
+
+    public void UpdateItemSlots()
+    {
+        for (int i = 0; i < itemSlots.Count; i++)
+        {
+            UpdateItemSlot(i);
+        }
+    }
+
+    public void UpdateItemSlot(int slot)
+    {
+        itemSlots[slot].itemImage.sprite = CurrentItemsInShop[slot].itemSprite;
+        itemSlots[slot].itemDescription.text = CurrentItemsInShop[slot].itemDesc;
+        itemSlots[slot].costText.text = $"Cost: {CurrentItemsInShop[slot].cost}";
     }
 }

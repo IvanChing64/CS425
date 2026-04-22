@@ -10,8 +10,7 @@ public class ScriptableItem : ScriptableObject
     //[Tooltip("Describes what the item does")]
     //public ItemType type;
 
-    //public Sprite itemSprite;
-    public Image itemImage;
+    public Sprite itemSprite;
     public string itemDesc;
     public int cost;
 }
