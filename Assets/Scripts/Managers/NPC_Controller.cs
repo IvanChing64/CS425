@@ -728,6 +728,7 @@ public class NPC_Controller: MonoBehaviour
                 case TurnState.Moving:
                     yield return StartCoroutine(MoveAlongPath());
                     currentState = TurnState.Acting;
+           
                     break;
 
                 case TurnState.Acting:
@@ -736,6 +737,7 @@ public class NPC_Controller: MonoBehaviour
 
                     FinishedMoves();
                     CheckForHealAfterMove();
+                    CheckAndAttack();
                     currentState = TurnState.EndTurn;
                     break;
 
