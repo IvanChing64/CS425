@@ -8,7 +8,6 @@ using Unity.VisualScripting;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public static int WinReward;
     public GameState gameState;
     public int turnNumber;
     public bool unitMoving = false;
@@ -39,7 +38,7 @@ public class GameManager : MonoBehaviour
             // If the player is victorious
             if (CheckPlayerVictory())
             {
-                ArmyManager.Instance.GainCurrency(WinReward);
+                ArmyManager.Instance.GainCurrency(CurrentSession.ActiveStageData.currency);
                 EndScreenManager.Instance.SetWinningText();
                 gameState = GameState.EndScreen;
             }

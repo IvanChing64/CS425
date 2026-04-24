@@ -127,8 +127,6 @@ public class levelSelect : MonoBehaviour
             GridManager.height = 20;
         }
 
-        GameManager.WinReward = stageData.currency;
-
         SceneManager.LoadScene("Scenes/SampleScene");
     }
 
