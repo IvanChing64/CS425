@@ -15,4 +15,4 @@ MonoBehaviour:
   itemSprite: {fileID: 8793639957104055765, guid: 555b5686f997f164e89648ce4fac238b, type: 3}
   itemDesc: New Huckster for army
   cost: 200
-  newUnit: {fileID: 11400000, guid: 683f96d00b38cf346a9d982aaa302743, type: 2}
+  newUnit: {fileID: 11400000, guid: c01e7227687912743982f8a00d0af5cb, type: 2}
