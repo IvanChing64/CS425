@@ -51,6 +51,8 @@ public class ShopManager : MonoBehaviour
         {
             CurrentItemsInShop.Add(NewUnitItems[0]);
         }
+
+        RestockShop();
     }
 
     public void BuyItemInSlot(int slot)
