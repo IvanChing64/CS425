@@ -13,18 +13,21 @@ MonoBehaviour:
   m_Name: Spirit
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Spirit
-  cardDescription: Gain Resistant and Defiant
+  cardDescription: Gain Immunity and Defiant
   type: 2
   range: 0
+  areaRange: 0
   value: 1
   cost: 1
   damaging: 0
+  piercing: 0
   areaEffect: 0
   rangeType: 1
-  cardIcon: {fileID: 3944780313303554582, guid: 46932ac090d56484495ec1827f4451aa, type: 3}
+  cardIcon: {fileID: 3915293088273905023, guid: 660534ed80185a94f8c5a02090313f5a, type: 3}
   cardCorner: {fileID: -8686425463742581414, guid: 48dcce1cec15ef34cb12d5459f8d55bd, type: 3}
   cardBorderColor: {r: 0.2509804, g: 0.8, b: 0.12941177, a: 1}
-  primarySupportEffect: 11
+  primarySupportEffect: 15
   secondarySupportEffect: 8
   primaryControlEffect: 0
   secondaryControlEffect: 0
+  summon: 0

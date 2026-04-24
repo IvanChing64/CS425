@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rob
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Rob
-  cardDescription: Damage and restrict a ranged enemy. Energize self
+  cardDescription: Damage a ranged enemy. Energize self
   type: 0
   range: 3
   areaRange: 0
@@ -28,6 +28,6 @@ MonoBehaviour:
   cardBorderColor: {r: 1, g: 0, b: 0, a: 1}
   primarySupportEffect: 0
   secondarySupportEffect: 0
-  primaryControlEffect: 3
+  primaryControlEffect: 0
   secondaryControlEffect: 0
   summon: 0

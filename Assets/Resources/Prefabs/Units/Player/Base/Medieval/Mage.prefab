@@ -607,6 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efead496cd676ad49b7245ff8fbde53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player1
+  Name: 
   OccupiedTile: {fileID: 0}
   Faction: 0
   summoned: 0
@@ -624,6 +625,7 @@ MonoBehaviour:
   strengthen: 0
   resistant: 0
   invisible: 0
+  immune: 0
   stunned: 0
   restricted: 0
   frozen: 0

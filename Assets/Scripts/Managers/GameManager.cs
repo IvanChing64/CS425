@@ -68,16 +68,28 @@ public class GameManager : MonoBehaviour
                 turnNumber += 1;
                 // Debug.Log("Player Turn");
                 // Debug.Log("Turn Number" + turnNumber);
+                UnitManager.Instance.ApplyEndTurnEffects(Faction.Enemy);
                 combatUIManager.Instance.ShowEndTurnOption();
                 TurnUIManager.Instance.UpdateTurnText(turnNumber);
                 CardManager.instance.NextTurn();
+                if (CheckPlayerVictory())
+                {
+                    EndScreenManager.Instance.SetWinningText();
+                    ChangeState(GameState.EndScreen);
+                }
                 break;
             case GameState.EnemyTurn:
-                Debug.Log("Enemy Turn");
-                Debug.Log("Turn Number" + turnNumber);
+                // Debug.Log("Enemy Turn");
+                // Debug.Log("Turn Number" + turnNumber);
+                UnitManager.Instance.ApplyEndTurnEffects(Faction.Player);
                 combatUIManager.Instance.hideEndTurnOption();
                 UnitManager.Instance.BeginEnemyTurn();
                 CardManager.instance.ToggleCardArea(false);
+                if (CheckEnemyVictory())
+                {
+                    EndScreenManager.Instance.SetLosingText();
+                    ChangeState(GameState.EndScreen);
+                }
                 break;
             case GameState.EndScreen:
                 //Debug.Log("End screen reached");

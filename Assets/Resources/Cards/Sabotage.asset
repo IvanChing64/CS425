@@ -28,6 +28,6 @@ MonoBehaviour:
   cardBorderColor: {r: 1, g: 0, b: 0, a: 1}
   primarySupportEffect: 0
   secondarySupportEffect: 0
-  primaryControlEffect: 9
+  primaryControlEffect: 8
   secondaryControlEffect: 2
   summon: 0

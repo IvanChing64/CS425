@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efead496cd676ad49b7245ff8fbde53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player1
+  Name: 
   OccupiedTile: {fileID: 0}
   Faction: 0
   summoned: 0
@@ -270,6 +271,7 @@ MonoBehaviour:
   strengthen: 0
   resistant: 0
   invisible: 0
+  immune: 0
   stunned: 0
   restricted: 0
   frozen: 0
@@ -297,11 +299,11 @@ MonoBehaviour:
   - Fly
   - Blaster
   - Blaster
-  - Overwatch
+  - Repair
   canAttack: 0
   canSupport: 0
   canSummon: 0
-  energy: 3
+  energy: 2
 --- !u!114 &7232603518593366301
 MonoBehaviour:
   m_ObjectHideFlags: 0

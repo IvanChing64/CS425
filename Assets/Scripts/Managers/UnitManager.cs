@@ -18,8 +18,8 @@ public class UnitManager : MonoBehaviour
 
     //Adding reference to player tile.
     private Tile playerTile;
-    public bool targetting = false;
-    public Tile targettedTile, previousTile; 
+    public bool targeting = false;
+    public Tile targetedTile, previousTile; 
     private List<Tile> enemyTiles = new List<Tile>();
 
     public BaseUnit SelectedUnit;
@@ -42,6 +42,8 @@ public class UnitManager : MonoBehaviour
     public static float reflectEfficiency = 0.75f;
     public static float absorbEfficiency = 0.5f;
     public static int backstabInvisibleBonus = 15;
+    public static int maxRegenStacks = 5;
+    //public static int 
 
     public List<ScriptableUnit> MB;
     public List<ScriptableUnit> WB;
@@ -101,66 +103,221 @@ public class UnitManager : MonoBehaviour
 
     private void Update()
     {
-        if (targetting && !PauseMenu.instance.blocker.activeInHierarchy)
+        if (targeting && !PauseMenu.instance.blocker.activeInHierarchy)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
-            int range = CardManager.instance.selectedCard.areaRange;
+            int range = 0;
 
             if (hit.collider != null)
             {
                 GameObject objectOver = hit.collider.gameObject;
-                if (previousTile != targettedTile)
+                if (previousTile != targetedTile)
                 {
-                    previousTile = targettedTile;
+                    previousTile = targetedTile;
                 }
                 
-                targettedTile = objectOver.GetComponent<Tile>();
-                if (targettedTile != null)
+                targetedTile = objectOver.GetComponent<Tile>();
+                if (targetedTile != null)
                 {
-                    if (previousTile != null)
+                    if (CardManager.instance.selectedCard.cardType == Type.Attack)
                     {
-                        foreach (Tile t in SelectedPlayer.GetTilesInAOEAttackRange(previousTile, range))
+                        range = CardManager.instance.selectedCard.areaRange;
+
+                        if (previousTile != null)
                         {
-                            t.ShowHighlight(true, Tile.nonwalkableColor);
-                        }
-                    }
-
-                    foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
-                    {
-                        t.ShowHighlight(true, Tile.targetableColor);
-                    }
-
-                    SelectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
-
-                    foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
-                    {
-                        if (targettedTile == t)
-                        {
-                            foreach (Tile p in SelectedPlayer.GetTilesInAOEAttackRange(targettedTile, range))
+                            foreach (Tile t in SelectedPlayer.GetTilesInAOEAttackRange(previousTile, range))
                             {
-                                p.ShowHighlight(true, Tile.attackableColor);
+                                t.ShowHighlight(false, Tile.nonwalkableColor);
                             }
-                            t.ShowHighlight(true, Tile.attackableColor);
-                            break;
+                        }
+
+                        foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
+                        {
+                            if (t.OccupiedUnit == null || t.OccupiedUnit.Faction == Faction.Enemy)t.ShowHighlight(true, Tile.targetableColor);
+                        }
+
+                    } else if (CardManager.instance.selectedCard.cardType == Type.Support)
+                    {
+                        range = CardManager.instance.selectedCard.range;
+
+                        if (previousTile != null)
+                        {
+                            previousTile.ShowHighlight(false, Tile.nonwalkableColor);
+                        }
+
+                        if (range == 0)
+                        {
+                            SelectedPlayer.OccupiedTile.ShowHighlight(true, Tile.targetableColor);
+                        } else
+                        {
+                            foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
+                            {
+                                if (t.OccupiedUnit == null || t.OccupiedUnit.Faction == Faction.Player)t.ShowHighlight(true, Tile.targetableColor);
+                            }
+                        }
+                        
+                    } else if (CardManager.instance.selectedCard.cardType == Type.Movement)
+                    {
+                        range = CardManager.instance.selectedCard.range;
+
+                        if (SelectedPlayer.moveRange == 0)
+                        {
+                            SelectedPlayer.moveRange = range;
+
+                            if (previousTile != null)
+                            {
+                                previousTile.ShowHighlight(false, Tile.nonwalkableColor);
+                            }
+
+                            if (CardManager.instance.selectedCard.rangeType != RangeType.FloodMovementUnrestricted)
+                            {
+                                foreach (Tile t in SelectedPlayer.GetTilesInMoveRange())
+                                {
+                                    t.ShowHighlight(true, Tile.targetableColor);
+                                }
+                            } else
+                            {
+                                foreach (Tile t in SelectedPlayer.GetTilesInUnrestrictedMoveRange())
+                                {
+                                    if (t.isWalkable)t.ShowHighlight(true, Tile.targetableColor);
+                                }
+                            }
+
+                            
+                            SelectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
+
+                            SelectedPlayer.moveRange = 0;
+                        } else
+                        {
+                            if (previousTile != null)
+                            {
+                                previousTile.ShowHighlight(false, Tile.nonwalkableColor);
+                            }
+
+                            if (CardManager.instance.selectedCard.rangeType != RangeType.FloodMovementUnrestricted)
+                            {
+                                foreach (Tile t in SelectedPlayer.GetTilesInMoveRange())
+                                {
+                                    t.ShowHighlight(true, Tile.targetableColor);
+                                }
+                            } else
+                            {
+                                foreach (Tile t in SelectedPlayer.GetTilesInUnrestrictedMoveRange())
+                                {
+                                    if (t.isWalkable)t.ShowHighlight(true, Tile.targetableColor);
+                                }
+                            }
+                        }
+                        
+                    } else if (CardManager.instance.selectedCard.cardType == Type.Summon)
+                    {
+                        range = CardManager.instance.selectedCard.range;
+
+                        if (previousTile != null)
+                        {
+                            previousTile.ShowHighlight(false, Tile.nonwalkableColor);
+                        }
+
+                        foreach (Tile t in SelectedPlayer.GetTilesInMoveRange())
+                        {
+                            t.ShowHighlight(true, Tile.targetableColor);
                         }
                     }
+                
+                    if (CardManager.instance.selectedCard.cardType == Type.Attack)
+                    {
+                       foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
+                        {
+                            if (targetedTile == t)
+                            {
+                                foreach (Tile p in SelectedPlayer.GetTilesInAOEAttackRange(targetedTile, range))
+                                {
+                                    if (p.OccupiedUnit == null || p.OccupiedUnit.Faction == Faction.Enemy)p.ShowHighlight(true, Tile.attackableColor);
+                                }
+                                if (t.OccupiedUnit == null || t.OccupiedUnit.Faction == Faction.Enemy)t.ShowHighlight(true, Tile.attackableColor);
+                                break;
+                            }
+                        } 
+                    } else if (CardManager.instance.selectedCard.cardType == Type.Support)
+                    {
+                        foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
+                        {
+                            if (targetedTile == t)
+                            {
+                                if (t.OccupiedUnit == null || t.OccupiedUnit.Faction == Faction.Player)t.ShowHighlight(true, Tile.supportableColor);
+                                break;
+                            }
+                        } 
+
+                        if (targetedTile == SelectedPlayer.OccupiedTile)
+                        {
+                            SelectedPlayer.OccupiedTile.ShowHighlight(true, Tile.supportableColor);
+                        }
+
+                    } else if (CardManager.instance.selectedCard.cardType == Type.Movement)
+                    {
+                        if (CardManager.instance.selectedCard.rangeType != RangeType.FloodMovementUnrestricted) {
+                            foreach (Tile t in SelectedPlayer.GetTilesInMoveRange())
+                            {
+                                if (targetedTile == t)
+                                {
+                                    List<Tile> path = AStarManager.Instance.GeneratePath(SelectedPlayer.OccupiedTile, t);
+                                    foreach (Tile p in path)
+                                    {
+                                        p.ShowHighlight(true, Tile.walkableColor);
+                                        if (SelectedPlayer.OccupiedTile == p)
+                                        {
+                                            p.ShowHighlight(true, Tile.walkableColor);
+                                        }
+                                    }
+                                    t.ShowHighlight(true, Tile.walkableColor);
+                                    break;
+                                }
+                                SelectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
+                            } 
+                        } else
+                        {
+                            foreach (Tile t in SelectedPlayer.GetTilesInUnrestrictedMoveRange())
+                            {
+                                if (targetedTile == t)
+                                {
+                                    if (t.isWalkable)t.ShowHighlight(true, Tile.walkableColor);
+                                    break;
+                                }
+                            } 
+                        }
+
+                    } else if (CardManager.instance.selectedCard.cardType == Type.Summon)
+                    {
+                        foreach (Tile t in SelectedPlayer.GetTilesInMoveRange())
+                        {
+                            if (targetedTile == t)
+                            {
+                                t.ShowHighlight(true, Tile.summonableColor);
+                                break;
+                            }
+                        }
+                    }
+
                 } else
                 {
-                    if (previousTile != null)
+                    if (CardManager.instance.selectedCard.cardType == Type.Attack)
                     {
-                        foreach (Tile t in SelectedPlayer.GetTilesInAOEAttackRange(previousTile, range))
+                        if (previousTile != null)
                         {
-                            t.ShowHighlight(true, Tile.nonwalkableColor);
+                            foreach (Tile t in SelectedPlayer.GetTilesInAOEAttackRange(previousTile, range))
+                            {
+                                t.ShowHighlight(false, Tile.nonwalkableColor);
+                            }
                         }
                     }
                 }
             }
         } 
     }
-
 
     //Party Function for future purposes
     public void AddUnitToParty(ScriptableUnit unit)
@@ -258,13 +415,10 @@ public class UnitManager : MonoBehaviour
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
 
-
-
     //private T GetRandomUnit<T>(Faction faction) where T : BaseUnit
     //{
     //    return (T)units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
     //}
-
 
     private void SetSelectedUnit(BaseUnit unit)
     {
@@ -328,14 +482,13 @@ public class UnitManager : MonoBehaviour
         // TODO: enemies should be initialized with correct movement range
         int moveRange = SelectedEnemy.moveRange + SelectedEnemy.moveModifier;
 
-        if ((int)SelectedEnemy.restricted > 1)
+        if (SelectedEnemy.restricted > 0)
         {
             moveRange = 0;
         }
 
-        if ((int)SelectedEnemy.stunned > 1)
+        if ((int)SelectedEnemy.stunned == 1)
         {
-            Debug.Log("Enemy is stunned and cannot move or attack.");
             return;
         }
 
@@ -438,5 +591,34 @@ public class UnitManager : MonoBehaviour
             }
         }*/
 
+    }
+
+    public void ApplyEndTurnEffects(Faction faction)
+    {
+        if (faction == Faction.Player)
+        {
+            for (int i = 1; i <= playerUnitCount; i++)
+            {
+                int initial = playerUnitCount;
+                playersSpawned[playerUnitCount - i].ApplyEndTurnEffects();
+                if (initial > playerUnitCount)
+                {
+                    i--;
+                }
+
+            }
+        } else if (faction == Faction.Enemy)
+        {
+            for (int i = 1; i <= enemyUnitCount; i++)
+            {
+                int initial = enemyUnitCount;
+                enemiesSpawned[enemyUnitCount - i].ApplyEndTurnEffects();
+                if (initial > enemyUnitCount)
+                {
+                    i--;
+                }
+
+            }
+        }
     }
 }
