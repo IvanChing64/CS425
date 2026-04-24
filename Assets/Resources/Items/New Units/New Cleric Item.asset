@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6287078ae4d6a04cbdd8a4584396a72, type: 3}
+  m_Name: New Cleric Item
+  m_EditorClassIdentifier: Scripts::NewUnitItem
+  itemSprite: {fileID: 4723107735738678597, guid: 2018574d4308f4786a63ea08083f13cc, type: 3}
+  itemDesc: New Cleric for army
+  cost: 200
+  newUnit: {fileID: 11400000, guid: bd85134c64687194690aa1e0e21a8b7e, type: 2}

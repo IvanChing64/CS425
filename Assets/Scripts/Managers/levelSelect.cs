@@ -54,12 +54,7 @@ public class levelSelect : MonoBehaviour
     //Colors the node according to if the stage is unlocked to be played or not
     public void RefreshNodes()
     {
-        bool isUnlocked = false;
-
-        if (isStart || devMode)
-        {
-            isUnlocked = true;
-        }
+        bool isUnlocked = isStart || devMode;
 
         if(requiredStageIDs != null && requiredStageIDs.Count > 0)
         {
@@ -91,13 +86,35 @@ public class levelSelect : MonoBehaviour
     //Loads the next scene, in this case, the grid screen
     public void selectStage()
     {
-        if(previewMenu != null)
+        if (previewMenu != null)
         {
             previewMenu.OpenPreview(this);
         }
     }
 
     public void ConfirmLoadStage()
+    {
+        CurrentSession.ActiveStageID = stageID;
+        CurrentSession.ActiveStageData = stageData;
+
+        LoadBattleStage();
+
+        // TODO: Restore when shop is implemented
+        //switch (stageData.type)
+        //{
+        //    case StageType.Battle:
+        //        LoadBattleStage();
+        //        break;
+        //    case StageType.Shop:
+        //        LoadShopStage();
+        //        break;
+        //    default:
+        //        Debug.Log("Invalid stage type");
+        //        break;
+        //}
+    }
+
+    public void LoadBattleStage()
     {
         if (isRandomSize)
         {
@@ -109,9 +126,12 @@ public class levelSelect : MonoBehaviour
             GridManager.width = 30;
             GridManager.height = 20;
         }
-        CurrentSession.ActiveStageID = stageID;
-        CurrentSession.ActiveStageData = stageData;
 
         SceneManager.LoadScene("Scenes/SampleScene");
+    }
+
+    public void LoadShopStage()
+    {
+        SceneManager.LoadScene("Scenes/Shop");
     }
 }

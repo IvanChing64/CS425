@@ -11,6 +11,7 @@ public class EndScreenManager : MonoBehaviour
     public static EndScreenManager Instance;
     [SerializeField] private Canvas EndScreenCanvas;
     [SerializeField] private Text EndScreenTitle;
+    [SerializeField] private Text RewardText;
 
     void Awake()
     {
@@ -30,23 +31,28 @@ public class EndScreenManager : MonoBehaviour
 
     public void SetWinningText()
     {
+        SetRewardText();
         GameProgress.ClearedStages.Add(CurrentSession.ActiveStageID);
         EndScreenTitle.text = "Victory!";
+    }
+
+    public void SetRewardText()
+    {
+        RewardText.text = $"Reward: {GameManager.Instance.stageData.currency} Gold\n" +
+                          $"Total: {ArmyManager.Instance.GetCurrency()} Gold";
     }
 
     public void SetLosingText()
     {
         EndScreenTitle.text = "Defeat.";
+        RewardText.gameObject.SetActive(false);
     }
 
-    /// <summary>
-    /// <para>Currently, goes to the main menu. Should go to the stage map when that is implemented</para>
-    /// </summary>
     public void EndGameButton()
     {
         SceneManager.LoadScene("Scenes/MainMenu");
-        //SceneManager.LoadScene("Scenes/StageSelection"); // or whatever we call it
     }
+
     public void ContinueButton()
     {
         SceneManager.LoadScene("Scenes/StageSelection");
