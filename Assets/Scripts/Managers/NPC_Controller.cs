@@ -1,3 +1,4 @@
+using Codice.CM.WorkspaceServer.Tree.GameUI.HeadTree;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -19,6 +20,20 @@ public class NPC_Controller: MonoBehaviour
         Acting,
         EndTurn
     }
+
+    enum BossState
+    {
+        Invulnerable,
+        Vulnerable
+    }
+    BossState occupiedState = BossState.Invulnerable;
+
+    int minionsAlive = 3;
+    float healthPenaltyPerMinion = 100;
+
+    int aoeCooldown = 0;
+    int aoeCooldownMax = 2;
+
     private TurnState currentState = TurnState.Idle;
 
     public static NPC_Controller Instance;
@@ -29,6 +44,9 @@ public class NPC_Controller: MonoBehaviour
     private int pathIndex;
     private int tilesMovedThisTurn;
     private bool isMoving;
+
+    public bool isEliteVarient = false;
+    public bool isEnraged = false;
 
     private BaseUnit npcUnit;
 
@@ -46,9 +64,56 @@ public class NPC_Controller: MonoBehaviour
 
     //MovementBehavior logic: Andrew Shelton
 
+    /*public override void TakeDamage(float amount)
+    {
+        if (occupiedState == BossState.Invulnerable)
+        {
+            Debug.Log("Boss takes 0 damage!");
+            return;
+        }
+        base.TakeDamage(amount);
+    }*/
+
+    // Stuff to help boss
+    public void OnMinionDied()
+    {
+        minionsAlive--;
+
+        //Reduce boss max health or health
+        float damage = npcUnit.maxHealth - healthPenaltyPerMinion;
+        npcUnit.health -= damage;
+
+        Debug.Log($"Boss takes {damage} damage from minion death");
+
+        if (minionsAlive <= 0)
+        {
+            occupiedState = BossState.Vulnerable;
+            Debug.Log("Minions destroyed! Boss is now vulnerable!");
+        }
+    }
+    // Added Enrage stuff. Not implemented yet.
+    void ApplyEnrageStats()
+    {
+        npcUnit.moveRange = 1;
+        npcUnit.attackRange = 6;
+    }
+
+    void UpdateEnrageState()
+    {
+        if (!isEliteVarient) return;
+
+        if (!isEnraged && npcUnit.health <= npcUnit.maxHealth * 0.5f)
+        {
+            isEnraged = true;
+            ApplyEnrageStats();
+            Debug.Log("Enraged!");
+        }
+    }
   
+
     private Tile GetRangedTarget()
     {
+
         var targeting = GetComponent<EnemyTargetingManager>();
         targeting.SelectTarget();
 
@@ -294,7 +359,7 @@ public class NPC_Controller: MonoBehaviour
         return bestTarget.OccupiedTile;
     }
 
-    /*private Tile GetBossTarget()
+    private Tile GetBossTarget()
     {
           BaseUnit highestHealthPlayer = null;
           float highestHealth = -Mathf.Infinity;
@@ -312,9 +377,89 @@ public class NPC_Controller: MonoBehaviour
               }
           }
 
+        if (highestHealthPlayer == null)
+            return npcUnit.OccupiedTile;
 
-      }*/
+        return GridManager.Instance.GetTileForUnit(highestHealthPlayer.gameObject);
 
+      }
+
+    private Tile GetBossMove()
+    {
+        Tile targetTile = GetBossTarget();
+
+        if (occupiedState == BossState.Invulnerable)
+        {
+            return npcUnit.OccupiedTile;
+        }
+
+        // Vulnerable: move like ranged unit
+        List<Tile> movableTiles = RangeManager.GetTilesInRange(
+            npcUnit.OccupiedTile,
+            npcUnit.moveRange,
+            RangeType.FloodTargeting);
+
+        Tile bestTile = null;
+        float bestScore = -Mathf.Infinity;
+
+        foreach (var tile in movableTiles)
+        {
+            if (!tile.isWalkable) continue;
+
+            float distToPlayer = Vector2.Distance(
+                tile.transform.position,
+                targetTile.transform.position
+            );
+
+            if (distToPlayer > npcUnit.attackRange)
+                continue;
+
+            float score = Vector2.Distance(tile.transform.position, npcUnit.OccupiedTile.transform.position);
+
+            if (score > bestScore)
+            {
+                bestScore = score;
+                bestTile = tile;
+            }
+        }
+
+        if (bestTile != null)
+            return bestTile;
+
+        return GetRandomTile();
+    }
+
+    /*private void BossAttack()
+    {
+        Tile myTile = npcUnit.OccupiedTile;
+        Tile targetTile = GetBossTarget();
+
+        float dist = Vector2.Distance(
+            myTile.transform.position,
+            targetTile.transform.position
+        );
+
+        if (dist > npcUnit.attackRange)
+            return;
+
+        if (currentState == BossState.Invulnerable)
+        {
+            // Only ranged attack
+            UseSingleTargetAttack(targeting.CurrentTarget);
+            return;
+        }
+
+        // Vulnerable state: allow AOE
+        if (aoeCooldown <= 0 && CountEnemiesInSquare(myTile, 1) >= 2)
+        {
+            UseAOEAttack(myTile);
+            aoeCooldown = aoeCooldownMax;
+        }
+        else
+        {
+            UseSingleTargetAttack(targeting.CurrentTarget);
+        }
+    }*/
     private Tile GetMeleeTarget()
     {
         var targeting = GetComponent<EnemyTargetingManager>();
@@ -456,7 +601,7 @@ public class NPC_Controller: MonoBehaviour
                 break;
 
             case Enemy1.MovementBehavior.Boss:
-                //chosenTile = GetBossTarget();
+                chosenTile = GetBossMove();
                 break;
 
 
