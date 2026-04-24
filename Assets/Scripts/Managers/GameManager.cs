@@ -75,6 +75,11 @@ public class GameManager : MonoBehaviour
                 // Debug.Log("Player Turn");
                 // Debug.Log("Turn Number" + turnNumber);
                 UnitManager.Instance.ApplyEndTurnEffects(Faction.Enemy);
+                if (CheckEnemyVictory())
+                {
+                    EndScreenManager.Instance.SetLosingText();
+                    ChangeState(GameState.EndScreen);
+                }
                 combatUIManager.Instance.ShowEndTurnOption();
                 TurnUIManager.Instance.UpdateTurnText(turnNumber);
                 CardManager.instance.NextTurn();
@@ -88,6 +93,11 @@ public class GameManager : MonoBehaviour
                 // Debug.Log("Enemy Turn");
                 // Debug.Log("Turn Number" + turnNumber);
                 UnitManager.Instance.ApplyEndTurnEffects(Faction.Player);
+                if (CheckPlayerVictory())
+                {
+                    EndScreenManager.Instance.SetWinningText();
+                    ChangeState(GameState.EndScreen);
+                }
                 combatUIManager.Instance.hideEndTurnOption();
                 UnitManager.Instance.BeginEnemyTurn();
                 CardManager.instance.ToggleCardArea(false);

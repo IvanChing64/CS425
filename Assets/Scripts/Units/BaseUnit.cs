@@ -108,6 +108,12 @@ public class BaseUnit : MonoBehaviour
         Boss
     }
 
+    public enum AttackBehavior
+    {
+        UpClose,
+        AreaAttack,
+        RangedArea,
+    }
     public virtual void ApplyFlags()
     {
         //Does nothing in the base class, overridden
@@ -130,7 +136,7 @@ public class BaseUnit : MonoBehaviour
     }
 
     //damage functions
-    public void takeDamage(float damageAmount, bool dodgeable = true, bool pierce = false, BaseUnit attacker = null, bool poison = false)
+    public void takeDamage(float damageAmount, bool dodgeable = true, bool pierce = false, BaseUnit attacker = null, bool poison = false, bool reflected = false)
     {
         healthbar = GetComponentInChildren<healthbar>();
 
@@ -143,7 +149,7 @@ public class BaseUnit : MonoBehaviour
             // Check for Reflect
             if (reflect > 0)
             {
-                attacker.takeDamage(damage * UnitManager.reflectEfficiency, true, false);
+                attacker.takeDamage(damage * UnitManager.reflectEfficiency, true, false, this, false, true);
                 reflect--;
                 return;
             }
@@ -222,6 +228,12 @@ public class BaseUnit : MonoBehaviour
             if (defiant)
             {
                 health = maxHealth * 0.2f;
+                UpdateHealth();
+                return;
+            }
+            if (reflected)
+            {
+                health = 1;
                 UpdateHealth();
                 return;
             }
