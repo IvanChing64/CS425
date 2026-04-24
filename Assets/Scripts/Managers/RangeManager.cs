@@ -19,7 +19,7 @@ public static class RangeManager
             case RangeType.FloodTargeting:
                 return GetPathsFlood(startTile, range, true);
             case RangeType.FloodMovementUnrestricted:
-                return GetPathsFlood(startTile, range, false, true);
+                return GetPathsFlood(startTile, range, true, true);
             default:
                 Debug.LogError("Invalid range type.");
                 return null;

@@ -182,7 +182,7 @@ public class UnitManager : MonoBehaviour
                             {
                                 foreach (Tile t in SelectedPlayer.GetTilesInUnrestrictedMoveRange())
                                 {
-                                    if (t.isWalkable)t.ShowHighlight(true, Tile.targetableColor);
+                                    if (t.Walkable)t.ShowHighlight(true, Tile.targetableColor);
                                 }
                             }
 
@@ -207,7 +207,7 @@ public class UnitManager : MonoBehaviour
                             {
                                 foreach (Tile t in SelectedPlayer.GetTilesInUnrestrictedMoveRange())
                                 {
-                                    if (t.isWalkable)t.ShowHighlight(true, Tile.targetableColor);
+                                    if (t.Walkable)t.ShowHighlight(true, Tile.targetableColor);
                                 }
                             }
                         }
@@ -284,7 +284,7 @@ public class UnitManager : MonoBehaviour
                             {
                                 if (targetedTile == t)
                                 {
-                                    if (t.isWalkable)t.ShowHighlight(true, Tile.walkableColor);
+                                    if (t.Walkable)t.ShowHighlight(true, Tile.walkableColor);
                                     break;
                                 }
                             } 

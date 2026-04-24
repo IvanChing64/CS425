@@ -721,7 +721,7 @@ public class NPC_Controller: MonoBehaviour
 
     private void CheckAndAttack()
     {
-        List<Tile> attackableTiles = RangeManager.GetTilesInRange(npcUnit.OccupiedTile, npcUnit.attackRange, RangeType.FloodTargeting);
+        List<Tile> attackableTiles = npcUnit.GetTilesInAttackRange();
         Debug.Log($"NPC checking attack. Range: {npcUnit.attackRange}. Tiles found in range: {attackableTiles.Count}");
         BaseUnit target = null;
         
@@ -820,7 +820,7 @@ public class NPC_Controller: MonoBehaviour
         
         }
         Debug.Log($"{gameObject.name} finished moving.");
-        ExecuteAttacks();
+        //ExecuteAttacks();
         npcUnit.moveRange = tilesPerMove;
         HasFinishedTurn = true;
         //StartCoroutine(EndTurnDelay());
@@ -1017,6 +1017,14 @@ public class NPC_Controller: MonoBehaviour
 
     public static IEnumerator RunEnemyTurn(List<NPC_Controller> enemies)
     {
+
+        for (int i = 0; i < 9; i++)
+        {
+            
+        }
+
+
+
         foreach (var npc in enemies)
         {
             if (npc == null) continue;

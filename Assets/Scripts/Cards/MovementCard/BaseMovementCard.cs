@@ -27,7 +27,7 @@ public class BaseMovementCard : BaseCard
             
             foreach (Tile t in tilesInRange)
             {
-                if (t.isWalkable)
+                if (t.OccupiedUnit == null)
                 {
                     t.ShowHighlight(true, Tile.targetableColor);
                 }              
