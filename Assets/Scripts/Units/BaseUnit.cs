@@ -86,7 +86,7 @@ public class BaseUnit : MonoBehaviour
     public Animator UnitAnimator;
     [SerializeField] healthbar healthbar;
     [SerializeField] private AudioClip[] hurtSFX;
-    public bool isEliteVarient = false;
+   
 
     //Enemy Flags: Andrew Shelton
     public enum EnemyFlag
