@@ -229,9 +229,26 @@ public class NPC_Controller: MonoBehaviour
 
     private Tile GetRandomTile()
     {
-       var tiles = GridManager.Instance.AllTiles;
-        int index = UnityEngine.Random.Range(0, tiles.Count);
-        return tiles[index];
+        var movableTiles = RangeManager.GetTilesInRange(npcUnit.OccupiedTile,
+        npcUnit.moveRange, RangeType.FloodTargeting);
+
+        var validTiles = new List<Tile>();
+
+        foreach (var tile in movableTiles)
+        {
+            if (!tile.isWalkable) continue;
+            if (tile == npcUnit.OccupiedTile) continue;
+
+            var path = AStarManager.Instance.GeneratePath(npcUnit.OccupiedTile, tile);
+            if (path == null || path.Count == 0) continue;
+
+            validTiles.Add(tile);
+        }
+
+        if (validTiles.Count == 0) return npcUnit.OccupiedTile;
+
+        int index = UnityEngine.Random.Range(0, validTiles.Count);
+        return validTiles[index];
     }
 
     private void HealTarget(BaseUnit target, int healAmount)
