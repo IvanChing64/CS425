@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6287078ae4d6a04cbdd8a4584396a72, type: 3}
   m_Name: New Mage Item
   m_EditorClassIdentifier: Scripts::NewUnitItem
-  itemImage: {fileID: 0}
-  itemDesc: 
-  cost: 0
+  itemSprite: {fileID: -6657997426889672124, guid: d7697f9aae68e2b48b6747e3aadbb44b, type: 3}
+  itemDesc: New Mage for army
+  cost: 200
   newUnit: {fileID: 11400000, guid: c9fc47d75230a4a4db5cd4f426f749f1, type: 2}

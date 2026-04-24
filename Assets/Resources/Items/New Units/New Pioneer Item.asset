@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6287078ae4d6a04cbdd8a4584396a72, type: 3}
   m_Name: New Pioneer Item
   m_EditorClassIdentifier: Scripts::NewUnitItem
-  itemImage: {fileID: 0}
-  itemDesc: 
-  cost: 0
+  itemSprite: {fileID: 8793639957104055765, guid: 620d85e4ffc10784295e8a53869ae3cc, type: 3}
+  itemDesc: New Pioneer for army
+  cost: 200
   newUnit: {fileID: 11400000, guid: d5407282cbc87f04caafc3681c0c63b4, type: 2}

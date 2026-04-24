@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6287078ae4d6a04cbdd8a4584396a72, type: 3}
-  m_Name: New Huckster Item
+  m_Name: New Scientist unit
   m_EditorClassIdentifier: Scripts::NewUnitItem
-  itemSprite: {fileID: 8793639957104055765, guid: 555b5686f997f164e89648ce4fac238b, type: 3}
-  itemDesc: New Huckster for army
+  itemSprite: {fileID: 8793639957104055765, guid: 242606ea3a5337c498839e854e7a1759, type: 3}
+  itemDesc: New Scientist for army
   cost: 200
-  newUnit: {fileID: 11400000, guid: 683f96d00b38cf346a9d982aaa302743, type: 2}
+  newUnit: {fileID: 11400000, guid: 9dde388e36f795d4083dbd0bd1b91217, type: 2}

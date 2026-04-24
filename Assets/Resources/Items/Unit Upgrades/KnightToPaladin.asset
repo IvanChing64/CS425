@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: KnightToPaladin
   m_EditorClassIdentifier: Scripts::UnitUpgradeItem
   itemSprite: {fileID: 8793639957104055765, guid: e2813a56c80d66443aedce0553824a40, type: 3}
-  cost: 0
+  itemDesc: 'Upgrade Knight to Paladin '
+  cost: 150
   originalUnit: {fileID: 11400000, guid: f2d5425ab28ecbb4ebb8bc1550f29a69, type: 2}
   upgradedUnit: {fileID: 11400000, guid: dcd44c3bb5910cf4bbc22ad9c62d1afa, type: 2}

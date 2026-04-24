@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00d61b94e333a064fbb87b63f8fac2c8, type: 3}
-  m_Name: ArcherToThief
+  m_Name: SpyToHacker
   m_EditorClassIdentifier: Scripts::UnitUpgradeItem
-  itemSprite: {fileID: 8793639957104055765, guid: 0db4c25234f5d7542bb2891ad21bab8d, type: 3}
-  itemDesc: Upgrade Archer to Thief
+  itemSprite: {fileID: 8793639957104055765, guid: 7e3dd20a79d54c147b7c9490c94aebc7, type: 3}
+  itemDesc: Upgrade Spy to Hacker
   cost: 150
-  originalUnit: {fileID: 11400000, guid: d502f600d9ca1be40a72b0264cc05c2f, type: 2}
-  upgradedUnit: {fileID: 11400000, guid: 252e01cc4b26ef545be3cf3f36c85ce5, type: 2}
+  originalUnit: {fileID: 11400000, guid: a79e227108a1f394892f78bb50a9fdaa, type: 2}
+  upgradedUnit: {fileID: 11400000, guid: 66bd5b647404e7740a21d399177e29c4, type: 2}

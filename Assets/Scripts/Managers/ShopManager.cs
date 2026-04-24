@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class ShopManager : MonoBehaviour
@@ -17,6 +18,8 @@ public class ShopManager : MonoBehaviour
     //public static List<PartyBuffItem> PartyBuffItems;
     //public static List<DeckAdditionItem> DeckAdditionItems;
 
+    [SerializeField] private Text currencyText;
+
     public List<ShopItemSlot> itemSlots;
 
     void Awake()
@@ -25,23 +28,37 @@ public class ShopManager : MonoBehaviour
 
         if (!ItemListsInititialized)
         {
-            UnitUpgradeItems = new List<UnitUpgradeItem>(Resources.LoadAll<UnitUpgradeItem>("Items"));
-            NewUnitItems = new List<NewUnitItem>(Resources.LoadAll<NewUnitItem>("Items"));
+            UnitUpgradeItems = new List<UnitUpgradeItem>(Resources.LoadAll<UnitUpgradeItem>("Items/Unit Upgrades"));
+            NewUnitItems = new List<NewUnitItem>(Resources.LoadAll<NewUnitItem>("Items/New Units"));
             ItemListsInititialized = true;
         }
 
         if (!StockInitialized)
         {
-            RestockShop();
+            InitializeStock();
             StockInitialized = true;
         }
 
         UpdateItemSlots();
+        UpdateCurrencyText();
+    }
+
+    private void InitializeStock()
+    {
+        CurrentItemsInShop = new List<ScriptableItem>(itemSlots.Count);
+
+        for (int i = 0; i < itemSlots.Count; i++)
+        {
+            CurrentItemsInShop.Add(NewUnitItems[0]);
+        }
     }
 
     public void BuyItemInSlot(int slot)
     {
+        if (!BuyItem(CurrentItemsInShop[slot])) return;
 
+        RestockItemIn(slot);
+        UpdateItemSlot(slot);
     }
 
     public bool BuyItem(ScriptableItem item)
@@ -78,53 +95,52 @@ public class ShopManager : MonoBehaviour
                 break;
         }
 
+        UpdateCurrencyText();
         return true;
     }
 
     public void RestockShop()
     {
-        // The first two shop items should be new units
-        int[] randItems = GetUniqueRandomValues(2, 0, NewUnitItems.Count);
-        CurrentItemsInShop[0] = NewUnitItems[randItems[0]];
-        CurrentItemsInShop[1] = NewUnitItems[randItems[1]];
-
-        // The next two items should be unit upgrades
-        randItems = GetUniqueRandomValues(2, 0, UnitUpgradeItems.Count);
-        CurrentItemsInShop[2] = UnitUpgradeItems[randItems[0]];
-        CurrentItemsInShop[3] = UnitUpgradeItems[randItems[1]];
-
-        // Other items can be whatever
+        for (int i = 0; i < itemSlots.Count; i++)
+        {
+            RestockItemIn(i);
+        }
     }
 
     public void RestockItemIn(int slot)
     {
-        CurrentItemsInShop[slot] = null;
-    }
+        ScriptableItem itemToAdd;
 
-    public void TestFunction()
-    {
-        ArmyManager.Instance.RemoveUnit("Knight");
-    }
-
-    public static int[] GetUniqueRandomValues(int n, int minIncl, int maxExcl)
-    {
-        int[] randInts = new int[n];
-        for (int i = 0; i < n; i++)
+        switch (slot)
         {
-            randInts[i] = maxExcl;
+            case < 2:
+                itemToAdd = NewUnitItems[Random.Range(0, NewUnitItems.Count)];
+                break;
+            case < 4:
+                itemToAdd = GetApplicableUpgradeItem();
+                if (itemToAdd == null) itemToAdd = NewUnitItems[Random.Range(0, NewUnitItems.Count)];
+                break;
+            default:
+                Debug.Log("Shop item slot Out of Bounds or upgrade type undefined");
+                return;
         }
 
-        for (int i = 0; i < n; i++)
-        {
-            int x = randInts[i];
-            do
-            {
-                randInts[i] = Random.Range(minIncl, maxExcl);
-            }
-            while ((i != 0 && randInts[0..i].Contains(x)) || (i != n && randInts[(i + 1)..].Contains(x)));
-        }
+        CurrentItemsInShop[slot] = itemToAdd;
+    }
 
-        return randInts;
+    private UnitUpgradeItem GetApplicableUpgradeItem()
+    {
+        List<UnitUpgradeItem> applicableList = new(UnitUpgradeItems.Where(item => ArmyManager.Instance.HasUnit(item.originalUnit) && !CurrentItemsInShop.Contains(item)));
+
+        if (applicableList.Count == 0) return null;
+
+        return applicableList[Random.Range(0, applicableList.Count)];
+    }
+
+    public void RerollShop()
+    {
+        RestockShop();
+        UpdateItemSlots();
     }
 
     public void UpdateItemSlots()
@@ -138,7 +154,29 @@ public class ShopManager : MonoBehaviour
     public void UpdateItemSlot(int slot)
     {
         itemSlots[slot].itemImage.sprite = CurrentItemsInShop[slot].itemSprite;
-        itemSlots[slot].itemDescription.text = CurrentItemsInShop[slot].itemDesc;
+        itemSlots[slot].itemImage.SetNativeSize();
+
+        string desc;
+        if (CurrentItemsInShop[slot] is NewUnitItem nuItem)
+        {
+            desc = $"New {nuItem.newUnit.name} for army";
+        }
+        else if (CurrentItemsInShop[slot] is UnitUpgradeItem uuItem)
+        {
+            desc = $"Upgrade {uuItem.originalUnit.name} to {uuItem.upgradedUnit.name}";
+        }
+        else
+        {
+            desc = $"Buy {CurrentItemsInShop[slot].Type.ToString()}";
+        }
+
+        itemSlots[slot].itemDescription.text = desc;
+
         itemSlots[slot].costText.text = $"Cost: {CurrentItemsInShop[slot].cost}";
+    }
+
+    public void UpdateCurrencyText()
+    {
+        currencyText.text = $"Gold: {ArmyManager.Instance.GetCurrency()}";
     }
 }

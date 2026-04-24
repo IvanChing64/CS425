@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: New Knight Item
   m_EditorClassIdentifier: Scripts::NewUnitItem
   itemSprite: {fileID: 7384290322352760091, guid: 728135fe2ac4b434ab56e445d647d2a0, type: 3}
-  cost: 100
+  itemDesc: New Knight for army
+  cost: 200
   newUnit: {fileID: 11400000, guid: f2d5425ab28ecbb4ebb8bc1550f29a69, type: 2}
