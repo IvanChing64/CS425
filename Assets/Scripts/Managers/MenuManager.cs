@@ -78,6 +78,7 @@ public class MenuManager : MonoBehaviour
         Story = 1,
         Controls = 2,
         StageSelect = 3,
-        Combat = 4
+        Combat = 4,
+        Shop = 5
     }
 }
