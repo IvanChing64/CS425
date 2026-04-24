@@ -31,14 +31,14 @@ public class EndScreenManager : MonoBehaviour
 
     public void SetWinningText()
     {
+        SetRewardText();
         GameProgress.ClearedStages.Add(CurrentSession.ActiveStageID);
         EndScreenTitle.text = "Victory!";
-        SetRewardText();
     }
 
     public void SetRewardText()
     {
-        RewardText.text = $"Reward: {CurrentSession.ActiveStageData.currency} Gold\n" +
+        RewardText.text = $"Reward: {GameManager.Instance.stageData.currency} Gold\n" +
                           $"Total: {ArmyManager.Instance.GetCurrency()} Gold";
     }
 

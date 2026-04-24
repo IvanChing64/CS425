@@ -86,7 +86,7 @@ public class levelSelect : MonoBehaviour
     //Loads the next scene, in this case, the grid screen
     public void selectStage()
     {
-        if(previewMenu != null)
+        if (previewMenu != null)
         {
             previewMenu.OpenPreview(this);
         }
