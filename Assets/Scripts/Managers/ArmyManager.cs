@@ -12,7 +12,7 @@ public class ArmyManager : MonoBehaviour
     public static Dictionary<string, ScriptableUnit> AllPlayerUnits;
 
     public List<ScriptableUnit> unitsInArmy;
-    public int currency;
+    [SerializeField] private int currency;
 
     private void Awake()
     {
@@ -44,6 +44,23 @@ public class ArmyManager : MonoBehaviour
 
     public bool RemoveUnit(ScriptableUnit unit) => unitsInArmy.Remove(unit);
     public bool RemoveUnit(string unitName) => RemoveUnit(AllPlayerUnits[unitName]);
+
+    public int GetCurrency() => currency;
+
+    public void GainCurrency(int amount)
+    {
+        currency += amount;
+        if (currency > 9999)
+            currency = 999;
+    }
+
+    public bool AttemptPurchase(int purchaseAmount)
+    {
+        if (purchaseAmount > currency)
+            return false;
+        currency -= purchaseAmount;
+        return true;
+    }
 
     /// <remarks><em>Only generated if ArmyManager instance does not already have units</em></remarks>
     public void GenerateStartingArmy()
