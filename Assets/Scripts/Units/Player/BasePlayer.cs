@@ -20,6 +20,11 @@ public class BasePlayer : BaseUnit
         
         base.ResetValues();
 
+        if (restricted > 0)
+        {
+            moveModifier = -99;
+        }
+
         GetComponentInParent<HandManager>().UpdateCardVisuals();
     }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ray Gun
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Ray Gun
-  cardDescription: Damage and daze all ranged enemies in a short radius
+  cardDescription: Damage and daze all ranged enemies in a small radius
   type: 0
   range: 3
   areaRange: 1

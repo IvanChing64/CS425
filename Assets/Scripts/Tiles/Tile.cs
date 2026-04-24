@@ -23,7 +23,7 @@ public abstract class Tile : MonoBehaviour
     public static Color walkableColor = new Color(6f/255f, 135f/255f, 1, 170f/255f);
     public static Color nonwalkableColor = new Color(0, 0, 0, 0);
     public static Color targetableColor = new Color(1, 1, 1, 120f/255f);
-    public static Color attackableColor = new Color(1, 18f/255f, 0, 159f/255f);
+    public static Color attackableColor = new Color(1, 18f/255f, 0, 210f/255f);
     public static Color supportableColor = new Color(3f/255f, 1, 0, 152f/255f);
     public static Color summonableColor = new Color(167f/255f, 65f/255f, 1, 155f/255f);
 
@@ -35,6 +35,7 @@ public abstract class Tile : MonoBehaviour
     //Player movement testing
     private void OnMouseDown()
     {
+        
         //Checks if the combat menu is open on screen
         //if (combatUIManager.Instance != null && combatUIManager.Instance.IsCombatMenuOpen) return;
 
@@ -193,30 +194,71 @@ public abstract class Tile : MonoBehaviour
                 ShowHighlight(false, Tile.nonwalkableColor);
                 CardManager.instance.PlaySelectedCard();
                 summonUnit.Stun();
+                summonUnit.Energize(summonUnit.energy);
                 summonUnit.GetComponent<HandManager>().NextTurn();
+                //CardManager.instance.SetSelectedPlayer(summonUnit);
                 return;
             }
 
             // If the card is a movement card, move to the tile
             /* TODO: This part is still gross, some of this functionality should be extracted */
-            List<Tile> tilesInRange = player.GetTilesInMoveRange();
-            if (tilesInRange.Contains(this) && CardManager.instance.selectedCard.cardType == Type.Movement)
+            List<Tile> tilesInRange;
+            if (CardManager.instance.selectedCard.rangeType == RangeType.FloodMovementUnrestricted)
             {
-                //BasePlayer playerPath = UnitManager.Instance.SelectedPlayer;
-                List<Tile> path = AStarManager.Instance.GeneratePath(player.OccupiedTile, this);
-                UnitManager.Instance.SelectedPlayer.OccupiedTile.highlight.SetActive(false);
-                UnitManager.Instance.selector.Hide();
-                combatUIManager.Instance.ToggleBlocker(true);
-                CardManager.instance.PlaySelectedCard();
-                CardManager.instance.ToggleCardArea(false);
-                if (path != null && path.Count > 0)
+                tilesInRange = player.GetTilesInUnrestrictedMoveRange();
+
+                if (CardManager.instance.selectedCard.cardType == Type.Movement)
                 {
-                    StartCoroutine(MoveUnitPath(player, path));
+                    if (!isWalkable)
+                    {
+                        return;
+                    }
+                    UnitManager.Instance.SelectedPlayer.OccupiedTile.highlight.SetActive(false);
+                    UnitManager.Instance.selector.Hide();
+                    // combatUIManager.Instance.ToggleBlocker(true);
+                    CardManager.instance.PlaySelectedCard();
+                    // CardManager.instance.ToggleCardArea(false);
+
+                    setUnit(UnitManager.Instance.SelectedPlayer);
+                    // combatUIManager.Instance.ToggleBlocker(false);
+                    // CardManager.instance.ToggleCardArea(true);
+                    UnitManager.Instance.selector.PlaceOnUnit(UnitManager.Instance.SelectedUnit);
+
+                    OccupiedUnit = UnitManager.Instance.SelectedPlayer;
+                    UnitManager.Instance.SelectedPlayer.OccupiedTile = this;
+                    if (UnitManager.Instance.SelectedPlayer.Faction == Faction.Player)
+                    {
+                        UnitManager.Instance.SelectedPlayer.moveRange = 0;
+                    }
+
+                    foreach (Tile t in tilesInRange) t.highlight.SetActive(false);
+                    return;
                 }
 
-                foreach (Tile t in tilesInRange) t.highlight.SetActive(false);
-                return;
+            } else
+            {
+                tilesInRange = player.GetTilesInMoveRange();
+
+                if (tilesInRange.Contains(this) && CardManager.instance.selectedCard.cardType == Type.Movement)
+                {
+                    List<Tile> path = AStarManager.Instance.GeneratePath(player.OccupiedTile, this);
+                    UnitManager.Instance.SelectedPlayer.OccupiedTile.highlight.SetActive(false);
+                    UnitManager.Instance.selector.Hide();
+                    combatUIManager.Instance.ToggleBlocker(true);
+                    CardManager.instance.PlaySelectedCard();
+                    CardManager.instance.ToggleCardArea(false);
+
+                    if (path != null && path.Count > 0)
+                    {   
+                        StartCoroutine(MoveUnitPath(player, path));
+                    }
+
+                    foreach (Tile t in tilesInRange) t.highlight.SetActive(false);
+                    return;
+                }
             }
+            
+            Debug.LogWarning("FUDGE");
         }
 
         // If there is a unit occupying this tile, select it

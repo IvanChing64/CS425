@@ -70,7 +70,7 @@ public class BaseSummonCard : BaseCard
             {
                 unit.absorb = 0;
                 unit.defiant = false;
-                unit.takeDamage(999999, false, false);
+                unit.takeDamage(999999, false, true);
                 break;
             }
         }

@@ -384,7 +384,14 @@ public class NPC_Controller: MonoBehaviour
         
         if (path.Count > npcUnit.moveRange + npcUnit.moveModifier)
         {
-            path = path.GetRange(0, npcUnit.moveRange + npcUnit.moveModifier);
+            if (npcUnit.moveRange + npcUnit.moveModifier < 0)
+            {
+                path = path.GetRange(0, npcUnit.moveRange);
+            } else
+            {
+                path = path.GetRange(0, npcUnit.moveRange + npcUnit.moveModifier);
+            }
+            
         }
 
         pathIndex = 0;
@@ -456,7 +463,7 @@ public class NPC_Controller: MonoBehaviour
                 unitAnimator.SetTrigger("attack");
             }
             Debug.Log($"{npcUnit.name} attacks {target.name}");
-            target.takeDamage(npcUnit.dmg * npcUnit.attackModifier, true, true, npcUnit);
+            target.takeDamage(npcUnit.dmg * npcUnit.attackModifier, true, false, npcUnit);
         } else {
             Debug.Log("nothing happened!");
         }

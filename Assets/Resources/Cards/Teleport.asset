@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Teleport
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Teleport
-  cardDescription: Gain Distant Unrestricted Movement
+  cardDescription: Gain Unrestricted Movement
   type: 1
-  range: 6
-  value: 6
+  range: 5
+  areaRange: 0
+  value: 5
   cost: 1
   damaging: 0
   piercing: 0

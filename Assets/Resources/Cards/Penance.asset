@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Penance
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Penance
-  cardDescription: Purely damage all ranged enemies
+  cardDescription: Damage all ranged enemies. Ignore Defenses
   type: 0
   range: 3
   areaRange: 0

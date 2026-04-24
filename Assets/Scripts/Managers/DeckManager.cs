@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using UnityEngine.EventSystems;
+
 //Developer: Bailey Escritor
 //Holds all available cards and manages deck creation
 public class DeckManager : MonoBehaviour

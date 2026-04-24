@@ -36,7 +36,7 @@ public class BaseSupportCard : BaseCard
                 List<Tile> tilesInRange = player.GetTilesInAttackRange();
                 foreach (Tile t in tilesInRange)
                 {
-                    t.ShowHighlight(true, Tile.supportableColor);
+                    if(t.OccupiedUnit == null || t.OccupiedUnit.Faction == Faction.Player)t.ShowHighlight(true, Tile.supportableColor);
                 }
 
                 if (AoE == AreaOfEffectType.SupportExclusive)
@@ -49,7 +49,7 @@ public class BaseSupportCard : BaseCard
                 List<Tile> tilesInRange = player.GetTilesInAttackRange();
                 foreach (Tile t in tilesInRange)
                 {
-                    t.ShowHighlight(true, Tile.targetableColor);
+                    if(t.OccupiedUnit == null || t.OccupiedUnit.Faction == Faction.Player)t.ShowHighlight(true, Tile.targetableColor);
                 }
 
                 if (range == 0)
@@ -138,11 +138,15 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Regeneration:
-                targetPlayer.Regeneration();
+                targetPlayer.Regeneration(value);
                 break;
 
             case SupportEffect.Absorb:
                 targetPlayer.Absorb(value);
+                break;
+
+            case SupportEffect.Immune:
+                targetPlayer.Immune();
                 break;
 
             default:
@@ -199,7 +203,7 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Reflect:
-                targetPlayer.Reflect(value);
+                targetPlayer.Reflect();
                 break;
 
             case SupportEffect.Regeneration:
@@ -207,7 +211,11 @@ public class BaseSupportCard : BaseCard
                 break;
 
             case SupportEffect.Absorb:
-                targetPlayer.Absorb(value);
+                targetPlayer.Absorb();
+                break;
+
+            case SupportEffect.Immune:
+                targetPlayer.Immune();
                 break;
 
             default:

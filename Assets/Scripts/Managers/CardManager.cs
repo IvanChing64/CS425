@@ -155,6 +155,7 @@ public class CardManager : MonoBehaviour
         StartCoroutine(destroy(selectedCard.gameObject));
         DeselectCard();
         selectedPlayer.GetComponent<HandManager>().UpdateHandPositions();
+        selectedPlayer.GetComponent<HandManager>().UpdateCardVisuals();
         UpdateDeckCard();
         UpdateAPCounter();
     }
@@ -229,6 +230,7 @@ public class CardManager : MonoBehaviour
 
         UpdateDeckCard();
         UpdateAPCounter();
+        selectedPlayer.GetComponent<HandManager>().UpdateCardVisuals();
 
         if (selectedHand.currentDeck.Count == 0) 
         {
@@ -258,6 +260,7 @@ public class CardManager : MonoBehaviour
             {
                 selectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(true);
                 ToggleDeckCard(true);
+                combatUIManager.Instance.ShowEndTurnOption();
             }
         }
         else {
@@ -266,6 +269,7 @@ public class CardManager : MonoBehaviour
             {
                 selectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(false);
                 ToggleDeckCard(false);
+                combatUIManager.Instance.hideEndTurnOption();
             }
         }
     }

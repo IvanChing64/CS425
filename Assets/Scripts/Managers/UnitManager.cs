@@ -42,6 +42,8 @@ public class UnitManager : MonoBehaviour
     public static float reflectEfficiency = 0.75f;
     public static float absorbEfficiency = 0.5f;
     public static int backstabInvisibleBonus = 15;
+    public static int maxRegenStacks = 5;
+    //public static int 
 
     public List<ScriptableUnit> MB;
     public List<ScriptableUnit> WB;
@@ -170,10 +172,22 @@ public class UnitManager : MonoBehaviour
                                 previousTile.ShowHighlight(false, Tile.nonwalkableColor);
                             }
 
-                            foreach (Tile t in SelectedPlayer.GetTilesInMoveRange())
+                            if (CardManager.instance.selectedCard.rangeType != RangeType.FloodMovementUnrestricted)
                             {
-                                t.ShowHighlight(true, Tile.targetableColor);
+                                foreach (Tile t in SelectedPlayer.GetTilesInMoveRange())
+                                {
+                                    t.ShowHighlight(true, Tile.targetableColor);
+                                }
+                            } else
+                            {
+                                foreach (Tile t in SelectedPlayer.GetTilesInUnrestrictedMoveRange())
+                                {
+                                    if (t.isWalkable)t.ShowHighlight(true, Tile.targetableColor);
+                                }
                             }
+
+                            
+                            SelectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
 
                             SelectedPlayer.moveRange = 0;
                         } else
@@ -183,9 +197,18 @@ public class UnitManager : MonoBehaviour
                                 previousTile.ShowHighlight(false, Tile.nonwalkableColor);
                             }
 
-                            foreach (Tile t in SelectedPlayer.GetTilesInMoveRange())
+                            if (CardManager.instance.selectedCard.rangeType != RangeType.FloodMovementUnrestricted)
                             {
-                                t.ShowHighlight(true, Tile.targetableColor);
+                                foreach (Tile t in SelectedPlayer.GetTilesInMoveRange())
+                                {
+                                    t.ShowHighlight(true, Tile.targetableColor);
+                                }
+                            } else
+                            {
+                                foreach (Tile t in SelectedPlayer.GetTilesInUnrestrictedMoveRange())
+                                {
+                                    if (t.isWalkable)t.ShowHighlight(true, Tile.targetableColor);
+                                }
                             }
                         }
                         
@@ -224,10 +247,6 @@ public class UnitManager : MonoBehaviour
                         {
                             if (targetedTile == t)
                             {
-                                // foreach (Tile p in SelectedPlayer.GetTilesInAOEAttackRange(targetedTile, range))
-                                // {
-                                //     if (p.OccupiedUnit.Faction == Faction.Player)p.ShowHighlight(true, Tile.supportableColor);
-                                // }
                                 if (t.OccupiedUnit == null || t.OccupiedUnit.Faction == Faction.Player)t.ShowHighlight(true, Tile.supportableColor);
                                 break;
                             }
@@ -240,23 +259,37 @@ public class UnitManager : MonoBehaviour
 
                     } else if (CardManager.instance.selectedCard.cardType == Type.Movement)
                     {
-                        foreach (Tile t in SelectedPlayer.GetTilesInMoveRange())
-                        {
-                            if (targetedTile == t)
+                        if (CardManager.instance.selectedCard.rangeType != RangeType.FloodMovementUnrestricted) {
+                            foreach (Tile t in SelectedPlayer.GetTilesInMoveRange())
                             {
-                                List<Tile> path = AStarManager.Instance.GeneratePath(SelectedPlayer.OccupiedTile, t);
-                                foreach (Tile p in path)
+                                if (targetedTile == t)
                                 {
-                                    p.ShowHighlight(true, Tile.walkableColor);
-                                    if (SelectedPlayer.OccupiedTile == p)
+                                    List<Tile> path = AStarManager.Instance.GeneratePath(SelectedPlayer.OccupiedTile, t);
+                                    foreach (Tile p in path)
                                     {
-                                        p.ShowHighlight(false, Tile.nonwalkableColor);
+                                        p.ShowHighlight(true, Tile.walkableColor);
+                                        if (SelectedPlayer.OccupiedTile == p)
+                                        {
+                                            p.ShowHighlight(true, Tile.walkableColor);
+                                        }
                                     }
+                                    t.ShowHighlight(true, Tile.walkableColor);
+                                    break;
                                 }
-                                t.ShowHighlight(true, Tile.walkableColor);
-                                break;
-                            }
-                        } 
+                                SelectedPlayer.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
+                            } 
+                        } else
+                        {
+                            foreach (Tile t in SelectedPlayer.GetTilesInUnrestrictedMoveRange())
+                            {
+                                if (targetedTile == t)
+                                {
+                                    if (t.isWalkable)t.ShowHighlight(true, Tile.walkableColor);
+                                    break;
+                                }
+                            } 
+                        }
+
                     } else if (CardManager.instance.selectedCard.cardType == Type.Summon)
                     {
                         foreach (Tile t in SelectedPlayer.GetTilesInMoveRange())
@@ -382,13 +415,10 @@ public class UnitManager : MonoBehaviour
         GameManager.Instance.ChangeState(GameState.PlayerTurn);
     }
 
-
-
     //private T GetRandomUnit<T>(Faction faction) where T : BaseUnit
     //{
     //    return (T)units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
     //}
-
 
     private void SetSelectedUnit(BaseUnit unit)
     {
@@ -452,14 +482,13 @@ public class UnitManager : MonoBehaviour
         // TODO: enemies should be initialized with correct movement range
         int moveRange = SelectedEnemy.moveRange + SelectedEnemy.moveModifier;
 
-        if ((int)SelectedEnemy.restricted > 1)
+        if (SelectedEnemy.restricted > 0)
         {
             moveRange = 0;
         }
 
-        if ((int)SelectedEnemy.stunned > 1)
+        if ((int)SelectedEnemy.stunned == 1)
         {
-            Debug.Log("Enemy is stunned and cannot move or attack.");
             return;
         }
 
@@ -562,5 +591,34 @@ public class UnitManager : MonoBehaviour
             }
         }*/
 
+    }
+
+    public void ApplyEndTurnEffects(Faction faction)
+    {
+        if (faction == Faction.Player)
+        {
+            for (int i = 1; i <= playerUnitCount; i++)
+            {
+                int initial = playerUnitCount;
+                playersSpawned[playerUnitCount - i].ApplyEndTurnEffects();
+                if (initial > playerUnitCount)
+                {
+                    i--;
+                }
+
+            }
+        } else if (faction == Faction.Enemy)
+        {
+            for (int i = 1; i <= enemyUnitCount; i++)
+            {
+                int initial = enemyUnitCount;
+                enemiesSpawned[enemyUnitCount - i].ApplyEndTurnEffects();
+                if (initial > enemyUnitCount)
+                {
+                    i--;
+                }
+
+            }
+        }
     }
 }

@@ -27,9 +27,12 @@ public class BaseMovementCard : BaseCard
             
             foreach (Tile t in tilesInRange)
             {
-                t.ShowHighlight(true, Tile.targetableColor);
+                if (t.isWalkable)
+                {
+                    t.ShowHighlight(true, Tile.targetableColor);
+                }              
             }
-            //player.OccupiedTile.ShowHighlight(true, Tile.targetableColor);
+            
             UnitManager.Instance.targeting = true;
             if (player.GetComponent<HandManager>().actionPoints < cost)
             {
@@ -49,12 +52,19 @@ public class BaseMovementCard : BaseCard
         if(player != null)
         {
             player.moveRange = range + player.moveModifier;
-            List<Tile> tilesInRange = player.GetTilesInMoveRange();
+            List<Tile> tilesInRange; ;
+            if (rangeType == RangeType.FloodMovementUnrestricted)
+            {
+                tilesInRange = player.GetTilesInUnrestrictedMoveRange();
+            } else
+            {
+                tilesInRange = player.GetTilesInMoveRange();
+            }
             foreach(Tile t in tilesInRange)
             {
                 t.ShowHighlight(false, Tile.nonwalkableColor);
             }
-            //player.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
+            player.OccupiedTile.ShowHighlight(false, Tile.nonwalkableColor);
 
             player.moveRange = 0;
         }

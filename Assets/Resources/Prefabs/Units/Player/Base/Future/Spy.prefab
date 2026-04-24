@@ -253,8 +253,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efead496cd676ad49b7245ff8fbde53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player1
+  Name: 
   OccupiedTile: {fileID: 0}
   Faction: 0
+  summoned: 0
+  lifetime: 0
   maxHealth: 60
   health: 60
   guard: 0
@@ -268,7 +271,7 @@ MonoBehaviour:
   strengthen: 0
   resistant: 0
   invisible: 0
-  absorb: 0
+  immune: 0
   stunned: 0
   restricted: 0
   frozen: 0
@@ -280,6 +283,7 @@ MonoBehaviour:
   dodge: 0
   agility: 0
   reflect: 0
+  absorb: 0
   defiant: 0
   daze: 0
   poison: 0
@@ -299,6 +303,7 @@ MonoBehaviour:
   - Cloak
   canAttack: 0
   canSupport: 0
+  canSummon: 0
   energy: 2
 --- !u!114 &7232603518593366301
 MonoBehaviour:

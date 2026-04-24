@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rocket
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Rocket
-  cardDescription: Damage all distant enemies in a short radius
+  cardDescription: Damage all distant enemies in a small radius
   type: 0
   range: 4
   areaRange: 1

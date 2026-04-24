@@ -125,60 +125,18 @@ public class BaseUnit : MonoBehaviour
     }
 
     //damage functions
-    public void takeDamage(float damageAmount, bool dodgeable = true, bool reflectable = true, BaseUnit attacker = null)
+    public void takeDamage(float damageAmount, bool dodgeable = true, bool pierce = false, BaseUnit attacker = null, bool poison = false)
     {
         healthbar = GetComponentInChildren<healthbar>();
 
         float damage = damageAmount * defenseModifier;
         float absorbAmount;
 
-        if (GameManager.Instance.gameState == GameState.PlayerTurn)
-        {
-            // Check for Pierce Damage
-            if (!CardManager.instance.selectedCard.pierce)
-            {
-                // Check for Reflect
-                if (reflect > 0 && reflectable)
-                {
-                    attacker.takeDamage(damage * UnitManager.reflectEfficiency, true, false);
-                    reflect--;
-                    return;
-                }
-
-                // Check for Absorb
-                if (absorb > 0)
-                {
-                    absorbAmount = damage * UnitManager.absorbEfficiency;
-                    Heal(absorbAmount);
-                    absorb--;
-                    return;
-                } 
-
-                // Check for Dodge
-                if (dodgeable && dodge > 0)
-                {
-                    float dodgeChance = dodge * 0.05f;
-                    if (dodgeChance > UnitManager.maxDodgeChance)
-                    {
-                        dodgeChance = UnitManager.maxDodgeChance;
-                    }
-                    if (Random.value < dodgeChance)
-                    {
-                        dodge--;
-                        return;
-                    }
-                }
-            } else
-            {
-                if (damage < damageAmount)
-                {
-                    damage = damageAmount;
-                }
-            }
-        } else
+        // Check for Pierce Damage
+        if (!pierce)
         {
             // Check for Reflect
-            if (reflect > 0 && reflectable)
+            if (reflect > 0)
             {
                 attacker.takeDamage(damage * UnitManager.reflectEfficiency, true, false);
                 reflect--;
@@ -193,40 +151,42 @@ public class BaseUnit : MonoBehaviour
                 absorb--;
                 return;
             } 
-
-            // Check for Dodge
-            if (dodgeable && dodge > 0)
+        } else
+        {
+            if (damage < damageAmount)
             {
-                float dodgeChance = dodge * 0.05f;
-                if (dodgeChance > UnitManager.maxDodgeChance)
-                {
-                    dodgeChance = UnitManager.maxDodgeChance;
-                }
-                if (Random.value < dodgeChance)
-                {
-                    dodge--;
-                    return;
-                }
+                damage = damageAmount;
             }
         }
 
-        if (guard > 0)
+        // Check for Dodge
+        if (dodgeable && dodge > 0)
         {
-            if (Faction == Faction.Enemy)
+            float dodgeChance = dodge * 0.05f;
+            if (dodgeChance > UnitManager.maxDodgeChance)
             {
-                if (!CardManager.instance.selectedCard.pierce)
+                dodgeChance = UnitManager.maxDodgeChance;
+            }
+            if (Random.value < dodgeChance)
+            {
+                dodge--;
+                return;
+            }
+        }
+
+        if (!poison && guard > 0)
+        {
+            if (pierce)
+            {
+                if (guard >= damage * 2 * UnitManager.guardEfficiency)
                 {
-                    if (guard >= damage * UnitManager.guardEfficiency)
-                    {
-                        guard -= damage * UnitManager.guardEfficiency;
-                    } else
-                    {
-                        damage = damage * UnitManager.guardEfficiency - guard;
-                        guard = 0;
-                        health -= damage;
-                    } 
-                }
-               
+                    guard -= damage * 2 * UnitManager.guardEfficiency;
+                } else
+                {
+                    damage = damage * UnitManager.guardEfficiency - guard;
+                    guard = 0;
+                    health -= damage;
+                } 
             } else
             {
                 if (guard >= damage * UnitManager.guardEfficiency)
@@ -486,23 +446,23 @@ public class BaseUnit : MonoBehaviour
     }
 
     // Reflect 75% damage taken back to the attacker
-    public void Reflect(int stacks)
+    public void Reflect(int stacks = 1)
     {
         reflect += stacks;
     }
 
     // Heal for 10% times number of stacksof max health at the end of the turn
-    public void Regeneration()
+    public void Regeneration(int stacks = 1)
     {
-        regeneration += 2;
-        if (regeneration >= 6)
+        regeneration += stacks;
+        if (regeneration >= UnitManager.maxRegenStacks)
         {
-            regeneration = 6;
+            regeneration = UnitManager.maxRegenStacks;
         }
     }
 
     // Heal 50% of damage dealt to the player
-    public void Absorb(int stacks)
+    public void Absorb(int stacks = 1)
     {
         absorb += stacks;
     }
@@ -529,6 +489,15 @@ public class BaseUnit : MonoBehaviour
         }
 
         moveModifier--;
+
+        if (Faction == Faction.Enemy)
+        {
+            if (moveRange - moveModifier < 0)
+            {
+                moveModifier++;
+            }
+        }
+
         if (Faction == Faction.Player)
         {
             GetComponentInParent<HandManager>().UpdateCardVisuals();
@@ -543,8 +512,8 @@ public class BaseUnit : MonoBehaviour
         {
             return;
         }
-        if (stunned == EffectFlag.Middle) return;
-        stunned = EffectFlag.Middle;
+        if (stunned == EffectFlag.End) return;
+        stunned = EffectFlag.End;
     }
 
     // Reduce movement to 0 for turn
@@ -554,8 +523,9 @@ public class BaseUnit : MonoBehaviour
         {
             return;
         }
-        if (restricted == EffectFlag.Middle) return;
-        restricted = EffectFlag.Middle;
+        if (restricted == EffectFlag.End) return;
+        restricted = EffectFlag.End;
+        if (Faction == Faction.Player) moveModifier = -99;
     }
 
     // Stun for 1 turn and decrease defense by 15%
@@ -589,9 +559,9 @@ public class BaseUnit : MonoBehaviour
         {
             return;
         }
-        if (poison >= 8) 
+        if (poison >= 6) 
         {
-            poison = 8;
+            poison = 6;
             return;
         }
         if (poison == 0)
@@ -771,6 +741,149 @@ public class BaseUnit : MonoBehaviour
     // Reset all values and decrement all effects at the end of the turn
     public virtual void ResetValues()
     {
+        // if (summoned)
+        // {
+        //     lifetime--;
+        //     if (lifetime == 0)
+        //     {
+        //         Die();
+        //     }
+        // }
+
+        // attackModifier = 1;
+        // defenseModifier = 1;
+        // moveModifier = 0;
+        reflect = 0;
+        absorb = 0;
+        defiant = false;
+        // agility = 0;
+
+        // if (immune > 0)
+        // {
+        //     immune--;
+        // }
+
+        // if (invisible > 0)
+        // {
+        //     invisible--;
+        //     attackModifier += UnitManager.invisibleAttackBoost;
+        //     if (invisible == 0)
+        //     {
+        //         Invisible(true);
+        //     }
+        // }
+
+        // if (daze > 0)
+        // {
+        //     daze--;
+        //     moveModifier -= daze;
+        // }
+
+        // if (strengthen > 0)
+        // {
+        //     strengthen--;
+        //     if (strengthen > 0)
+        //     {
+        //         Strengthen(true);
+        //     }
+        // }
+
+        // if (stunned > 0)
+        // {
+        //     stunned--;
+        // }
+
+        // if (frozen > 0)
+        // {
+        //     frozen--;
+        //     if (frozen > 0)
+        //     {
+        //         Freeze(true);
+        //     }
+        // }
+
+        // if (weaken > 0)
+        // {
+        //     weaken--;
+        //     if (weaken > 0)
+        //     {
+        //         Weaken(true);
+        //     }
+        // }
+
+        // if (regeneration > 0)
+        // {
+        //     Heal(maxHealth * 0.1f * regeneration);
+        //     regeneration--;
+        // }
+
+        // if (poison > 0)
+        // {
+        //     takeDamage(health * 0.1f * poison, false, false);
+        //     poison--;
+        //     if (poison == 0)
+        //     {
+        //         attackModifier += UnitManager.poisonAttackDown;
+        //     }
+        // }
+
+        // if (flaming > 0)
+        // {
+        //     takeDamage(health * 0.2f, false, false);
+        //     takeDamage(maxHealth * 0.15f, false, false);
+        //     flaming--;
+        // }
+
+        // if (boost > 0)
+        // {
+        //     boost--;
+        //     if (boost > 0)
+        //     {
+        //         Boost(true);
+        //     }
+        // }
+
+        // if (hinder > 0)
+        // {
+        //     hinder--;
+        //     if (hinder > 0)
+        //     {
+        //         Hinder(true);
+        //     }
+        // }
+
+        // if (resistant > 0)
+        // {
+        //     resistant--;
+        //     if (resistant > 0)
+        //     {
+        //         Resistant(true);
+        //     }
+        // }
+
+        // if (vulnerable > 0)
+        // {
+        //     vulnerable--;
+        //     if (vulnerable > 0)
+        //     {
+        //         Vulnerable(true);
+        //     }
+        // }
+
+        // if (restricted > 0)
+        // {
+        //     restricted--;
+        // }
+
+        if (dodge > 0)
+        {
+            dodge--;
+        }
+
+    }
+
+    public void ApplyEndTurnEffects()
+    {
         if (summoned)
         {
             lifetime--;
@@ -783,9 +896,9 @@ public class BaseUnit : MonoBehaviour
         attackModifier = 1;
         defenseModifier = 1;
         moveModifier = 0;
-        reflect = 0;
-        absorb = 0;
-        defiant = false;
+        //reflect = 0;
+        //absorb = 0;
+        //defiant = false;
         agility = 0;
 
         if (immune > 0)
@@ -806,6 +919,7 @@ public class BaseUnit : MonoBehaviour
         if (daze > 0)
         {
             daze--;
+            moveModifier -= daze;
         }
 
         if (strengthen > 0)
@@ -842,13 +956,26 @@ public class BaseUnit : MonoBehaviour
 
         if (regeneration > 0)
         {
-            Heal(maxHealth * 0.1f * regeneration);
+            for (int i = 1; i <= regeneration; i++)
+            {
+                if (i <= 3)
+                {
+                    Heal(maxHealth * 0.15f);
+                } else if (i == 4)
+                {
+                    Heal(maxHealth * 0.1f);
+                } else if (i == UnitManager.maxRegenStacks)
+                {
+                    Heal(maxHealth * 0.05f);
+                }
+            }
+            //Heal(maxHealth * 0.1f * regeneration);
             regeneration--;
         }
 
         if (poison > 0)
         {
-            takeDamage(health * 0.1f * poison, false, false);
+            takeDamage(health * 0.1f * poison, false, false, null, true);
             poison--;
             if (poison == 0)
             {
@@ -858,8 +985,8 @@ public class BaseUnit : MonoBehaviour
 
         if (flaming > 0)
         {
-            takeDamage(health * 0.2f, false, false);
-            takeDamage(maxHealth * 0.15f, false, false);
+            takeDamage(health * 0.2f, false, true);
+            takeDamage(maxHealth * 0.15f, false, true);
             flaming--;
         }
 
@@ -904,11 +1031,10 @@ public class BaseUnit : MonoBehaviour
             restricted--;
         }
 
-        if (dodge > 0)
-        {
-            dodge--;
-        }
-
+        // if (dodge > 0)
+        // {
+        //     dodge--;
+        // }
     }
 
 
