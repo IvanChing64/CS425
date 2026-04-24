@@ -176,7 +176,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4723107735738678597, guid: 088c72b8c44664ef7ba139bf42990072, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.78607315, g: 0.42301533, b: 0.9245283, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -215,6 +215,7 @@ MonoBehaviour:
   strengthen: 0
   resistant: 0
   invisible: 0
+  immune: 0
   stunned: 0
   restricted: 0
   frozen: 0

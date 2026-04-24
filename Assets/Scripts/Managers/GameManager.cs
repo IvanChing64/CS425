@@ -12,12 +12,15 @@ public class GameManager : MonoBehaviour
     public int turnNumber;
     public bool unitMoving = false;
 
+    public StageData stageData;
+
     void Awake()
     {
         Instance = this;
     }
     private void Start()
     {
+        stageData = CurrentSession.ActiveStageData;
         ChangeState(GameState.GenerateGrid);
     }
     
@@ -35,11 +38,14 @@ public class GameManager : MonoBehaviour
         // If it is the player or enemy turn
         if (gameState == GameState.PlayerTurn || gameState == GameState.EnemyTurn)
         {
+            // If the player is victorious
             if (CheckPlayerVictory())
             {
+                ArmyManager.Instance.GainCurrency(stageData.currency);
                 EndScreenManager.Instance.SetWinningText();
                 gameState = GameState.EndScreen;
             }
+            // Otherwise, if the enemy is victorious
             else if (CheckEnemyVictory())
             {
                 EndScreenManager.Instance.SetLosingText();

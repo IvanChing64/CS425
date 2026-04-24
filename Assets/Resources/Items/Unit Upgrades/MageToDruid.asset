@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d61b94e333a064fbb87b63f8fac2c8, type: 3}
+  m_Name: MageToDruid
+  m_EditorClassIdentifier: Scripts::UnitUpgradeItem
+  itemSprite: {fileID: 8793639957104055765, guid: 26bfc06fea3f36f43910f650af4f549f, type: 3}
+  itemDesc: Upgrade Mage to Druid
+  cost: 150
+  originalUnit: {fileID: 11400000, guid: c9fc47d75230a4a4db5cd4f426f749f1, type: 2}
+  upgradedUnit: {fileID: 11400000, guid: 1dfd4a66ce32563418c45deb80c7ffe7, type: 2}

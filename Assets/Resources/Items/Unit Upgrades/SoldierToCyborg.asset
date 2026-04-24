@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d61b94e333a064fbb87b63f8fac2c8, type: 3}
+  m_Name: SoldierToCyborg
+  m_EditorClassIdentifier: Scripts::UnitUpgradeItem
+  itemSprite: {fileID: 8793639957104055765, guid: da0a4a465bcb095418dadd1200965a07, type: 3}
+  itemDesc: Upgrade Soldier to Cyborg
+  cost: 150
+  originalUnit: {fileID: 11400000, guid: 55a12e113d12ca944b867525fec19c31, type: 2}
+  upgradedUnit: {fileID: 11400000, guid: 683f96d00b38cf346a9d982aaa302743, type: 2}

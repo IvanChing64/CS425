@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d61b94e333a064fbb87b63f8fac2c8, type: 3}
+  m_Name: HucksterToDoctor
+  m_EditorClassIdentifier: Scripts::UnitUpgradeItem
+  itemSprite: {fileID: 8793639957104055765, guid: e386646eb6c125a4386b29cc976b7d1b, type: 3}
+  itemDesc: Upgrade Huckster to Doctor
+  cost: 150
+  originalUnit: {fileID: 11400000, guid: c01e7227687912743982f8a00d0af5cb, type: 2}
+  upgradedUnit: {fileID: 11400000, guid: c1819edbf424c554f894b5b793fb2cf9, type: 2}
