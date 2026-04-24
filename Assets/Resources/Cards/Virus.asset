@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: Virus
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Virus
-  cardDescription: Weaken and Poison a ranged enemy
+  cardDescription: Poison and Weaken a ranged enemy
   type: 0
   range: 3
   areaRange: 0
-  value: 1
+  value: 3
   cost: 1
   damaging: 0
   piercing: 0
   areaEffect: 0
   rangeType: 1
-  cardIcon: {fileID: 1754874583245942008, guid: 1a9e22590fd36ad4aaf4fc2e820b04cf, type: 3}
+  cardIcon: {fileID: 3520646400762234793, guid: 1f19f283aab5cb04ba2513f961944c2f, type: 3}
   cardCorner: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
   cardBorderColor: {r: 1, g: 0, b: 0, a: 1}
   primarySupportEffect: 0
   secondarySupportEffect: 0
-  primaryControlEffect: 7
-  secondaryControlEffect: 5
+  primaryControlEffect: 5
+  secondaryControlEffect: 7
   summon: 0

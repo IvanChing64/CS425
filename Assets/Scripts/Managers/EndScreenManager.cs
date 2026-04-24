@@ -38,7 +38,7 @@ public class EndScreenManager : MonoBehaviour
 
     public void SetRewardText()
     {
-        RewardText.text = $"Reward: {GameManager.WinReward} Gold\n" +
+        RewardText.text = $"Reward: {CurrentSession.ActiveStageData.currency} Gold\n" +
                           $"Total: {ArmyManager.Instance.GetCurrency()} Gold";
     }
 

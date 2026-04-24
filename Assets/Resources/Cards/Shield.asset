@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Shield
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Shield
-  cardDescription: Guard a nearby ally
+  cardDescription: Grant Guard and Immunity to a nearby ally
   type: 2
   range: 2
   areaRange: 0
-  value: 30
+  value: 25
   cost: 0
   damaging: 0
   piercing: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   cardCorner: {fileID: -8686425463742581414, guid: 48dcce1cec15ef34cb12d5459f8d55bd, type: 3}
   cardBorderColor: {r: 0.2509804, g: 0.8, b: 0.12941177, a: 1}
   primarySupportEffect: 2
-  secondarySupportEffect: 0
+  secondarySupportEffect: 15
   primaryControlEffect: 0
   secondaryControlEffect: 0
   summon: 0

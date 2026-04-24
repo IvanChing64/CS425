@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Smite
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Smite
-  cardDescription: 'Heavily damage a close enemy '
+  cardDescription: 'Heavily damage and daze a close enemy '
   type: 0
   range: 1
+  areaRange: 0
   value: 50
   cost: 1
   damaging: 1
+  piercing: 0
   areaEffect: 0
   rangeType: 1
   cardIcon: {fileID: -5212242483619365012, guid: 895ceec2f50f7f44ca08f5b9cfae671f, type: 3}
@@ -26,5 +28,6 @@ MonoBehaviour:
   cardBorderColor: {r: 1, g: 0, b: 0, a: 1}
   primarySupportEffect: 0
   secondarySupportEffect: 0
-  primaryControlEffect: 0
-  secondaryControlEffect: 0
+  primaryControlEffect: 1
+  secondaryControlEffect: 1
+  summon: 0

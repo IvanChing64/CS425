@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Nanobots
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Nanobots
-  cardDescription: Grant a ranged ally Absorb and Regeneration
+  cardDescription: Grant a ranged ally Absorb and Immunity
   type: 2
   range: 3
   areaRange: 0
@@ -26,8 +26,8 @@ MonoBehaviour:
   cardIcon: {fileID: -8650742481347510577, guid: 9f5ce9425be3860458f4a86583873974, type: 3}
   cardCorner: {fileID: -8686425463742581414, guid: 48dcce1cec15ef34cb12d5459f8d55bd, type: 3}
   cardBorderColor: {r: 0.2509804, g: 0.8, b: 0.12941177, a: 1}
-  primarySupportEffect: 9
-  secondarySupportEffect: 13
+  primarySupportEffect: 14
+  secondarySupportEffect: 15
   primaryControlEffect: 0
   secondaryControlEffect: 0
   summon: 0

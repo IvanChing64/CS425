@@ -1,8 +1,6 @@
 //using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-
-//using System.Numerics;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -323,10 +321,9 @@ public class HandManager : MonoBehaviour
             {
                 if (currentHand[i] != null)
                 {
-                    float yPosition = currentHand[i].cardHolder.transform.position.y;
-                    Vector3 targetPos = new Vector3(((i - (currentHand.Count / 2 - 0.5f)) * cardPositionOffsetX) + 960, yPosition, 0);
-                    //currentHand[i].cardHolder.transform.localPosition = targetPos;
-                    CardManager.instance.moveCard(currentHand[i].cardHolder, false, false, targetPos);
+                    float yPosition = currentHand[i].cardHolder.transform.localPosition.y;
+                    Vector3 targetPos = new Vector3((i - (currentHand.Count / 2 - 0.5f)) * cardPositionOffsetX, yPosition, 0);
+                    currentHand[i].cardHolder.transform.localPosition = targetPos;
                 }
             }
 
@@ -334,9 +331,13 @@ public class HandManager : MonoBehaviour
             {
                 if (currentHand[i] != null)
                 {
-                    float yPosition = currentHand[i].cardHolder.transform.localPosition.y;
-                    Vector3 targetPos = new Vector3((i - (currentHand.Count / 2 - 0.5f)) * cardPositionOffsetX, yPosition, 0);
-                    currentHand[i].cardHolder.transform.localPosition = targetPos;
+                    float yPosition = currentHand[i].cardHolder.transform.position.y;
+                    if (!currentHand[i].selected)
+                    {
+                        yPosition = 96;
+                    }
+                    Vector3 targetPos = new Vector3(((i - (currentHand.Count / 2 - 0.5f)) * cardPositionOffsetX) + 960, yPosition, 0);
+                    CardManager.instance.moveCard(currentHand[i].cardHolder, false, false, targetPos);
                 }
             }
         } else if (currentHand.Count % 2 == 1) 
@@ -344,20 +345,24 @@ public class HandManager : MonoBehaviour
             for (int i = 0; i < currentHand.Count; i++)
             {
                 if (currentHand[i] != null)
-                {   
-                    float yPosition = currentHand[i].cardHolder.transform.position.y;
-                    Vector3 targetPos = new Vector3(((i - (currentHand.Count / 2)) * cardPositionOffsetX) + 960, yPosition, 0);
-                    CardManager.instance.moveCard(currentHand[i].cardHolder, false, false, targetPos);
+                {
+                    float yPosition = currentHand[i].cardHolder.transform.localPosition.y;
+                    Vector3 targetPos = new Vector3((i - (currentHand.Count / 2)) * cardPositionOffsetX, yPosition, 0);
+                    currentHand[i].cardHolder.transform.localPosition = targetPos;
                 }
             }
 
             for (int i = 0; i < currentHand.Count; i++)
             {
                 if (currentHand[i] != null)
-                {
-                    float yPosition = currentHand[i].cardHolder.transform.localPosition.y;
-                    Vector3 targetPos = new Vector3((i - (currentHand.Count / 2)) * cardPositionOffsetX, yPosition, 0);
-                    currentHand[i].cardHolder.transform.localPosition = targetPos;
+                {   
+                    float yPosition = currentHand[i].cardHolder.transform.position.y;
+                    if (!currentHand[i].selected)
+                    {
+                        yPosition = 96;
+                    }
+                    Vector3 targetPos = new Vector3(((i - (currentHand.Count / 2)) * cardPositionOffsetX) + 960, yPosition, 0);
+                    CardManager.instance.moveCard(currentHand[i].cardHolder, false, false, targetPos);
                 }
             }
         }

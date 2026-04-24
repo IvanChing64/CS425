@@ -8,7 +8,6 @@ using Unity.VisualScripting;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public static int WinReward;
     public GameState gameState;
     public int turnNumber;
     public bool unitMoving = false;
@@ -39,7 +38,7 @@ public class GameManager : MonoBehaviour
             // If the player is victorious
             if (CheckPlayerVictory())
             {
-                ArmyManager.Instance.GainCurrency(WinReward);
+                ArmyManager.Instance.GainCurrency(CurrentSession.ActiveStageData.currency);
                 EndScreenManager.Instance.SetWinningText();
                 gameState = GameState.EndScreen;
             }
@@ -72,16 +71,28 @@ public class GameManager : MonoBehaviour
                 turnNumber += 1;
                 // Debug.Log("Player Turn");
                 // Debug.Log("Turn Number" + turnNumber);
+                UnitManager.Instance.ApplyEndTurnEffects(Faction.Enemy);
                 combatUIManager.Instance.ShowEndTurnOption();
                 TurnUIManager.Instance.UpdateTurnText(turnNumber);
                 CardManager.instance.NextTurn();
+                if (CheckPlayerVictory())
+                {
+                    EndScreenManager.Instance.SetWinningText();
+                    ChangeState(GameState.EndScreen);
+                }
                 break;
             case GameState.EnemyTurn:
-                Debug.Log("Enemy Turn");
-                Debug.Log("Turn Number" + turnNumber);
+                // Debug.Log("Enemy Turn");
+                // Debug.Log("Turn Number" + turnNumber);
+                UnitManager.Instance.ApplyEndTurnEffects(Faction.Player);
                 combatUIManager.Instance.hideEndTurnOption();
                 UnitManager.Instance.BeginEnemyTurn();
                 CardManager.instance.ToggleCardArea(false);
+                if (CheckEnemyVictory())
+                {
+                    EndScreenManager.Instance.SetLosingText();
+                    ChangeState(GameState.EndScreen);
+                }
                 break;
             case GameState.EndScreen:
                 //Debug.Log("End screen reached");

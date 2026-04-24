@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -34,6 +35,16 @@ public class ArmyManager : MonoBehaviour
         if (unitsInArmy.Count == 0) GenerateStartingArmy();
         
         DontDestroyOnLoad(gameObject);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            GainCurrency(100);
+            if (ShopManager.Instance != null)
+                ShopManager.Instance.UpdateCurrencyText();
+        }
     }
 
     public void AddUnit(ScriptableUnit unit) => unitsInArmy.Add(unit);

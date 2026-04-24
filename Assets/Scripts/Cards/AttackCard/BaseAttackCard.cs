@@ -33,23 +33,23 @@ public class BaseAttackCard : BaseCard
             player.dmg = value;
             player.attackRange = range;
             Tile currentTile = player.OccupiedTile;
-            
 
-            if (AoE == AreaOfEffectType.None || AoE == AreaOfEffectType.AttackSelfCenter)
+            if (AoE == AreaOfEffectType.AttackSelfCenter)
             {
                 foreach (Tile t in player.GetTilesInAttackRange())
                 {
-                    t.ShowHighlight(true, Tile.attackableColor);
+                    if (t.OccupiedUnit == null || t.OccupiedUnit.Faction == Faction.Enemy)t.ShowHighlight(true, Tile.attackableColor);
                 }
                 currentTile.ShowHighlight(false, Tile.nonwalkableColor);
-            } else if (AoE == AreaOfEffectType.AttackRangedCenter)
+                //UnitManager.Instance.targetting = true;
+            } else if (AoE == AreaOfEffectType.None || AoE == AreaOfEffectType.AttackRangedCenter)
             {
                 foreach (Tile t in player.GetTilesInAttackRange())
                 {
-                    t.ShowHighlight(true, Tile.targetableColor);
+                    if (t.OccupiedUnit == null || t.OccupiedUnit.Faction == Faction.Enemy)t.ShowHighlight(true, Tile.targetableColor);
                 }
                 currentTile.ShowHighlight(false, Tile.nonwalkableColor);
-                UnitManager.Instance.targetting = true;
+                UnitManager.Instance.targeting = true;
             }
             
         }
@@ -61,7 +61,7 @@ public class BaseAttackCard : BaseCard
         
         //Unhighlight Selectable Tiles and Targets
         BasePlayer player = CardManager.instance.selectedPlayer;
-        UnitManager.Instance.targetting = false;
+        UnitManager.Instance.targeting = false;
 
         if(player != null)
         {

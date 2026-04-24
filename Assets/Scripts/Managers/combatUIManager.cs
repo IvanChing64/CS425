@@ -54,7 +54,7 @@ public class combatUIManager : MonoBehaviour
             {
                 playerAnim.SetTrigger("attack");
             }
-            targetEnemy.takeDamage(targetPlayer.dmg * targetPlayer.attackModifier, true, true, targetPlayer);
+            targetEnemy.takeDamage(targetPlayer.dmg * targetPlayer.attackModifier, true, false, targetPlayer);
             targetPlayer.canAttack = false;
             targetPlayer.dmg = 0;
             foreach (Tile t in GridManager.Instance.GetNeighborsOf(targetPlayer.OccupiedTile))
@@ -83,10 +83,13 @@ public class combatUIManager : MonoBehaviour
             {
                 if (attacker.invisible > 0 && CardManager.instance.selectedCard.cardName == "Backstab")
                 {
-                    defender.takeDamage((attacker.dmg + UnitManager.backstabInvisibleBonus) * attacker.attackModifier, true, true, attacker);
-                } else
+                    defender.takeDamage((attacker.dmg + UnitManager.backstabInvisibleBonus) * attacker.attackModifier, true, false, attacker);
+                } else if (CardManager.instance.selectedCard.pierce)
                 {
                     defender.takeDamage(attacker.dmg * attacker.attackModifier, true, true, attacker);
+                } else
+                {
+                    defender.takeDamage(attacker.dmg * attacker.attackModifier, true, false, attacker);
                 }
                 
             } else

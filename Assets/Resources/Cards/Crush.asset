@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Crush
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Crush
-  cardDescription: Damage and daze a close enemy
+  cardDescription: Damage and heavily daze a close enemy
   type: 0
   range: 1
   areaRange: 0
@@ -29,5 +29,5 @@ MonoBehaviour:
   primarySupportEffect: 0
   secondarySupportEffect: 0
   primaryControlEffect: 1
-  secondaryControlEffect: 0
+  secondaryControlEffect: 1
   summon: 0
