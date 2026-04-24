@@ -294,26 +294,65 @@ public class NPC_Controller: MonoBehaviour
         return bestTarget.OccupiedTile;
     }
 
-  /*private Tile GetBossTarget()
-  {
-        BaseUnit highestHealthPlayer = null;
-        float highestHealth = -Mathf.Infinity;
+    /*private Tile GetBossTarget()
+    {
+          BaseUnit highestHealthPlayer = null;
+          float highestHealth = -Mathf.Infinity;
 
-        foreach (var unit in UnitManager.Instance.playersSpawned)
-        {
-            if (unit == npcUnit) continue;
+          foreach (var unit in UnitManager.Instance.playersSpawned)
+          {
+              if (unit == npcUnit) continue;
 
 
-            // Find the highest health instead of lowest
-            if (unit.health > highestHealth)
+              // Find the highest health instead of lowest
+              if (unit.health > highestHealth)
+              {
+                  highestHealth = unit.health;
+                  highestHealthPlayer = unit;
+              }
+          }
+
+
+      }*/
+
+    private Tile GetMeleeTarget()
+    {
+        var targeting = GetComponent<EnemyTargetingManager>();
+        targeting.SelectTarget();
+
+        Tile playerTile = GridManager.Instance.GetTileForUnit(targeting.CurrentTarget.gameObject);
+
+        List<Tile> movableTiles = RangeManager.GetTilesInRange(
+        npcUnit.OccupiedTile,
+        npcUnit.moveRange,
+        RangeType.FloodTargeting);
+
+        Tile bestTile = null;
+        float bestScore = Mathf.Infinity;
+
+        foreach (var tile in movableTiles) {
+
+            if (!tile.isWalkable) continue;
+            if (tile == npcUnit.OccupiedTile) continue;
+
+            var path = AStarManager.Instance.GeneratePath(tile, playerTile);
+            if (path == null || path.Count == 0) continue;
+
+            float score = path.Count;
+
+            if (score < bestScore)
             {
-                highestHealth = unit.health;
-                highestHealthPlayer = unit;
+                bestScore = score;
+                bestTile = tile;
             }
         }
 
+        if (bestTile == null)
+            return GetRandomTile();
 
-    }*/
+        return bestTile;
+    }
+    
 
 
     private void Update()
