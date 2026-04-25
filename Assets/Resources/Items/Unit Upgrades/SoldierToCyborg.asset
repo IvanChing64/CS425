@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::UnitUpgradeItem
   itemSprite: {fileID: 8793639957104055765, guid: da0a4a465bcb095418dadd1200965a07, type: 3}
   itemDesc: Upgrade Soldier to Cyborg
-  cost: 150
+  cost: 250
   originalUnit: {fileID: 11400000, guid: 55a12e113d12ca944b867525fec19c31, type: 2}
   upgradedUnit: {fileID: 11400000, guid: 683f96d00b38cf346a9d982aaa302743, type: 2}
