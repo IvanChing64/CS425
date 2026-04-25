@@ -22,7 +22,7 @@ public class NPC_Controller: MonoBehaviour
     }
 
     enum BossState
-    {
+    { 
         Invulnerable,
         Vulnerable
     }
@@ -53,6 +53,9 @@ public class NPC_Controller: MonoBehaviour
 
     private Enemy1 enemy1;
     private Animator unitAnimator;
+
+    [SerializeField] private int summonCooldownTurns = 2;
+    private int summonCooldownRemaining = 0;
 
     private void Awake()
     {
@@ -200,14 +203,32 @@ public class NPC_Controller: MonoBehaviour
 
     public void DecrementCurrentSummons()
     {
-        currentSummons--;
+        int previous = currentSummons;
+        currentSummons = Mathf.Max(0, currentSummons - 1);
+
+        summonCooldownRemaining = summonCooldownTurns;
+        
+        if (previous > 0 && currentSummons == 0)
+        {
+            summonCooldownRemaining = summonCooldownTurns;
+        }
     }
 
     [SerializeField] private int healAmount = 10;
 
     private bool CanSummonThisTurn()
     {
-        return GameManager.Instance.turnNumber % 2 == 0;
+        if (summonCooldownRemaining > 0)
+            return false;
+
+        if (GameManager.Instance.turnNumber % 2 != 0)
+            return false;
+
+        if (currentSummons >= maxSummons)
+            return false;
+
+        return true;
+
     }
 
     [SerializeField]
@@ -228,17 +249,25 @@ public class NPC_Controller: MonoBehaviour
         unit.summoner = this;
         unit.isSummoned = true;
         tile.OccupiedUnit = unit;
+
+        var baseEnemy = enemy.GetComponent<BaseEnemy>();
+        if (baseEnemy != null && UnitManager.Instance != null)
+        {
+            UnitManager.Instance.enemiesSpawned.Add(baseEnemy);
+
+            UnitManager.Instance.enemyUnitCount = UnitManager.Instance.enemiesSpawned.Count;
+        }
     }
 
-    private void SummonGrunts()
+    private bool SummonGrunts()
     {
-        if (currentSummons >= maxSummons) return;
+        if (currentSummons >= maxSummons) return false;
 
         // spawn 2 grunts near the support
         var neighbors = npcUnit.OccupiedTile.Neighbors;
-        if (neighbors == null || neighbors.Count == 0) return;
+        if (neighbors == null || neighbors.Count == 0) return false;
 
-        int spawned = 0;
+        bool spawnedAny = false;
 
         foreach (Tile tile in neighbors)
         {
@@ -250,20 +279,27 @@ public class NPC_Controller: MonoBehaviour
             SpawnEnemyAtTile(tile);
 
             currentSummons++;
-            spawned++;
+            spawnedAny = true;
+            
 
-            if (spawned >= 2) break;
+            if (currentSummons >= maxSummons) break;
         }
-
+        return spawnedAny;
     }
     private Tile GetSupportTarget()
     {
-        bool isElite = isEliteVarient;
-        if (isElite && CanSummonThisTurn() && !hasSummonedThisTurn)
-        {
-            SummonGrunts();
-            hasSummonedThisTurn = true;
+        Debug.Log($"Summons: {currentSummons}, Cooldown: {summonCooldownRemaining}, Turn: {GameManager.Instance.turnNumber}");
 
+        bool isElite = isEliteVarient;
+        if (isElite && CanSummonThisTurn() && currentSummons < maxSummons)
+        {
+            bool didSummon = SummonGrunts();
+
+            if (didSummon)
+            {
+                hasSummonedThisTurn = true;
+                return npcUnit.OccupiedTile;
+            }
             return GetRandomTile();
         }
         BaseUnit lowestHealthAlly = null;
@@ -812,9 +848,18 @@ public class NPC_Controller: MonoBehaviour
 
     public void BeginTurn()
     {
+        Debug.Log($"[WARLOCK TURN START] Cooldown before: {summonCooldownRemaining}");
+
         tilesMovedThisTurn = 0;
         HasFinishedTurn = false;
         hasSummonedThisTurn = false;
+        
+        //Added for summoner
+        if (summonCooldownRemaining > 0) {
+            summonCooldownRemaining--;
+        }
+        hasSummonedThisTurn = false;
+
         //isMoving = false;
         //New: Ensure targeting happens first
         var targeting = GetComponent<EnemyTargetingManager>();

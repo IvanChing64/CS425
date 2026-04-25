@@ -1063,8 +1063,13 @@ public class BaseUnit : MonoBehaviour
         healthbar.UpdateGuardBar(guard, maxHealth);
     }
 
+    private bool isDead = false;
+
     void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
         Debug.Log($"{name} has died.");
         if (Faction == Faction.Player)
         { 
@@ -1078,6 +1083,7 @@ public class BaseUnit : MonoBehaviour
             UnitManager.Instance.enemyUnitCount -= 1; // Decrease the enemy unit count
             UnitManager.Instance.enemiesSpawned.Remove((BaseEnemy)this);
         }
+
 
         if (isSummoned && summoner != null)
         {
