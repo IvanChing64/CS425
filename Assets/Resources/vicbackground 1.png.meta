@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d10119e76070a334086b020ca9641189
+guid: 84cd4bd561a80cd48b908758fb7e3524
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9086557435885758130
-    second: vicbackground_0
+      213: 4366550747201467375
+    second: vicbackground 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: vicbackground_0
+      name: vicbackground 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 1365
-        height: 768
+        height: 632
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2b6a72568dfe91e70800000000000000
-      internalID: 9086557435885758130
+      spriteID: fe3f8a405ca199c30800000000000000
+      internalID: 4366550747201467375
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      vicbackground_0: 9086557435885758130
+      vicbackground 1_0: 4366550747201467375
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
