@@ -1229,7 +1229,6 @@ GameObject:
   - component: {fileID: 173974627}
   - component: {fileID: 173974626}
   - component: {fileID: 173974625}
-  - component: {fileID: 173974628}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1301,7 +1300,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 311877093}
         m_TargetAssemblyTypeName: MenuManager, Scripts
         m_MethodName: PreviousScene
         m_Mode: 1
@@ -1351,23 +1350,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173974622}
   m_CullTransparentMesh: 1
---- !u!114 &173974628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 173974622}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7534e8fc634074240bef86de77b99994, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
-  buttonSFX:
-  - {fileID: 8300000, guid: aeb2b1f1d428a9549a37a5c62d92b531, type: 3}
-  pauseMenuUI: {fileID: 0}
-  settingUI: {fileID: 0}
-  blocker: {fileID: 0}
 --- !u!1 &244969351
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,12 +1851,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 16
   stageData: {fileID: 11400000, guid: 04f0eb05325830b4f9658fba5bbcf1ef, type: 2}
-  stageDesciption: 'A discarded tablet screen flickers with life, offering digital
-    upgrades and "cheat codes" in exchange for Maya''s plastic tokens.
+  stageDesciption: 'A rogue Scientist is overclocking a massive Sentry Robot while
+    three Elite Soldiers hold the line. Break the phalanx and stop the experiment
+    before the "Security Protocol" wipes your squad.
 
 
-    Enemies:
-    1 Robot 3 Soldier 1 Scientist'
+    Enemies: 1 Robot 3 Soldier
+    1 Scientist
+
+    Reward: 250g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 12
@@ -2748,7 +2733,7 @@ MonoBehaviour:
   stageDesciption: "The King\u2019s law doesn\u2019t reach this far. The stone path
     has turned to dirt, and the local guards have traded their spears for badges.
     It\u2019s a lawless land now, where the fastest draw wins the day.\n\nEnemies:
-    1 Pioneer 2 Bandit 1 Huckster"
+    1 Pioneer 2 Bandit 1 Huckster\nReward: 100g"
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -3046,7 +3031,10 @@ MonoBehaviour:
     heavier, and the air smells like old leather.
 
 
-    Enemies: 1 Pioneer 3 Huckster '
+    Enemies: 1 Pioneer 3 Huckster
+
+    Reward:
+    100g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -3208,7 +3196,10 @@ MonoBehaviour:
     to the desk-lamp sun.
 
 
-    Enemies: 1 Robot 2 Soldier 2 Scientist'
+    Enemies: 1 Robot 2 Soldier 2 Scientist
+
+    Reward:
+    250g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 12
@@ -4288,7 +4279,9 @@ MonoBehaviour:
     that doesn''t bleed.
 
 
-    Enemies: 2 Bandit 1 Elite'
+    Enemies: 2 Bandit 1 Elite
+
+    Reward: 200g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 11
@@ -5145,7 +5138,9 @@ MonoBehaviour:
     showdown!
 
 
-    Enemies: 2 Pioneer 2 Huckster'
+    Enemies: 2 Pioneer 2 Huckster
+
+    Reward: 150g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 11
@@ -5382,12 +5377,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 1
   stageData: {fileID: 11400000, guid: dea111ae8bb11484280e0f2e4af6087d, type: 2}
-  stageDesciption: 'Pandora opens the lid. Dust motes dance in the light like magical
-    spores. The floorboards disappear; the adventure begins.
-
-
-    Enemies: 1 Grunt
-    1 Archer 1 Cultist '
+  stageDesciption: "Pandora opens the lid. Dust motes dance in the light like magical
+    spores. The floorboards disappear; the adventure begins.\n\nEnemies: 1 Grunt
+    1 Archer 1 Cultist \nReward: 50g"
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -5544,8 +5536,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 13
   stageData: {fileID: 11400000, guid: 44f5a50bcd275914fb37805703f67061, type: 2}
-  stageDesciption: "That\u2019s no gunslinger in the distance\u2014it\u2019s a hologram.
-    The tumbleweeds are now floating scrap-bots.\n\nEnemies: 4 Robot 1 Soldier"
+  stageDesciption: "That\u2019s no gunslinger in the distance;it\u2019s a hologram.
+    The tumbleweeds are now floating scrap-bots.\n\nEnemies: 4 Robot 1 Soldier\nReward:
+    200g"
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 11
@@ -5706,7 +5699,9 @@ MonoBehaviour:
     through!
 
 
-    Enemies: 1 Grunt 2 Cultist '
+    Enemies: 1 Grunt 2 Cultist
+
+    Reward: 100g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -5864,10 +5859,13 @@ MonoBehaviour:
   stageID: 14
   stageData: {fileID: 11400000, guid: 6d992fabd9cc34b4db6cbc71cdb7b489, type: 2}
   stageDesciption: 'Around the campfire, the revolver clicks and hums with static.
-    The barrel begins to glow with plasma energy.
+    The barrel begins to glow with plasma energy. They have you surrounded!
 
 
-    Enemies: 7 Robot'
+    Enemies:
+    7 Robot
+
+    Reward: 300g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 11
@@ -6107,7 +6105,9 @@ MonoBehaviour:
 
 
     Enemies:
-    2 Grunts 1 Archer'
+    2 Grunts 1 Archer
+
+    Reward: 50g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 7
@@ -7208,7 +7208,9 @@ MonoBehaviour:
 
 
     Enemies: 1 Pioneer 2 Bandit
-    1 Huckster'
+    1 Huckster
+
+    Reward: 100g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -7369,7 +7371,9 @@ MonoBehaviour:
     pointing toward the stars.
 
 
-    Enemies: 2 Soldier 1 Elite'
+    Enemies: 2 Soldier 1 Elite
+
+    Reward: 200g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 11
@@ -7768,7 +7772,7 @@ MonoBehaviour:
   stageID: 5
   stageData: {fileID: 11400000, guid: c7e29c6073a441648b88b861cbcd430f, type: 2}
   stageDesciption: "The King\u2019s vanguard fights a holding action as the lush
-    meadows begin to turn to dust.\n\nEnemies: 1 Grunt 1 Elite "
+    meadows begin to turn to dust.\n\nEnemies: 1 Grunt 1 Elite\nReward: 100g"
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -8545,7 +8549,9 @@ MonoBehaviour:
     need a snack break.
 
 
-    Enemies: 2 Grunts 1 Archer 1 Cultist'
+    Enemies: 2 Grunts 1 Archer 1 Cultist
+
+    Reward: 100g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -9243,8 +9249,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Stage Number
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ee341fdc43d76854f9fc1c7e33527d18, type: 2}
-  m_sharedMaterial: {fileID: 5418399235429956811, guid: ee341fdc43d76854f9fc1c7e33527d18, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9268,7 +9274,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.75
+  m_fontSize: 30.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9379,7 +9385,9 @@ MonoBehaviour:
     finds a small enemy camp!
 
 
-    Enemies: 1 Grunts 2 Archers'
+    Enemies: 1 Grunts 2 Archers
+
+    Reward: 50g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 7
