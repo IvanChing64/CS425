@@ -11,6 +11,7 @@ public class ShopManager : MonoBehaviour
 
     public static bool StockInitialized = false;
     public static List<ScriptableItem> CurrentItemsInShop;
+    public static float RerollCostMultiplier = 1.0f;
 
     public static bool ItemListsInititialized = false;
     public static List<UnitUpgradeItem> UnitUpgradeItems;
@@ -19,6 +20,9 @@ public class ShopManager : MonoBehaviour
     //public static List<DeckAdditionItem> DeckAdditionItems;
 
     [SerializeField] private Text currencyText;
+    [SerializeField] private Text armyCapText;
+    [SerializeField] private Text rerollCostText;
+    [SerializeField] private int rerollBaseCost;
 
     public List<ShopItemSlot> itemSlots;
 
@@ -40,7 +44,10 @@ public class ShopManager : MonoBehaviour
         }
 
         UpdateItemSlots();
+        
         UpdateCurrencyText();
+        UpdateArmyCapText();
+        UpdateRerollCostText();
     }
 
     private void InitializeStock()
@@ -97,6 +104,7 @@ public class ShopManager : MonoBehaviour
                 break;
         }
 
+        UpdateArmyCapText();
         UpdateCurrencyText();
         return true;
     }
@@ -137,6 +145,18 @@ public class ShopManager : MonoBehaviour
         if (applicableList.Count == 0) return null;
 
         return applicableList[Random.Range(0, applicableList.Count)];
+    }
+
+    public void RerollButton()
+    {
+        int rerollCost = (int)Math.Round(rerollBaseCost * RerollCostMultiplier);
+        bool purchased = ArmyManager.Instance.AttemptPurchase(rerollCost);
+        if (!purchased) return;
+
+        RerollShop();
+        RerollCostMultiplier += 0.5f;
+
+        UpdateRerollCostText();
     }
 
     public void RerollShop()
@@ -180,5 +200,22 @@ public class ShopManager : MonoBehaviour
     public void UpdateCurrencyText()
     {
         currencyText.text = $"Gold: {ArmyManager.Instance.GetCurrency()}";
+    }
+
+    public void UpdateArmyCapText()
+    {
+        int armyCount = ArmyManager.Instance.unitsInArmy.Count;
+        int armyCap = ArmyManager.Instance.ArmyCapacity;
+        armyCapText.text = $"{armyCount} / {armyCap} units";
+
+        if (armyCount >= armyCap)
+        {
+            armyCapText.color = Color.softRed;
+        }
+    }
+
+    public void UpdateRerollCostText()
+    {
+        rerollCostText.text = $"Cost: {(int)Math.Round(rerollBaseCost * RerollCostMultiplier)}";
     }
 }
