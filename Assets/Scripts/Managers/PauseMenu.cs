@@ -24,6 +24,7 @@ public class PauseMenu : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         } else
         {
+            Debug.LogWarning("FUDGE");
             Destroy(gameObject);
             return;
         }
