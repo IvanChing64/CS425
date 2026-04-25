@@ -55,6 +55,13 @@ public class EndScreenManager : MonoBehaviour
 
     public void ContinueButton()
     {
-        SceneManager.LoadScene("Scenes/StageSelection");
+        if(CurrentSession.ActiveStageID == "17")
+        {
+            SceneManager.LoadScene("Scene/Victory");
+        }
+        else
+        {
+            SceneManager.LoadScene("Scenes/StageSelection");
+        } 
     }
 }
