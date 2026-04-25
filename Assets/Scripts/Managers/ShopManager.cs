@@ -88,31 +88,34 @@ public class ShopManager : MonoBehaviour
     /// <returns>Whether the item was bought</returns>
     public bool BuyItem(ScriptableItem item)
     {
-        bool purchased = ArmyManager.Instance.AttemptPurchase(item.cost);
-        if (!purchased) return false;
+        // If we can't purchase the upgrade, return false
+        bool purchasable = ArmyManager.Instance.GetCurrency() >= item.cost;
+        if (!purchasable) return false;
 
         switch (item.Type)
         {
+            // If we are buying a unit upgrade item
             case ItemType.UnitUpgrade:
                 UnitUpgradeItem upgradeItem = item as UnitUpgradeItem;
                 if (ArmyManager.Instance.RemoveUnit(upgradeItem.originalUnit))
                     ArmyManager.Instance.AddUnit(upgradeItem.upgradedUnit);
                 else
+                {
                     Debug.Log("Original unit not found in army");
+                    return false;
+                }
+
                 break;
 
+            // If we are buying a new unit
             case ItemType.NewUnit:
                 NewUnitItem newUnitItem = item as NewUnitItem;
-                ArmyManager.Instance.AddUnit(newUnitItem.newUnit);
-                break;
-
-            case ItemType.PartyBuff:
-                Debug.Log("Party buff item not implemented");
-                break;
-
-            case ItemType.DeckAddition:
-                Debug.Log("Deck addition item not implemented");
-                // ArmyManager.Instance.AddCardToDecks(deckAddItem.card);
+                bool added = ArmyManager.Instance.AddUnit(newUnitItem.newUnit);
+                if (!added)
+                {
+                    Debug.Log("Army at capacity, new unit cannot be added");
+                    return false;
+                }
                 break;
 
             default:
@@ -120,6 +123,7 @@ public class ShopManager : MonoBehaviour
                 break;
         }
 
+        ArmyManager.Instance.AttemptPurchase(item.cost);
         UpdateArmyCapText();
         UpdateCurrencyText();
         return true;
@@ -147,9 +151,12 @@ public class ShopManager : MonoBehaviour
 
         switch (slot)
         {
+            // The first two slots should stock a new unit
             case < 2:
                 itemToAdd = NewUnitItems[Random.Range(0, NewUnitItems.Count)];
                 break;
+
+            // The next two slots should stock unit upgrades, if there are no possible unit upgrades stock new units instead
             case < 4:
                 itemToAdd = GetApplicableUpgradeItem();
                 if (itemToAdd == null) itemToAdd = NewUnitItems[Random.Range(0, NewUnitItems.Count)];
@@ -163,7 +170,7 @@ public class ShopManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Finds and returns a possible unit upgrade item the player can use
+    /// Finds and returns a possible unit upgrade item the player can use, unit upgrades should not be for units the player does not have or that are already in stock
     /// </summary>
     /// <returns>A random unit upgrade of possible ones the player can obtain, null if there are none</returns>
     private UnitUpgradeItem GetApplicableUpgradeItem()
@@ -180,15 +187,17 @@ public class ShopManager : MonoBehaviour
     /// </summary>
     public void RerollButton()
     {
+        // If we can't purchase a reroll, return;
         int rerollCost = (int)Math.Round(rerollBaseCost * RerollCostMultiplier);
         bool purchased = ArmyManager.Instance.AttemptPurchase(rerollCost);
         if (!purchased) return;
 
         RerollShop();
-        RerollCostMultiplier += 0.5f;
 
-        UpdateCurrencyText();
+        // Update the reroll cost (multiplier)
+        RerollCostMultiplier += 0.5f;
         UpdateRerollCostText();
+        UpdateCurrencyText();
     }
 
     /// <summary>

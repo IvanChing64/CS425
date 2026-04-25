@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::UnitUpgradeItem
   itemSprite: {fileID: 8793639957104055765, guid: bea52bf6196a1294999dbdcc7562ab9c, type: 3}
   itemDesc: Upgrade Pioneer to Gravekeeper
-  cost: 150
+  cost: 250
   originalUnit: {fileID: 11400000, guid: d5407282cbc87f04caafc3681c0c63b4, type: 2}
   upgradedUnit: {fileID: 11400000, guid: 34a1d9c152fcc174bb56424bd1cd48bc, type: 2}
