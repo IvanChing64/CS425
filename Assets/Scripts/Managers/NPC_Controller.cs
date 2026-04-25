@@ -1017,10 +1017,10 @@ public class NPC_Controller: MonoBehaviour
     public static IEnumerator RunEnemyTurn(List<NPC_Controller> enemies)
     {
 
-        for (int i = 0; i < 9; i++)
-        {
+        // for (int i = 0; i < 9; i++)
+        // {
             
-        }
+        // }
 
 
 
