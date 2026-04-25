@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.UI.CanvasScaler;
 //Developer: Andrew Shelton
 //Edits from Ivan Ching
 //Aggregated from multiple tutorials and sources
@@ -43,6 +44,7 @@ public class NPC_Controller: MonoBehaviour
     private int pathIndex;
     private int tilesMovedThisTurn;
     private bool isMoving;
+    private bool hasSummonedThisTurn = false;
 
     public bool isEliteVarient = false;
     public bool isEnraged = false;
@@ -108,6 +110,8 @@ public class NPC_Controller: MonoBehaviour
             Debug.Log("Enraged!");
         }
     }
+
+
   
 
     private Tile GetRangedTarget()
@@ -194,6 +198,11 @@ public class NPC_Controller: MonoBehaviour
         return bestTile;
     }
 
+    public void DecrementCurrentSummons()
+    {
+        currentSummons--;
+    }
+
     [SerializeField] private int healAmount = 10;
 
     private bool CanSummonThisTurn()
@@ -201,24 +210,62 @@ public class NPC_Controller: MonoBehaviour
         return GameManager.Instance.turnNumber % 2 == 0;
     }
 
-    /*private void SummonGrunts()
+    [SerializeField]
+    private GameObject enemyPrefab;
+
+    [SerializeField] private int maxSummons = 4;
+    private int currentSummons = 0;
+
+    public void SpawnEnemyAtTile(Tile tile)
     {
+        GameObject enemy = Instantiate(enemyPrefab);
+
+        enemy.transform.position = tile.transform.position;
+
+        BaseUnit unit = enemy.GetComponent<BaseUnit>();
+        
+        unit.OccupiedTile = tile;
+        unit.summoner = this;
+        unit.isSummoned = true;
+        tile.OccupiedUnit = unit;
+    }
+
+    private void SummonGrunts()
+    {
+        if (currentSummons >= maxSummons) return;
+
         // spawn 2 grunts near the support
         var neighbors = npcUnit.OccupiedTile.Neighbors;
-        if (neighbors != null && neighbors.Count > 0) { 
-        UnitManager.Instance.SpawnEnemies("Grunt", neighbors[0]);
-        UnitManager.Instance.SpawnEnemies("Grunt", neighbors[1]);
+        if (neighbors == null || neighbors.Count == 0) return;
+
+        int spawned = 0;
+
+        foreach (Tile tile in neighbors)
+        {
+            if (tile.OccupiedUnit != null || !tile.isWalkable) continue;
+
+            if (currentSummons >= maxSummons)
+                break;
+
+            SpawnEnemyAtTile(tile);
+
+            currentSummons++;
+            spawned++;
+
+            if (spawned >= 2) break;
         }
-    }*/
+
+    }
     private Tile GetSupportTarget()
     {
-        /*bool isElite = npcUnit.isEliteVarient;
-        if (isElite && CanSummonThisTurn)
+        bool isElite = isEliteVarient;
+        if (isElite && CanSummonThisTurn() && !hasSummonedThisTurn)
         {
             SummonGrunts();
+            hasSummonedThisTurn = true;
 
-            return GetRetreatTile();
-        }*/
+            return GetRandomTile();
+        }
         BaseUnit lowestHealthAlly = null;
         float lowestHealth = Mathf.Infinity;
 
@@ -767,6 +814,7 @@ public class NPC_Controller: MonoBehaviour
     {
         tilesMovedThisTurn = 0;
         HasFinishedTurn = false;
+        hasSummonedThisTurn = false;
         //isMoving = false;
         //New: Ensure targeting happens first
         var targeting = GetComponent<EnemyTargetingManager>();

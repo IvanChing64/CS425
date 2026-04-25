@@ -86,7 +86,9 @@ public class BaseUnit : MonoBehaviour
     public Animator UnitAnimator;
     [SerializeField] healthbar healthbar;
     [SerializeField] private AudioClip[] hurtSFX;
-   
+
+    public bool isSummoned = false;
+    public NPC_Controller summoner;
 
     //Enemy Flags: Andrew Shelton
     public enum EnemyFlag
@@ -1075,6 +1077,11 @@ public class BaseUnit : MonoBehaviour
             // Otherwise this is an enemy unit
             UnitManager.Instance.enemyUnitCount -= 1; // Decrease the enemy unit count
             UnitManager.Instance.enemiesSpawned.Remove((BaseEnemy)this);
+        }
+
+        if (isSummoned && summoner != null)
+        {
+            summoner.DecrementCurrentSummons();
         }
         Destroy(gameObject);
     }

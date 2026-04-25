@@ -238,9 +238,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 91c9ddbccc0cd9f42a0d5e9e6d94f0ef, type: 3}
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
-  isEliteVarient: 1
-  enemyFlag: 2
-  movementBehavior: 2
+  enemyFlag: 3
+  movementBehavior: 3
 --- !u!114 &751289258245009956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +267,10 @@ MonoBehaviour:
   moveSpeed: 2.5
   tilesPerMove: 3
   path: []
+  isEliteVarient: 1
+  isEnraged: 0
   healAmount: 10
+  enemyPrefab: {fileID: 1167321167610509267, guid: c1a9f193137bdb0469bf511ae1063fd5, type: 3}
 --- !u!95 &738936172720448078
 Animator:
   serializedVersion: 7
