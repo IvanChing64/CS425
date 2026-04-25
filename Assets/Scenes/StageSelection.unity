@@ -1229,7 +1229,6 @@ GameObject:
   - component: {fileID: 173974627}
   - component: {fileID: 173974626}
   - component: {fileID: 173974625}
-  - component: {fileID: 173974628}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1301,7 +1300,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 311877093}
         m_TargetAssemblyTypeName: MenuManager, Scripts
         m_MethodName: PreviousScene
         m_Mode: 1
@@ -1351,23 +1350,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173974622}
   m_CullTransparentMesh: 1
---- !u!114 &173974628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 173974622}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7534e8fc634074240bef86de77b99994, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
-  buttonSFX:
-  - {fileID: 8300000, guid: aeb2b1f1d428a9549a37a5c62d92b531, type: 3}
-  pauseMenuUI: {fileID: 0}
-  settingUI: {fileID: 0}
-  blocker: {fileID: 0}
 --- !u!1 &244969351
 GameObject:
   m_ObjectHideFlags: 0
