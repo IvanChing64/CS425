@@ -38,7 +38,7 @@ public class UnitManager : MonoBehaviour
     public static float frozenDefenseDown = 0.1f;
     public static float poisonAttackDown = 0.1f;
     public static float maxDodgeChance = 0.85f;
-    public static float guardEfficiency = 0.85f;
+    public static float guardEfficiency = 0.90f;
     public static float reflectEfficiency = 0.75f;
     public static float absorbEfficiency = 0.5f;
     public static int backstabInvisibleBonus = 15;
