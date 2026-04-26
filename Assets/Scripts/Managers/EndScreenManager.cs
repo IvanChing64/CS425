@@ -57,7 +57,7 @@ public class EndScreenManager : MonoBehaviour
     {
         if(CurrentSession.ActiveStageID == "17")
         {
-            SceneManager.LoadScene("Scene/Victory");
+            SceneManager.LoadScene("Scenes/Victory");
         }
         else
         {

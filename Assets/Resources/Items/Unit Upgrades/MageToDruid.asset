@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::UnitUpgradeItem
   itemSprite: {fileID: 8793639957104055765, guid: 26bfc06fea3f36f43910f650af4f549f, type: 3}
   itemDesc: Upgrade Mage to Druid
-  cost: 150
+  cost: 250
   originalUnit: {fileID: 11400000, guid: c9fc47d75230a4a4db5cd4f426f749f1, type: 2}
   upgradedUnit: {fileID: 11400000, guid: 1dfd4a66ce32563418c45deb80c7ffe7, type: 2}

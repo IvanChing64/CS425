@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::UnitUpgradeItem
   itemSprite: {fileID: 8793639957104055765, guid: e386646eb6c125a4386b29cc976b7d1b, type: 3}
   itemDesc: Upgrade Huckster to Doctor
-  cost: 150
+  cost: 250
   originalUnit: {fileID: 11400000, guid: c01e7227687912743982f8a00d0af5cb, type: 2}
   upgradedUnit: {fileID: 11400000, guid: c1819edbf424c554f894b5b793fb2cf9, type: 2}
