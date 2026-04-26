@@ -95,7 +95,7 @@ public class NPC_Controller: MonoBehaviour
         }
     }
     // Added Enrage stuff. Not implemented yet.
-    void ApplyEnrageStats()
+    void ConquestEnrageStats()
     {
         npcUnit.moveRange = 1;
         npcUnit.attackRange = 6;
@@ -105,10 +105,12 @@ public class NPC_Controller: MonoBehaviour
     {
         if (!isEliteVarient) return;
 
-        if (!isEnraged && npcUnit.health <= npcUnit.maxHealth * 0.5f)
+        if (isEnraged) return;
+
+        if (npcUnit.health <= npcUnit.maxHealth * 0.5f)
         {
             isEnraged = true;
-            ApplyEnrageStats();
+            ConquestEnrageStats();
             Debug.Log("Enraged!");
         }
     }
@@ -118,7 +120,7 @@ public class NPC_Controller: MonoBehaviour
 
     private Tile GetRangedTarget()
     {
-
+        UpdateEnrageState();
         var targeting = GetComponent<EnemyTargetingManager>();
         targeting.SelectTarget();
 
@@ -849,6 +851,7 @@ public class NPC_Controller: MonoBehaviour
         tilesMovedThisTurn = 0;
         HasFinishedTurn = false;
         //isMoving = false;
+        UpdateEnrageState();
         //New: Ensure targeting happens first
         var targeting = GetComponent<EnemyTargetingManager>();
         if (enemy1.movementBehavior != Enemy1.MovementBehavior.Support)
