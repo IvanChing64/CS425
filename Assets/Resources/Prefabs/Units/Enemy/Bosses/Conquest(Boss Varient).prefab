@@ -176,7 +176,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8793639957104055765, guid: 78fd2fe21755dd34b90c62856a3798cd, type: 3}
-  m_Color: {r: 0.85878915, g: 0.52799034, b: 0.990566, a: 1}
+  m_Color: {r: 0.6245283, g: 0.9978029, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -238,6 +238,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 91c9ddbccc0cd9f42a0d5e9e6d94f0ef, type: 3}
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
+  isSummoned: 0
+  summoner: {fileID: 0}
   enemyFlag: 0
   movementBehavior: 1
 --- !u!114 &751289258245009956
@@ -270,6 +272,9 @@ MonoBehaviour:
   isEliteVarient: 0
   isEnraged: 0
   healAmount: 10
+  enemyPrefab: {fileID: 0}
+  maxSummons: 6
+  summonsPerCast: 2
 --- !u!95 &738936172720448078
 Animator:
   serializedVersion: 7

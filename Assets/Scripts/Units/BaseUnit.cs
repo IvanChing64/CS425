@@ -979,22 +979,26 @@ public class BaseUnit : MonoBehaviour
             {
                 if (i <= 3)
                 {
-                    Heal(maxHealth * 0.15f);
+                    Heal(maxHealth * 0.1f);
                 } else if (i == 4)
                 {
-                    Heal(maxHealth * 0.1f);
+                    Heal(maxHealth * 0.15f);
                 } else if (i == UnitManager.maxRegenStacks)
                 {
-                    Heal(maxHealth * 0.05f);
+                    Heal(maxHealth * 0.1f);
                 }
             }
-            //Heal(maxHealth * 0.1f * regeneration);
             regeneration--;
         }
 
         if (poison > 0)
         {
-            takeDamage(health * 0.1f * poison, false, false, null, true);
+            float poisonDamage = health * 0.8f * poison;
+            if (poisonDamage > 50)
+            {
+                poisonDamage = 50;
+            }
+            takeDamage(poisonDamage, false, false, null, true);
             poison--;
             if (poison == 0)
             {
