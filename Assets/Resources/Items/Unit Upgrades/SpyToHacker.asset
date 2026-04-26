@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::UnitUpgradeItem
   itemSprite: {fileID: 8793639957104055765, guid: 7e3dd20a79d54c147b7c9490c94aebc7, type: 3}
   itemDesc: Upgrade Spy to Hacker
-  cost: 150
+  cost: 250
   originalUnit: {fileID: 11400000, guid: a79e227108a1f394892f78bb50a9fdaa, type: 2}
   upgradedUnit: {fileID: 11400000, guid: 66bd5b647404e7740a21d399177e29c4, type: 2}

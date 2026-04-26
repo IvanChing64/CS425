@@ -86,7 +86,9 @@ public class BaseUnit : MonoBehaviour
     public Animator UnitAnimator;
     [SerializeField] healthbar healthbar;
     [SerializeField] private AudioClip[] hurtSFX;
-   
+
+    public bool isSummoned = false;
+    public NPC_Controller summoner;
 
     //Enemy Flags: Andrew Shelton
     public enum EnemyFlag
@@ -977,22 +979,26 @@ public class BaseUnit : MonoBehaviour
             {
                 if (i <= 3)
                 {
-                    Heal(maxHealth * 0.15f);
+                    Heal(maxHealth * 0.1f);
                 } else if (i == 4)
                 {
-                    Heal(maxHealth * 0.1f);
+                    Heal(maxHealth * 0.15f);
                 } else if (i == UnitManager.maxRegenStacks)
                 {
-                    Heal(maxHealth * 0.05f);
+                    Heal(maxHealth * 0.1f);
                 }
             }
-            //Heal(maxHealth * 0.1f * regeneration);
             regeneration--;
         }
 
         if (poison > 0)
         {
-            takeDamage(health * 0.1f * poison, false, false, null, true);
+            float poisonDamage = health * 0.8f * poison;
+            if (poisonDamage > 50)
+            {
+                poisonDamage = 50;
+            }
+            takeDamage(poisonDamage, false, false, null, true);
             poison--;
             if (poison == 0)
             {
@@ -1061,8 +1067,15 @@ public class BaseUnit : MonoBehaviour
         healthbar.UpdateGuardBar(guard, maxHealth);
     }
 
+    private bool isDead = false;
+
     void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
+        //Debug.Log($"[DEATH] {name} | isSummoned: {isSummoned} | summoner: {summoner}");
+
         Debug.Log($"{name} has died.");
         if (Faction == Faction.Player)
         { 
@@ -1076,6 +1089,14 @@ public class BaseUnit : MonoBehaviour
             UnitManager.Instance.enemyUnitCount -= 1; // Decrease the enemy unit count
             UnitManager.Instance.enemiesSpawned.Remove((BaseEnemy)this);
         }
+
+
+        if (isSummoned && summoner != null)
+        {
+            Debug.Log($"[CALLING DECREMENT] From {name}");
+            summoner.DecrementCurrentSummons();
+        }
+
         Destroy(gameObject);
     }
 

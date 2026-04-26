@@ -22,4 +22,4 @@ MonoBehaviour:
   - {fileID: 1167321167610509267, guid: e915b861a780d254d98796fa7af8e054, type: 3}
   - {fileID: 1167321167610509267, guid: e915b861a780d254d98796fa7af8e054, type: 3}
   enemyCount: 5
-  currency: 200
+  currency: 250

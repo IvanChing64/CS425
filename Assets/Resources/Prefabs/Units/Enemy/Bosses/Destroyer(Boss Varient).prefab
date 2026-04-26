@@ -175,7 +175,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8793639957104055765, guid: 57ec18272ef72d64384db5331fc40ca5, type: 3}
+  m_Sprite: {fileID: 8793639957104055765, guid: a22ff163f8e65c34db09feb42b234b78, type: 3}
   m_Color: {r: 0.93193537, g: 0.383277, b: 0.9339623, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -238,6 +238,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 91c9ddbccc0cd9f42a0d5e9e6d94f0ef, type: 3}
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
+  isSummoned: 0
+  summoner: {fileID: 0}
   enemyFlag: 0
   movementBehavior: 0
 --- !u!114 &751289258245009956
@@ -270,6 +272,9 @@ MonoBehaviour:
   isEliteVarient: 0
   isEnraged: 0
   healAmount: 10
+  enemyPrefab: {fileID: 0}
+  maxSummons: 6
+  summonsPerCast: 2
 --- !u!95 &738936172720448078
 Animator:
   serializedVersion: 7
@@ -280,7 +285,7 @@ Animator:
   m_GameObject: {fileID: 1167321167610509267}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 58b5ca088bfe77d47b7332af420df1d9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3f9875718a5e99f4eb5c0461794f59d2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

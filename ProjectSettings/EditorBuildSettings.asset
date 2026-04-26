@@ -26,6 +26,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Army.unity
     guid: c164c57815b9a2447bc4075ce2e533cd
+    path: Assets/Scenes/Victory.unity
+    guid: 00cb7b4c74132074ca6a95fce546168b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

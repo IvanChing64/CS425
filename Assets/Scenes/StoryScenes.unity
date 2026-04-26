@@ -924,7 +924,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d7cffddcbc0cc8f4ebe6e28eb9804082, type: 3}
-    m_FontSize: 40
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -940,7 +940,7 @@ MonoBehaviour:
     kingdom of knights and dragons, but as the afternoon sun shifts, her world evolves,
     stretching into a dusty frontier of outlaws and finally igniting into a neon-soaked
     galaxy of starships and plasma fire. Armed with her favorite toys and a heart
-    full of wonder, she leads her makeshift heroes through shifting eras
+    full of wonder, she leads her makeshift heroes through shifting eras.
 --- !u!222 &1566991096
 CanvasRenderer:
   m_ObjectHideFlags: 0

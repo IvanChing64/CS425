@@ -77,6 +77,13 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void ToBeginning()
+    {
+        GameProgress.ClearedStages.Clear();
+        CurrentSession.ActiveStageID = "";
+        SceneManager.LoadScene("Scenes/MainMenu");
+    }
+
     public enum GameScreen
     {
         Start = 0,
@@ -84,6 +91,7 @@ public class MenuManager : MonoBehaviour
         Controls = 2,
         StageSelect = 3,
         Combat = 4,
-        Shop = 5
+        Shop = 5,
+        Victory = 6
     }
 }

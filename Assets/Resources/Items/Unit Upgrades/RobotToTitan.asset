@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::UnitUpgradeItem
   itemSprite: {fileID: 8793639957104055765, guid: a22ff163f8e65c34db09feb42b234b78, type: 3}
   itemDesc: Upgrade Robot to Titan
-  cost: 150
+  cost: 250
   originalUnit: {fileID: 11400000, guid: ef734037b8e7f7c4893980cf3a110262, type: 2}
   upgradedUnit: {fileID: 11400000, guid: a8bc1354113c59c4da3b7f50fb401f9d, type: 2}

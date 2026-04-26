@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::UnitUpgradeItem
   itemSprite: {fileID: 8793639957104055765, guid: fc3447d6877fdd7488e7c835529ba62f, type: 3}
   itemDesc: Upgrade Scientist to Engineer
-  cost: 150
+  cost: 250
   originalUnit: {fileID: 11400000, guid: 9dde388e36f795d4083dbd0bd1b91217, type: 2}
   upgradedUnit: {fileID: 11400000, guid: 70703edf9d426784ea79bac5a2988c80, type: 2}

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::UnitUpgradeItem
   itemSprite: {fileID: 8793639957104055765, guid: 78fd2fe21755dd34b90c62856a3798cd, type: 3}
   itemDesc: Upgrade Gunner to Marksman
-  cost: 150
+  cost: 250
   originalUnit: {fileID: 11400000, guid: 5bd8c363ee2c6804bb093c5489902b27, type: 2}
   upgradedUnit: {fileID: 11400000, guid: 8c2871f16f205e646ac8e683608a3882, type: 2}

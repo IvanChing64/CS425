@@ -15,6 +15,8 @@ public class ArmyManager : MonoBehaviour
     public List<ScriptableUnit> unitsInArmy;
     [SerializeField] private int currency;
 
+    public int ArmyCapacity { get; private set; } = 6;
+
     private void Awake()
     {
         if (Instance != null)
@@ -47,8 +49,14 @@ public class ArmyManager : MonoBehaviour
         }
     }
 
-    public void AddUnit(ScriptableUnit unit) => unitsInArmy.Add(unit);
-    public void AddUnit(string unitName) => AddUnit(AllPlayerUnits[unitName]);
+    public bool AddUnit(ScriptableUnit unit)
+    {
+        if (unitsInArmy.Count >= ArmyCapacity) return false;
+        unitsInArmy.Add(unit);
+        return true;
+    }
+
+    public bool AddUnit(string unitName) => AddUnit(AllPlayerUnits[unitName]);
     
     public bool HasUnit(ScriptableUnit unit) => unitsInArmy.Contains(unit);
     public bool HasUnit(string unitName) => HasUnit(AllPlayerUnits[unitName]);
