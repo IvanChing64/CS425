@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.UI.CanvasScaler;
 //Developer: Andrew Shelton
 //Edits from Ivan Ching
 //Aggregated from multiple tutorials and sources
@@ -21,7 +22,7 @@ public class NPC_Controller: MonoBehaviour
     }
 
     enum BossState
-    {
+    { 
         Invulnerable,
         Vulnerable
     }
@@ -43,6 +44,7 @@ public class NPC_Controller: MonoBehaviour
     private int pathIndex;
     private int tilesMovedThisTurn;
     private bool isMoving;
+    //private bool hasSummonedThisTurn = false;
 
     public bool isEliteVarient = false;
     public bool isEnraged = false;
@@ -51,6 +53,8 @@ public class NPC_Controller: MonoBehaviour
 
     private Enemy1 enemy1;
     private Animator unitAnimator;
+
+    
 
     private void Awake()
     {
@@ -108,6 +112,8 @@ public class NPC_Controller: MonoBehaviour
             Debug.Log("Enraged!");
         }
     }
+
+
   
 
     private Tile GetRangedTarget()
@@ -194,31 +200,106 @@ public class NPC_Controller: MonoBehaviour
         return bestTile;
     }
 
+    public void DecrementCurrentSummons()
+    {
+        currentSummons = Mathf.Max(0, currentSummons - 1);
+        Debug.Log($"[DECREMENT] currentSummons now: {currentSummons}");
+
+    
+    }
+
     [SerializeField] private int healAmount = 10;
 
     private bool CanSummonThisTurn()
     {
-        return GameManager.Instance.turnNumber % 2 == 0;
+        Debug.Log($"[CHECK] CanSummon? Turn: {GameManager.Instance.turnNumber}");
+
+        return GameManager.Instance.turnNumber % 2 == 0
+        && currentSummons < maxSummons;
+
     }
 
-    /*private void SummonGrunts()
+    [SerializeField]
+    private GameObject enemyPrefab;
+
+
+    [SerializeField] private int maxSummons = 6;
+    [SerializeField] private int summonsPerCast = 2;
+    //[SerializeField] private int summonCooldownTurns = 2;
+
+    //private int nextSummonTurn = 0;
+    private int currentSummons = 0;
+
+    public void SpawnEnemyAtTile(Tile tile)
     {
+        GameObject enemy = Instantiate(enemyPrefab);
+
+        enemy.transform.position = tile.transform.position;
+
+        BaseUnit unit = enemy.GetComponent<BaseUnit>();
+        
+        unit.OccupiedTile = tile;
+        unit.summoner = this;
+        unit.isSummoned = true;
+        tile.OccupiedUnit = unit;
+
+        var baseEnemy = enemy.GetComponent<BaseEnemy>();
+        if (baseEnemy != null && UnitManager.Instance != null)
+        {
+            UnitManager.Instance.enemiesSpawned.Add(baseEnemy);
+
+            UnitManager.Instance.enemyUnitCount = UnitManager.Instance.enemiesSpawned.Count;
+        }
+    }
+
+    private bool SummonGrunts()
+    {
+        if (currentSummons >= maxSummons) return false;
+
         // spawn 2 grunts near the support
         var neighbors = npcUnit.OccupiedTile.Neighbors;
-        if (neighbors != null && neighbors.Count > 0) { 
-        UnitManager.Instance.SpawnEnemies("Grunt", neighbors[0]);
-        UnitManager.Instance.SpawnEnemies("Grunt", neighbors[1]);
+        if (neighbors == null || neighbors.Count == 0) return false;
+
+        int spawned = 0;
+
+        foreach (Tile tile in neighbors)
+        {
+            if (tile.OccupiedUnit != null || !tile.isWalkable) continue;
+
+
+            SpawnEnemyAtTile(tile);
+
+            currentSummons++;
+            spawned++;
+            
+            if (spawned >= summonsPerCast || currentSummons >= maxSummons)
+                break;
         }
-    }*/
+        if (spawned > 0)
+        {
+            
+
+            Debug.Log($"[SUMMON] Spawned {spawned}. Total: {currentSummons}");
+            return true;
+        }
+        return false;
+    }
     private Tile GetSupportTarget()
     {
-        /*bool isElite = npcUnit.isEliteVarient;
-        if (isElite && CanSummonThisTurn)
-        {
-            SummonGrunts();
+        Debug.Log($"Summons: {currentSummons}, Turn: {GameManager.Instance.turnNumber}");
 
-            return GetRetreatTile();
-        }*/
+        bool isElite = isEliteVarient;
+        if (isElite && CanSummonThisTurn() && currentSummons < maxSummons)
+        {
+            bool didSummon = SummonGrunts();
+
+            if (didSummon)
+            {
+                //hasSummonedThisTurn = true;
+                return npcUnit.OccupiedTile;
+            }
+            return GetRandomTile();
+        }
         BaseUnit lowestHealthAlly = null;
         float lowestHealth = Mathf.Infinity;
 

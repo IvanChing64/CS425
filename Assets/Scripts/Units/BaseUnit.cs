@@ -86,7 +86,9 @@ public class BaseUnit : MonoBehaviour
     public Animator UnitAnimator;
     [SerializeField] healthbar healthbar;
     [SerializeField] private AudioClip[] hurtSFX;
-   
+
+    public bool isSummoned = false;
+    public NPC_Controller summoner;
 
     //Enemy Flags: Andrew Shelton
     public enum EnemyFlag
@@ -1061,8 +1063,15 @@ public class BaseUnit : MonoBehaviour
         healthbar.UpdateGuardBar(guard, maxHealth);
     }
 
+    private bool isDead = false;
+
     void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
+        //Debug.Log($"[DEATH] {name} | isSummoned: {isSummoned} | summoner: {summoner}");
+
         Debug.Log($"{name} has died.");
         if (Faction == Faction.Player)
         { 
@@ -1076,6 +1085,14 @@ public class BaseUnit : MonoBehaviour
             UnitManager.Instance.enemyUnitCount -= 1; // Decrease the enemy unit count
             UnitManager.Instance.enemiesSpawned.Remove((BaseEnemy)this);
         }
+
+
+        if (isSummoned && summoner != null)
+        {
+            Debug.Log($"[CALLING DECREMENT] From {name}");
+            summoner.DecrementCurrentSummons();
+        }
+
         Destroy(gameObject);
     }
 
