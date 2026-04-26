@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::ScriptableUnit
   Faction: 0
   UnitPrefab: {fileID: 1672246827751298856, guid: 1adbadc5a6b864c4c88c67405a44e30c, type: 3}
-  health: 0
+  unitImage: {fileID: 8793639957104055765, guid: da0a4a465bcb095418dadd1200965a07, type: 3}
+  health: 70
   dmg: 0
+  energy: 2

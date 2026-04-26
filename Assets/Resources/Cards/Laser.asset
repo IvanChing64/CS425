@@ -17,7 +17,7 @@ MonoBehaviour:
   type: 0
   range: 3
   areaRange: 0
-  value: 25
+  value: 30
   cost: 1
   damaging: 1
   piercing: 1

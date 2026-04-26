@@ -298,7 +298,7 @@ MonoBehaviour:
   - Walk
   - March
   - Wound
-  - Wound
+  - Heal
   - Heal
   - Heal
   canAttack: 0

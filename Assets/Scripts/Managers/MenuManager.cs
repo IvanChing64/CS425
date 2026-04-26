@@ -63,6 +63,11 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("Scenes/Shop");
     }
 
+    public void ToArmy()
+    {
+        SceneManager.LoadScene("Scenes/Army");
+    }
+
     public void PreviousScene()
     {
         int previousIndex = SceneManager.GetActiveScene().buildIndex - 1;
