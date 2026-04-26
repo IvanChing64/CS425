@@ -44,7 +44,7 @@ public class NPC_Controller: MonoBehaviour
     private int pathIndex;
     private int tilesMovedThisTurn;
     private bool isMoving;
-    private bool hasSummonedThisTurn = false;
+    //private bool hasSummonedThisTurn = false;
 
     public bool isEliteVarient = false;
     public bool isEnraged = false;
@@ -54,8 +54,7 @@ public class NPC_Controller: MonoBehaviour
     private Enemy1 enemy1;
     private Animator unitAnimator;
 
-    [SerializeField] private int summonCooldownTurns = 2;
-    private int summonCooldownRemaining = 0;
+    
 
     private void Awake()
     {
@@ -203,38 +202,32 @@ public class NPC_Controller: MonoBehaviour
 
     public void DecrementCurrentSummons()
     {
-        int previous = currentSummons;
         currentSummons = Mathf.Max(0, currentSummons - 1);
+        Debug.Log($"[DECREMENT] currentSummons now: {currentSummons}");
 
-        summonCooldownRemaining = summonCooldownTurns;
-        
-        if (previous > 0 && currentSummons == 0)
-        {
-            summonCooldownRemaining = summonCooldownTurns;
-        }
+    
     }
 
     [SerializeField] private int healAmount = 10;
 
     private bool CanSummonThisTurn()
     {
-        if (summonCooldownRemaining > 0)
-            return false;
+        Debug.Log($"[CHECK] CanSummon? Turn: {GameManager.Instance.turnNumber}");
 
-        if (GameManager.Instance.turnNumber % 2 != 0)
-            return false;
-
-        if (currentSummons >= maxSummons)
-            return false;
-
-        return true;
+        return GameManager.Instance.turnNumber % 2 == 0
+        && currentSummons < maxSummons;
 
     }
 
     [SerializeField]
     private GameObject enemyPrefab;
 
-    [SerializeField] private int maxSummons = 4;
+
+    [SerializeField] private int maxSummons = 6;
+    [SerializeField] private int summonsPerCast = 2;
+    //[SerializeField] private int summonCooldownTurns = 2;
+
+    //private int nextSummonTurn = 0;
     private int currentSummons = 0;
 
     public void SpawnEnemyAtTile(Tile tile)
@@ -267,28 +260,33 @@ public class NPC_Controller: MonoBehaviour
         var neighbors = npcUnit.OccupiedTile.Neighbors;
         if (neighbors == null || neighbors.Count == 0) return false;
 
-        bool spawnedAny = false;
+        int spawned = 0;
 
         foreach (Tile tile in neighbors)
         {
             if (tile.OccupiedUnit != null || !tile.isWalkable) continue;
 
-            if (currentSummons >= maxSummons)
-                break;
 
             SpawnEnemyAtTile(tile);
 
             currentSummons++;
-            spawnedAny = true;
+            spawned++;
+            
+            if (spawned >= summonsPerCast || currentSummons >= maxSummons)
+                break;
+        }
+        if (spawned > 0)
+        {
             
 
-            if (currentSummons >= maxSummons) break;
+            Debug.Log($"[SUMMON] Spawned {spawned}. Total: {currentSummons}");
+            return true;
         }
-        return spawnedAny;
+        return false;
     }
     private Tile GetSupportTarget()
     {
-        Debug.Log($"Summons: {currentSummons}, Cooldown: {summonCooldownRemaining}, Turn: {GameManager.Instance.turnNumber}");
+        Debug.Log($"Summons: {currentSummons}, Turn: {GameManager.Instance.turnNumber}");
 
         bool isElite = isEliteVarient;
         if (isElite && CanSummonThisTurn() && currentSummons < maxSummons)
@@ -297,7 +295,7 @@ public class NPC_Controller: MonoBehaviour
 
             if (didSummon)
             {
-                hasSummonedThisTurn = true;
+                //hasSummonedThisTurn = true;
                 return npcUnit.OccupiedTile;
             }
             return GetRandomTile();
@@ -848,18 +846,8 @@ public class NPC_Controller: MonoBehaviour
 
     public void BeginTurn()
     {
-        Debug.Log($"[WARLOCK TURN START] Cooldown before: {summonCooldownRemaining}");
-
         tilesMovedThisTurn = 0;
         HasFinishedTurn = false;
-        hasSummonedThisTurn = false;
-        
-        //Added for summoner
-        if (summonCooldownRemaining > 0) {
-            summonCooldownRemaining--;
-        }
-        hasSummonedThisTurn = false;
-
         //isMoving = false;
         //New: Ensure targeting happens first
         var targeting = GetComponent<EnemyTargetingManager>();

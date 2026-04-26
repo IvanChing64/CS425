@@ -1070,6 +1070,8 @@ public class BaseUnit : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
+        //Debug.Log($"[DEATH] {name} | isSummoned: {isSummoned} | summoner: {summoner}");
+
         Debug.Log($"{name} has died.");
         if (Faction == Faction.Player)
         { 
@@ -1087,8 +1089,10 @@ public class BaseUnit : MonoBehaviour
 
         if (isSummoned && summoner != null)
         {
+            Debug.Log($"[CALLING DECREMENT] From {name}");
             summoner.DecrementCurrentSummons();
         }
+
         Destroy(gameObject);
     }
 
