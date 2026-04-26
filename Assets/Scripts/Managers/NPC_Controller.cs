@@ -97,17 +97,25 @@ public class NPC_Controller: MonoBehaviour
     // Added Enrage stuff. Not implemented yet.
     void ConquestEnrageStats()
     {
-        npcUnit.moveRange = 1;
-        npcUnit.attackRange = 6;
+        isEnraged = true;
+        npcUnit.ApplyConquestStats();
     }
 
-    void UpdateEnrageState()
+    public void UpdateEnrageState()
     {
+        Debug.Log($"[ENRAGE CHECK] {name} | Elite: {isEliteVarient}");
+
+
         if (!isEliteVarient) return;
 
         if (isEnraged) return;
 
-        if (npcUnit.health <= npcUnit.maxHealth * 0.5f)
+        float healthPercent = (float)npcUnit.health / npcUnit.maxHealth;
+
+        Debug.Log($"[ENRAGE HP] {healthPercent}");
+
+
+        if (healthPercent <= 0.5f)
         {
             isEnraged = true;
             ConquestEnrageStats();
@@ -120,7 +128,7 @@ public class NPC_Controller: MonoBehaviour
 
     private Tile GetRangedTarget()
     {
-        UpdateEnrageState();
+        Debug.Log($"[RANGED TARGET CALLED] {name}");
         var targeting = GetComponent<EnemyTargetingManager>();
         targeting.SelectTarget();
 
@@ -744,12 +752,13 @@ public class NPC_Controller: MonoBehaviour
         {
             path.RemoveAt(0);
         }
-        
+        int count = Mathf.Min(npcUnit.moveRange, path.Count);
+
         if (path.Count > npcUnit.moveRange + npcUnit.moveModifier)
         {
             if (npcUnit.moveRange + npcUnit.moveModifier < 0)
             {
-                path = path.GetRange(0, npcUnit.moveRange);
+                path = path.GetRange(0, count);
             } else
             {
                 path = path.GetRange(0, npcUnit.moveRange + npcUnit.moveModifier);
@@ -848,11 +857,13 @@ public class NPC_Controller: MonoBehaviour
 
     public void BeginTurn()
     {
+
         tilesMovedThisTurn = 0;
         HasFinishedTurn = false;
         //isMoving = false;
-        UpdateEnrageState();
+        Debug.Log($"[BEGIN TURN] {name}");
         //New: Ensure targeting happens first
+        npcUnit.ApplyConquestStats();
         var targeting = GetComponent<EnemyTargetingManager>();
         if (enemy1.movementBehavior != Enemy1.MovementBehavior.Support)
         {
