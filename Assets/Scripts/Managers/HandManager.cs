@@ -41,12 +41,6 @@ public class HandManager : MonoBehaviour
         ShuffleDeck();
         //DrawHand();
     }
-
-    //Shows card info in UI
-    void ShowInfo(BaseCard card)
-    {
-        // Implementation for displaying card information
-    }
     
     //Shuffle cards based on Fisher-Yates Shuffle
     void ShuffleDeck()
@@ -122,6 +116,7 @@ public class HandManager : MonoBehaviour
         UpdateHandPositions();
     }
 
+    // Draw a card from the deck, avoid duplicates and reshuffle if needed
     public void DrawCard(bool extraDraw)
     {
         if (!canDraw)
@@ -239,9 +234,7 @@ public class HandManager : MonoBehaviour
         {
             deckCardIDs.Add(index);
             index++;
-        }
-        
-        //Debug.Log("Deck filled from resources with " + currentDeck.Count + " cards.");
+        }        
     }
 
     // Call this to reset for next turn

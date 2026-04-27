@@ -8,6 +8,7 @@ public class BaseAttackCard : BaseCard
     public bool damaging, piercing;
     public ControlEffect primaryEffect, secondaryEffect;
 
+    // Copies values, control effects, and damage conditionals
     public override void CopyScriptableCard(ScriptableCard card)
     {
         base.CopyScriptableCard(card);
@@ -17,6 +18,7 @@ public class BaseAttackCard : BaseCard
         pierce = card.piercing;
     }
 
+    // Highlights attack tiles and allows the player to attack
     public override void SelectCard()
     {
         base.SelectCard();
@@ -55,6 +57,7 @@ public class BaseAttackCard : BaseCard
         }
     }
 
+    // Unhighlights tiles and stops the player from attacking
     public override void DeselectCard()
     {
         base.DeselectCard();
@@ -89,6 +92,7 @@ public class BaseAttackCard : BaseCard
         }
     }
 
+    // Applies the primary and secondary control effects on target
     public void ApplyControlEffect(BaseUnit targetEnemy)
     {
         switch (primaryEffect)

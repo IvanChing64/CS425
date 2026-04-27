@@ -12,7 +12,7 @@ public class ShopConfirmation : MonoBehaviour
     [SerializeField] private List<TMP_Text> textFields; 
     [SerializeField] private int selectedSlot; 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Loads scriptable army slots and hides confirmation panel
     void Start()
     {
         ScriptableArmySlot[] slots = Resources.LoadAll<ScriptableArmySlot>("Army");
