@@ -202,8 +202,8 @@ MonoBehaviour:
   Faction: 1
   summoned: 0
   lifetime: 0
-  maxHealth: 1000
-  health: 1000
+  maxHealth: 700
+  health: 700
   guard: 0
   dmg: 10
   attackModifier: 1
