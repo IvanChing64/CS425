@@ -237,6 +237,12 @@ public class ShopManager : MonoBehaviour
         else if (CurrentItemsInShop[slot] is UnitUpgradeItem uuItem)
         {
             desc = $"Upgrade {uuItem.originalUnit.name} to {uuItem.upgradedUnit.name}";
+
+            // The bishop should take on a cyan coloration
+            if (uuItem.upgradedUnit.name.Equals("Bishop"))
+                itemSlots[slot].itemImage.color = new Color(0, 0.95f, 1);
+            else
+                itemSlots[slot].itemImage.color = Color.white;
         }
         else
         {
