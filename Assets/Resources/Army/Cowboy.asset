@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f0dae171547c7a4095881398c0ba426, type: 3}
+  m_Name: Cowboy
+  m_EditorClassIdentifier: Scripts::ScriptableArmySlot
+  health: 60
+  energy: 1
+  description: A ranged unit with high and costly damage and normal movement. Relies
+    on dodging and can energize self.
+  unitImage: {fileID: 8793639957104055765, guid: 01e6af626fe4688438399f8e1d4f145c, type: 3}

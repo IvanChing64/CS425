@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6287078ae4d6a04cbdd8a4584396a72, type: 3}
   m_Name: New Gunner Item
   m_EditorClassIdentifier: Scripts::NewUnitItem
-  itemSprite: {fileID: 8793639957104055765, guid: 941ef7b96b9b62a42ae02c35ddaf483f, type: 3}
+  itemSprite: {fileID: 8793639957104055765, guid: 9fff7bf739bc24440ac87b7f067abba9, type: 3}
   itemDesc: New Gunner for army
   cost: 200
   newUnit: {fileID: 11400000, guid: 5bd8c363ee2c6804bb093c5489902b27, type: 2}

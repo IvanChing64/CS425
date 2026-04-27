@@ -8,6 +8,7 @@ public class ScriptableUnit : ScriptableObject
     public BaseUnit UnitPrefab;
     public float health;
     public float dmg;
+    public int energy;
 }
 
 public enum Faction

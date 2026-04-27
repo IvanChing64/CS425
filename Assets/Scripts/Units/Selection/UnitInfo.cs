@@ -72,9 +72,9 @@ public class UnitInfo : MonoBehaviour
         attackField.gameObject.SetActive(false);
 
         // Move up other fields
-        attackModifierField.gameObject.transform.localPosition = new Vector3(attackModifierField.gameObject.transform.localPosition.x, 75, 0);
-        defenseModifierField.gameObject.transform.localPosition = new Vector3(attackModifierField.gameObject.transform.localPosition.x, 45, 0);
-        movementModifierField.gameObject.transform.localPosition = new Vector3(attackModifierField.gameObject.transform.localPosition.x, 15, 0);
+        attackModifierField.gameObject.transform.localPosition = moveField.gameObject.transform.localPosition;
+        defenseModifierField.gameObject.transform.localPosition = rangeField.gameObject.transform.localPosition;
+        movementModifierField.gameObject.transform.localPosition = attackField.gameObject.transform.localPosition;
 
         // Update attack modifier field
         attackModifierField.fieldText.text = $"X {player.attackModifier}";
@@ -141,7 +141,7 @@ public class UnitInfo : MonoBehaviour
         attackField.gameObject.SetActive(true);
 
         // Move up other fields
-        defenseModifierField.gameObject.transform.localPosition = new Vector3(attackModifierField.gameObject.transform.localPosition.x, -15, 0);
+        defenseModifierField.gameObject.transform.localPosition = new Vector3(defenseModifierField.gameObject.transform.localPosition.x, -150, 0);
 
         // Update attack modifier field
         attackModifierField.gameObject.SetActive(false);

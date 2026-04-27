@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableUnit
   Faction: 0
   UnitPrefab: {fileID: 1672246827751298856, guid: 8ba5165623a50134fbc1bd28f265cc11, type: 3}
+  unitImage: {fileID: 7384290322352760091, guid: 728135fe2ac4b434ab56e445d647d2a0, type: 3}
+  health: 100
+  dmg: 0
+  energy: 2
