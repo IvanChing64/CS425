@@ -205,7 +205,7 @@ MonoBehaviour:
   maxHealth: 200
   health: 200
   guard: 300
-  dmg: 10
+  dmg: 40
   attackModifier: 1
   defenseModifier: 1
   moveModifier: 0
