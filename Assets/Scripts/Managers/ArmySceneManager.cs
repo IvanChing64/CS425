@@ -45,7 +45,13 @@ public class ArmySceneManager : MonoBehaviour
         {
             return;
         }
+
         armySlots[index].unitImage.sprite = foundUnit.unitImage;
+        if (name.Equals("Bishop"))
+            armySlots[index].unitImage.color = new Color(0, 0.95f, 1);
+        else
+            armySlots[index].unitImage.color = Color.white;
+
         armySlots[index].unitImage.SetNativeSize();
 
         armySlots[index].armyName.text = foundUnit.name;

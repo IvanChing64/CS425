@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d61b94e333a064fbb87b63f8fac2c8, type: 3}
   m_Name: ClericToBishop
   m_EditorClassIdentifier: Scripts::UnitUpgradeItem
-  itemSprite: {fileID: 8793639957104055765, guid: 2b6483f17ef1b07478a00a3ac395699b, type: 3}
+  itemSprite: {fileID: 4723107735738678597, guid: 2018574d4308f4786a63ea08083f13cc, type: 3}
   itemDesc: Upgrade Cleric to Bishop
   cost: 250
   originalUnit: {fileID: 11400000, guid: bd85134c64687194690aa1e0e21a8b7e, type: 2}
