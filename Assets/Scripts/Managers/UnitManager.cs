@@ -101,6 +101,8 @@ public class UnitManager : MonoBehaviour
         }
     }
 
+
+
     private void Update()
     {
         if (targeting && !PauseMenu.instance.blocker.activeInHierarchy)
@@ -405,6 +407,7 @@ public class UnitManager : MonoBehaviour
                 BaseEnemy spawnedEnemy = Instantiate(prefab.GetComponent<BaseEnemy>(), randomSpawnTile.transform.position, Quaternion.identity);
                 spawnedEnemy.name = $"Enemy_{i}";
                 randomSpawnTile.setUnit(spawnedEnemy);
+                spawnedEnemy.InitializeUnit();
                 enemiesSpawned.Add(spawnedEnemy);
                 enemyTiles.Add(randomSpawnTile);
             }

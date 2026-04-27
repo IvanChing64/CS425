@@ -210,7 +210,7 @@ MonoBehaviour:
   defenseModifier: 1
   moveModifier: 0
   moveRange: 3
-  attackRange: 8
+  attackRange: 10
   boost: 0
   strengthen: 0
   resistant: 0
@@ -238,6 +238,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 91c9ddbccc0cd9f42a0d5e9e6d94f0ef, type: 3}
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
+  isSummoned: 0
+  summoner: {fileID: 0}
+  baseMoveRange: 0
+  baseAttackRange: 0
+  isEnraged: 0
   enemyFlag: 4
   movementBehavior: 4
 --- !u!114 &751289258245009956
@@ -270,6 +275,10 @@ MonoBehaviour:
   isEliteVarient: 0
   isEnraged: 0
   healAmount: 10
+  enemyPrefab: {fileID: 0}
+  maxSummons: 6
+  summonsPerCast: 2
+  aoeRange: 2
 --- !u!95 &738936172720448078
 Animator:
   serializedVersion: 7

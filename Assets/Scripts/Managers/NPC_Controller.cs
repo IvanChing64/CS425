@@ -448,6 +448,39 @@ public class NPC_Controller: MonoBehaviour
         return bestTarget.OccupiedTile;
     }
 
+    private BaseUnit GetbestHPPlayer()
+    {
+        BaseUnit bestTarget = null;
+        float bestHP = -Mathf.Infinity;
+
+        foreach (var player in UnitManager.Instance.playersSpawned)
+        {
+            if (player.health > bestHP)
+            {
+                bestHP = player.health;
+                bestTarget = player;
+            }
+        }
+
+        return bestTarget;
+
+    }
+
+    private int CountUnitsInRange(Tile center, int range)
+    {
+        int count = 0;
+
+        var tiles = RangeManager.GetTilesInRange(center, range, RangeType.FloodTargeting);
+
+        foreach (var player in UnitManager.Instance.playersSpawned)
+        {
+            if (tiles.Contains(player.OccupiedTile)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     private Tile GetBossTarget()
     {
           BaseUnit highestHealthPlayer = null;
@@ -473,9 +506,18 @@ public class NPC_Controller: MonoBehaviour
 
       }
 
+    private void UseSingleTargetAttack(BaseUnit target)
+    {
+        if (target == null) return;
+
+        Debug.Log($"[Boss] Single Target Attack against {target.name}");
+
+        target.takeDamage(npcUnit.dmg, false, false, npcUnit);
+    }
+
     private Tile GetBossMove()
     {
-        Tile targetTile = GetBossTarget();
+        Tile targetTile = GetbestHPPlayer().OccupiedTile;
 
         if (occupiedState == BossState.Invulnerable)
         {
@@ -495,15 +537,22 @@ public class NPC_Controller: MonoBehaviour
         {
             if (!tile.isWalkable) continue;
 
-            float distToPlayer = Vector2.Distance(
-                tile.transform.position,
-                targetTile.transform.position
-            );
+            var pathToPlayer = AStarManager.Instance.GeneratePath(tile, targetTile);
+            if (pathToPlayer == null) continue;
 
-            if (distToPlayer > npcUnit.attackRange)
-                continue;
+            int distToPlayer = pathToPlayer.Count;
 
-            float score = Vector2.Distance(tile.transform.position, npcUnit.OccupiedTile.transform.position);
+            var pathFromStart = AStarManager.Instance.GeneratePath(npcUnit.OccupiedTile, tile);
+            if (pathFromStart == null) continue;
+
+            int moveDistance = pathFromStart.Count;
+
+            float score = -distToPlayer + moveDistance;
+
+            // discourage staying still
+            if (tile == npcUnit.OccupiedTile)
+                score -= 1000f;
+
 
             if (score > bestScore)
             {
@@ -515,13 +564,18 @@ public class NPC_Controller: MonoBehaviour
         if (bestTile != null)
             return bestTile;
 
+        Debug.Log($"[BossMove] Selected tile: {bestTile?.name}");
         return GetRandomTile();
     }
 
-    /*private void BossAttack()
+    private void BossAttack()
     {
         Tile myTile = npcUnit.OccupiedTile;
-        Tile targetTile = GetBossTarget();
+        BaseUnit target = GetbestHPPlayer();
+
+        if (target == null) return;
+
+        Tile targetTile = target.OccupiedTile;
 
         float dist = Vector2.Distance(
             myTile.transform.position,
@@ -531,24 +585,18 @@ public class NPC_Controller: MonoBehaviour
         if (dist > npcUnit.attackRange)
             return;
 
-        if (currentState == BossState.Invulnerable)
-        {
-            // Only ranged attack
-            UseSingleTargetAttack(targeting.CurrentTarget);
-            return;
-        }
+        bool shouldAOE = CountUnitsInRange(myTile, 1) >= 1;
 
-        // Vulnerable state: allow AOE
-        if (aoeCooldown <= 0 && CountEnemiesInSquare(myTile, 1) >= 2)
+        if (shouldAOE)
         {
-            UseAOEAttack(myTile);
-            aoeCooldown = aoeCooldownMax;
-        }
-        else
+            Debug.Log("Boss using AOE!");
+            BossAOEAttack(myTile);
+        } else
         {
-            UseSingleTargetAttack(targeting.CurrentTarget);
+            Debug.Log("Boss targeting highest HP player");
+            UseSingleTargetAttack(target);
         }
-    }*/
+    }
     private bool HasPlayersInAOERange()
     {
         var tilesInRange = RangeManager.GetTilesInRange(npcUnit.OccupiedTile, npcUnit.attackRange, RangeType.FloodTargeting);
@@ -607,6 +655,27 @@ public class NPC_Controller: MonoBehaviour
             }
         }
      
+    }
+
+    private void BossAOEAttack(Tile centerTile)
+    {
+        Debug.Log("[Boss] AOE Attack!");
+
+        var tilesInRange = RangeManager.GetTilesInRange(
+            centerTile,
+            aoeRange, // make sure this exists
+            RangeType.FloodTargeting
+        );
+
+        foreach (var player in UnitManager.Instance.playersSpawned.ToList())
+        {
+            if (tilesInRange.Contains(player.OccupiedTile))
+            {
+                Debug.Log($"[AOE] Hitting {player.name}");
+
+                player.takeDamage(npcUnit.dmg, false, false, npcUnit);
+            }
+        }
     }
 
 
@@ -760,7 +829,8 @@ public class NPC_Controller: MonoBehaviour
                 break;
 
             case Enemy1.MovementBehavior.Boss:
-                chosenTile = GetBossMove();
+                chosenTile = GetBossTarget();
+                Debug.Log($"[Targeting] Final chosen tile: {chosenTile?.name}");
                 break;
 
 
@@ -1123,7 +1193,14 @@ public class NPC_Controller: MonoBehaviour
 
                     FinishedMoves();
                     CheckForHealAfterMove();
-                    CheckAndAttack();
+                    if (enemy1.movementBehavior == Enemy1.MovementBehavior.Boss)
+                    {
+                        BossAttack();
+                    }
+                    else
+                    {
+                        CheckAndAttack();
+                    }    
                     currentState = TurnState.EndTurn;
                     break;
 

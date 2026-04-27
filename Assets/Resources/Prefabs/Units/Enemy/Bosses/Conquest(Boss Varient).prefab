@@ -202,10 +202,10 @@ MonoBehaviour:
   Faction: 1
   summoned: 0
   lifetime: 0
-  maxHealth: 300
-  health: 300
+  maxHealth: 100
+  health: 100
   guard: 0
-  dmg: 50
+  dmg: 10
   attackModifier: 1
   defenseModifier: 1
   moveModifier: 0
@@ -240,8 +240,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   isSummoned: 0
   summoner: {fileID: 0}
-  enemyFlag: 0
-  movementBehavior: 1
+  baseMoveRange: 0
+  baseAttackRange: 0
+  isEnraged: 0
+  enemyFlag: 1
+  movementBehavior: 2
 --- !u!114 &751289258245009956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,12 +272,13 @@ MonoBehaviour:
   moveSpeed: 2.5
   tilesPerMove: 3
   path: []
-  isEliteVarient: 0
+  isEliteVarient: 1
   isEnraged: 0
   healAmount: 10
   enemyPrefab: {fileID: 0}
   maxSummons: 6
   summonsPerCast: 2
+  aoeRange: 2
 --- !u!95 &738936172720448078
 Animator:
   serializedVersion: 7
