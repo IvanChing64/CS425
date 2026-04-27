@@ -2,6 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Author: Bailey Escritor 
+
 /// <summary>
 /// This is used to store and update values for unit slots in the army scene
 /// </summary>
