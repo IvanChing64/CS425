@@ -3507,6 +3507,13 @@ MonoBehaviour:
   movement: {fileID: 885131540}
   support: {fileID: 360864996}
   summon: {fileID: 2004335608}
+  stats: {fileID: 1224733705}
+  desc: {fileID: 1581103465}
+  cards: {fileID: 1856535928}
+  attackIcon: {fileID: 584313326}
+  moveIcon: {fileID: 438451830}
+  suppIcon: {fileID: 1694907828}
+  summIcon: {fileID: 819335242}
 --- !u!4 &753840206
 Transform:
   m_ObjectHideFlags: 0

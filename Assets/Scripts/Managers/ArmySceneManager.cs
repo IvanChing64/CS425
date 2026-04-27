@@ -14,6 +14,8 @@ public class ArmySceneManager : MonoBehaviour
     public Text armySize;
     public TMP_Text unitName, health, energy, description;
     public TMP_Text attack, movement, support, summon;
+    public TMP_Text stats, desc, cards;
+    public Image attackIcon, moveIcon, suppIcon, summIcon;
 
     void Awake()
     {
@@ -21,7 +23,6 @@ public class ArmySceneManager : MonoBehaviour
 
         ScriptableArmySlot[] slots = Resources.LoadAll<ScriptableArmySlot>("Army");
         scriptableArmySlots.AddRange(slots);
-        //unitSlots.AddRange(armySlots);
         armySize.text = $"Army: {ArmyManager.Instance.unitsInArmy.Count} / 6";
         
 
@@ -61,6 +62,15 @@ public class ArmySceneManager : MonoBehaviour
     // Update the army info panel
     public void UpdateInfoPanel(ScriptableArmySlot unit, int index)
     {
+        // Hide Titles and Icons
+        stats.enabled = true;
+        desc.enabled = true;
+        cards.enabled = true;
+        attackIcon.enabled = true;
+        moveIcon.enabled = true;
+        suppIcon.enabled = true;
+        summIcon.enabled = true;
+
         if (index > ArmyManager.Instance.unitsInArmy.Count)
         {
             return;
@@ -118,6 +128,15 @@ public class ArmySceneManager : MonoBehaviour
         attack.text = "";
         support.text = "";
         summon.text = "";
+
+        // Hide Titles and Icons
+        stats.enabled = false;
+        desc.enabled = false;
+        cards.enabled = false;
+        attackIcon.enabled = false;
+        moveIcon.enabled = false;
+        suppIcon.enabled = false;
+        summIcon.enabled = false;
     }
 
     // Army Slot Button

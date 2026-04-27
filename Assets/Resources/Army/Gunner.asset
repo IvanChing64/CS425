@@ -16,4 +16,4 @@ MonoBehaviour:
   energy: 1
   description: A ranged glass cannon unit with high and costly damage and low movement.
     Can attack multiple enemies at once and energize self.
-  unitImage: {fileID: 8793639957104055765, guid: 941ef7b96b9b62a42ae02c35ddaf483f, type: 3}
+  unitImage: {fileID: 8793639957104055765, guid: 9fff7bf739bc24440ac87b7f067abba9, type: 3}

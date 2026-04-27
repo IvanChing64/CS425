@@ -15,6 +15,6 @@ MonoBehaviour:
   health: 140
   energy: 2
   description: A tank unit with low up-close area damage and ranged piercing damage.
-    Low movementand can boost self and immunize self. Can grant guard, absorption,
+    Low movement and can boost self and immunize self. Can grant guard, absorption,
     and energy to allies.
   unitImage: {fileID: 8793639957104055765, guid: a22ff163f8e65c34db09feb42b234b78, type: 3}
