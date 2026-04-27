@@ -27,6 +27,7 @@ public class Enemy1 : BaseEnemy
     void Start()
     {
         ApplyFlags();
+        UpdateHealth();
         
     }
 
