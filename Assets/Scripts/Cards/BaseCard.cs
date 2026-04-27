@@ -48,12 +48,12 @@ public abstract class BaseCard : MonoBehaviour
 
     public virtual void ButtonPressed()
     {
-        if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
         if (CardManager.instance == null)
         {
             Debug.LogWarning("CardManager.instance is null.");
             return;
         }
+        if (GameManager.Instance.gameState != GameState.PlayerTurn) return;
         if(CardManager.instance.selectedCard == this)
         {
             if(UnitManager.Instance.SelectedPlayer != null)
@@ -79,6 +79,7 @@ public abstract class BaseCard : MonoBehaviour
     public void moveCard(bool forward)
     {
         if (selected) return;
+        if (CardManager.instance == null) return;
         if (forward)
         {
             Vector3 posit = new Vector3(cardHolder.transform.position.x, 140, cardHolder.transform.position.z);
