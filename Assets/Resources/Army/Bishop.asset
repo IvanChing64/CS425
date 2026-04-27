@@ -16,4 +16,4 @@ MonoBehaviour:
   energy: 3
   description: A healer unit with low piercing damage and normal movement. Can consistently
     heal, boost, and immunize allies.
-  unitImage: {fileID: 8793639957104055765, guid: 2b6483f17ef1b07478a00a3ac395699b, type: 3}
+  unitImage: {fileID: 4723107735738678597, guid: 2018574d4308f4786a63ea08083f13cc, type: 3}

@@ -17,10 +17,17 @@ public class CardDisplay : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        updateCardDisplay(CardManager.instance.selectedPlayer);
+        if (CardManager.instance != null)
+        {
+            updateCardDisplay(CardManager.instance.selectedPlayer);
+        } else
+        {
+            UpdateCardDisplayDefault();
+        }
+        
     }
 
-    // Updates the card display with the current card data
+    // Updates the card display with the current card data referring to a base unit, accounting for modifiers
     public void updateCardDisplay(BaseUnit unit)
     {
         if (cardData.type == Type.Attack)
@@ -96,4 +103,27 @@ public class CardDisplay : MonoBehaviour
         cardIcon.sprite = cardData.cardIcon;
         cardCorner.sprite = cardData.cardCorner;
     }    
+
+    // Updates card display based on default values
+    public void UpdateCardDisplayDefault()
+    {
+        cardName.text = cardData.cardName;
+        cardDescription.text = cardData.cardDescription;
+        cardValue.color = Color.black;
+        cardValue.text = cardData.value.ToString();
+        cardCost.color = Color.black;
+
+        if (cardData.cost >= 0)
+        {
+            cardCost.text = cardData.cost.ToString();
+        } else
+        {
+            cardCost.text = "0";
+        }
+
+        cardBorder.color = cardData.cardBorderColor;
+        cardIcon.sprite = cardData.cardIcon;
+        cardCorner.sprite = cardData.cardCorner;
+    }
+
 }
