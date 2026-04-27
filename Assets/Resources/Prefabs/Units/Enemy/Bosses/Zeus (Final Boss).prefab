@@ -205,12 +205,12 @@ MonoBehaviour:
   maxHealth: 1000
   health: 1000
   guard: 0
-  dmg: 40
+  dmg: 10
   attackModifier: 1
   defenseModifier: 1
   moveModifier: 0
   moveRange: 3
-  attackRange: 10
+  attackRange: 6
   boost: 0
   strengthen: 0
   resistant: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 0}
   maxSummons: 6
   summonsPerCast: 2
-  aoeRange: 2
+  aoeRange: 5
 --- !u!95 &738936172720448078
 Animator:
   serializedVersion: 7

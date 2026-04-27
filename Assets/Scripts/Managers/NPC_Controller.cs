@@ -483,28 +483,39 @@ public class NPC_Controller: MonoBehaviour
 
     private Tile GetBossTarget()
     {
-          BaseUnit highestHealthPlayer = null;
-          float highestHealth = -Mathf.Infinity;
-
-          foreach (var unit in UnitManager.Instance.playersSpawned)
-          {
-              if (unit == npcUnit) continue;
-
-
-              // Find the highest health instead of lowest
-              if (unit.health > highestHealth)
-              {
-                  highestHealth = unit.health;
-                  highestHealthPlayer = unit;
-              }
-          }
-
-        if (highestHealthPlayer == null)
+        BaseUnit target = GetbestHPPlayer();
+        if (target == null)
             return npcUnit.OccupiedTile;
 
-        return GridManager.Instance.GetTileForUnit(highestHealthPlayer.gameObject);
+        Tile targetTile = target.OccupiedTile;
 
-      }
+        List<Tile> movableTiles = RangeManager.GetTilesInRange(
+            npcUnit.OccupiedTile,
+            npcUnit.moveRange,
+            RangeType.FloodTargeting);
+
+        Tile bestTile = npcUnit.OccupiedTile;
+        float bestScore = Mathf.Infinity;
+
+        foreach (var tile in movableTiles)
+        {
+            if (!tile.isWalkable) continue;
+
+            var path = AStarManager.Instance.GeneratePath(tile, targetTile);
+            if (path == null) continue;
+
+            int distToTarget = path.Count;
+
+            if (distToTarget < bestScore)
+            {
+                bestScore = distToTarget;
+                bestTile = tile;
+            }
+        }
+
+        return bestTile;
+
+    }
 
     private void UseSingleTargetAttack(BaseUnit target)
     {
@@ -582,20 +593,20 @@ public class NPC_Controller: MonoBehaviour
             targetTile.transform.position
         );
 
-        if (dist > npcUnit.attackRange)
-            return;
 
-        bool shouldAOE = CountUnitsInRange(myTile, 1) >= 1;
+        bool shouldAOE = CountUnitsInRange(myTile, 1) >= 1
+            || CountUnitsInRange(target.OccupiedTile, 1) >= 1;
 
         if (shouldAOE)
         {
             Debug.Log("Boss using AOE!");
             BossAOEAttack(myTile);
-        } else
-        {
-            Debug.Log("Boss targeting highest HP player");
-            UseSingleTargetAttack(target);
-        }
+        } 
+        if (dist > npcUnit.attackRange)
+            return;
+
+        Debug.Log("Boss targeting highest HP player");
+        UseSingleTargetAttack(target);
     }
     private bool HasPlayersInAOERange()
     {
@@ -830,7 +841,6 @@ public class NPC_Controller: MonoBehaviour
 
             case Enemy1.MovementBehavior.Boss:
                 chosenTile = GetBossTarget();
-                Debug.Log($"[Targeting] Final chosen tile: {chosenTile?.name}");
                 break;
 
 
