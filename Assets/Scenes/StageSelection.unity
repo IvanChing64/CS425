@@ -1851,15 +1851,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 16
   stageData: {fileID: 11400000, guid: 04f0eb05325830b4f9658fba5bbcf1ef, type: 2}
-  stageDesciption: 'A rogue Scientist is overclocking a massive Sentry Robot while
-    three Elite Soldiers hold the line. Break the phalanx and stop the experiment
-    before the "Security Protocol" wipes your squad.
+  stageDesciption: 'An army of droids have been let loose on the city! Stop their
+    invasion before the city is overrun with nuts and bolts!
 
 
-    Enemies: 1 Robot 3 Soldier
-    1 Scientist
+    Enemies: 7 Droids
 
-    Reward: 250g'
+    Reward:
+    300g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 12
@@ -2730,10 +2729,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 9
   stageData: {fileID: 11400000, guid: 8520f328a73a1e646874815c9891c8ee, type: 2}
-  stageDesciption: "The King\u2019s law doesn\u2019t reach this far. The stone path
-    has turned to dirt, and the local guards have traded their spears for badges.
-    It\u2019s a lawless land now, where the fastest draw wins the day.\n\nEnemies:
-    1 Pioneer 2 Bandit 1 Huckster\nReward: 100g"
+  stageDesciption: 'The party is suddenly transported to a land of ill-gottent gains.
+    Scoundrels and thieves run amok. Bring them to justice!
+
+
+    Enemies: 1 Bandit
+    2 Outlaw 1 Huckster
+
+    Reward: 100g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -3027,14 +3030,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 7
   stageData: {fileID: 11400000, guid: 8100362cb732c894783a78125ff3d20a, type: 2}
-  stageDesciption: 'Pandora''s knights find a strange, sandy desert. The swords feel
-    heavier, and the air smells like old leather.
+  stageDesciption: 'An old ruin has mysteriously brought you all to a far off land.
+    The air is dry and the heat is intense. A party approaches you with ill intent.
+    Defend yourself!
 
 
-    Enemies: 1 Pioneer 3 Huckster
+    Enemies: 1 Bandit 3 Huckster
 
-    Reward:
-    100g'
+    Reward: 100g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -3192,14 +3195,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 15
   stageData: {fileID: 11400000, guid: 89b56d9167bd379449d3fbe3a9e61373, type: 2}
-  stageDesciption: 'A holographic army flickers into existence, blocking the path
-    to the desk-lamp sun.
+  stageDesciption: 'BOSS FIGHT!!!
 
 
-    Enemies: 1 Robot 2 Soldier 2 Scientist
+    A giant enemy robot has crushed the city''s
+    walls! Each footstep shakes the ground beneath you. Steady yourself and stop
+    this titan from smashing this city to pieces!
 
-    Reward:
-    250g'
+
+    Enemies: 1 Destroyer 2 Mercenaries
+    2 Mad Scientists
+
+    Reward: 300g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 12
@@ -4275,13 +4282,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 11
   stageData: {fileID: 11400000, guid: 9633e160f4d96b44a877a9dd32001906, type: 2}
-  stageDesciption: 'The last of the gunslingers face a mysterious, glowing threat
-    that doesn''t bleed.
+  stageDesciption: 'BOSS FIGHT!!!
 
 
-    Enemies: 2 Bandit 1 Elite
+    A pale horseman has come before you. They
+    prophesize your defeat and an impending doom for the lands you protect. Defy
+    fate and create your own destiny!
 
-    Reward: 200g'
+
+    Enemies: 1 Conquest 2 Outlaws 1 Bandit
+
+    Reward:
+    200g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 11
@@ -5134,11 +5146,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 10
   stageData: {fileID: 11400000, guid: 79ab8631e2ea5ab4d86b9b2dd859204c, type: 2}
-  stageDesciption: 'Robbers have surrounded the party! It''s time for a high-noon
-    showdown!
+  stageDesciption: 'It''s high noon and a band of outlaws is calling you out! Defend
+    your lives and your honor!
 
 
-    Enemies: 2 Pioneer 2 Huckster
+    Enemies: 4 Outlaws
 
     Reward: 150g'
   stageWidthMin: 12
@@ -5536,9 +5548,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 13
   stageData: {fileID: 11400000, guid: 44f5a50bcd275914fb37805703f67061, type: 2}
-  stageDesciption: "That\u2019s no gunslinger in the distance;it\u2019s a hologram.
-    The tumbleweeds are now floating scrap-bots.\n\nEnemies: 4 Robot 1 Soldier\nReward:
-    200g"
+  stageDesciption: 'The sandy winds have become still as the party enters a strange
+    world filled with new technology. Droids and mercenaries attempt to address your
+    sudden appearance.
+
+
+    Enemies: 3 Droids 2 Mercenaries
+
+    Reward: 200g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 11
@@ -5695,11 +5712,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 6
   stageData: {fileID: 11400000, guid: 72ecd8b1242b20f46a06b276fe1db4e1, type: 2}
-  stageDesciption: 'A fortress of pillows blocks the way. Defeat the archers to get
-    through!
+  stageDesciption: 'An evil cult has taken over the area, stop them before they spread
+    into the kingdom.
 
 
-    Enemies: 1 Grunt 2 Cultist
+    Enemies: 2 Grunt 2 Cultist
 
     Reward: 100g'
   stageWidthMin: 12
@@ -5858,14 +5875,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 14
   stageData: {fileID: 11400000, guid: 6d992fabd9cc34b4db6cbc71cdb7b489, type: 2}
-  stageDesciption: 'Around the campfire, the revolver clicks and hums with static.
-    The barrel begins to glow with plasma energy. They have you surrounded!
+  stageDesciption: 'As the sun sets, the night sky is filled with artificial light
+    as the world turns from the long forgotten past to the distant future.
 
 
     Enemies:
-    7 Robot
+    2 Droids 2 Mercenaries 1 Mad Scientist
 
-    Reward: 300g'
+    Reward: 250g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 11
@@ -6101,7 +6118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 2
   stageData: {fileID: 11400000, guid: 38317e8499517ce4f91068b45e169f98, type: 2}
-  stageDesciption: 'Directed to venture West, the party encounters a group of bandits!
+  stageDesciption: 'Directed to venture West, the party encounters a group of mercenaries!
 
 
     Enemies:
@@ -7203,12 +7220,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 8
   stageData: {fileID: 11400000, guid: a6b5bea95a7a8f94bb2d5b8a2604b9db, type: 2}
-  stageDesciption: 'The knight trades his heavy shield for a wide-brimmed hat. The
-    green forests are drying up into golden canyons.
+  stageDesciption: 'A mysterious portal has brought you to a desert town filled with
+    outlaws and tricksters. Restore the peace of this forgotten land.
 
 
-    Enemies: 1 Pioneer 2 Bandit
-    1 Huckster
+    Enemies:
+    1 Bandit 2 Outlaw 1 Huckster
 
     Reward: 100g'
   stageWidthMin: 12
@@ -7367,11 +7384,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 12
   stageData: {fileID: 11400000, guid: ee3628c3eb197614792e879b81c4bdda, type: 2}
-  stageDesciption: 'Pandora finds a flashlight. The beams cut through the dust storms,
-    pointing toward the stars.
+  stageDesciption: 'Time accelerates to a distant future of neon lights and automatons.
+    The party encounters a party of high-tech mercenaries.
 
 
-    Enemies: 2 Soldier 1 Elite
+    Enemies: 3 Mercenaries
+    2 Mad Scientists
 
     Reward: 200g'
   stageWidthMin: 12
@@ -7771,8 +7789,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 5
   stageData: {fileID: 11400000, guid: c7e29c6073a441648b88b861cbcd430f, type: 2}
-  stageDesciption: "The King\u2019s vanguard fights a holding action as the lush
-    meadows begin to turn to dust.\n\nEnemies: 1 Grunt 1 Elite\nReward: 100g"
+  stageDesciption: 'BOSS FIGHT!!!
+
+
+    The evil Warlock has come to bring destruction
+    and anarchy! Stop her before her creations overwhelm you and take over the land!
+
+
+    Enemies:
+    2 Grunts 1 Warlock
+
+    Reward: 150g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -8545,13 +8572,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 4
   stageData: {fileID: 11400000, guid: caf34e53ff3b311438b4a17f5af15ba1, type: 2}
-  stageDesciption: 'A plastic gold coin buys a shiny sticker of bravery. Even heroes
-    need a snack break.
+  stageDesciption: 'A nearby village is being attacked by a raiding party! Stop the
+    assault and become town heroes!
 
 
     Enemies: 2 Grunts 1 Archer 1 Cultist
 
-    Reward: 100g'
+    Reward:
+    100g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 10
@@ -9544,11 +9572,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 17
   stageData: {fileID: 11400000, guid: 78a45c7baa6e4dc4386ffaba54ed5af1, type: 2}
-  stageDesciption: 'Worlds collide. The ultimate enemy stands before you. Win now,
-    or miss bedtime.
+  stageDesciption: 'FINAL BOSS!!!
 
 
-    Boss Stage!'
+    Worlds collide. The ultimate enemy stands
+    before you. Prevail now, or it''s bedtime for you.'
   stageWidthMin: 20
   stageWidthMax: 20
   stageHeightMin: 12

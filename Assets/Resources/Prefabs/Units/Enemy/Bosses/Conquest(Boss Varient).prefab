@@ -197,13 +197,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6381d107cad097a41ae24e95fb7a9281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
-  Name: 
+  Name: Conquest
   OccupiedTile: {fileID: 0}
   Faction: 1
   summoned: 0
   lifetime: 0
-  maxHealth: 100
-  health: 100
+  maxHealth: 300
+  health: 300
   guard: 0
   dmg: 10
   attackModifier: 1
