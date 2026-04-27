@@ -89,8 +89,8 @@ public class BaseUnit : MonoBehaviour
 
     public bool isSummoned = false;
     public NPC_Controller summoner;
-    public int baseMoveRange;
-    public int baseAttackRange;
+    public int baseMoveRange = 4;
+    public int baseAttackRange = 3;
 
     public bool isEnraged = false;
 
@@ -1076,7 +1076,7 @@ public class BaseUnit : MonoBehaviour
 
     // Andrew: Stat application for enraged status
 
-    public void ApplyConquestStats()
+    public void ApplyConquestStats(bool isEnraged)
     {
         if (isEnraged)
         {
