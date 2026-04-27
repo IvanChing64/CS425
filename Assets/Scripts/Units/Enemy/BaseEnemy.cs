@@ -15,9 +15,6 @@ public class BaseEnemy : BaseUnit
     {
         ApplyFlags(); // if you use flags
 
-        baseMoveRange = moveRange;
-        baseAttackRange = attackRange;
-
-        ApplyConquestStats(); // ensures correct state on spawn
+        
     }
 }

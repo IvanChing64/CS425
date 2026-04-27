@@ -62,11 +62,7 @@ public class EnemyTargetingManager : MonoBehaviour
 
             float dist = Vector2.Distance(transform.position, p.transform.position);
 
-            //Section to ask how many npc's are targetting one unit.
 
-            /*int load = EnemyTargetingManager.TargetCounts.ContainsKey(p)
-                ? EnemyTargetingManager.TargetCounts[p]
-                : 0;*/
 
             if (dist < bestDistance)
             {

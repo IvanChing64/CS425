@@ -43,7 +43,7 @@ public class NPC_Controller: MonoBehaviour
     private int pathIndex;
     private int tilesMovedThisTurn;
     private bool isMoving;
-    //private bool hasSummonedThisTurn = false;
+
 
     public bool isEliteVarient = false;
     public bool isEnraged = false;
@@ -66,38 +66,14 @@ public class NPC_Controller: MonoBehaviour
 
     //MovementBehavior logic: Andrew Shelton
 
-    /*public override void TakeDamage(float amount)
-    {
-        if (occupiedState == BossState.Invulnerable)
-        {
-            Debug.Log("Boss takes 0 damage!");
-            return;
-        }
-        base.TakeDamage(amount);
-    }*/
 
-    // Stuff to help boss
-    public void OnMinionDied()
-    {
-        minionsAlive--;
-
-        //Reduce boss max health or health
-        float damage = npcUnit.maxHealth - healthPenaltyPerMinion;
-        npcUnit.health -= damage;
-
-        Debug.Log($"Boss takes {damage} damage from minion death");
-
-        if (minionsAlive <= 0)
-        {
-            occupiedState = BossState.Vulnerable;
-            Debug.Log("Minions destroyed! Boss is now vulnerable!");
-        }
-    }
-    // Added Enrage stuff. Not implemented yet.
+ 
+ 
+    // Added Enrage stuff.
     void ConquestEnrageStats()
     {
         isEnraged = true;
-        npcUnit.ApplyConquestStats();
+        npcUnit.ApplyConquestStats(isEnraged);
     }
 
     public void UpdateEnrageState()
@@ -141,8 +117,6 @@ public class NPC_Controller: MonoBehaviour
 
        
 
-        // alreadyInRange = movableTiles.Contains(playerTile);
-
         foreach (var tile in movableTiles)
         {
             if (!tile.isWalkable) continue;
@@ -170,33 +144,7 @@ public class NPC_Controller: MonoBehaviour
         {
             return bestTile;
         }
-        //Pass 2: 
 
-        /*bestScore = Mathf.Infinity;
-
-       foreach (var tile in movableTiles) 
-       {
-            if (!tile.isWalkable) { continue; }
-            if (tile == npcUnit.OccupiedTile) continue;
-
-            //var testPath = AStarManager.Instance.GeneratePath(npcUnit.OccupiedTile, tile);
-             //if (testPath == null || testPath.Count == 0) continue;
-
-            var pathFromTileToPlayer = AStarManager.Instance.GeneratePath(tile, playerTile);
-
-            if (pathFromTileToPlayer == null || pathFromTileToPlayer.Count == 0)
-                continue;
-
-            // combine path cost + distance
-            float score = pathFromTileToPlayer.Count;
-
-            if (score < bestScore)
-             {
-                bestScore = score;
-                bestTile = tile;
-             }
-
-       }*/
 
        if (bestTile == null)
         {
@@ -918,7 +866,6 @@ public class NPC_Controller: MonoBehaviour
 
         pathIndex = 0;
         tilesMovedThisTurn = 0;
-        //isMoving = true;
 
         Debug.Log("Enemy target set to: " + endTile.name);
 
@@ -1027,7 +974,7 @@ public class NPC_Controller: MonoBehaviour
         //isMoving = false;
         Debug.Log($"[BEGIN TURN] {name}");
         //New: Ensure targeting happens first
-        npcUnit.ApplyConquestStats();
+        npcUnit.ApplyConquestStats(isEnraged);
         var targeting = GetComponent<EnemyTargetingManager>();
         if (enemy1.movementBehavior != Enemy1.MovementBehavior.Support)
         {
@@ -1044,13 +991,9 @@ public class NPC_Controller: MonoBehaviour
             return;
             
         }
-        //GetComponent<EnemyTargetingManager>().SelectTarget();
-        //SetTarget(startTile);
 
         //Changed to set behavior target for movement based on current flag
         SetBehaviorTarget(startTile);
-        //StartCoroutine(MoveAlongPath());
-        //Update();
 
     }
 
@@ -1222,62 +1165,7 @@ public class NPC_Controller: MonoBehaviour
 
             yield return null;
         }
-        /*tilesMovedThisTurn = 0;
-        HasFinishedTurn = false;
-
-        if (!(npcUnit.restricted == EffectFlag.None))
-        {
-            npcUnit.moveRange = 0;
-        }
-
         
-        //Select target
-        var targeting = GetComponent<EnemyTargetingManager>();
-        if (enemy1.movementBehavior != Enemy1.MovementBehavior.Support) { 
-            if (targeting != null)
-            targeting.SelectTarget();
-        }
-        Tile startTile = npcUnit.OccupiedTile;
-        if (startTile == null)
-        {
-            Debug.LogError($"{name} has no OccupiedTile placeholder!");
-            HasFinishedTurn = true;
-            yield break;
-        }
-
-        if(unitAnimator != null)
-        {
-            unitAnimator.SetBool("IsMoving", true);
-        }
-
-        //SetTarget(startTile);
-
-        //Changed to set behavior target for movement based on current flag
-        SetBehaviorTarget(startTile);
-
-        while (pathIndex < path.Count && tilesMovedThisTurn < npcUnit.moveRange)
-        {
-            Tile currentTargetTile = path[pathIndex];
-            if (currentTargetTile == null) break;
-
-            Vector2 targetPos = currentTargetTile.transform.position;
-
-            while (Vector2.Distance(transform.position, targetPos) > 0.1f)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-                yield return null;
-            }
-            pathIndex++;
-            tilesMovedThisTurn++;
-            yield return null;
-        }
-            if(unitAnimator != null)
-            {
-                unitAnimator.SetBool("IsMoving", false);
-        }
-
-        FinishedMoves();
-        CheckForHealAfterMove();*/
     }
 
     public static IEnumerator RunEnemyTurn(List<NPC_Controller> enemies)

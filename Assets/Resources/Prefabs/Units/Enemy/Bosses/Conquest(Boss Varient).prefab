@@ -205,7 +205,7 @@ MonoBehaviour:
   maxHealth: 300
   health: 300
   guard: 0
-  dmg: 10
+  dmg: 60
   attackModifier: 1
   defenseModifier: 1
   moveModifier: 0
@@ -240,8 +240,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
   isSummoned: 0
   summoner: {fileID: 0}
-  baseMoveRange: 0
-  baseAttackRange: 0
+  conquestMoveRange: 4
+  conquestAttackRange: 3
   isEnraged: 0
   enemyFlag: 1
   movementBehavior: 2
