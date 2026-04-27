@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.CanvasScaler;
@@ -31,8 +32,6 @@ public class NPC_Controller: MonoBehaviour
     int minionsAlive = 3;
     float healthPenaltyPerMinion = 100;
 
-    int aoeCooldown = 0;
-    int aoeCooldownMax = 2;
 
     private TurnState currentState = TurnState.Idle;
 
@@ -95,20 +94,30 @@ public class NPC_Controller: MonoBehaviour
         }
     }
     // Added Enrage stuff. Not implemented yet.
-    void ApplyEnrageStats()
+    void ConquestEnrageStats()
     {
-        npcUnit.moveRange = 1;
-        npcUnit.attackRange = 6;
+        isEnraged = true;
+        npcUnit.ApplyConquestStats();
     }
 
-    void UpdateEnrageState()
+    public void UpdateEnrageState()
     {
+        Debug.Log($"[ENRAGE CHECK] {name} | Elite: {isEliteVarient}");
+
+
         if (!isEliteVarient) return;
 
-        if (!isEnraged && npcUnit.health <= npcUnit.maxHealth * 0.5f)
+        if (isEnraged) return;
+
+        float healthPercent = (float)npcUnit.health / npcUnit.maxHealth;
+
+        Debug.Log($"[ENRAGE HP] {healthPercent}");
+
+
+        if (healthPercent <= 0.5f)
         {
             isEnraged = true;
-            ApplyEnrageStats();
+            ConquestEnrageStats();
             Debug.Log("Enraged!");
         }
     }
@@ -118,7 +127,7 @@ public class NPC_Controller: MonoBehaviour
 
     private Tile GetRangedTarget()
     {
-
+        Debug.Log($"[RANGED TARGET CALLED] {name}");
         var targeting = GetComponent<EnemyTargetingManager>();
         targeting.SelectTarget();
 
@@ -540,6 +549,67 @@ public class NPC_Controller: MonoBehaviour
             UseSingleTargetAttack(targeting.CurrentTarget);
         }
     }*/
+    private bool HasPlayersInAOERange()
+    {
+        var tilesInRange = RangeManager.GetTilesInRange(npcUnit.OccupiedTile, npcUnit.attackRange, RangeType.FloodTargeting);
+
+        foreach (var unit in UnitManager.Instance.playersSpawned)
+        {
+            if (tilesInRange.Contains(unit.OccupiedTile)) return true;
+        }
+        return false;
+    
+    }
+
+    private int CountPlayersInAOE()
+    {
+        int count = 0;
+
+        var tilesInRange = RangeManager.GetTilesInRange(
+            npcUnit.OccupiedTile,
+            aoeRange,
+            RangeType.FloodTargeting
+        );
+
+        Debug.Log($"[AOE DEBUG] TilesInRange count: {tilesInRange.Count}");
+        Debug.Log($"[AOE DEBUG] Players count: {UnitManager.Instance.playersSpawned.Count}");
+
+        foreach (var unit in UnitManager.Instance.playersSpawned)
+        {
+
+            if (unit.OccupiedTile == null)
+            {
+                continue;
+            }
+
+            if (tilesInRange.Contains(unit.OccupiedTile))
+            {
+                count++;
+            } 
+        }
+
+
+        return count;
+    }
+    [SerializeField] private int aoeRange = 3;
+   
+    private void PerformAOEAttack()
+    {
+        Debug.Log("[AOE] Boss used AOE attack!");
+
+        var tilesInRange = RangeManager.GetTilesInRange(npcUnit.OccupiedTile, aoeRange, RangeType.FloodTargeting);
+
+        foreach (var unit in UnitManager.Instance.playersSpawned.ToList())
+        {
+            if (tilesInRange.Contains(unit.OccupiedTile))
+            {
+                unit.takeDamage(npcUnit.dmg, false, false, npcUnit);
+            }
+        }
+     
+    }
+
+
     private Tile GetMeleeTarget()
     {
         var targeting = GetComponent<EnemyTargetingManager>();
@@ -560,10 +630,19 @@ public class NPC_Controller: MonoBehaviour
             if (!tile.isWalkable) continue;
             if (tile == npcUnit.OccupiedTile) continue;
 
-            var path = AStarManager.Instance.GeneratePath(tile, playerTile);
-            if (path == null || path.Count == 0) continue;
+            var pathToPlayer = AStarManager.Instance.GeneratePath(tile, playerTile);
+            if (pathToPlayer == null || pathToPlayer.Count == 0) continue;
 
-            float score = path.Count;
+            var pathFromStart = AStarManager.Instance.GeneratePath(npcUnit.OccupiedTile, tile);
+            if (pathFromStart == null) continue;
+
+            int moveDistance = pathFromStart.Count;
+
+            // Skip tiles that don't use enough movement
+            if (moveDistance < npcUnit.moveRange)
+                continue;
+
+            float score = pathToPlayer.Count;
 
             if (score < bestScore)
             {
@@ -668,7 +747,7 @@ public class NPC_Controller: MonoBehaviour
         switch (enemy1.movementBehavior)
         {
             case Enemy1.MovementBehavior.Melee:
-                chosenTile = GetClosestReachablePlayerTile(startTile);
+                chosenTile = GetMeleeTarget();
                 break;
 
             case Enemy1.MovementBehavior.Ranged:
@@ -742,12 +821,13 @@ public class NPC_Controller: MonoBehaviour
         {
             path.RemoveAt(0);
         }
-        
+        int count = Mathf.Min(npcUnit.moveRange, path.Count);
+
         if (path.Count > npcUnit.moveRange + npcUnit.moveModifier)
         {
             if (npcUnit.moveRange + npcUnit.moveModifier < 0)
             {
-                path = path.GetRange(0, npcUnit.moveRange);
+                path = path.GetRange(0, count);
             } else
             {
                 path = path.GetRange(0, npcUnit.moveRange + npcUnit.moveModifier);
@@ -801,6 +881,21 @@ public class NPC_Controller: MonoBehaviour
 
     private void CheckAndAttack()
     {
+        //AOE logic:
+        int aoeCount = CountPlayersInAOE();
+
+        if (isEliteVarient && enemy1.movementBehavior == BaseUnit.MovementBehavior.Melee)
+        {
+
+            if (aoeCount >= 1) 
+            {
+                PerformAOEAttack();
+                return; 
+            }
+        }
+
+        //End of AOE logic
+
         List<Tile> attackableTiles = npcUnit.GetTilesInAttackRange();
         Debug.Log($"NPC checking attack. Range: {npcUnit.attackRange}. Tiles found in range: {attackableTiles.Count}");
         BaseUnit target = null;
@@ -846,10 +941,13 @@ public class NPC_Controller: MonoBehaviour
 
     public void BeginTurn()
     {
+
         tilesMovedThisTurn = 0;
         HasFinishedTurn = false;
         //isMoving = false;
+        Debug.Log($"[BEGIN TURN] {name}");
         //New: Ensure targeting happens first
+        npcUnit.ApplyConquestStats();
         var targeting = GetComponent<EnemyTargetingManager>();
         if (enemy1.movementBehavior != Enemy1.MovementBehavior.Support)
         {
