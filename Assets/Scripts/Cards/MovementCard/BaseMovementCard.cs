@@ -5,6 +5,7 @@ using System.Collections.Generic;
 //Derived class for movement cards
 public class BaseMovementCard : BaseCard
 {
+    // Highlights movable tiles and allows the player to move
     public override void SelectCard()
     {
         base.SelectCard();
@@ -41,6 +42,7 @@ public class BaseMovementCard : BaseCard
         }
     }
 
+    // Unhighlights tiles and disallows movement
     public override void DeselectCard()
     {
         base.DeselectCard();

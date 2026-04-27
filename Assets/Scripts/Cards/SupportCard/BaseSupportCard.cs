@@ -6,9 +6,8 @@ using UnityEngine;
 public class BaseSupportCard : BaseCard
 {
     public SupportEffect primaryEffect, secondaryEffect;
-    //public int value;
 
-    //Copies properties from ScriptableCard including support effect
+    //Copies properties from ScriptableCard including primary and secondary support effects
     public override void CopyScriptableCard(ScriptableCard card)
     {
         base.CopyScriptableCard(card);
@@ -16,6 +15,7 @@ public class BaseSupportCard : BaseCard
         secondaryEffect = card.secondarySupportEffect;
     }
 
+    // Highlights the supportable colors and allows supporting
     public override void SelectCard()
     {
         base.SelectCard();
@@ -61,6 +61,7 @@ public class BaseSupportCard : BaseCard
         }
     }
 
+    // Unhighlights supportable colors ann disallows supporting
     public override void DeselectCard()
     {
         base.DeselectCard();
@@ -81,7 +82,7 @@ public class BaseSupportCard : BaseCard
         }
     }
 
-    //Applies the support effect to the selected player
+    //Applies the primary and secondary support effect to the selected player
     public void ApplySupportEffect(BaseUnit targetPlayer)
     {
         switch (primaryEffect)

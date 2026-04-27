@@ -14,10 +14,10 @@ public class DeckManager : MonoBehaviour
     public List<ScriptableUnit> allSummons = new List<ScriptableUnit>();
     private bool initialized = false;
 
-
+    // DEBUG WAY TO SELECT DEBUG TEAMS
     public int DEBUGTEAMSELECTOR = -1;
 
-    // Initializes singleton instance and loads all cards from Resources
+    // Initializes singleton instance and loads all cards and summons from Resources
     void Awake()
     {
         if (instance == null)
@@ -66,6 +66,7 @@ public class DeckManager : MonoBehaviour
         }
     }
 
+    // DEBUG CHOOSE TEAM BY PRESSING 0 KEY
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))

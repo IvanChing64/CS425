@@ -10,10 +10,13 @@ public class CardManager : MonoBehaviour
     public static CardManager instance;
     public BasePlayer selectedPlayer;
     public BaseCard selectedCard;
+
+    // Unity Scene Objects
     public GameObject cardArea, deckCard, actionPointCounter;
     public Button binButton;
-    private UnityEngine.Coroutine routine;
-    [SerializeField] public static int cardSelectOffsetY = 18;
+
+    // Current running routine
+    private Coroutine routine;
 
     // Initializes instance and calls backdrop creation
     void Awake()
@@ -28,12 +31,13 @@ public class CardManager : MonoBehaviour
         }
     }
 
+    // Start move coroutine to move card
     public void moveCard(GameObject card, bool forward, bool wait, Vector3 end)
     {
-        //StopCoroutine(move(card, !forward, wait, end));
         StartCoroutine(move(card, forward, wait, end));
     }
 
+    // Coroutine to move cards
     private IEnumerator move(GameObject card, bool forward, bool wait, Vector3 endPosition)
     {
         if (wait)
@@ -160,6 +164,7 @@ public class CardManager : MonoBehaviour
         UpdateAPCounter();
     }
 
+    // Coroutine that destroys the card after other coroutines are done
     private IEnumerator destroy(GameObject card)
     {
         if (routine != null)
@@ -172,6 +177,7 @@ public class CardManager : MonoBehaviour
     //Shows hand of selected player and hides previous player's hand
     public void SetSelectedPlayer(BasePlayer player)
     {
+        // Unselects previous card
         if (selectedCard != null)
         {
             Vector3 posit = new Vector3(selectedCard.cardHolder.transform.position.x, 96, selectedCard.cardHolder.transform.position.z);
@@ -184,7 +190,6 @@ public class CardManager : MonoBehaviour
 
         if (selectedPlayer == null)
         {
-            Debug.Log("No player selected.");
 
             ToggleDeckCard(false);
             if (previousPlayer != null)
@@ -196,6 +201,7 @@ public class CardManager : MonoBehaviour
 
         selectedHand = selectedPlayer.GetComponent<HandManager>();
 
+        // Sets Deck Card and Draws hand if necessary
         ToggleDeckCard(true);
         if (selectedHand.actionPoints > 0 && selectedHand.deckIndex != -1 && selectedHand.deckIndex < selectedHand.currentDeck.Count)
         {
@@ -214,18 +220,12 @@ public class CardManager : MonoBehaviour
         if (!selectedHand.handDrawn)
         {
             selectedPlayer.GetComponent<HandManager>().DrawHand();
-            foreach (BaseCard card in selectedPlayer.GetComponent<HandManager>().currentHand)
-            {
-                Vector3 posit = new Vector3(card.cardHolder.transform.position.x, 96, card.cardHolder.transform.position.z);
-                moveCard(card.cardHolder, false, false, posit);
-            }
-        } else
+        }
+
+        foreach (BaseCard card in selectedPlayer.GetComponent<HandManager>().currentHand)
         {
-            foreach (BaseCard card in selectedPlayer.GetComponent<HandManager>().currentHand)
-            {
-                Vector3 posit = new Vector3(card.cardHolder.transform.position.x, 96, card.cardHolder.transform.position.z);
-                moveCard(card.cardHolder, false, false, posit);
-            }
+            Vector3 posit = new Vector3(card.cardHolder.transform.position.x, 96, card.cardHolder.transform.position.z);
+            moveCard(card.cardHolder, false, false, posit);
         }
 
         UpdateDeckCard();
@@ -238,7 +238,6 @@ public class CardManager : MonoBehaviour
             selectedPlayer.GetComponent<HandManager>().NextTurn();
         }
 
-        //selectedPlayer.GetComponent<HandManager>().ToggleHandVisibility(true);
         if (previousPlayer != null && previousPlayer != selectedPlayer)
         {
             previousPlayer.GetComponent<HandManager>().ToggleHandVisibility(false);

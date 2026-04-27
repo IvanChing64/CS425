@@ -4,18 +4,17 @@ using UnityEngine;
 //Derived class for summon cards
 public class BaseSummonCard : BaseCard
 {
-    //public int value;
+    // Summon to spawn
     public Summons summon;
-    public ScriptableUnit summonData;
 
-    //Copies properties from ScriptableCard including support effect
+    //Copies properties from ScriptableCard summon to spawn
     public override void CopyScriptableCard(ScriptableCard card)
     {
         base.CopyScriptableCard(card);
         summon = card.summon;
-        //DeckManager.instance.gets
     }
 
+    // Highlights summonable tiles and allows summoning
     public override void SelectCard()
     {
         base.SelectCard();
@@ -42,6 +41,7 @@ public class BaseSummonCard : BaseCard
         }
     }
 
+    // Unhighlights tiles and stops the player from summoning
     public override void DeselectCard()
     {
         base.DeselectCard();
@@ -61,6 +61,7 @@ public class BaseSummonCard : BaseCard
         }
     }
 
+    // Spawns summon on given tile, kills duplicate summons
     public BasePlayer SummonUnit(Tile spawnTile)
     {
         ScriptableUnit summonToSpawn = DeckManager.instance.GetSummonByName(summon.ToString());
@@ -81,9 +82,6 @@ public class BaseSummonCard : BaseCard
         spawnedSummon.lifetime = value + 1;
         UnitManager.Instance.playersSpawned.Add(spawnedSummon);
         UnitManager.Instance.playerUnitCount++;
-        //spawnedSummon.GetComponent<HandManager>().NextTurn();
         return spawnedSummon;
     }
-
-
 }
