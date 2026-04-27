@@ -18,6 +18,8 @@ MonoBehaviour:
   enemies:
   - {fileID: 1167321167610509267, guid: fb236ddf03e02fc468e58762964fab69, type: 3}
   - {fileID: 1167321167610509267, guid: fb236ddf03e02fc468e58762964fab69, type: 3}
-  - {fileID: 1167321167610509267, guid: 6f22371dbeb55fe49a5126bbb9801216, type: 3}
-  enemyCount: 3
+  - {fileID: 1167321167610509267, guid: fb236ddf03e02fc468e58762964fab69, type: 3}
+  - {fileID: 1167321167610509267, guid: e915b861a780d254d98796fa7af8e054, type: 3}
+  - {fileID: 1167321167610509267, guid: e915b861a780d254d98796fa7af8e054, type: 3}
+  enemyCount: 5
   currency: 200

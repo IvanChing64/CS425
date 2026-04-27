@@ -16,10 +16,10 @@ MonoBehaviour:
   grassTilePrefab: {fileID: -8581200666732430661, guid: b8ee60a72174f294090435ee37ddd91e, type: 3}
   mountainTilePrefab: {fileID: -4349095895413475627, guid: 39f762b5c03830b4eb002ba872163050, type: 3}
   enemies:
-  - {fileID: 1167321167610509267, guid: 697d0283c728bac47a37805569885685, type: 3}
   - {fileID: 1167321167610509267, guid: fb236ddf03e02fc468e58762964fab69, type: 3}
   - {fileID: 1167321167610509267, guid: fb236ddf03e02fc468e58762964fab69, type: 3}
   - {fileID: 1167321167610509267, guid: e915b861a780d254d98796fa7af8e054, type: 3}
   - {fileID: 1167321167610509267, guid: e915b861a780d254d98796fa7af8e054, type: 3}
+  - {fileID: 1167321167610509267, guid: 6f22371dbeb55fe49a5126bbb9801216, type: 3}
   enemyCount: 5
-  currency: 250
+  currency: 300

@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6381d107cad097a41ae24e95fb7a9281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
-  Name: 
+  Name: Destroyer
   OccupiedTile: {fileID: 0}
   Faction: 1
   summoned: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
   maxHealth: 200
   health: 200
   guard: 300
-  dmg: 40
+  dmg: 45
   attackModifier: 1
   defenseModifier: 1
   moveModifier: 0

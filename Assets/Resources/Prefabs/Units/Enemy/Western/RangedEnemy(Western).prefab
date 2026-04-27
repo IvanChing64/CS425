@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6381d107cad097a41ae24e95fb7a9281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
-  Name: 
+  Name: Outlaw
   OccupiedTile: {fileID: 0}
   Faction: 1
   summoned: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
   maxHealth: 80
   health: 80
   guard: 0
-  dmg: 30
+  dmg: 50
   attackModifier: 1
   defenseModifier: 1
   moveModifier: 0
@@ -215,6 +215,7 @@ MonoBehaviour:
   strengthen: 0
   resistant: 0
   invisible: 0
+  immune: 0
   stunned: 0
   restricted: 0
   frozen: 0
@@ -237,8 +238,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 91c9ddbccc0cd9f42a0d5e9e6d94f0ef, type: 3}
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
-  enemyFlag: 0
-  movementBehavior: 1
+  isSummoned: 0
+  summoner: {fileID: 0}
+  baseMoveRange: 0
+  baseAttackRange: 0
+  isEnraged: 0
+  enemyFlag: 1
+  movementBehavior: 2
 --- !u!114 &751289258245009956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +272,13 @@ MonoBehaviour:
   moveSpeed: 2.5
   tilesPerMove: 3
   path: []
+  isEliteVarient: 0
+  isEnraged: 0
   healAmount: 10
+  enemyPrefab: {fileID: 0}
+  maxSummons: 6
+  summonsPerCast: 2
+  aoeRange: 3
 --- !u!95 &738936172720448078
 Animator:
   serializedVersion: 7
