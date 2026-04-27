@@ -89,6 +89,10 @@ public class BaseUnit : MonoBehaviour
 
     public bool isSummoned = false;
     public NPC_Controller summoner;
+    public int baseMoveRange;
+    public int baseAttackRange;
+
+    public bool isEnraged = false;
 
     //Enemy Flags: Andrew Shelton
     public enum EnemyFlag
@@ -124,6 +128,8 @@ public class BaseUnit : MonoBehaviour
     private void Start()
     {
         ApplyFlags();
+        baseMoveRange = moveRange;
+        baseAttackRange = attackRange;
     }
     //End of new stuff.
     public List<Tile> GetTilesInMoveRange() => RangeManager.GetTilesInRange(OccupiedTile, moveRange, RangeType.FloodMovement);
@@ -224,6 +230,14 @@ public class BaseUnit : MonoBehaviour
         }
 
         UpdateHealth();
+
+        //Andrew: Added for enrage status on conquest
+
+        var controller = GetComponent<NPC_Controller>();
+        if (controller != null)
+        {
+            controller.UpdateEnrageState();
+        }
 
         if (health <= 0)
         {
@@ -1058,6 +1072,22 @@ public class BaseUnit : MonoBehaviour
         // {
         //     dodge--;
         // }
+    }
+
+    // Andrew: Stat application for enraged status
+
+    public void ApplyConquestStats()
+    {
+        if (isEnraged)
+        {
+            moveRange = 1;
+            attackRange = 6;
+        }
+        else
+        {
+            moveRange = baseMoveRange;
+            attackRange = baseAttackRange;
+        }
     }
 
 
