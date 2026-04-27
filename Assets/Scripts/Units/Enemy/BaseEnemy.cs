@@ -11,4 +11,13 @@ public class BaseEnemy : BaseUnit
     {
 
     }
+    public virtual void InitializeUnit()
+    {
+        ApplyFlags(); // if you use flags
+
+        baseMoveRange = moveRange;
+        baseAttackRange = attackRange;
+
+        ApplyConquestStats(); // ensures correct state on spawn
+    }
 }
