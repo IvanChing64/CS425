@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class ArmySceneManager : MonoBehaviour
 {
-    public static ArmySceneManager instance;
-    public static bool objectsInitialized = false;
-
     public List<ScriptableArmySlot> scriptableArmySlots;
     public List<UnitArmySlot> armySlots;
     public Text armySize;
@@ -15,16 +12,16 @@ public class ArmySceneManager : MonoBehaviour
     public TMP_Text attack, movement, support, summon;
     public TMP_Text stats, desc, cards;
     public Image attackIcon, moveIcon, suppIcon, summIcon;
+    public Button cardPreviewButton;
+    public int selectedSlot;
 
+    // Loads and updates all army slots
     void Awake()
     {
-        instance = this;
-
         ScriptableArmySlot[] slots = Resources.LoadAll<ScriptableArmySlot>("Army");
         scriptableArmySlots.AddRange(slots);
         armySize.text = $"Army: {ArmyManager.Instance.unitsInArmy.Count} / 6";
         
-
         UpdateArmySlots();
         ClearInfoPanel();
     }
@@ -67,7 +64,13 @@ public class ArmySceneManager : MonoBehaviour
     // Update the army info panel
     public void UpdateInfoPanel(ScriptableArmySlot unit, int index)
     {
-        // Hide Titles and Icons
+        // Move button into camera space
+        if (!stats.enabled)
+        {
+            cardPreviewButton.transform.position -= new Vector3(1000f, 0f, 0f);
+        }
+
+        // Show Titles and Icons
         stats.enabled = true;
         desc.enabled = true;
         cards.enabled = true;
@@ -122,6 +125,7 @@ public class ArmySceneManager : MonoBehaviour
     // Clear army info panel
     public void ClearInfoPanel()
     {
+        if (!stats.enabled) return;
         // Clear Unit Stat Info and Description
         unitName.text = "";
         health.text = "";
@@ -142,6 +146,8 @@ public class ArmySceneManager : MonoBehaviour
         moveIcon.enabled = false;
         suppIcon.enabled = false;
         summIcon.enabled = false;
+        cardPreviewButton.transform.position += new Vector3(1000f, 0f, 0f);
+
     }
 
     // Army Slot Button
@@ -153,10 +159,16 @@ public class ArmySceneManager : MonoBehaviour
             return;
         }
 
+        selectedSlot = slotNum;
+
         ScriptableArmySlot foundUnit = scriptableArmySlots.Find(unit => unit.name == ArmyManager.Instance.unitsInArmy[slotNum].name);
 
         UpdateInfoPanel(foundUnit, slotNum);
     }
 
-    
+    // Show Cards Button
+    public void CardButton()
+    {
+        ArmyCardPanel.instance.UpdateCardPanel(selectedSlot);
+    }
 }

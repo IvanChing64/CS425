@@ -159,7 +159,7 @@ public class HandManager : MonoBehaviour
 
         if ((currentHand.Count + 1) % 2 == 1)
         {
-            spawnPos = new Vector3(((currentHand.Count - 0 - (currentHand.Count / 2)) * cardPositionOffsetX) + 0, -800, 0);
+            spawnPos = new Vector3(((currentHand.Count - (currentHand.Count / 2)) * cardPositionOffsetX) + 0, -800, 0);
         } else
         {
             spawnPos = new Vector3(((currentHand.Count - 1 - (currentHand.Count / 2 - 0.5f)) * cardPositionOffsetX) + 0, -800, 0);
