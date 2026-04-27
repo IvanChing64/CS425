@@ -946,6 +946,7 @@ public class BaseUnit : MonoBehaviour
         {
             moveRange = 1;
             attackRange = 6;
+            dmg = 60;
         }
         else
         {
