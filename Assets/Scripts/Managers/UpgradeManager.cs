@@ -6,9 +6,6 @@ public class UpgradeManager : MonoBehaviour
     public static UpgradeManager instance {get; private set;}
     private bool initialized = false;
 
-    Dictionary<int, ScriptableCard> CardUpgrades;
-    Dictionary<int, ScriptableUnit> UnitUpgrades;
-
     void Awake()
     {
         if (instance == null)

@@ -22,15 +22,19 @@ public class UnitManager : MonoBehaviour
     public Tile targetedTile, previousTile; 
     private List<Tile> enemyTiles = new List<Tile>();
 
+    // Selected Unit and Select
     public BaseUnit SelectedUnit;
     public UnitSelector selector;
 
+    // Player and Enemy lists
     public List<BasePlayer> playersSpawned = new List<BasePlayer>();
     public List<BaseEnemy> enemiesSpawned = new List<BaseEnemy>();
 
+    // Player and Enemy Numbers
     public int enemyUnitCount;
     public int playerUnitCount;
 
+    // Unit Effect Values
     public static float boostHinderValue = 0.25f;
     public static float strengthenWeakenValue = 0.25f;
     public static float resistantVulnerableValue = 0.25f;
@@ -43,15 +47,14 @@ public class UnitManager : MonoBehaviour
     public static float absorbEfficiency = 0.5f;
     public static int backstabInvisibleBonus = 15;
     public static int maxRegenStacks = 5;
-    //public static int 
 
+    // DEBUG TEAMS
     public List<ScriptableUnit> MB;
     public List<ScriptableUnit> WB;
     public List<ScriptableUnit> FB;
     public List<ScriptableUnit> MU;
     public List<ScriptableUnit> WU;
     public List<ScriptableUnit> FU;
-
 
     public BasePlayer SelectedPlayer
     {
@@ -101,6 +104,7 @@ public class UnitManager : MonoBehaviour
         }
     }
 
+    // Used for dynamic tile highlighting
     private void Update()
     {
         if (targeting && !PauseMenu.instance.blocker.activeInHierarchy)
