@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     public int turnNumber;
     public bool unitMoving = false;
+    public Color playerTurnColor = Color.blue;
+    public Color enemyTurnColor = Color.red;
 
     public StageData stageData;
 
@@ -81,7 +83,7 @@ public class GameManager : MonoBehaviour
                     ChangeState(GameState.EndScreen);
                 }
                 combatUIManager.Instance.ShowEndTurnOption();
-                TurnUIManager.Instance.UpdateTurnText(turnNumber);
+                TurnUIManager.Instance.UpdateTurnText(turnNumber,"Player Turn",playerTurnColor);
                 CardManager.instance.NextTurn();
                 if (CheckPlayerVictory())
                 {
@@ -92,6 +94,7 @@ public class GameManager : MonoBehaviour
             case GameState.EnemyTurn:
                 // Debug.Log("Enemy Turn");
                 // Debug.Log("Turn Number" + turnNumber);
+                TurnUIManager.Instance.UpdateTurnText(turnNumber, "Enemy Turn", enemyTurnColor);
                 UnitManager.Instance.ApplyEndTurnEffects(Faction.Player);
                 if (CheckPlayerVictory())
                 {

@@ -32,9 +32,10 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         SoundFXManager.instance.PlaySoundFXClip(mainMenuSFX, transform, 1f);
+        ArmyManager.Instance.ResetArmy();
         GameProgress.ClearedStages.Clear();
         CurrentSession.ActiveStageID = "";
-        SceneManager.LoadScene("Scenes/StageSelection");
+        SceneManager.LoadScene("Scenes/StoryScenes");
     }
 
     public void QuitGame()
@@ -79,6 +80,7 @@ public class MenuManager : MonoBehaviour
 
     public void ToBeginning()
     {
+        ArmyManager.Instance.ResetArmy();
         GameProgress.ClearedStages.Clear();
         CurrentSession.ActiveStageID = "";
         SceneManager.LoadScene("Scenes/MainMenu");

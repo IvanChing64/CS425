@@ -9577,8 +9577,8 @@ MonoBehaviour:
 
     Worlds collide. The ultimate enemy stands
     before you. Prevail now, or it''s bedtime for you.'
-  stageWidthMin: 20
-  stageWidthMax: 20
+  stageWidthMin: 18
+  stageWidthMax: 18
   stageHeightMin: 12
   stageHeightMax: 12
   isRandomSize: 1
