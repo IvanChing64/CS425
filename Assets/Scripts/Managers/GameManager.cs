@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 
 //Developer: Ivan Ching
+//Purpose: This script is to manage the game state of the game during main gameplay
 
 public class GameManager : MonoBehaviour
 {

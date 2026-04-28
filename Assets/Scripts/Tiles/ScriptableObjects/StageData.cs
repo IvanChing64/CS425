@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+//Developed by Ivan Ching
+//Scriptable object for stage data.
 
 [CreateAssetMenu(fileName = "NewStageData", menuName = "ScriptableObjects/StageData")]
 public class StageData : ScriptableObject
