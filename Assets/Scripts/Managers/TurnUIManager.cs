@@ -10,14 +10,18 @@ public class TurnUIManager : MonoBehaviour
     public static TurnUIManager Instance;
 
     [SerializeField] private Text turnText;
+    [SerializeField] private Text turnTitle;
+    [SerializeField] private Image backgroundBox;
 
     public void Awake()
     {
         Instance = this;
     }
 
-    public void UpdateTurnText(int turnNumber)
+    public void UpdateTurnText(int turnNumber,string title, Color boxColor)
     {
         turnText.text = "Turn #" + turnNumber;
+        turnTitle.text = title;
+        backgroundBox.color = boxColor;
     }
 }

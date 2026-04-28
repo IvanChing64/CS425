@@ -81,6 +81,13 @@ public class ArmyManager : MonoBehaviour
         return true;
     }
 
+    public void ResetArmy()
+    {
+        unitsInArmy.Clear();
+        currency = 0;
+        GenerateStartingArmy();
+    }
+
     /// <remarks><em>Only generated if ArmyManager instance does not already have units</em></remarks>
     public void GenerateStartingArmy()
     {
