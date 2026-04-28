@@ -14,6 +14,7 @@ public class healthbar : MonoBehaviour
         healthSlider.value = currentValue / maxValue;
     }
 
+    //change guard bar of both player and enemy.
     public void UpdateGuardBar(float currentValue, float maxValue)
     {
         guardSlider.value = currentValue / maxValue;

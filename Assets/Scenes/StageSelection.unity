@@ -1857,6 +1857,7 @@ MonoBehaviour:
 
     Enemies: 7 Droids
 
+
     Reward:
     300g'
   stageWidthMin: 12
@@ -2733,8 +2734,9 @@ MonoBehaviour:
     Scoundrels and thieves run amok. Bring them to justice!
 
 
-    Enemies: 1 Bandit
-    2 Outlaw 1 Huckster
+    Enemies: 1 Bandit,
+    2 Outlaw, 1 Huckster
+
 
     Reward: 100g'
   stageWidthMin: 12
@@ -3035,7 +3037,8 @@ MonoBehaviour:
     Defend yourself!
 
 
-    Enemies: 1 Bandit 3 Huckster
+    Enemies: 1 Bandit, 3 Huckster
+
 
     Reward: 100g'
   stageWidthMin: 12
@@ -3203,8 +3206,9 @@ MonoBehaviour:
     this titan from smashing this city to pieces!
 
 
-    Enemies: 1 Destroyer 2 Mercenaries
+    Enemies: 1 Destroyer, 2 Mercenaries,
     2 Mad Scientists
+
 
     Reward: 300g'
   stageWidthMin: 12
@@ -4290,7 +4294,8 @@ MonoBehaviour:
     fate and create your own destiny!
 
 
-    Enemies: 1 Conquest 2 Outlaws 1 Bandit
+    Enemies: 1 Conquest, 2 Outlaws, 1 Bandit
+
 
     Reward:
     200g'
@@ -5152,6 +5157,7 @@ MonoBehaviour:
 
     Enemies: 4 Outlaws
 
+
     Reward: 150g'
   stageWidthMin: 12
   stageWidthMax: 15
@@ -5390,8 +5396,8 @@ MonoBehaviour:
   stageID: 1
   stageData: {fileID: 11400000, guid: dea111ae8bb11484280e0f2e4af6087d, type: 2}
   stageDesciption: "Pandora opens the lid. Dust motes dance in the light like magical
-    spores. The floorboards disappear; the adventure begins.\n\nEnemies: 1 Grunt
-    1 Archer 1 Cultist \nReward: 50g"
+    spores. The floorboards disappear; the adventure begins.\n\nEnemies: 1 Grunt,
+    1 Archer, 1 Cultist\n \nReward: 50g"
   stageWidthMin: 10
   stageWidthMax: 15
   stageHeightMin: 7
@@ -5553,7 +5559,8 @@ MonoBehaviour:
     sudden appearance.
 
 
-    Enemies: 3 Droids 2 Mercenaries
+    Enemies: 3 Droids, 2 Mercenaries
+
 
     Reward: 200g'
   stageWidthMin: 12
@@ -5716,7 +5723,8 @@ MonoBehaviour:
     into the kingdom.
 
 
-    Enemies: 2 Grunt 2 Cultist
+    Enemies: 2 Grunt, 2 Cultist
+
 
     Reward: 100g'
   stageWidthMin: 12
@@ -5880,7 +5888,8 @@ MonoBehaviour:
 
 
     Enemies:
-    2 Droids 2 Mercenaries 1 Mad Scientist
+    2 Droids, 2 Mercenaries, 1 Mad Scientist
+
 
     Reward: 250g'
   stageWidthMin: 12
@@ -6122,7 +6131,8 @@ MonoBehaviour:
 
 
     Enemies:
-    2 Grunts 1 Archer
+    2 Grunts, 1 Archer
+
 
     Reward: 50g'
   stageWidthMin: 12
@@ -7225,7 +7235,8 @@ MonoBehaviour:
 
 
     Enemies:
-    1 Bandit 2 Outlaw 1 Huckster
+    1 Bandit, 2 Outlaw, 1 Huckster
+
 
     Reward: 100g'
   stageWidthMin: 12
@@ -7388,8 +7399,9 @@ MonoBehaviour:
     The party encounters a party of high-tech mercenaries.
 
 
-    Enemies: 3 Mercenaries
+    Enemies: 3 Mercenaries,
     2 Mad Scientists
+
 
     Reward: 200g'
   stageWidthMin: 12
@@ -7797,7 +7809,8 @@ MonoBehaviour:
 
 
     Enemies:
-    2 Grunts 1 Warlock
+    2 Grunts, 1 Warlock
+
 
     Reward: 150g'
   stageWidthMin: 12
@@ -8576,7 +8589,8 @@ MonoBehaviour:
     assault and become town heroes!
 
 
-    Enemies: 2 Grunts 1 Archer 1 Cultist
+    Enemies: 2 Grunts, 1 Archer, 1 Cultist
+
 
     Reward:
     100g'
@@ -9413,7 +9427,8 @@ MonoBehaviour:
     finds a small enemy camp!
 
 
-    Enemies: 1 Grunts 2 Archers
+    Enemies: 1 Grunt, 2 Archers
+
 
     Reward: 50g'
   stageWidthMin: 12

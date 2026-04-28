@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
+//Developer: Ivan Ching
+//Purposs: This script's purpose is to display a panel that shows a description of the story of the stage node. This includes enemy and enemy types as well as rewards
+
 public class StagePreview : MonoBehaviour
 {
     public TMP_Text titleText;

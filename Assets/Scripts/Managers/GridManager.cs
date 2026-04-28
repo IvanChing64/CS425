@@ -314,6 +314,7 @@ public class GridManager : MonoBehaviour
         return neighbors;
     }
 
+    //Addes a background and scales it to the stage.
     private void ScaleBackground()
     {
         float centerX = (float)width / 2f - 0.5f;

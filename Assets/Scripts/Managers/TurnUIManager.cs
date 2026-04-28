@@ -18,6 +18,7 @@ public class TurnUIManager : MonoBehaviour
         Instance = this;
     }
 
+    //updates info on the turn box
     public void UpdateTurnText(int turnNumber,string title, Color boxColor)
     {
         turnText.text = "Turn #" + turnNumber;
