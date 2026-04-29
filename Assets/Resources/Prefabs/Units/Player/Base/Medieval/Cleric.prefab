@@ -303,7 +303,7 @@ MonoBehaviour:
   - Walk
   - March
   - Wound
-  - Heal
+  - Wound
   - Heal
   - Heal
   canAttack: 0

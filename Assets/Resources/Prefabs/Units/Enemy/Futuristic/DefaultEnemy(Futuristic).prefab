@@ -243,7 +243,7 @@ MonoBehaviour:
   baseMoveRange: 0
   baseAttackRange: 0
   isEnraged: 0
-  enemyFlag: 0
+  enemyFlag: 2
   movementBehavior: 0
 --- !u!114 &751289258245009956
 MonoBehaviour:
