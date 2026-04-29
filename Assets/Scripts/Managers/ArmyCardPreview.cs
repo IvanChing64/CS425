@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Author: Bailey Escritor
+
 public class ArmyCardPanel : MonoBehaviour
 {
     [SerializeField] private RectTransform cardPanel;

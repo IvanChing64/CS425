@@ -200,6 +200,11 @@ public class NPC_Controller: MonoBehaviour
         unit.isSummoned = true;
         tile.OccupiedUnit = unit;
 
+        if (unitAnimator != null)
+        {
+            unitAnimator.SetTrigger("attack");
+        }
+
         var baseEnemy = enemy.GetComponent<BaseEnemy>();
         if (baseEnemy != null && UnitManager.Instance != null)
         {
@@ -218,6 +223,12 @@ public class NPC_Controller: MonoBehaviour
         if (neighbors == null || neighbors.Count == 0) return false;
 
         int spawned = 0;
+
+        if(unitAnimator != null)
+        {
+            unitAnimator.SetTrigger("attack");
+        }
+
 
         foreach (Tile tile in neighbors)
         {
@@ -605,6 +616,11 @@ public class NPC_Controller: MonoBehaviour
         Debug.Log("[AOE] Boss used AOE attack!");
 
         var tilesInRange = RangeManager.GetTilesInRange(npcUnit.OccupiedTile, aoeRange, RangeType.FloodTargeting);
+
+        if (unitAnimator != null)
+        {
+            unitAnimator.SetTrigger("attack");
+        }
 
         foreach (var unit in UnitManager.Instance.playersSpawned.ToList())
         {

@@ -103,6 +103,7 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Loading Menu");
     }
 
+    //changes scenes to stage select from pause menu
     public void LoadStageSelect()
     {
         SoundFXManager.instance.PlaySoundFXClip(buttonSFX, transform, 1f);

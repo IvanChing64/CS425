@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Authors: Ivan Ching, Bailey Escritor, Liam Riel, Andrew Shelton
 public class BaseUnit : MonoBehaviour
 {
     [Header("Unit Stats")]
@@ -774,139 +775,9 @@ public class BaseUnit : MonoBehaviour
     // Reset all values and decrement all effects at the end of the turn
     public virtual void ResetValues()
     {
-        // if (summoned)
-        // {
-        //     lifetime--;
-        //     if (lifetime == 0)
-        //     {
-        //         Die();
-        //     }
-        // }
-
-        // attackModifier = 1;
-        // defenseModifier = 1;
-        // moveModifier = 0;
         reflect = 0;
         absorb = 0;
         defiant = false;
-        // agility = 0;
-
-        // if (immune > 0)
-        // {
-        //     immune--;
-        // }
-
-        // if (invisible > 0)
-        // {
-        //     invisible--;
-        //     attackModifier += UnitManager.invisibleAttackBoost;
-        //     if (invisible == 0)
-        //     {
-        //         Invisible(true);
-        //     }
-        // }
-
-        // if (daze > 0)
-        // {
-        //     daze--;
-        //     moveModifier -= daze;
-        // }
-
-        // if (strengthen > 0)
-        // {
-        //     strengthen--;
-        //     if (strengthen > 0)
-        //     {
-        //         Strengthen(true);
-        //     }
-        // }
-
-        // if (stunned > 0)
-        // {
-        //     stunned--;
-        // }
-
-        // if (frozen > 0)
-        // {
-        //     frozen--;
-        //     if (frozen > 0)
-        //     {
-        //         Freeze(true);
-        //     }
-        // }
-
-        // if (weaken > 0)
-        // {
-        //     weaken--;
-        //     if (weaken > 0)
-        //     {
-        //         Weaken(true);
-        //     }
-        // }
-
-        // if (regeneration > 0)
-        // {
-        //     Heal(maxHealth * 0.1f * regeneration);
-        //     regeneration--;
-        // }
-
-        // if (poison > 0)
-        // {
-        //     takeDamage(health * 0.1f * poison, false, false);
-        //     poison--;
-        //     if (poison == 0)
-        //     {
-        //         attackModifier += UnitManager.poisonAttackDown;
-        //     }
-        // }
-
-        // if (flaming > 0)
-        // {
-        //     takeDamage(health * 0.2f, false, false);
-        //     takeDamage(maxHealth * 0.15f, false, false);
-        //     flaming--;
-        // }
-
-        // if (boost > 0)
-        // {
-        //     boost--;
-        //     if (boost > 0)
-        //     {
-        //         Boost(true);
-        //     }
-        // }
-
-        // if (hinder > 0)
-        // {
-        //     hinder--;
-        //     if (hinder > 0)
-        //     {
-        //         Hinder(true);
-        //     }
-        // }
-
-        // if (resistant > 0)
-        // {
-        //     resistant--;
-        //     if (resistant > 0)
-        //     {
-        //         Resistant(true);
-        //     }
-        // }
-
-        // if (vulnerable > 0)
-        // {
-        //     vulnerable--;
-        //     if (vulnerable > 0)
-        //     {
-        //         Vulnerable(true);
-        //     }
-        // }
-
-        // if (restricted > 0)
-        // {
-        //     restricted--;
-        // }
 
         if (dodge > 0)
         {
@@ -929,9 +800,6 @@ public class BaseUnit : MonoBehaviour
         attackModifier = 1;
         defenseModifier = 1;
         moveModifier = 0;
-        //reflect = 0;
-        //absorb = 0;
-        //defiant = false;
         agility = 0;
 
         if (immune > 0)
@@ -1007,7 +875,7 @@ public class BaseUnit : MonoBehaviour
 
         if (poison > 0)
         {
-            float poisonDamage = health * 0.8f * poison;
+            float poisonDamage = health * 0.08f * poison;
             if (poisonDamage > 50)
             {
                 poisonDamage = 50;
@@ -1068,10 +936,6 @@ public class BaseUnit : MonoBehaviour
             restricted--;
         }
 
-        // if (dodge > 0)
-        // {
-        //     dodge--;
-        // }
     }
 
     // Andrew: Stat application for enraged status
@@ -1082,6 +946,7 @@ public class BaseUnit : MonoBehaviour
         {
             moveRange = 1;
             attackRange = 6;
+            dmg = 60;
         }
         else
         {
@@ -1103,8 +968,6 @@ public class BaseUnit : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
-
-        //Debug.Log($"[DEATH] {name} | isSummoned: {isSummoned} | summoner: {summoner}");
 
         Debug.Log($"{name} has died.");
         if (Faction == Faction.Player)

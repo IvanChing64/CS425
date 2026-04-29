@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Author: Bailey Escritor
+
 public class ArmySceneManager : MonoBehaviour
 {
     public List<ScriptableArmySlot> scriptableArmySlots;

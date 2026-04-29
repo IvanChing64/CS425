@@ -18,6 +18,7 @@ public class MenuManager : MonoBehaviour
         Instance = this;
     }
 
+    //Hides the continue button when no stages are cleared
     private void Start()
     {
         if (currentScreen == GameScreen.Start)
@@ -29,45 +30,54 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    //Starts the game, resets the stages, resets the army
     public void StartGame()
     {
         SoundFXManager.instance.PlaySoundFXClip(mainMenuSFX, transform, 1f);
+        ArmyManager.Instance.ResetArmy();
         GameProgress.ClearedStages.Clear();
         CurrentSession.ActiveStageID = "";
-        SceneManager.LoadScene("Scenes/StageSelection");
+        SceneManager.LoadScene("Scenes/StoryScenes");
     }
 
+    //Quits game
     public void QuitGame()
     {
         SoundFXManager.instance.PlaySoundFXClip(mainMenuSFX, transform, 1f);
         Application.Quit();
     }
 
+    //Continues to stage selection
     public void ContinueGame()
     {
         SceneManager.LoadScene("Scenes/StageSelection");
     }
 
+    //Continues to story scene
     public void ToStory()
     {
         SceneManager.LoadScene("Scenes/StoryScenes");
     }
 
+    //Continues to controls
     public void ToControls()
     {
         SceneManager.LoadScene("Scenes/Controls");
     }
 
+    //Continues to shop
     public void ToShop()
     {
         SceneManager.LoadScene("Scenes/Shop");
     }
 
+    //Continues to army scene
     public void ToArmy()
     {
         SceneManager.LoadScene("Scenes/Army");
     }
 
+    //goes back to previous scene in the unity build
     public void PreviousScene()
     {
         int previousIndex = SceneManager.GetActiveScene().buildIndex - 1;
@@ -77,8 +87,10 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    //restart button on the end screen, resets stages, resets army.
     public void ToBeginning()
     {
+        ArmyManager.Instance.ResetArmy();
         GameProgress.ClearedStages.Clear();
         CurrentSession.ActiveStageID = "";
         SceneManager.LoadScene("Scenes/MainMenu");

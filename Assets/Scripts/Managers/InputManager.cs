@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+//Developer: Ivan Ching
 
 public class InputManager : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class InputManager : MonoBehaviour
         camComponent = Camera.main;
     }
 
+    //looks for button presses.
     void Update()
     {
         if(GameManager.Instance.gameState != GameState.PlayerTurn && GameManager.Instance.gameState != GameState.EnemyTurn)
@@ -54,6 +56,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    //creates camera and its default postions
     public void InitializeCamera(Vector3 pos, float initialZoom)
     {
         homePosition = pos;
@@ -62,6 +65,7 @@ public class InputManager : MonoBehaviour
 
     }
 
+    //Delection logic
     public void HandleDeselect()
     {
         if(combatUIManager.Instance != null && combatUIManager.Instance.IsCombatMenuOpen)
@@ -94,6 +98,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    //clear highlights from units
     private void ClearMovementHighlights()
     {
         var selectedPlayer = UnitManager.Instance.SelectedPlayer;
@@ -108,6 +113,8 @@ public class InputManager : MonoBehaviour
         }
     }
 
+
+    //Camera movement logic
     private void HandleCamera()
     {
         float x = Input.GetAxisRaw("Horizontal");
@@ -120,6 +127,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    //Camera zoom logic
     private void HandleCameraZoom()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -130,6 +138,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    //Resets camera
     private IEnumerator SnapBack()
     {
         if (!isCamInitialized)

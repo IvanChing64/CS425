@@ -37,7 +37,7 @@ public class UnitInfo : MonoBehaviour
         }
 
         // Write name field
-        nameField.fieldText.text = selectedUnit.name;
+        nameField.fieldText.text = selectedUnit.Name;
 
         if (selectedUnit is BasePlayer p)
         {

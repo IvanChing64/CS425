@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4788174676183193968}
   - component: {fileID: 2810093181928549197}
   - component: {fileID: 2065938482087267046}
+  - component: {fileID: 4688099542148421221}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -75,6 +76,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4688099542148421221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535576495004243331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0, g: 0.80784315, b: 1, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1891060810755376529
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efead496cd676ad49b7245ff8fbde53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player1
-  Name: 
+  Name: Paladin
   OccupiedTile: {fileID: 0}
   Faction: 0
   summoned: 0
@@ -385,6 +401,7 @@ MonoBehaviour:
   strengthen: 0
   resistant: 0
   invisible: 0
+  immune: 0
   stunned: 0
   restricted: 0
   frozen: 0
@@ -407,6 +424,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 91c9ddbccc0cd9f42a0d5e9e6d94f0ef, type: 3}
   - {fileID: 8300000, guid: f07f738aaed46a7438620c46b642d30b, type: 3}
   - {fileID: 8300000, guid: a73bff5cdba4b65439456efe57db26f9, type: 3}
+  isSummoned: 0
+  summoner: {fileID: 0}
+  baseMoveRange: 0
+  baseAttackRange: 0
+  isEnraged: 0
   startingDeck:
   - March
   - March

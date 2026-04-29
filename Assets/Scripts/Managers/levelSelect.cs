@@ -114,6 +114,7 @@ public class levelSelect : MonoBehaviour
         //}
     }
 
+    //Loads the stage and sets the size of the grid of the stage
     public void LoadBattleStage()
     {
         if (isRandomSize)
@@ -130,6 +131,7 @@ public class levelSelect : MonoBehaviour
         SceneManager.LoadScene("Scenes/SampleScene");
     }
 
+    //loads the shop
     public void LoadShopStage()
     {
         SceneManager.LoadScene("Scenes/Shop");
