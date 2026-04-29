@@ -702,55 +702,6 @@ public class NPC_Controller: MonoBehaviour
     }
     
 
-
-    private void Update()
-    {
-       /* if (GameManager.Instance == null) return;
-
-        if (GameManager.Instance.gameState != GameState.EnemyTurn) return;
-
-        
-
-
-        if (!isMoving || path == null) return;
-
-        if (pathIndex >= path.Count)
-        {
-            FinishedMoves();
-            return;
-
-        }
-
-        if (tilesMovedThisTurn >= tilesPerMove)
-        {
-            
-            
-            //Debug.Log("NPC stopped: reached tilesPerMove limit.");
-            FinishedMoves();
-            return;
-            
-           
-        }
-        
-
-        Tile currentTargetTile = path[pathIndex];
-        Vector2 targetPos = currentTargetTile.transform.position;
-        transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-        if (currentTargetTile == null)
-        {
-            Debug.Log("Current target tile is null!");
-            return;
-        }
-       
-        transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-
-        if (Vector2.Distance(transform.position, targetPos) < 0.1f)
-        {
-            //Debug.Log("NPC reached tile: " + currentTargetTile.name);
-            pathIndex++;
-            tilesMovedThisTurn++;
-        }*/
-    }
     //New: Function for setting enemy behavior for movement based on current flag
 
     public void SetBehaviorTarget(Tile startTile)
@@ -1138,7 +1089,7 @@ public class NPC_Controller: MonoBehaviour
                         currentState = TurnState.EndTurn;
                         break;
                     }
-
+                   
                     currentState = TurnState.Targeting;
                     break;
 
@@ -1147,11 +1098,13 @@ public class NPC_Controller: MonoBehaviour
                         unitAnimator.SetBool("IsMoving", true);
 
                     SetBehaviorTarget(npcUnit.OccupiedTile);
+                    //yield return new WaitForSeconds(0.3f);
                     currentState = TurnState.Moving;
                     break;
 
                 case TurnState.Moving:
                     yield return StartCoroutine(MoveAlongPath());
+                    yield return new WaitForSeconds(0.3f);
                     currentState = TurnState.Acting;
            
                     break;
@@ -1160,6 +1113,7 @@ public class NPC_Controller: MonoBehaviour
                     if (unitAnimator != null)
                         unitAnimator.SetBool("IsMoving", false);
 
+                    yield return new WaitForSeconds(0.2f);
                     FinishedMoves();
                     CheckForHealAfterMove();
                     if (enemy1.movementBehavior == Enemy1.MovementBehavior.Boss)
@@ -1169,7 +1123,8 @@ public class NPC_Controller: MonoBehaviour
                     else
                     {
                         CheckAndAttack();
-                    }    
+                    }
+                    yield return new WaitForSeconds(0.2f);
                     currentState = TurnState.EndTurn;
                     break;
 
