@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Prayer
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Prayer
-  cardDescription: Grant Boost and Immunity to all ranged allies
+  cardDescription: Grant Boost and Immunity to all ranged allies for 2 turns
   type: 2
   range: 3
   areaRange: 0

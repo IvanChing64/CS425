@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Grasp
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Grasp
-  cardDescription: Restrict and Expose a ranged enemy
+  cardDescription: Expose and restrict a ranged enemy for 1 turn
   type: 0
   range: 3
+  areaRange: 0
   value: 20
   cost: 1
   damaging: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Overwatch
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Overwatch
-  cardDescription: Gain Boost and Immunity
+  cardDescription: Gain Boost and Immunity for two turns
   type: 2
   range: 0
   areaRange: 0

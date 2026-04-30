@@ -385,7 +385,7 @@ public class BaseUnit : MonoBehaviour
         } else
         {
             // Become Invisible
-            if (invisible != 0) return;
+            if ((int)invisible >= 1) return;
             invisible = EffectFlag.Start;
             GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.5f);
             attackModifier += UnitManager.invisibleAttackBoost;

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Overdrive
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Overdrive
-  cardDescription: Gain Boost and Resistant
+  cardDescription: Gain Boost and Resistant for two turns
   type: 2
   range: 0
   areaRange: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tenacity
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Tenacity
-  cardDescription: Gain Immunity and Resistance
+  cardDescription: Gain Immunity and Resistance for 2 turns
   type: 2
   range: 0
   areaRange: 0

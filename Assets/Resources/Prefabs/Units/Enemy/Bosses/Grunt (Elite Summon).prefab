@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 738936172720448078}
   - component: {fileID: -6658566611899959939}
   m_Layer: 0
-  m_Name: Destroyer (Elite Varient)
+  m_Name: Grunt (Elite Summon)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,8 +175,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8793639957104055765, guid: a22ff163f8e65c34db09feb42b234b78, type: 3}
-  m_Color: {r: 0.93193537, g: 0.383277, b: 0.9339623, a: 1}
+  m_Sprite: {fileID: -5948806968594788206, guid: 765cca1a0021749bb9646e4062ec7824, type: 3}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -197,19 +197,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6381d107cad097a41ae24e95fb7a9281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
-  Name: Destroyer
+  Name: Spawn
   OccupiedTile: {fileID: 0}
   Faction: 1
   summoned: 0
   lifetime: 0
-  maxHealth: 200
-  health: 200
-  guard: 300
-  dmg: 45
+  maxHealth: 40
+  health: 40
+  guard: 0
+  dmg: 30
   attackModifier: 1
   defenseModifier: 1
   moveModifier: 0
-  moveRange: 3
+  moveRange: 4
   attackRange: 1
   boost: 0
   strengthen: 0
@@ -243,8 +243,8 @@ MonoBehaviour:
   baseMoveRange: 0
   baseAttackRange: 0
   isEnraged: 0
-  enemyFlag: 0
-  movementBehavior: 0
+  enemyFlag: 2
+  movementBehavior: 1
 --- !u!114 &751289258245009956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,13 +272,13 @@ MonoBehaviour:
   moveSpeed: 2.5
   tilesPerMove: 4
   path: []
-  isEliteVarient: 1
+  isEliteVarient: 0
   isEnraged: 0
   healAmount: 10
   enemyPrefab: {fileID: 0}
   maxSummons: 6
   summonsPerCast: 2
-  aoeRange: 2
+  aoeRange: 3
 --- !u!95 &738936172720448078
 Animator:
   serializedVersion: 7
@@ -289,7 +289,7 @@ Animator:
   m_GameObject: {fileID: 1167321167610509267}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3f9875718a5e99f4eb5c0461794f59d2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 451d5f1d5330e42218c98e0f70cea694, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -524,7 +524,6 @@ GameObject:
   - component: {fileID: 2103509822518254231}
   - component: {fileID: 4189325051226918885}
   - component: {fileID: 3709701032567082997}
-  - component: {fileID: 8929903627012499655}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -589,21 +588,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8929903627012499655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2976721025581453321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 3, y: -3}
-  m_UseGraphicAlpha: 1
 --- !u!1 &6163788838552927680
 GameObject:
   m_ObjectHideFlags: 0

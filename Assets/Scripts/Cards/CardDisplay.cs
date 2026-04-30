@@ -10,8 +10,11 @@ public class CardDisplay : MonoBehaviour
     public ScriptableCard cardData;
     public Image cardBorder;
     public Image cardIcon, cardCorner;
+    public Image cardBack;
     public TMP_Text cardName, cardDescription, cardValue, cardCost;
     public float overrideValue = 0;
+
+    public static Color greyedOutColor = new Color(0.77f, 0.77f, 0.77f, 1f);
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,6 +48,10 @@ public class CardDisplay : MonoBehaviour
         cardValue.color = Color.black;
         cardValue.text = cardData.value.ToString();
         cardCost.color = Color.black;
+        cardBack.color = Color.white;
+        cardBorder.color = cardData.cardBorderColor;
+        cardIcon.color = Color.white;
+        cardCorner.color = Color.white;
 
         switch (cardData.type)
         {
@@ -97,6 +104,10 @@ public class CardDisplay : MonoBehaviour
         if (CardManager.instance.selectedPlayer != null && CardManager.instance.selectedPlayer.GetComponent<HandManager>().actionPoints < cardData.cost)
         {
             cardCost.color = Color.red;
+            cardBack.color  = greyedOutColor;
+            cardBorder.color -= Color.white - greyedOutColor;
+            cardIcon.color -= Color.white - greyedOutColor;
+            cardCorner.color -= Color.white - greyedOutColor;
         }
 
         cardBorder.color = cardData.cardBorderColor;

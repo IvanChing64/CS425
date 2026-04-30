@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Virus
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Virus
-  cardDescription: Poison and Weaken a ranged enemy
+  cardDescription: Poison and Weaken a ranged enemy for two turns
   type: 0
   range: 3
   areaRange: 0

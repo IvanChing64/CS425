@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Kinetic
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Kinetic
-  cardDescription: Grant a ranged ally reflect and Guard
+  cardDescription: Grant a ranged ally reflect and Guard for 1 turn
   type: 2
   range: 3
   areaRange: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Laser
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Laser
-  cardDescription: Damage a ranged enemy. Ignore defenses
+  cardDescription: Pierce a ranged enemy.
   type: 0
   range: 3
   areaRange: 0

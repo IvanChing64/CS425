@@ -924,7 +924,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 9
+  m_Text: 
 --- !u!222 &143606888
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1944,7 +1944,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3640100242305684065, guid: efaab34668cca4d4cae62126240d006c, type: 3}
+  m_Sprite: {fileID: 5781926932207268377, guid: efaab34668cca4d4cae62126240d006c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2735,7 +2735,7 @@ MonoBehaviour:
 
 
     Enemies: 1 Bandit,
-    2 Outlaw, 1 Huckster
+    2 Outlaws, 1 Huckster
 
 
     Reward: 100g'
@@ -3037,7 +3037,7 @@ MonoBehaviour:
     Defend yourself!
 
 
-    Enemies: 1 Bandit, 3 Huckster
+    Enemies: 2 Bandits, 2 Hucksters
 
 
     Reward: 100g'
@@ -3206,11 +3206,11 @@ MonoBehaviour:
     this titan from smashing this city to pieces!
 
 
-    Enemies: 1 Destroyer, 2 Mercenaries,
-    2 Mad Scientists
+    Enemies: 1 Destroyer, 4 Mercenaries
 
 
-    Reward: 300g'
+    Reward:
+    300g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 12
@@ -5155,11 +5155,11 @@ MonoBehaviour:
     your lives and your honor!
 
 
-    Enemies: 4 Outlaws
+    Enemies: 5 Outlaws
 
 
     Reward: 150g'
-  stageWidthMin: 12
+  stageWidthMin: 15
   stageWidthMax: 15
   stageHeightMin: 11
   stageHeightMax: 12
@@ -5244,7 +5244,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5293505787706998000, guid: efaab34668cca4d4cae62126240d006c, type: 3}
+  m_Sprite: {fileID: 5781926932207268377, guid: efaab34668cca4d4cae62126240d006c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5398,10 +5398,10 @@ MonoBehaviour:
   stageDesciption: "Pandora opens the lid. Dust motes dance in the light like magical
     spores. The floorboards disappear; the adventure begins.\n\nEnemies: 1 Grunt,
     1 Archer, 1 Cultist\n \nReward: 50g"
-  stageWidthMin: 10
-  stageWidthMax: 15
-  stageHeightMin: 7
-  stageHeightMax: 10
+  stageWidthMin: 8
+  stageWidthMax: 8
+  stageHeightMin: 8
+  stageHeightMax: 8
   isRandomSize: 1
   requiredStageIDs:
   - 
@@ -5723,7 +5723,7 @@ MonoBehaviour:
     into the kingdom.
 
 
-    Enemies: 2 Grunt, 2 Cultist
+    Enemies: 4 Cultists
 
 
     Reward: 100g'
@@ -5811,7 +5811,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5293505787706998000, guid: efaab34668cca4d4cae62126240d006c, type: 3}
+  m_Sprite: {fileID: 5781926932207268377, guid: efaab34668cca4d4cae62126240d006c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6135,8 +6135,8 @@ MonoBehaviour:
 
 
     Reward: 50g'
-  stageWidthMin: 12
-  stageWidthMax: 15
+  stageWidthMin: 8
+  stageWidthMax: 11
   stageHeightMin: 7
   stageHeightMax: 10
   isRandomSize: 1
@@ -6219,7 +6219,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5781926932207268377, guid: efaab34668cca4d4cae62126240d006c, type: 3}
+  m_Sprite: {fileID: 5293505787706998000, guid: efaab34668cca4d4cae62126240d006c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7235,7 +7235,7 @@ MonoBehaviour:
 
 
     Enemies:
-    1 Bandit, 2 Outlaw, 1 Huckster
+    1 Bandit, 2 Outlaws, 1 Huckster
 
 
     Reward: 100g'
@@ -7813,8 +7813,8 @@ MonoBehaviour:
 
 
     Reward: 150g'
-  stageWidthMin: 12
-  stageWidthMax: 15
+  stageWidthMin: 13
+  stageWidthMax: 13
   stageHeightMin: 10
   stageHeightMax: 10
   isRandomSize: 1
@@ -9591,7 +9591,14 @@ MonoBehaviour:
 
 
     Worlds collide. The ultimate enemy stands
-    before you. Prevail now, or it''s bedtime for you.'
+    before you. Prevail now, or it''s bedtime for you.
+
+
+    Enemies: 1 Zeus, 1 Destroyer,
+    1 Conquest, 1 Warlock
+
+
+    Reward: VICTORY!!'
   stageWidthMin: 18
   stageWidthMax: 18
   stageHeightMin: 12

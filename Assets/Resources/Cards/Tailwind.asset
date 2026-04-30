@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tailwind
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Tailwind
-  cardDescription: Grant agility to self and all ranged allies
+  cardDescription: Grant agility to self and all ranged allies for 1 turn
   type: 2
   range: 3
   areaRange: 0
