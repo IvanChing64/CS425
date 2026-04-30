@@ -27,10 +27,10 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Text armyCapText;
     [SerializeField] private Text rerollCostText;
     [SerializeField] private int rerollBaseCost;
-
+    
     public List<ShopItemSlot> itemSlots;
 
-    void Awake()
+    private void Awake()
     {
         Instance = this;
 

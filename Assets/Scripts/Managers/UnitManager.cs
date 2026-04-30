@@ -235,7 +235,7 @@ public class UnitManager : MonoBehaviour
                     if (CardManager.instance.selectedCard.cardType == Type.Attack)
                     {
                        foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
-                        {
+                       {
                             if (targetedTile == t)
                             {
                                 foreach (Tile p in SelectedPlayer.GetTilesInAOEAttackRange(targetedTile, range))
@@ -245,7 +245,7 @@ public class UnitManager : MonoBehaviour
                                 if (t.OccupiedUnit == null || t.OccupiedUnit.Faction == Faction.Enemy)t.ShowHighlight(true, Tile.attackableColor);
                                 break;
                             }
-                        } 
+                       } 
                     } else if (CardManager.instance.selectedCard.cardType == Type.Support)
                     {
                         foreach (Tile t in SelectedPlayer.GetTilesInAttackRange())
@@ -426,6 +426,10 @@ public class UnitManager : MonoBehaviour
     //    return (T)units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
     //}
 
+    /// <summary>
+    /// Universal handling of selecting units, called by SetSelectedPlayer and SetSelectedEnemy.
+    /// </summary>
+    /// <param name="unit">The unit to select.</param>
     private void SetSelectedUnit(BaseUnit unit)
     {
         if (SelectedUnit != null && SelectedUnit != unit)
@@ -448,6 +452,10 @@ public class UnitManager : MonoBehaviour
         UnitInfo.Instance.UpdatePanel();
     }
 
+    /// <summary>
+    /// Sets a player unit as a selected unit and updates the selection indicator and unit info panel.
+    /// </summary>
+    /// <param name="player">The player unit to select.</param>
     public void SetSelectedPlayer(BasePlayer player)
     {
         SetSelectedUnit(player);
@@ -472,6 +480,10 @@ public class UnitManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets an enemy unit as a selected unit, shows enemy movement and attack range, and updates the selection indicator and unit info panel.
+    /// </summary>
+    /// <param name="enemy">The enemy unit to select.</param>
     public void SetSelectedEnemy(BaseEnemy enemy)
     {
         SetSelectedUnit(enemy);
@@ -484,8 +496,6 @@ public class UnitManager : MonoBehaviour
         }
 
         int attackRange = SelectedEnemy.attackRange;
-        // int moveRange = NPC_Controller.Instance.tilesPerMove;
-        // TODO: enemies should be initialized with correct movement range
         int moveRange = SelectedEnemy.moveRange + SelectedEnemy.moveModifier;
 
         if (SelectedEnemy.restricted > 0)
@@ -508,6 +518,7 @@ public class UnitManager : MonoBehaviour
 
         if (moveRange > 0)
         {
+            // Move range will override total range, showing movement and total potential attack range
             RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, moveRange).ForEach(t => t.ShowHighlight(false, Tile.walkableColor));
             RangeManager.GetTilesInRange(SelectedEnemy.OccupiedTile, moveRange).ForEach(t => t.ShowHighlight(true, Tile.walkableColor));
         }

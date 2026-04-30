@@ -36,6 +36,7 @@ public class MenuManager : MonoBehaviour
         SoundFXManager.instance.PlaySoundFXClip(mainMenuSFX, transform, 1f);
         ArmyManager.Instance.ResetArmy();
         GameProgress.ClearedStages.Clear();
+        ShopManager.StockInitialized = false;
         CurrentSession.ActiveStageID = "";
         SceneManager.LoadScene("Scenes/StoryScenes");
     }
