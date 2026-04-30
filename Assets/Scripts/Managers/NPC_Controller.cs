@@ -703,55 +703,6 @@ public class NPC_Controller: MonoBehaviour
     }
     
 
-
-    private void Update()
-    {
-       /* if (GameManager.Instance == null) return;
-
-        if (GameManager.Instance.gameState != GameState.EnemyTurn) return;
-
-        
-
-
-        if (!isMoving || path == null) return;
-
-        if (pathIndex >= path.Count)
-        {
-            FinishedMoves();
-            return;
-
-        }
-
-        if (tilesMovedThisTurn >= tilesPerMove)
-        {
-            
-            
-            //Debug.Log("NPC stopped: reached tilesPerMove limit.");
-            FinishedMoves();
-            return;
-            
-           
-        }
-        
-
-        Tile currentTargetTile = path[pathIndex];
-        Vector2 targetPos = currentTargetTile.transform.position;
-        transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-        if (currentTargetTile == null)
-        {
-            Debug.Log("Current target tile is null!");
-            return;
-        }
-       
-        transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-
-        if (Vector2.Distance(transform.position, targetPos) < 0.1f)
-        {
-            //Debug.Log("NPC reached tile: " + currentTargetTile.name);
-            pathIndex++;
-            tilesMovedThisTurn++;
-        }*/
-    }
     //New: Function for setting enemy behavior for movement based on current flag
 
     public void SetBehaviorTarget(Tile startTile)
@@ -923,7 +874,7 @@ public class NPC_Controller: MonoBehaviour
         return inRangeTiles;
     }
 
-    private void CheckAndAttack()
+    private IEnumerator CheckAndAttack()
     {
         //AOE logic:
         int aoeCount = CountPlayersInAOE();
@@ -934,7 +885,7 @@ public class NPC_Controller: MonoBehaviour
             if (aoeCount >= 1) 
             {
                 PerformAOEAttack();
-                return; 
+                yield break; 
             }
         }
 
@@ -942,6 +893,7 @@ public class NPC_Controller: MonoBehaviour
 
         List<Tile> attackableTiles = npcUnit.GetTilesInAttackRange();
         Debug.Log($"NPC checking attack. Range: {npcUnit.attackRange}. Tiles found in range: {attackableTiles.Count}");
+        
         BaseUnit target = null;
         
 
@@ -959,14 +911,22 @@ public class NPC_Controller: MonoBehaviour
 
         if(target != null)
         {
+            //Wind-up before the attack
+            //yield return new WaitForSeconds(0.2f);
+
             if (unitAnimator != null)
             {
                 unitAnimator.SetTrigger("attack");
             }
+
+            yield return new WaitForSeconds(0.5f);
             Debug.Log($"{npcUnit.name} attacks {target.name}");
             target.takeDamage(npcUnit.dmg * npcUnit.attackModifier, true, false, npcUnit);
+
+            yield return new WaitForSeconds(0.5f);
         } else {
             Debug.Log("nothing happened!");
+            yield return null;
         }
     }
 
@@ -1139,7 +1099,7 @@ public class NPC_Controller: MonoBehaviour
                         currentState = TurnState.EndTurn;
                         break;
                     }
-
+                   
                     currentState = TurnState.Targeting;
                     break;
 
@@ -1148,11 +1108,13 @@ public class NPC_Controller: MonoBehaviour
                         unitAnimator.SetBool("IsMoving", true);
 
                     SetBehaviorTarget(npcUnit.OccupiedTile);
+                    yield return new WaitForSeconds(0.3f);
                     currentState = TurnState.Moving;
                     break;
 
                 case TurnState.Moving:
                     yield return StartCoroutine(MoveAlongPath());
+                    //yield return new WaitForSeconds(0.3f);
                     currentState = TurnState.Acting;
            
                     break;
@@ -1161,6 +1123,7 @@ public class NPC_Controller: MonoBehaviour
                     if (unitAnimator != null)
                         unitAnimator.SetBool("IsMoving", false);
 
+                    //yield return new WaitForSeconds(0.2f);
                     FinishedMoves();
                     if (enemy1.enemyFlag == BaseUnit.EnemyFlag.Support) CheckForHealAfterMove();
                     if (enemy1.movementBehavior == Enemy1.MovementBehavior.Boss)
@@ -1169,8 +1132,9 @@ public class NPC_Controller: MonoBehaviour
                     }
                     else
                     {
-                        CheckAndAttack();
-                    }    
+                        yield return StartCoroutine(CheckAndAttack());
+                    }
+                    yield return new WaitForSeconds(0.2f);
                     currentState = TurnState.EndTurn;
                     break;
 
