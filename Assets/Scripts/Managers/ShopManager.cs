@@ -233,6 +233,7 @@ public class ShopManager : MonoBehaviour
         if (CurrentItemsInShop[slot] is NewUnitItem nuItem)
         {
             desc = $"New {nuItem.newUnit.name} for army";
+            itemSlots[slot].itemImage.color = Color.white;
         }
         else if (CurrentItemsInShop[slot] is UnitUpgradeItem uuItem)
         {

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 //Developer: Ivan Ching
-//Edits from Andrew Shelton
+//Edits from Andrew Shelton and Bailey Escritor
 //Aggregated from multiple tutorials
 
 public class UnitManager : MonoBehaviour
@@ -105,7 +105,7 @@ public class UnitManager : MonoBehaviour
     }
 
 
-
+    // Update done by Bailey Escritor
     private void Update()
     {
         if (targeting && !PauseMenu.instance.blocker.activeInHierarchy)

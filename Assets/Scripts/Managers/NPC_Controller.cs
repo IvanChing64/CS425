@@ -252,6 +252,7 @@ public class NPC_Controller: MonoBehaviour
         }
         return false;
     }
+
     private Tile GetSupportTarget()
     {
         Debug.Log($"Summons: {currentSummons}, Turn: {GameManager.Instance.turnNumber}");
@@ -1124,7 +1125,7 @@ public class NPC_Controller: MonoBehaviour
 
                     //yield return new WaitForSeconds(0.2f);
                     FinishedMoves();
-                    CheckForHealAfterMove();
+                    if (enemy1.enemyFlag == BaseUnit.EnemyFlag.Support) CheckForHealAfterMove();
                     if (enemy1.movementBehavior == Enemy1.MovementBehavior.Boss)
                     {
                         BossAttack();

@@ -303,7 +303,7 @@ MonoBehaviour:
   - Wander
   - Wander
   - Poison
-  - Bandage
+  - Poison
   - Remedy
   - Remedy
   canAttack: 0

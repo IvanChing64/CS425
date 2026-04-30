@@ -363,6 +363,10 @@ public class BaseUnit : MonoBehaviour
     public void Energize(int energy = 1)
     {
         GetComponent<HandManager>().actionPoints += energy;
+        if (GetComponent<SpriteRenderer>().color.b < 1)
+        {
+            GetComponent<SpriteRenderer>().color += new Color(0.5f, 0.5f, 0.5f, 0);
+        }
     }
 
     // Become untargetable, increase attack by 15%
@@ -946,7 +950,7 @@ public class BaseUnit : MonoBehaviour
         {
             moveRange = 1;
             attackRange = 6;
-            dmg = 60;
+            dmg = 70;
         }
         else
         {

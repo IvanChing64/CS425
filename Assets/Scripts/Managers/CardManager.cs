@@ -98,6 +98,7 @@ public class CardManager : MonoBehaviour
     {
         if (selectedCard != null)
         {
+            int oldCost = selectedCard.cost;
             selectedCard.PlayCard();
             selectedPlayer.GetComponent<HandManager>().RemoveCard(selectedCard);
             Destroy(selectedCard.gameObject);
@@ -106,6 +107,20 @@ public class CardManager : MonoBehaviour
             UpdateDeckCard();
             UpdateAPCounter();
             selectedPlayer.GetComponent<HandManager>().UpdateCardVisuals();
+            if (selectedPlayer.GetComponent<HandManager>().actionPoints <= 0.5 && oldCost > 0)
+            {
+                if (selectedPlayer.GetComponent<SpriteRenderer>().color.b == 1)
+                {
+                    selectedPlayer.GetComponent<SpriteRenderer>().color -= new Color(0.5f, 0.5f, 0.5f, 0);
+                }
+            }
+            if (oldCost == -1)
+            {
+                if (selectedPlayer.GetComponent<SpriteRenderer>().color.b < 1)
+                {
+                    selectedPlayer.GetComponent<SpriteRenderer>().color += new Color(0.5f, 0.5f, 0.5f, 0);
+                }
+            }
         }
     }
 

@@ -141,8 +141,16 @@ public class HandManager : MonoBehaviour
             if (actionPoints > 0)
             {
                 actionPoints--;
+                if (actionPoints <= 0.5)
+                {
+                    if (GetComponentInParent<SpriteRenderer>().color.b == 1)
+                    {
+                        GetComponentInParent<SpriteRenderer>().color -= new Color(0.5f, 0.5f, 0.5f, 0);
+                    }
+                }
             } else
             {
+
                 Debug.Log("No More Action Points to use");
                 return;
             }
@@ -250,6 +258,16 @@ public class HandManager : MonoBehaviour
             if (actionPoints > maxActionPoints)
             {
                 actionPoints = maxActionPoints;
+            }
+
+            if (GetComponentInParent<SpriteRenderer>().color.b < 1)
+            {
+                GetComponentInParent<SpriteRenderer>().color += new Color(0.5f, 0.5f, 0.5f, 0);
+            }
+            
+            if (GetComponentInParent<BasePlayer>().Name == "Bishop")
+            {
+                GetComponentInParent<SpriteRenderer>().color = new Color(0, 0.95f, 1, 1);
             }
         }
         

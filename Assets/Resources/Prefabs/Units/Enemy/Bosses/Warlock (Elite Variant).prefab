@@ -276,8 +276,8 @@ MonoBehaviour:
   isEnraged: 0
   healAmount: 10
   enemyPrefab: {fileID: 1167321167610509267, guid: 50efaa4c161f51341865f6c00a2284f4, type: 3}
-  maxSummons: 3
-  summonsPerCast: 1
+  maxSummons: 4
+  summonsPerCast: 2
   aoeRange: 3
 --- !u!95 &738936172720448078
 Animator:
