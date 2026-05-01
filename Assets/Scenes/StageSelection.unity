@@ -1851,15 +1851,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 16
   stageData: {fileID: 11400000, guid: 04f0eb05325830b4f9658fba5bbcf1ef, type: 2}
-  stageDesciption: 'An army of droids have been let loose on the city! Stop their
-    invasion before the city is overrun with nuts and bolts!
+  stageDesciption: 'Big Enemy Wave!
 
 
-    Enemies: 7 Droids
+    An army of droids have been let loose on
+    the city! Stop their invasion before the city is overrun with nuts and bolts!
 
 
-    Reward:
-    300g'
+    Enemies:
+    8 Droids
+
+
+    Reward: 300g'
   stageWidthMin: 12
   stageWidthMax: 15
   stageHeightMin: 12
@@ -5151,14 +5154,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 10
   stageData: {fileID: 11400000, guid: 79ab8631e2ea5ab4d86b9b2dd859204c, type: 2}
-  stageDesciption: 'It''s high noon and a band of outlaws is calling you out! Defend
-    your lives and your honor!
+  stageDesciption: 'Big Enemy Wave!
+
+
+    It''s high noon and a band of outlaws is
+    calling you out! Defend your lives and your honor!
 
 
     Enemies: 5 Outlaws
 
 
-    Reward: 150g'
+    Reward:
+    150g'
   stageWidthMin: 15
   stageWidthMax: 15
   stageHeightMin: 11
@@ -5719,16 +5726,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stageID: 6
   stageData: {fileID: 11400000, guid: 72ecd8b1242b20f46a06b276fe1db4e1, type: 2}
-  stageDesciption: 'An evil cult has taken over the area, stop them before they spread
-    into the kingdom.
+  stageDesciption: 'Big Enemy Wave!
 
 
-    Enemies: 4 Cultists
+    An evil cult has taken over the area, stop
+    them before they spread into the kingdom.
 
 
-    Reward: 100g'
+    Enemies: 6 Cultists
+
+
+    Reward:
+    100g'
   stageWidthMin: 12
-  stageWidthMax: 15
+  stageWidthMax: 12
   stageHeightMin: 10
   stageHeightMax: 10
   isRandomSize: 1
