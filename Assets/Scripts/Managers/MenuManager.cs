@@ -30,7 +30,9 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    //Starts the game, resets the stages, resets the army
+    /// <summary>
+    /// Starts the game, resets the stages, army, and shop
+    /// </summary>
     public void StartGame()
     {
         SoundFXManager.instance.PlaySoundFXClip(mainMenuSFX, transform, 1f);
@@ -41,44 +43,58 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("Scenes/StoryScenes");
     }
 
-    //Quits game
+    /// <summary>
+    /// Quits the game, closes the application
+    /// </summary>
     public void QuitGame()
     {
         SoundFXManager.instance.PlaySoundFXClip(mainMenuSFX, transform, 1f);
         Application.Quit();
     }
 
-    //Continues to stage selection
+    /// <summary>
+    /// Continues an existing game session, going to the stage selection screen
+    /// </summary>
     public void ContinueGame()
     {
         SceneManager.LoadScene("Scenes/StageSelection");
     }
 
-    //Continues to story scene
+    /// <summary>
+    /// Continues to the story scene
+    /// </summary>
     public void ToStory()
     {
         SceneManager.LoadScene("Scenes/StoryScenes");
     }
 
-    //Continues to controls
+    /// <summary>
+    /// Continues to the controls scene
+    /// </summary>
     public void ToControls()
     {
         SceneManager.LoadScene("Scenes/Controls");
     }
 
-    //Continues to shop
+    /// <summary>
+    /// Goes to the shop scene
+    /// </summary>
     public void ToShop()
     {
         SceneManager.LoadScene("Scenes/Shop");
     }
 
-    //Continues to army scene
+    /// <summary>
+    /// Goes to the army scene
+    /// </summary>
     public void ToArmy()
     {
         SceneManager.LoadScene("Scenes/Army");
     }
 
-    //goes back to previous scene in the unity build
+    /// <summary>
+    /// Goes back to previous scene in the Unity build
+    /// </summary>
     public void PreviousScene()
     {
         int previousIndex = SceneManager.GetActiveScene().buildIndex - 1;
@@ -88,7 +104,9 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    //restart button on the end screen, resets stages, resets army.
+    /// <summary>
+    /// Restart button on the end screen, resets stages, resets army.
+    /// </summary>
     public void ToBeginning()
     {
         ArmyManager.Instance.ResetArmy();
@@ -97,6 +115,9 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("Scenes/MainMenu");
     }
 
+    /// <summary>
+    /// Enumerator for the screens of the game, corresponding to the build index of its Unity scene
+    /// </summary>
     public enum GameScreen
     {
         Start = 0,
@@ -105,6 +126,7 @@ public class MenuManager : MonoBehaviour
         StageSelect = 3,
         Combat = 4,
         Shop = 5,
-        Victory = 6
+        Army = 6,
+        Victory = 7
     }
 }
