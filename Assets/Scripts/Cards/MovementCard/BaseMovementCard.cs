@@ -30,7 +30,7 @@ public class BaseMovementCard : BaseCard
             {
                 if (t.OccupiedUnit == null)
                 {
-                    t.ShowHighlight(true, Tile.targetableColor);
+                    if(t.isWalkable)t.ShowHighlight(true, Tile.targetableColor);
                 }              
             }
             

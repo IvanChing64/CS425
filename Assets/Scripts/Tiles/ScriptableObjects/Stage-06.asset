@@ -20,5 +20,7 @@ MonoBehaviour:
   - {fileID: 1167321167610509267, guid: 5fd3341674ba31c4ab24e25f016069d3, type: 3}
   - {fileID: 1167321167610509267, guid: 5fd3341674ba31c4ab24e25f016069d3, type: 3}
   - {fileID: 1167321167610509267, guid: 5fd3341674ba31c4ab24e25f016069d3, type: 3}
-  enemyCount: 4
-  currency: 50
+  - {fileID: 1167321167610509267, guid: 5fd3341674ba31c4ab24e25f016069d3, type: 3}
+  - {fileID: 1167321167610509267, guid: 5fd3341674ba31c4ab24e25f016069d3, type: 3}
+  enemyCount: 6
+  currency: 100

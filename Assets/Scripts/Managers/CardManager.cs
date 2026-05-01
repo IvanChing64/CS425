@@ -170,7 +170,7 @@ public class CardManager : MonoBehaviour
         Vector3 posit = new Vector3(selectedCard.cardHolder.transform.position.x, -800, selectedCard.cardHolder.transform.position.z);
         routine = StartCoroutine(move(selectedCard.cardHolder, false, false, posit));
         selectedPlayer.GetComponent<HandManager>().actionPoints += (float)selectedCard.cost / 2;
-        if (selectedPlayer.GetComponent<HandManager>().actionPoints < 1)
+        if (selectedPlayer.GetComponent<SpriteRenderer>().color.b < 1)
         {
             selectedPlayer.GetComponent<SpriteRenderer>().color += new Color(0.5f, 0.5f, 0.5f, 0);
         }
