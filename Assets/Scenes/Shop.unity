@@ -1937,6 +1937,7 @@ MonoBehaviour:
   itemDescription: {fileID: 1855467671}
   costText: {fileID: 35577881}
   itemImage: {fileID: 246317679}
+  itemButtonImage: {fileID: 1619977358}
 --- !u!1 &364736144
 GameObject:
   m_ObjectHideFlags: 0
@@ -2810,6 +2811,7 @@ MonoBehaviour:
   itemDescription: {fileID: 779003372}
   costText: {fileID: 674597410}
   itemImage: {fileID: 929661408}
+  itemButtonImage: {fileID: 645481090}
 --- !u!1 &612216411
 GameObject:
   m_ObjectHideFlags: 0
@@ -3877,6 +3879,7 @@ MonoBehaviour:
   itemDescription: {fileID: 1470908076}
   costText: {fileID: 1074878625}
   itemImage: {fileID: 1871141150}
+  itemButtonImage: {fileID: 1696155687}
 --- !u!1 &832336680
 GameObject:
   m_ObjectHideFlags: 0
@@ -4740,6 +4743,7 @@ MonoBehaviour:
   itemDescription: {fileID: 364736147}
   costText: {fileID: 681674687}
   itemImage: {fileID: 1629753915}
+  itemButtonImage: {fileID: 465005951}
 --- !u!1 &978720848
 GameObject:
   m_ObjectHideFlags: 0

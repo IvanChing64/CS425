@@ -4,11 +4,8 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "New Item", menuName = "Scriptable Items/Default Item")]
 
 public class ScriptableItem : ScriptableObject
-{ 
+{
     public virtual ItemType Type => ItemType.DefaultItem;
-
-    //[Tooltip("Describes what the item does")]
-    //public ItemType type;
 
     public Sprite itemSprite;
     public string itemDesc;

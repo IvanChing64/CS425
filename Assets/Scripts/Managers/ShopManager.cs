@@ -27,10 +27,10 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Text armyCapText;
     [SerializeField] private Text rerollCostText;
     [SerializeField] private int rerollBaseCost;
-
+    
     public List<ShopItemSlot> itemSlots;
 
-    void Awake()
+    private void Awake()
     {
         Instance = this;
 
@@ -233,7 +233,12 @@ public class ShopManager : MonoBehaviour
         if (CurrentItemsInShop[slot] is NewUnitItem nuItem)
         {
             desc = $"New {nuItem.newUnit.name} for army";
+
+            // A bishop upgrade may have tinted the image, reset this
             itemSlots[slot].itemImage.color = Color.white;
+
+            // Update button color
+            itemSlots[slot].itemButtonImage.color = ShopItemSlot.NewUnitItemColor;
         }
         else if (CurrentItemsInShop[slot] is UnitUpgradeItem uuItem)
         {
@@ -244,12 +249,16 @@ public class ShopManager : MonoBehaviour
                 itemSlots[slot].itemImage.color = new Color(0, 0.95f, 1);
             else
                 itemSlots[slot].itemImage.color = Color.white;
+
+            // Update button color
+            itemSlots[slot].itemButtonImage.color = ShopItemSlot.UnitUpgradeItemColor;
         }
         else
         {
             desc = $"Buy {CurrentItemsInShop[slot].Type.ToString()}";
         }
 
+        // Descriptions are consistent based on item type
         itemSlots[slot].itemDescription.text = desc;
 
         itemSlots[slot].costText.text = $"Cost: {CurrentItemsInShop[slot].cost}";

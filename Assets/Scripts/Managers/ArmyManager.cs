@@ -15,6 +15,9 @@ public class ArmyManager : MonoBehaviour
     public List<ScriptableUnit> unitsInArmy;
     [SerializeField] private int currency;
 
+    /// <summary>
+    /// The maximum number of units that can be in the army
+    /// </summary>
     public int ArmyCapacity { get; private set; } = 6;
 
     private void Awake()
@@ -49,6 +52,11 @@ public class ArmyManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds a specified unit to the army if the army is under capacity.
+    /// </summary>
+    /// <param name="unit">The unit to add to the army.</param>
+    /// <returns>If the unit was added, false when the army is at or over capacity.</returns>
     public bool AddUnit(ScriptableUnit unit)
     {
         if (unitsInArmy.Count >= ArmyCapacity) return false;
@@ -56,16 +64,51 @@ public class ArmyManager : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Adds a unit by name to the army. The name must be associated with a unit in the AllPlayerUnits dictionary.
+    /// </summary>
+    /// <param name="unitName">The name of the unit to add.</param>
+    /// <returns>If the unit was added, false when the army is at or over capacity.</returns>
     public bool AddUnit(string unitName) => AddUnit(AllPlayerUnits[unitName]);
     
+    /// <summary>
+    /// Finds if the army has a certain unit.
+    /// </summary>
+    /// <param name="unit">The unit to find.</param>
+    /// <returns>True if the army has the specified unit.</returns>
     public bool HasUnit(ScriptableUnit unit) => unitsInArmy.Contains(unit);
+
+    /// <summary>
+    /// Finds if the army has a certain unit. The name must be associated with a unit in the AllPlayerUnits dictionary.
+    /// </summary>
+    /// <param name="unitName">The name of the unit to find.</param>
+    /// <returns>True if the army has the specified unit.</returns>
     public bool HasUnit(string unitName) => HasUnit(AllPlayerUnits[unitName]);
 
+    /// <summary>
+    /// Removes a specified unit from the army.
+    /// </summary>
+    /// <param name="unit">The unit to remove from the army.</param>
+    /// <returns>False if the army did not contain the unit in the first place.</returns>
     public bool RemoveUnit(ScriptableUnit unit) => unitsInArmy.Remove(unit);
+
+    /// <summary>
+    /// Removes a unit specified by name from the army. The name must be associated with a unit in the AllPlayerUnits dictionary.
+    /// </summary>
+    /// <param name="unitName">The name of unit to remove from the army.</param>
+    /// <returns>False if the army did not contain the unit in the first place.</returns>
     public bool RemoveUnit(string unitName) => RemoveUnit(AllPlayerUnits[unitName]);
 
+    /// <summary>
+    /// Gets the player's current gold.
+    /// </summary>
+    /// <returns>The amount of gold the player has.</returns>
     public int GetCurrency() => currency;
 
+    /// <summary>
+    /// Adds gold to the player's currency total, capped at 9999
+    /// </summary>
+    /// <param name="amount">The amount of gold to add to the player's.</param>
     public void GainCurrency(int amount)
     {
         currency += amount;
@@ -73,6 +116,11 @@ public class ArmyManager : MonoBehaviour
             currency = 999;
     }
 
+    /// <summary>
+    /// Attempts to spend a certain gold amount. No gold is lost if the player's current gold is less than the purchase amount.
+    /// </summary>
+    /// <param name="purchaseAmount">The gold cost of the purchase to make.</param>
+    /// <returns>False if the player did not have enough gold to make the purchase, true if the purchase was made.</returns>
     public bool AttemptPurchase(int purchaseAmount)
     {
         if (purchaseAmount > currency)
@@ -81,6 +129,9 @@ public class ArmyManager : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Clears the player's army and sets their gold to 0.
+    /// </summary>
     public void ResetArmy()
     {
         unitsInArmy.Clear();
@@ -88,12 +139,13 @@ public class ArmyManager : MonoBehaviour
         GenerateStartingArmy();
     }
 
-    /// <remarks><em>Only generated if ArmyManager instance does not already have units</em></remarks>
-    public void GenerateStartingArmy()
+    /// <summary>
+    /// Adds three random base units to the player's army. One is always melee, one is always support, and one can be ranged or glass cannon.
+    /// </summary>
+    /// <remarks><em>Only called if the ArmyManager instance does not already have units, or when resetting the army.</em></remarks>
+    private void GenerateStartingArmy()
     {
         
-
-
         // Add the team's melee unit
         int random = Random.Range(0, 3);
         switch (random)
@@ -137,18 +189,6 @@ public class ArmyManager : MonoBehaviour
                 break;
         }
 
-        // // Add the team's glass cannon unit
-        // random = Random.Range(0, 3);
-        // switch (random)
-        // {
-        //     case 0: AddUnit("Mage"); break;
-        //     case 1: AddUnit("Gunner"); break;
-        //     case 2: AddUnit("Spy"); break;
-        //     default:
-        //         Debug.Log("Army generation out of range");
-        //         AddUnit("Mage");
-        //         break;
-        // }
     }
 
 }
