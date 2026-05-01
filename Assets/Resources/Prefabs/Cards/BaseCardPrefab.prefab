@@ -662,6 +662,7 @@ MonoBehaviour:
   cardBorder: {fileID: 4960612361969405961}
   cardIcon: {fileID: 3389921295800311876}
   cardCorner: {fileID: 7114628660092681800}
+  cardBack: {fileID: 7445652497849795667}
   cardName: {fileID: 7548386086184382497}
   cardDescription: {fileID: 3550087662931532542}
   cardValue: {fileID: 2318784186656136063}
@@ -769,7 +770,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.5254902, g: 0.9852931, b: 1, a: 1}
     m_SelectedColor: {r: 0.17254901, g: 0.98792493, b: 1, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
+    m_DisabledColor: {r: 0, g: 0, b: 0, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.08
   m_SpriteState:

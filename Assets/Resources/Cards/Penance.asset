@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Penance
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Penance
-  cardDescription: Damage all ranged enemies. Ignore Defenses
+  cardDescription: Pierce all ranged enemies.
   type: 0
   range: 3
   areaRange: 0

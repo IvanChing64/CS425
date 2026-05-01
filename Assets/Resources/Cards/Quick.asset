@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Quick
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Quick
-  cardDescription: Gain Agility
+  cardDescription: Gain Agility for 1 turn
   type: 2
   range: 0
   areaRange: 0

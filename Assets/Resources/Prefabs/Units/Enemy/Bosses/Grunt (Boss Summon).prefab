@@ -202,8 +202,8 @@ MonoBehaviour:
   Faction: 1
   summoned: 0
   lifetime: 0
-  maxHealth: 60
-  health: 60
+  maxHealth: 50
+  health: 50
   guard: 0
   dmg: 30
   attackModifier: 1
@@ -243,8 +243,8 @@ MonoBehaviour:
   baseMoveRange: 0
   baseAttackRange: 0
   isEnraged: 0
-  enemyFlag: 0
-  movementBehavior: 0
+  enemyFlag: 2
+  movementBehavior: 1
 --- !u!114 &751289258245009956
 MonoBehaviour:
   m_ObjectHideFlags: 0

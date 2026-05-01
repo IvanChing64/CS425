@@ -202,8 +202,8 @@ MonoBehaviour:
   Faction: 1
   summoned: 0
   lifetime: 0
-  maxHealth: 150
-  health: 150
+  maxHealth: 175
+  health: 175
   guard: 0
   dmg: 40
   attackModifier: 1
@@ -275,8 +275,8 @@ MonoBehaviour:
   isEliteVarient: 1
   isEnraged: 0
   healAmount: 10
-  enemyPrefab: {fileID: 1167321167610509267, guid: 50efaa4c161f51341865f6c00a2284f4, type: 3}
-  maxSummons: 4
+  enemyPrefab: {fileID: 1167321167610509267, guid: 86339359f8775194e962dd3eba1cff14, type: 3}
+  maxSummons: 6
   summonsPerCast: 2
   aoeRange: 3
 --- !u!95 &738936172720448078

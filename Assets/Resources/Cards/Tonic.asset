@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tonic
   m_EditorClassIdentifier: Scripts::ScriptableCard
   cardName: Tonic
-  cardDescription: Grant Immunity and Energy to a nearby ally
+  cardDescription: Grant Immunity and Energy to a nearby ally for 2 turns
   type: 2
   range: 2
   areaRange: 0

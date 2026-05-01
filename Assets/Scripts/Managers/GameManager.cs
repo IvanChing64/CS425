@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
                 CardManager.instance.NextTurn();
                 if (CheckPlayerVictory())
                 {
+                    ArmyManager.Instance.GainCurrency(stageData.currency);
                     EndScreenManager.Instance.SetWinningText();
                     ChangeState(GameState.EndScreen);
                 }
@@ -99,6 +100,7 @@ public class GameManager : MonoBehaviour
                 UnitManager.Instance.ApplyEndTurnEffects(Faction.Player);
                 if (CheckPlayerVictory())
                 {
+                    ArmyManager.Instance.GainCurrency(stageData.currency);
                     EndScreenManager.Instance.SetWinningText();
                     ChangeState(GameState.EndScreen);
                 }
